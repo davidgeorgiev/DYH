@@ -17,7 +17,7 @@
   <div class="jumbotron">
     <h1>Домашни</h1>
     <p><?php echo $_GET["class"]?></p> 
-	<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+	<p><a class="btn btn-primary btn-lg" href="add_hw.php?class=<?php echo $_GET["class"];?>" role="button">Добави ново домашно</a><a class="btn btn-primary btn-lg" style = "margin:10px;" href="add_info.php?class=<?php echo $_GET["class"];?>" role="button">Добави допълнителна информация</a></p>
   </div>
   <?php
 	if ($result = mysql_query("SELECT DISTINCT homeworks.date, WEEKDAY(homeworks.date) FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND Homeworks.date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.date ASC")){
@@ -48,7 +48,7 @@
 		echo '<h1>'.$weekday.' <small>'.$row[0].'</small></h1>';
 		echo '</div>';
 		echo '<div class="row">';
-		$result2 = mysql_query("SELECT homeworks.title, homeworks.data, homeworks.rank FROM Homeworks,User,UH WHERE UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND homeworks.date = '".$row[0]." 00:00:00'");
+		$result2 = mysql_query("SELECT homeworks.title, homeworks.data, homeworks.rank FROM Homeworks,User,UH WHERE UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND homeworks.date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
 		while ($row2 = mysql_fetch_array($result2)){
 			echo '	<div class="col-sm-4">';
 			switch($row2[2]){
@@ -73,21 +73,20 @@
   ?>
   
   <div class="row">
-    <div class="col-sm-4">
+    
 	<?php
-		if ($result = mysql_query("SELECT DISTINCT homeworks.date, WEEKDAY(homeworks.date) FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND Homeworks.date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.date ASC")){
+		if ($result = mysql_query("SELECT DISTINCT otherinfo.title,otherinfo.data FROM otherinfo,User,UH WHERE USER.NAME = '".$_GET["class"]."'  ORDER BY otherinfo.UID DESC")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';
 		}
 		while ($row = mysql_fetch_array($result)){
-			
+			echo '<div class="col-sm-4">';
+			echo '<h3>'.$row[0].'</h3>';
+			echo '<p>'.$row[1].'</p>';
+			echo '</div>';
 		}
 	?>
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
   </div>
   <?php
 	//echo '<div class="alert alert-success" role="alert">...</div><div class="alert alert-info" role="alert">...</div><div class="alert alert-warning" role="alert">...</div><div class="alert alert-danger" role="alert">Много важно събитие</div>';

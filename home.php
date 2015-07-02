@@ -25,18 +25,17 @@
     <h1>Домашни</h1>
     <p><?php echo $username?></p> 
 	<p><a class="btn btn-primary btn-lg" href="history.php" role="button">История</a><?php if ($EditMode == 1){include "main_menu.php";}?><a class="btn btn-primary btn-lg" style = "margin:10px;" href="index.php" role="button">Изход</a></p>
-  </div>
-  <?php
-	if ($result = mysql_query("SELECT DISTINCT homeworks.date, WEEKDAY(homeworks.date) FROM Homeworks,User,UH WHERE USER.NAME = '".$username."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND Homeworks.date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.date ASC" )){
+  </div>	
+<?php
+	if ($result = mysql_query("SELECT DISTINCT homeworks.Date, WEEKDAY(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC" )){
 		//echo 'Success';
 	} else {
 		echo 'FAIL';
 	}
-	
-	$SQL = "SELECT DISTINCT COUNT(homeworks.date), WEEKDAY(homeworks.date) FROM Homeworks,User,UH WHERE USER.NAME = '".$username."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND Homeworks.date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.date ASC";
+	$SQL = "SELECT DISTINCT COUNT(homeworks.Date), WEEKDAY(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC";
 	$result3 = mysql_query($SQL);
 	$row3 = mysql_fetch_array($result3);
-	$SQL = "SELECT DISTINCT COUNT(otherinfo.title) FROM otherinfo,User,UOI WHERE USER.NAME = '".$username."' AND UOI.UserID = User.UID AND UOI.OtherInfoID = OtherInfo.UID  ORDER BY otherinfo.UID DESC";
+	$SQL = "SELECT DISTINCT COUNT(otherinfo.Title) FROM otherinfo,user,uoi WHERE user.Name = '".$username."' AND uoi.UserID = user.UID AND uoi.OtherInfoID = otherinfo.UID  ORDER BY otherinfo.UID DESC";
 	$result4 = mysql_query($SQL);
 	$row4 = mysql_fetch_array($result4);
 	if (($row3[0] > 0) || ($row4[0] > 0)) {
@@ -45,10 +44,10 @@
 		$there_is_some_info = 0;
 	}
 	
-	
 	if ($there_is_some_info) {
 		echo '<div id = "my_page">';
 	}
+	
 	while ($row = mysql_fetch_array($result)){
 		//print_r($row);
 		echo '<div class="page-header">';
@@ -72,7 +71,7 @@
 		echo '<h1>'.$weekday.' <small id = "smalltag">'.$row[0].'</small></h1>';
 		echo '</div>';
 		echo '<div class="row">';
-		$result2 = mysql_query("SELECT homeworks.title, homeworks.data, homeworks.rank, homeworks.UID FROM Homeworks,User,UH WHERE USER.NAME = '".$username."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND homeworks.date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
+		$result2 = mysql_query("SELECT homeworks.Title, homeworks.Data, homeworks.Rank, homeworks.UID FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
 		while ($row2 = mysql_fetch_array($result2)){
 			echo '	<div class="col-sm-4">';
 			switch($row2[2]){
@@ -92,13 +91,12 @@
 					<button class="btn btn-default" style = "background-color:white;width:40%;;height:27px;padding:3px;" type="submit" >Изтрий</button>
 				</form>';
 			}
-			
 			echo '</div>';
 		}
 		echo '	</div>';
 	}
 	
-	if ($result = mysql_query("SELECT DISTINCT COUNT(otherinfo.title) FROM otherinfo,User,UOI WHERE USER.NAME = '".$username."' AND UOI.UserID = User.UID AND UOI.OtherInfoID = OtherInfo.UID  ORDER BY otherinfo.UID DESC")){
+	if ($result = mysql_query("SELECT DISTINCT COUNT(otherinfo.Title) FROM otherinfo,user,uoi WHERE user.Name = '".$username."' AND uoi.UserID = user.UID AND uoi.OtherInfoID = otherinfo.UID  ORDER BY otherinfo.UID DESC")){
 	//echo 'Success';
 	} else {
 		echo 'FAIL';
@@ -114,7 +112,7 @@
   <div class="row">
     
 	<?php
-		if ($result = mysql_query("SELECT DISTINCT otherinfo.title,otherinfo.data,otherinfo.UID FROM otherinfo,User,UOI WHERE USER.NAME = '".$username."' AND UOI.UserID = User.UID AND UOI.OtherInfoID = OtherInfo.UID  ORDER BY otherinfo.UID DESC")){
+		if ($result = mysql_query("SELECT DISTINCT otherinfo.Title,otherinfo.Data,otherinfo.UID FROM otherinfo,user,uoi WHERE user.Name = '".$username."' AND uoi.UserID = user.UID AND uoi.OtherInfoID = otherinfo.UID  ORDER BY otherinfo.UID DESC")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';
@@ -137,8 +135,7 @@
 	if ($there_is_some_info) {
 		echo '</div>';
 	}
-  ?>
-	
+	?>
 <div>
 	<div class="jumbotron" >
 	<h2>Учебната програма</h2>
@@ -149,16 +146,15 @@
 		$week = $date->format("W");
 		//echo "Weeknummer: $week";
 		if($week&1) {
-			$eoweek = "ODDWEEKID";
+			$eoweek = "OddWeekID";
 			echo '<p>Седмицата е нечетна</p>';
 		} else {
-			$eoweek = "EVENWEEKID";
+			$eoweek = "EvenWeekID";
 			echo '<p>Седмицата е четна</p>';
 		}
 	?>
-	
 	</div>
-  <table class="table table-bordered" style = "float:left;width:49%;">
+   <table class="table table-bordered" style = "float:left;width:49%;">
     <thead>
       <tr>
 		<th colspan="4">Понеделник</th>
@@ -167,7 +163,7 @@
 	<?php
 		for ($i=1; $i<=9; $i++){
 			
-			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.MONDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
+			$SQL = "SELECT class.time, class.subject, class.info FROM class, day, weeks, twoweeks, uw, user WHERE user.UID = uw.UserID AND twoweeks.UID = uw.TwoWeeksID AND twoweeks.".$eoweek." = weeks.UID AND day.UID = weeks.MondayID AND class.UID = day.class".$i."ID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			
 				
 			$result3 = mysql_query($SQL);
@@ -192,7 +188,7 @@
 	<?php
 		for ($i=1; $i<=9; $i++){
 			
-			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.TUESDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
+			$SQL = "SELECT class.time, class.subject, class.info FROM class, day, weeks, twoweeks, uw, user WHERE user.UID = uw.UserID AND twoweeks.UID = uw.TwoWeeksID AND twoweeks.".$eoweek." = weeks.UID AND day.UID = weeks.TuesdayID AND class.UID = day.class".$i."ID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			
 				
 			$result3 = mysql_query($SQL);
@@ -217,7 +213,7 @@
 	<?php
 		for ($i=1; $i<=9; $i++){
 			
-			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.WEDNESDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
+			$SQL = "SELECT class.time, class.subject, class.info FROM class, day, weeks, twoweeks, uw, user WHERE user.UID = uw.UserID AND twoweeks.UID = uw.TwoWeeksID AND twoweeks.".$eoweek." = weeks.UID AND day.UID = weeks.WednesdayID AND class.UID = day.class".$i."ID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			
 				
 			$result3 = mysql_query($SQL);
@@ -242,7 +238,7 @@
 	<?php
 		for ($i=1; $i<=9; $i++){
 			
-			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.THURSDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
+			$SQL = "SELECT class.time, class.subject, class.info FROM class, day, weeks, twoweeks, uw, user WHERE user.UID = uw.UserID AND twoweeks.UID = uw.TwoWeeksID AND twoweeks.".$eoweek." = weeks.UID AND day.UID = weeks.ThursdayID AND class.UID = day.class".$i."ID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			
 				
 			$result3 = mysql_query($SQL);
@@ -267,7 +263,7 @@
 	<?php
 		for ($i=1; $i<=9; $i++){
 			
-			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.FRIDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
+			$SQL = "SELECT class.time, class.subject, class.info FROM class, day, weeks, twoweeks, uw, user WHERE user.UID = uw.UserID AND twoweeks.UID = uw.TwoWeeksID AND twoweeks.".$eoweek." = weeks.UID AND day.UID = weeks.FridayID AND class.UID = day.class".$i."ID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			
 				
 			$result3 = mysql_query($SQL);
@@ -292,7 +288,7 @@
 	<?php
 		for ($i=1; $i<=9; $i++){
 			
-			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.SATURDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
+			$SQL = "SELECT class.time, class.subject, class.info FROM class, day, weeks, twoweeks, uw, user WHERE user.UID = uw.UserID AND twoweeks.UID = uw.TwoWeeksID AND twoweeks.".$eoweek." = weeks.UID AND day.UID = weeks.SaturdayID AND class.UID = day.class".$i."ID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			
 				
 			$result3 = mysql_query($SQL);
@@ -318,7 +314,7 @@
 	<?php
 		for ($i=1; $i<=9; $i++){
 			
-			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.SUNDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
+			$SQL = "SELECT class.time, class.subject, class.info FROM class, day, weeks, twoweeks, uw, user WHERE user.UID = uw.UserID AND twoweeks.UID = uw.TwoWeeksID AND twoweeks.".$eoweek." = weeks.UID AND day.UID = weeks.SundayID AND class.UID = day.class".$i."ID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			
 				
 			$result3 = mysql_query($SQL);

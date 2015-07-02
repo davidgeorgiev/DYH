@@ -63,7 +63,7 @@ function test_input($data) {
 <div class="" id="loginModal" ">
 	  <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">?</button>
-		<h3>Have an Account?</h3>
+		<h3 style = "color:rgba(243, 243, 243, 0.8);">Have an Account?</h3>
 	  </div>
 	  <div class="modal-body">
 		<div class="well">

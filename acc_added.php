@@ -11,7 +11,7 @@ include "config.php";
 			$name = $_POST["name"];
 			$psw = $_POST["psw"];
 	if ($db_found) {
-		$SQL = "SELECT Count(User.name) FROM USER WHERE User.name = '".$name."'";
+		$SQL = "SELECT Count(user.Name) FROM user WHERE user.Name = '".$name."'";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
 		if ($row[0] > 0){
@@ -23,19 +23,19 @@ include "config.php";
 			
 			
 		} else {
-			$SQL = "INSERT INTO User (Name, Password) VALUES ('".$name."', '".$psw."')";
+			$SQL = "INSERT INTO user (Name, Password) VALUES ('".$name."', '".$psw."')";
 			$result = mysql_query($SQL);
 			
-			$SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (9, 9)";
+			$SQL = "INSERT INTO twoweeks (EvenWeekID, OddWeekID) VALUES (9, 9)";
 			$result = mysql_query($SQL);
-			$uid = mysql_query("SELECT MAX(TWOWEEKS.UID) FROM TWOWEEKS");
+			$uid = mysql_query("SELECT MAX(twoweeks.UID) FROM twoweeks");
 			$row = mysql_fetch_array($uid);
 			
-			$SQL = "SELECT USER.UID FROM USER WHERE USER.NAME = '".$name."'";
+			$SQL = "SELECT user.UID FROM user WHERE user.Name = '".$name."'";
 			$result = mysql_query($SQL);
 			$row2 = mysql_fetch_array($result);
 			
-			$SQL = "INSERT INTO UW (USERID, TWOWEEKSID) VALUES ('".$row2[0]."', ".$row[0].")";
+			$SQL = "INSERT INTO uw (UserID, TwoWeeksID) VALUES ('".$row2[0]."', ".$row[0].")";
 			$result = mysql_query($SQL);
 			
 			mysql_close($dbLink);

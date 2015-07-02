@@ -6,8 +6,8 @@
 <body>
 <?php
 // define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $websiteErr = "";
-$name = $email = $gender = $comment = $website = "";
+$nameErr = $emailErr = $genderErr = $passErr = $websiteErr = "";
+$name = $email = $gender = $comment = $website = $psw = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (empty($_POST["name"])) {
@@ -18,6 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
        $nameErr = "Only letters and white space allowed"; 
      }
+   }
+   
+   if (empty($_POST["psw"])) {
+     $passErr = "Password is required";
    }
    
    if (empty($_POST["email"])) {
@@ -73,14 +77,22 @@ function test_input($data) {
 		  </ul>
 		  <div id="myTabContent" class="tab-content">
 			<div class="tab-pane active in" id="login">
-			<form method="post" class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+			<form method="post" class="form-horizontal" <?php echo 'action='; echo "home.php";?>> 
 				<fieldset>
 				     
-				  <div class="control-group" style = "margin-top: 20px;">
+				  <div class="control-group" style = "margin-top: 20px; margin-right: 80%;margin-left: 2%;">
 					<!-- Username -->
+					<div class="form-group" >
 					<label for="text" style = "margin-right: 10px;" >Име: </label>
-					<input type="text" name="name" value="<?php echo $name;?>">
-				   <span class="error">* <?php echo $nameErr;?></span>
+					<input type="text" name="name" class="form-control"  value="<?php echo $name;?>">
+					<span class="error"> <?php echo $nameErr;?></span>
+					</div>
+					<div class="form-group">
+					<label for="password">Парола</label>
+					<input type="password" class="form-control" name="psw" value="<?php echo $psw;?>">
+					<span class="error"> <?php echo $passErr;?></span>
+					</div>
+				   
 				   <br><br>
 				  </div>
 
@@ -88,7 +100,7 @@ function test_input($data) {
 
 				  <div class="control-group">
 					<!-- Button -->
-					<div class="controls" style = "margin-top:10px;">
+					<div class="controls" style = "margin-top:-40px;">
 					  <input class="btn btn-default" type="submit" name="submit" value="Влез"> 
 					</div>
 				  </div>
@@ -97,9 +109,13 @@ function test_input($data) {
 			</div>
 			<div class="tab-pane fade" id="create">
 				<form id="tab" role="form" <?php echo 'action='; echo "acc_added.php";?> method="post">
+					<div class="form-group" >
+					<label for="text" style = "margin-right: 10px;" >Име: </label>
+					<input type="text" name="name" class="form-control"  value="<?php echo $name;?>">
+					</div>
 					<div class="form-group">
-					  <label for="text" style = "margin-top: 10px;">Име: </label>
-					  <input type="text" class="form-control" name="name" placeholder="">
+					<label for="password">Парола</label>
+					<input type="password" class="form-control" name="psw" value="<?php echo $psw;?>">
 					</div>
 					<button class="btn btn-primary" type="submit" >Създай профил</button>
 				</form>
@@ -115,7 +131,7 @@ if($name != ""){
 		$row = mysql_fetch_array($result);
 		
 		if ($row[0] > 0){
-			$home = 'home.php?class='.$name;
+			$home = 'home.php?class='.$name.'&psw='.$psw;
 		} else {
 			$home = 'notreg.php';
 		}

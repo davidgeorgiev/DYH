@@ -9,6 +9,7 @@ include "config.php";
 	<div class="jumbotron">
 		<?php 
 			$name = $_POST["name"];
+			$psw = $_POST["psw"];
 	if ($db_found) {
 		$SQL = "SELECT Count(User.name) FROM USER WHERE User.name = '".$name."'";
 		$result = mysql_query($SQL);
@@ -22,7 +23,7 @@ include "config.php";
 			
 			
 		} else {
-			$SQL = "INSERT INTO User (Name) VALUES ('".$name."')";
+			$SQL = "INSERT INTO User (Name, Password) VALUES ('".$name."', '".$psw."')";
 			$result = mysql_query($SQL);
 			
 			$SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (9, 9)";
@@ -57,7 +58,8 @@ include "config.php";
   </div>
   <div class="panel-body">
     <?php 
-		echo '<p>Име: '.$name.'</p>'; 
+		echo '<p>Име: '.$name.'</p>';
+		echo '<p>Парола: '.$psw.'</p>';
 	?>
   </div>
 </div>

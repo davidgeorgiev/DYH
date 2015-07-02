@@ -25,6 +25,7 @@
 		<p><?php echo $_GET["class"]?></p> 
 		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Home</a></p>
 	</div>
+	<div id = "my_page">
   <h2>Добави допълнителна информация</h2>
   <form role="form" <?php echo 'action='; echo "info_added.php?class="; echo $_GET["class"];?> method="post">
     <div class="form-group">
@@ -38,6 +39,7 @@
 
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
+</div>
 </div>
 </body>
 </html>

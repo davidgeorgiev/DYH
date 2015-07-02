@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
   `Title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Data` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Rank` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `homeworks`
@@ -40,7 +40,15 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
 
 INSERT INTO `homeworks` (`UID`, `Date`, `Title`, `Data`, `Rank`) VALUES
 (31, '2015-07-01', 'Напомняне', 'Отивай да закусваш!', 3),
-(32, '2015-07-01', 'Напомняне', 'Автобус в 13:20', 3);
+(32, '2015-07-01', 'Напомняне', 'Автобус в 13:20', 3),
+(33, '2015-07-01', 'Напомняне', 'Автобус в 13:20', 4),
+(34, '2015-07-01', 'Напомняне', 'Лицеви и коремни', 2),
+(35, '2015-07-01', 'Напомняне', 'Краен срок за заявление за стажа до 16:00 ч. (да се прати и по e-mail-а на Чорбаджиев - pdf,docx,odt) - Образеца на заявлението - doc, odt Разпечатани и подписани заявления се предават в 24 кабинет. Заявленията в електронен вид се предават на email: lchorbadjiev@elsys-bg.org', 4),
+(36, '2015-07-01', 'Домашно', 'отвори <a href = "http://11b-16.free.bg/">това</a>', 1),
+(37, '2015-07-01', 'Напомняне', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 3),
+(38, '2015-06-30', 'Домашно', 'Да си гледаш Hell girl 12 ep', 2),
+(39, '2015-07-04', 'Напомняне', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 3),
+(40, '2015-07-07', 'Домашно - БЕЛ', 'Да прочетем Градушка на Яворов и да отговорим на следните въпроси.   1. На колко части е разделено стихотворението?  2. Кой и за какво говори в отделните части? 3. В коя част гласът на героя и лирическия говорител се сливат в едно? 4. Каква част от стихотворението е отделена за описание на градушката? 5. Какво чувство поражда стихотворението?', 2);
 
 -- --------------------------------------------------------
 
@@ -52,14 +60,15 @@ CREATE TABLE IF NOT EXISTS `otherinfo` (
   `UID` int(10) unsigned NOT NULL,
   `Title` text COLLATE utf8_unicode_ci NOT NULL,
   `Data` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Схема на данните от таблица `otherinfo`
 --
 
 INSERT INTO `otherinfo` (`UID`, `Title`, `Data`) VALUES
-(15, 'Напомняне', 'Да си в Национален студентски дом в 14:30');
+(15, 'Напомняне', 'Да си в Национален студентски дом в 14:30'),
+(16, 'Напомняне', 'Да си гледаш работата идиот такъв!');
 
 -- --------------------------------------------------------
 
@@ -71,15 +80,21 @@ CREATE TABLE IF NOT EXISTS `uh` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `USERID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uh`
 --
 
 INSERT INTO `uh` (`UID`, `HWID`, `USERID`) VALUES
-(21, 31, 14),
-(22, 32, 14);
+(23, 33, 24),
+(24, 34, 14),
+(25, 35, 14),
+(26, 36, 14),
+(27, 37, 14),
+(28, 38, 14),
+(29, 39, 14),
+(30, 40, 14);
 
 -- --------------------------------------------------------
 
@@ -91,14 +106,14 @@ CREATE TABLE IF NOT EXISTS `uoi` (
   `UID` int(10) unsigned NOT NULL,
   `OtherInfoID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uoi`
 --
 
 INSERT INTO `uoi` (`UID`, `OtherInfoID`, `UserID`) VALUES
-(15, 15, 14);
+(16, 16, 14);
 
 -- --------------------------------------------------------
 
@@ -109,14 +124,15 @@ INSERT INTO `uoi` (`UID`, `OtherInfoID`, `UserID`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `UID` int(10) unsigned NOT NULL,
   `Name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `user`
 --
 
 INSERT INTO `user` (`UID`, `Name`) VALUES
-(14, 'David');
+(14, 'David'),
+(24, 'Давид');
 
 --
 -- Indexes for dumped tables
@@ -160,27 +176,27 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `homeworks`
 --
 ALTER TABLE `homeworks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
 ALTER TABLE `otherinfo`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `uh`
 --
 ALTER TABLE `uh`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `uoi`
 --
 ALTER TABLE `uoi`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- Ограничения за дъмпнати таблици
 --

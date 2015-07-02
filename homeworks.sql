@@ -32,29 +32,15 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
   `Title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Data` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Rank` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `homeworks`
 --
 
 INSERT INTO `homeworks` (`UID`, `Date`, `Title`, `Data`, `Rank`) VALUES
-(1, '2015-06-30', 'Напомняне', 'Час на класа в 10:00', 1),
-(2, '2015-07-01', 'Проба', 'Някакво домашно', 2),
-(3, '2015-06-30', 'Напомняне', 'Да дойдеш на училище', 3),
-(4, '2015-07-01', 'Стаж в СОКИ', 'Да си там в 14:30', 4),
-(5, '2015-07-01', 'Важно', 'Гледай да си водиш дневник', 3),
-(15, '2015-06-30', 'Домашно', 'Да си гледаш Hell girl 12 ep', 2),
-(16, '2015-06-30', 'Домашно1', 'Да си гледаш Hell girl 13 ep', 2),
-(17, '2015-06-30', 'Домашно3', 'Да си гледаш Hell girl 14 ep', 2),
-(18, '2015-06-30', 'Домашно4', 'Да си гледаш Hell girl 15 ep', 2),
-(20, '2015-06-30', 'Напомняне', 'Отивай да ядеш бе!!!', 3),
-(21, '0000-00-00', '', '', 0),
-(22, '2015-06-30', '123', '123', 2),
-(23, '2015-07-03', 'Отивай да учиш бе тъпак!', 'всичко да си научил щото ще те убия', 3),
-(24, '2015-06-30', 'Домашно', 'хвърли боклука', 2),
-(25, '2015-06-30', 'Домашно', 'отивай да простираш', 2),
-(26, '2015-06-30', 'Напомняне', 'Кажи на Косьо да спре да се хили', 3);
+(31, '2015-07-01', 'Напомняне', 'Отивай да закусваш!', 3),
+(32, '2015-07-01', 'Напомняне', 'Автобус в 13:20', 3);
 
 -- --------------------------------------------------------
 
@@ -66,15 +52,14 @@ CREATE TABLE IF NOT EXISTS `otherinfo` (
   `UID` int(10) unsigned NOT NULL,
   `Title` text COLLATE utf8_unicode_ci NOT NULL,
   `Data` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Схема на данните от таблица `otherinfo`
 --
 
 INSERT INTO `otherinfo` (`UID`, `Title`, `Data`) VALUES
-(11, 'Домашно', 'Отивай да простираш!'),
-(12, 'Домашно', 'Хайде отивай да простираш че ми писна бе идиот!!!');
+(15, 'Напомняне', 'Да си в Национален студентски дом в 14:30');
 
 -- --------------------------------------------------------
 
@@ -86,25 +71,15 @@ CREATE TABLE IF NOT EXISTS `uh` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `USERID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uh`
 --
 
 INSERT INTO `uh` (`UID`, `HWID`, `USERID`) VALUES
-(1, 1, 1),
-(2, 4, 1),
-(3, 5, 1),
-(6, 15, 1),
-(7, 16, 1),
-(8, 17, 1),
-(9, 18, 1),
-(10, 20, 1),
-(13, 23, 1),
-(14, 24, 1),
-(15, 25, 3),
-(16, 26, 1);
+(21, 31, 14),
+(22, 32, 14);
 
 -- --------------------------------------------------------
 
@@ -116,15 +91,14 @@ CREATE TABLE IF NOT EXISTS `uoi` (
   `UID` int(10) unsigned NOT NULL,
   `OtherInfoID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uoi`
 --
 
 INSERT INTO `uoi` (`UID`, `OtherInfoID`, `UserID`) VALUES
-(10, 11, 2),
-(11, 12, 1);
+(15, 15, 14);
 
 -- --------------------------------------------------------
 
@@ -135,16 +109,14 @@ INSERT INTO `uoi` (`UID`, `OtherInfoID`, `UserID`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `UID` int(10) unsigned NOT NULL,
   `Name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `user`
 --
 
 INSERT INTO `user` (`UID`, `Name`) VALUES
-(1, 'David'),
-(2, 'Ivan'),
-(3, 'yoana');
+(14, 'David');
 
 --
 -- Indexes for dumped tables
@@ -188,27 +160,27 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `homeworks`
 --
 ALTER TABLE `homeworks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
 ALTER TABLE `otherinfo`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `uh`
 --
 ALTER TABLE `uh`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `uoi`
 --
 ALTER TABLE `uoi`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- Ограничения за дъмпнати таблици
 --

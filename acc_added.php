@@ -9,25 +9,29 @@ include "config.php";
 	<div class="jumbotron">
 		<?php 
 			$name = $_POST["name"];
-			echo '<h1>Поздравления, '.$name.'!</h1>';
-			
-		?>
-		<p><a class="btn btn-primary btn-lg" href="index.php" role="button">Влез</a></p>
-	</div>
-	<?php
 	if ($db_found) {
-		$SQL = "INSERT INTO User (Name) VALUES ('".$name."')";
+		$SQL = "SELECT Count(User.name) FROM USER WHERE User.name = '".$name."'";
 		$result = mysql_query($SQL);
-		mysql_close($dbLink);
-		echo '<div class="alert alert-success" role="alert">Вашият акаунт беше създаден успешно, за да влезете натиснете ';
-		echo '<a href="index.php" class="alert-link">тук</a>';
-		echo '!</div>';
+		$row = mysql_fetch_array($result);
+		if ($row[0] > 0){
+			echo '<h1>Грешка!</h1>';
+			echo '<div class="alert alert-danger" role="alert">Вече съществува акаунт с такова име, ';
+			echo '<a href="index.php" class="alert-link">опитай с друго</a>';
+			echo '!</div>';
+		} else {
+			$SQL = "INSERT INTO User (Name) VALUES ('".$name."')";
+			$result = mysql_query($SQL);
+			mysql_close($dbLink);
+			echo '<h1>Поздравления, '.$name.'!</h1>';
+			echo '<p><a class="btn btn-primary btn-lg" href="home.php?class='.$name.'" role="button">Начало</a></p></div>';
+			
+			echo '<div class="alert alert-success" role="alert">Вашият акаунт беше създаден успешно!</div>';
+		}
+		
 	}
 	else {
-
-		echo '<div class="alert alert-danger" role="alert">Вашият акаунт не е създаден.';
-		echo '<a href="index.php" class="alert-link">Опитай с друго име</a>';
-		echo '.</div>';
+		echo '<div class="alert alert-danger" role="alert">Датабазата не съществува!';
+		echo '</div>';
 		mysql_close($dbLink);
 	}
 	?>

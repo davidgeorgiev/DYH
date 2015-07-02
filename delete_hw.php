@@ -16,9 +16,9 @@
 
 <?php
 	if ($db_found && $EditMode == 1) {
-		$result1 = mysql_query("SELECT DISTINCT user.UID FROM UH,USER WHERE User.name ='".$username."' AND UH.USERID = USER.UID");
+		$result1 = mysql_query("SELECT DISTINCT user.UID FROM uh,user WHERE user.Name ='".$username."' AND uh.USERID = user.UID");
 		$row2 = mysql_fetch_array($result1);
-		$SQL = "DELETE FROM UH WHERE UH.HWID= '".$_GET["hwid"]."' AND UH.USERID = ".$row2[0];
+		$SQL = "DELETE FROM uh WHERE uh.HWID= '".$_GET["hwid"]."' AND uh.USERID = ".$row2[0];
 		//echo "hwid = ".$_GET["hwid"]." and user id = ".$row2[0];
 		$result = mysql_query($SQL);
 		mysql_close($dbLink);

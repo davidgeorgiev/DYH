@@ -127,7 +127,7 @@ function test_input($data) {
 <?php
 if($name != ""){
 	if ($db_found) {
-		$result = mysql_query("SELECT Count(user.name) FROM USER WHERE User.name = '".$name."'");
+		$result = mysql_query("SELECT Count(user.Name) FROM user WHERE user.Name = '".$name."'");
 		$row = mysql_fetch_array($result);
 		
 		if ($row[0] > 0){

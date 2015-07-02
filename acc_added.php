@@ -40,7 +40,7 @@ include "config.php";
 			
 			mysql_close($dbLink);
 			echo '<h1>Поздравления, '.$name.'!</h1>';
-			echo '<p><a class="btn btn-primary btn-lg" href="home.php?class='.$name.'" role="button">Начало</a></p></div>';
+			echo '<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Начало</a></p></div>';
 			
 			echo '<div class="alert alert-success" role="alert">Вашият акаунт беше създаден успешно!</div>';
 		}

@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `time` time NOT NULL,
   `subject` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `info` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `class`
@@ -96,7 +96,37 @@ INSERT INTO `class` (`UID`, `time`, `subject`, `info`) VALUES
 (277, '18:40:00', 'Математика', '41'),
 (278, '19:30:00', 'Математика', '41'),
 (279, '00:00:00', '', ''),
-(280, '00:00:00', '', '');
+(280, '00:00:00', '', ''),
+(281, '00:00:00', '', ''),
+(282, '14:30:00', 'Информационни технологии', '36'),
+(283, '15:00:00', 'Информационни технологии', '36'),
+(284, '16:50:00', 'Български език', '27'),
+(285, '16:50:00', 'Български език', '27'),
+(286, '17:30:00', 'Български език', '27'),
+(287, '18:40:00', 'Математика', '41'),
+(288, '19:30:00', 'Математика', '41'),
+(289, '00:00:00', '', ''),
+(290, '00:00:00', '', ''),
+(291, '00:00:00', '', ''),
+(292, '14:30:00', 'Информационни технологии', '36'),
+(293, '15:00:00', 'Информационни технологии', '36'),
+(294, '16:50:00', 'Български език', '27'),
+(295, '16:50:00', 'Български език', '27'),
+(296, '17:30:00', 'Български език', '27'),
+(297, '18:40:00', 'Математика', '41'),
+(298, '19:30:00', 'Математика', '41'),
+(299, '00:00:00', '', ''),
+(300, '00:00:00', '', ''),
+(301, '00:00:00', '', ''),
+(302, '14:30:00', 'Информационни технологии', '36'),
+(303, '15:00:00', 'Информационни технологии', '36'),
+(304, '00:00:00', '', ''),
+(305, '00:00:00', '', ''),
+(306, '00:00:00', '', ''),
+(307, '00:00:00', '', ''),
+(308, '00:00:00', '', ''),
+(309, '00:00:00', '', ''),
+(310, '00:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -115,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `day` (
   `class7ID` int(10) unsigned NOT NULL,
   `class8ID` int(10) unsigned NOT NULL,
   `class9ID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `day`
@@ -127,7 +157,10 @@ INSERT INTO `day` (`UID`, `class1ID`, `class2ID`, `class3ID`, `class4ID`, `class
 (20, 241, 242, 243, 244, 245, 246, 247, 248, 249),
 (21, 251, 252, 253, 254, 255, 256, 257, 258, 259),
 (22, 261, 262, 263, 264, 265, 266, 267, 268, 269),
-(23, 271, 272, 273, 274, 275, 276, 277, 278, 279);
+(23, 271, 272, 273, 274, 275, 276, 277, 278, 279),
+(24, 281, 282, 283, 284, 285, 286, 287, 288, 289),
+(25, 291, 292, 293, 294, 295, 296, 297, 298, 299),
+(26, 301, 302, 303, 304, 305, 306, 307, 308, 309);
 
 -- --------------------------------------------------------
 
@@ -141,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
   `Title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Data` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Rank` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `homeworks`
@@ -157,7 +190,8 @@ INSERT INTO `homeworks` (`UID`, `Date`, `Title`, `Data`, `Rank`) VALUES
 (37, '2015-07-01', 'Напомняне', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 3),
 (38, '2015-06-30', 'Домашно', 'Да си гледаш Hell girl 12 ep', 2),
 (39, '2015-07-04', 'Напомняне', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 3),
-(40, '2015-07-07', 'Домашно - БЕЛ', 'Да прочетем Градушка на Яворов и да отговорим на следните въпроси.   1. На колко части е разделено стихотворението?  2. Кой и за какво говори в отделните части? 3. В коя част гласът на героя и лирическия говорител се сливат в едно? 4. Каква част от стихотворението е отделена за описание на градушката? 5. Какво чувство поражда стихотворението?', 2);
+(40, '2015-07-07', 'Домашно - БЕЛ', 'Да прочетем Градушка на Яворов и да отговорим на следните въпроси.   1. На колко части е разделено стихотворението?  2. Кой и за какво говори в отделните части? 3. В коя част гласът на героя и лирическия говорител се сливат в едно? 4. Каква част от стихотворението е отделена за описание на градушката? 5. Какво чувство поражда стихотворението?', 2),
+(41, '2015-07-02', 'СОКИ', 'Погледни следните сайтове: <a href = "http://mgames-youth.org/">http://mgames-youth.org/</a>, <a href = "http://computerspace.org/">http://computerspace.org/</a>, <a href = "http://invisibleserdica.org/index.php/bg/">http://invisibleserdica.org/index.php/bg/</a>, <a href = "http://qycguidance.org/index.php/en/">http://qycguidance.org/index.php/en/</a>, ', 3);
 
 -- --------------------------------------------------------
 
@@ -189,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `twoweeks` (
   `UID` int(10) unsigned NOT NULL,
   `EvenWeekID` int(10) unsigned NOT NULL,
   `OddWeekID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `twoweeks`
@@ -201,7 +235,9 @@ INSERT INTO `twoweeks` (`UID`, `EvenWeekID`, `OddWeekID`) VALUES
 (9, 12, 9),
 (10, 13, 9),
 (11, 14, 9),
-(12, 15, 9);
+(12, 15, 9),
+(13, 15, 17),
+(14, 15, 18);
 
 -- --------------------------------------------------------
 
@@ -213,7 +249,14 @@ CREATE TABLE IF NOT EXISTS `uh` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `USERID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+
+--
+-- Схема на данните от таблица `uh`
+--
+
+INSERT INTO `uh` (`UID`, `HWID`, `USERID`) VALUES
+(31, 41, 26);
 
 -- --------------------------------------------------------
 
@@ -255,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `uw` (
   `UID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL,
   `TwoWeeksID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uw`
@@ -267,7 +310,10 @@ INSERT INTO `uw` (`UID`, `UserID`, `TwoWeeksID`) VALUES
 (9, 26, 9),
 (10, 26, 10),
 (11, 26, 11),
-(12, 26, 12);
+(12, 26, 12),
+(13, 26, 12),
+(14, 26, 13),
+(15, 26, 14);
 
 -- --------------------------------------------------------
 
@@ -284,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `weeks` (
   `FridayID` int(10) unsigned NOT NULL,
   `SaturdayID` int(10) unsigned NOT NULL,
   `SundayID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `weeks`
@@ -295,7 +341,10 @@ INSERT INTO `weeks` (`UID`, `MondayID`, `TuesdayID`, `WednesdayID`, `ThursdayID`
 (12, 20, 13, 13, 13, 13, 13, 13),
 (13, 13, 21, 13, 13, 13, 13, 13),
 (14, 22, 13, 13, 13, 13, 13, 13),
-(15, 22, 23, 13, 13, 13, 13, 13);
+(15, 22, 23, 13, 13, 13, 13, 13),
+(16, 24, 13, 13, 13, 13, 13, 13),
+(17, 13, 25, 13, 13, 13, 13, 13),
+(18, 26, 25, 13, 13, 13, 13, 13);
 
 --
 -- Indexes for dumped tables
@@ -369,17 +418,17 @@ ALTER TABLE `weeks`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=281;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=311;
 --
 -- AUTO_INCREMENT for table `day`
 --
 ALTER TABLE `day`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `homeworks`
 --
 ALTER TABLE `homeworks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
@@ -389,12 +438,12 @@ ALTER TABLE `otherinfo`
 -- AUTO_INCREMENT for table `twoweeks`
 --
 ALTER TABLE `twoweeks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `uh`
 --
 ALTER TABLE `uh`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `uoi`
 --
@@ -409,12 +458,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `uw`
 --
 ALTER TABLE `uw`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `weeks`
 --
 ALTER TABLE `weeks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- Ограничения за дъмпнати таблици
 --

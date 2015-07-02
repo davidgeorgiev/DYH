@@ -165,7 +165,7 @@ include "config.php";
 		switch ($week) {
 			case "Четна": $SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (".$row[0].", ".$row3[1].")";
 			break;
-			case "Нечетна": $SQL = "INSERT INTO TWOWEEKS (ODDWEEKID, ODDWEEKID) VALUES (".$row3[0].", ".$row[0].")";
+			case "Нечетна": $SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (".$row3[0].", ".$row[0].")";
 			break;
 		}
 		$result = mysql_query($SQL);

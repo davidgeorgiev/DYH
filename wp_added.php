@@ -126,17 +126,21 @@ include "config.php";
 		//print_r ($row[0]);
 		
 		switch ($week) {
-			case "Четна": $SQL = "SELECT EVENWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = ".$_GET["class"];
+			case "Четна": $SQL = "SELECT EVENWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
 			break;
-			case "Нечетна": $SQL = "SELECT ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = ".$_GET["class"];
+			case "Нечетна": $SQL = "SELECT ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$_GET["class"]."'ORDER BY TWOWEEKS.UID DESC";
 			break;
 		}
 		$result = mysql_query($SQL);
 		$row2 = mysql_fetch_array($result);
 		
+		$SQL = "SELECT EVENWEEKID, ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$_GET["class"]."'ORDER BY TWOWEEKS.UID DESC";
+		$result3 = mysql_query($SQL);
+		$row3 = mysql_fetch_array($result3);
+		
 		$result = mysql_query("SELECT MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID FROM WEEKS WHERE WEEKS.UID = ".$row2[0]);
 		$row2 = mysql_fetch_array($result);
-		$row2 = array(13,13,13,13,13,13,13);
+		//print_r ($row2);
 		
 		switch ($day) {
 			case "Понеделник": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row[0].", ".$row2[1].", ".$row2[2].", ".$row2[3].", ".$row2[4].", ".$row2[5].", ".$row2[6].")";
@@ -159,9 +163,9 @@ include "config.php";
 		$row = mysql_fetch_array($uid);
 		
 		switch ($week) {
-			case "Четна": $SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (".$row[0].", 9)";
+			case "Четна": $SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (".$row[0].", ".$row3[1].")";
 			break;
-			case "Нечетна": $SQL = "INSERT INTO TWOWEEKS (ODDWEEKID, ODDWEEKID) VALUES (9, ".$row[0].")";
+			case "Нечетна": $SQL = "INSERT INTO TWOWEEKS (ODDWEEKID, ODDWEEKID) VALUES (".$row3[0].", ".$row[0].")";
 			break;
 		}
 		$result = mysql_query($SQL);

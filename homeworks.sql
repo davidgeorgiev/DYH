@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `time` time NOT NULL,
   `subject` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `info` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=449 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=503 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `class`
@@ -264,7 +264,61 @@ INSERT INTO `class` (`UID`, `time`, `subject`, `info`) VALUES
 (445, '00:00:00', '', ''),
 (446, '00:00:00', '', ''),
 (447, '00:00:00', '', ''),
-(448, '00:00:00', '', '');
+(448, '00:00:00', '', ''),
+(449, '00:00:00', '', ''),
+(450, '00:00:00', '', ''),
+(451, '14:30:00', 'Соки', 'в НСД'),
+(452, '15:10:00', 'Соки', 'в НСД'),
+(453, '00:00:00', '', ''),
+(454, '00:00:00', '', ''),
+(455, '00:00:00', '', ''),
+(456, '00:00:00', '', ''),
+(457, '00:00:00', '', ''),
+(458, '00:00:00', '', ''),
+(459, '00:00:00', '', ''),
+(460, '00:00:00', '', ''),
+(461, '00:00:00', '', ''),
+(462, '00:00:00', '', ''),
+(463, '00:00:00', '', ''),
+(464, '00:00:00', '', ''),
+(465, '00:00:00', '', ''),
+(466, '00:00:00', '', ''),
+(467, '00:00:00', '', ''),
+(468, '00:00:00', '', ''),
+(469, '00:00:00', '', ''),
+(470, '00:00:00', '', ''),
+(471, '00:00:00', '', ''),
+(472, '00:00:00', '', ''),
+(473, '00:00:00', '', ''),
+(474, '00:00:00', '', ''),
+(475, '00:00:00', '', ''),
+(476, '00:00:00', '', ''),
+(477, '00:00:00', '', ''),
+(478, '00:00:00', '', ''),
+(479, '00:00:00', '', ''),
+(480, '00:00:00', 'Операционни системи', '31'),
+(481, '00:00:00', '', ''),
+(482, '00:00:00', '', ''),
+(483, '00:00:00', '', ''),
+(484, '00:00:00', '', ''),
+(485, '00:00:00', '', ''),
+(486, '00:00:00', '', ''),
+(487, '00:00:00', '', ''),
+(488, '00:00:00', '', ''),
+(489, '00:00:00', 'Български език', ''),
+(490, '00:00:00', '', ''),
+(491, '00:00:00', '', ''),
+(492, '00:00:00', '', ''),
+(493, '00:00:00', '', ''),
+(494, '00:00:00', '', ''),
+(495, '00:00:00', '', ''),
+(496, '00:00:00', '', ''),
+(497, '00:00:00', 'Български език', ''),
+(498, '00:00:00', '', ''),
+(499, '00:00:00', '', ''),
+(500, '00:00:00', '', ''),
+(501, '00:00:00', '', ''),
+(502, '00:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -283,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `day` (
   `class7ID` int(10) unsigned NOT NULL,
   `class8ID` int(10) unsigned NOT NULL,
   `class9ID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `day`
@@ -312,7 +366,13 @@ INSERT INTO `day` (`UID`, `class1ID`, `class2ID`, `class3ID`, `class4ID`, `class
 (37, 411, 412, 413, 414, 415, 416, 417, 418, 419),
 (38, 421, 422, 423, 424, 425, 426, 427, 428, 429),
 (39, 431, 432, 433, 434, 435, 436, 437, 438, 439),
-(40, 440, 441, 442, 443, 444, 445, 446, 447, 448);
+(40, 440, 441, 442, 443, 444, 445, 446, 447, 448),
+(41, 449, 450, 451, 452, 453, 454, 455, 456, 457),
+(42, 458, 459, 460, 461, 462, 463, 464, 465, 466),
+(43, 467, 468, 469, 470, 471, 472, 473, 474, 475),
+(44, 476, 477, 478, 479, 480, 481, 482, 483, 484),
+(45, 485, 486, 487, 488, 489, 490, 491, 492, 493),
+(46, 494, 495, 496, 497, 498, 499, 500, 501, 502);
 
 -- --------------------------------------------------------
 
@@ -326,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
   `Title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Data` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Rank` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `homeworks`
@@ -346,7 +406,19 @@ INSERT INTO `homeworks` (`UID`, `Date`, `Title`, `Data`, `Rank`) VALUES
 (41, '2015-07-02', 'СОКИ', 'Погледни следните сайтове: <a href = "http://mgames-youth.org/">http://mgames-youth.org/</a>, <a href = "http://computerspace.org/">http://computerspace.org/</a>, <a href = "http://invisibleserdica.org/index.php/bg/">http://invisibleserdica.org/index.php/bg/</a>, <a href = "http://qycguidance.org/index.php/en/">http://qycguidance.org/index.php/en/</a>, ', 3),
 (42, '2015-07-01', 'Домашно', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 4),
 (43, '2015-07-02', 'Напомняне', 'Да си гледаш Hell girl 12 ep', 3),
-(44, '2015-07-02', 'Домашно', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 3);
+(44, '2015-07-02', 'Домашно', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 3),
+(45, '2015-07-03', 'Разучаване на UNITY', 'Гледай следните клипчета </br> <a href = "https://www.youtube.com/watch?v=6Bp_DDlgCdY">2D Game Art for Non-Artists #1 - Introduction</a> </br> <a href = "https://www.youtube.com/watch?v=tp9PRN2TMy0">Creating 2D Games in Unity 4.5 #2 - Intro to 2D</a> ', 3),
+(46, '2015-07-01', 'Домашно4', 'Да си в Национален студентски дом в 14:30', 4),
+(47, '2015-07-03', 'Разучи UNITY', 'Гледай следните клипчета </br> <a href = "https://www.youtube.com/watch?v=6Bp_DDlgCdY">2D Game Art for Non-Artists #1 - Introduction</a> </br> <a href = "https://www.youtube.com/watch?v=tp9PRN2TMy0">Creating 2D Games in Unity 4.5 #2 - Intro to 2D</a> ', 2),
+(48, '2015-07-03', 'Напомняне', '200 лицеви опори', 4),
+(49, '0000-00-00', '', '', 0),
+(50, '2015-07-02', 'Домашно', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 2),
+(51, '2015-07-03', 'Напомняне', 'Гледай следните клипчета </br> <a href = "https://www.youtube.com/watch?v=6Bp_DDlgCdY">2D Game Art for Non-Artists #1 - Introduction</a> </br> <a href = "https://www.youtube.com/watch?v=tp9PRN2TMy0">Creating 2D Games in Unity 4.5 #2 - Intro to 2D</a> ', 4),
+(52, '2015-07-02', 'Напомняне', 'Да си гледаш Hell girl 12 ep', 3),
+(53, '2015-06-30', 'Домашно', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 2),
+(54, '2015-07-03', 'Домашно', 'Да си в Национален студентски дом в 14:30', 3),
+(55, '2015-07-03', 'Напомняне', 'Да си в Национален студентски дом в 14:30', 3),
+(56, '2015-07-02', 'Домашно4', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 2);
 
 -- --------------------------------------------------------
 
@@ -358,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `otherinfo` (
   `UID` int(10) unsigned NOT NULL,
   `Title` text COLLATE utf8_unicode_ci NOT NULL,
   `Data` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Схема на данните от таблица `otherinfo`
@@ -368,7 +440,11 @@ INSERT INTO `otherinfo` (`UID`, `Title`, `Data`) VALUES
 (15, 'Напомняне', 'Да си в Национален студентски дом в 14:30'),
 (16, 'Напомняне', 'Да си гледаш работата идиот такъв!'),
 (17, 'Напомняне', 'Да си в Национален студентски дом в 14:30'),
-(18, 'Напомняне', 'Да си в Национален студентски дом в 14:30');
+(18, 'Напомняне', 'Да си в Национален студентски дом в 14:30'),
+(19, 'Напомняне', 'Гледай да не се изгубиш в София пак с Давид'),
+(20, 'Напомняне', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)'),
+(21, 'Напомняне', 'Да си гледаш Hell girl 12 ep'),
+(22, 'Напомняне', 'Да си гледаш Hell girl 12 ep');
 
 -- --------------------------------------------------------
 
@@ -380,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `twoweeks` (
   `UID` int(10) unsigned NOT NULL,
   `EvenWeekID` int(10) unsigned NOT NULL,
   `OddWeekID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `twoweeks`
@@ -410,7 +486,16 @@ INSERT INTO `twoweeks` (`UID`, `EvenWeekID`, `OddWeekID`) VALUES
 (27, 9, 29),
 (28, 9, 30),
 (29, 9, 31),
-(30, 9, 32);
+(30, 9, 32),
+(31, 9, 9),
+(32, 9, 33),
+(33, 15, 34),
+(34, 15, 35),
+(35, 9, 9),
+(36, 9, 9),
+(37, 9, 36),
+(38, 37, 36),
+(39, 37, 38);
 
 -- --------------------------------------------------------
 
@@ -422,7 +507,7 @@ CREATE TABLE IF NOT EXISTS `uh` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `USERID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uh`
@@ -430,7 +515,12 @@ CREATE TABLE IF NOT EXISTS `uh` (
 
 INSERT INTO `uh` (`UID`, `HWID`, `USERID`) VALUES
 (31, 41, 26),
-(34, 44, 28);
+(34, 44, 28),
+(35, 45, 26),
+(37, 47, 29),
+(38, 48, 29),
+(41, 51, 31),
+(46, 56, 31);
 
 -- --------------------------------------------------------
 
@@ -442,7 +532,15 @@ CREATE TABLE IF NOT EXISTS `uoi` (
   `UID` int(10) unsigned NOT NULL,
   `OtherInfoID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Схема на данните от таблица `uoi`
+--
+
+INSERT INTO `uoi` (`UID`, `OtherInfoID`, `UserID`) VALUES
+(1, 19, 29),
+(2, 20, 31);
 
 -- --------------------------------------------------------
 
@@ -452,17 +550,21 @@ CREATE TABLE IF NOT EXISTS `uoi` (
 
 CREATE TABLE IF NOT EXISTS `user` (
   `UID` int(10) unsigned NOT NULL,
-  `Name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+  `Name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `user`
 --
 
-INSERT INTO `user` (`UID`, `Name`) VALUES
-(26, 'David'),
-(27, 'Yoana'),
-(28, '11b');
+INSERT INTO `user` (`UID`, `Name`, `Password`) VALUES
+(26, 'David', '0'),
+(27, 'Yoana', '0'),
+(28, '11b', '0'),
+(29, 'kosio', '0'),
+(30, 'Dora', '1234fo'),
+(31, 'David2', '123456pop');
 
 -- --------------------------------------------------------
 
@@ -474,7 +576,7 @@ CREATE TABLE IF NOT EXISTS `uw` (
   `UID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL,
   `TwoWeeksID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uw`
@@ -505,7 +607,16 @@ INSERT INTO `uw` (`UID`, `UserID`, `TwoWeeksID`) VALUES
 (28, 28, 27),
 (29, 28, 28),
 (30, 28, 29),
-(31, 28, 30);
+(31, 28, 30),
+(32, 29, 31),
+(33, 29, 32),
+(34, 26, 33),
+(35, 26, 34),
+(36, 30, 35),
+(37, 31, 36),
+(38, 31, 37),
+(39, 31, 38),
+(40, 31, 39);
 
 -- --------------------------------------------------------
 
@@ -522,7 +633,7 @@ CREATE TABLE IF NOT EXISTS `weeks` (
   `FridayID` int(10) unsigned NOT NULL,
   `SaturdayID` int(10) unsigned NOT NULL,
   `SundayID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `weeks`
@@ -550,7 +661,13 @@ INSERT INTO `weeks` (`UID`, `MondayID`, `TuesdayID`, `WednesdayID`, `ThursdayID`
 (29, 37, 13, 13, 13, 13, 13, 13),
 (30, 38, 13, 13, 13, 13, 13, 13),
 (31, 39, 13, 13, 13, 13, 13, 13),
-(32, 39, 13, 13, 13, 13, 40, 13);
+(32, 39, 13, 13, 13, 13, 40, 13),
+(33, 13, 13, 13, 13, 41, 13, 13),
+(34, 42, 27, 13, 13, 13, 13, 13),
+(35, 42, 43, 13, 13, 13, 13, 13),
+(36, 13, 13, 13, 13, 44, 13, 13),
+(37, 13, 13, 13, 13, 13, 13, 45),
+(38, 13, 13, 13, 13, 44, 13, 46);
 
 --
 -- Indexes for dumped tables
@@ -624,52 +741,52 @@ ALTER TABLE `weeks`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=449;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=503;
 --
 -- AUTO_INCREMENT for table `day`
 --
 ALTER TABLE `day`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `homeworks`
 --
 ALTER TABLE `homeworks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
 ALTER TABLE `otherinfo`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `twoweeks`
 --
 ALTER TABLE `twoweeks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `uh`
 --
 ALTER TABLE `uh`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `uoi`
 --
 ALTER TABLE `uoi`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `uw`
 --
 ALTER TABLE `uw`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `weeks`
 --
 ALTER TABLE `weeks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 --
 -- Ограничения за дъмпнати таблици
 --

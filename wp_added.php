@@ -1,18 +1,28 @@
-﻿<html>
+﻿<?php
+	session_start();
+	
+?>
+<html>
 <?php 
 include "head.php";
 include "config.php";
+
+$password = $_SESSION['psw'];
+$username = $_SESSION['name'];
+include "CheckEditMode.php";
+$_SESSION['psw'] = $password;
+$_SESSION['name'] = $username;
 ?>
 <body>
 
 <div class="container">
 	<div class="jumbotron">
 		<h1>Домашни</h1>
-		<p><?php echo $_GET["class"]?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Home</a></p>
+		<p><?php echo $username?></p> 
+		<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Home</a></p>
 	</div>
 	<?php
-	if ($db_found) {
+	if ($db_found && $EditMode == 1) {
 		$week = $_POST["week"];
 		$day = $_POST["day"];
 		
@@ -119,15 +129,15 @@ include "config.php";
 		//print_r ($row[0]);
 		
 		switch ($week) {
-			case "Четна": $SQL = "SELECT EVENWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			case "Четна": $SQL = "SELECT EVENWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$username."' ORDER BY TWOWEEKS.UID DESC";
 			break;
-			case "Нечетна": $SQL = "SELECT ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$_GET["class"]."'ORDER BY TWOWEEKS.UID DESC";
+			case "Нечетна": $SQL = "SELECT ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$username."'ORDER BY TWOWEEKS.UID DESC";
 			break;
 		}
 		$result = mysql_query($SQL);
 		$row2 = mysql_fetch_array($result);
 		
-		$SQL = "SELECT EVENWEEKID, ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$_GET["class"]."'ORDER BY TWOWEEKS.UID DESC";
+		$SQL = "SELECT EVENWEEKID, ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = '".$username."'ORDER BY TWOWEEKS.UID DESC";
 		$result3 = mysql_query($SQL);
 		$row3 = mysql_fetch_array($result3);
 		
@@ -165,7 +175,7 @@ include "config.php";
 		$uid = mysql_query("SELECT MAX(TWOWEEKS.UID) FROM TWOWEEKS");
 		$row = mysql_fetch_array($uid);
 		
-		$result2 = mysql_query("SELECT USER.UID FROM USER WHERE USER.NAME = '".$_GET["class"]."'");
+		$result2 = mysql_query("SELECT USER.UID FROM USER WHERE USER.NAME = '".$username."'");
 		$row2 = mysql_fetch_array($result2);
 		$SQL = "INSERT INTO UW (TWOWEEKSID,USERID) VALUES (".$row[0].", ".$row2[0].")";
 		$result = mysql_query($SQL);

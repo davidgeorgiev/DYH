@@ -1,12 +1,22 @@
-﻿<html>
+﻿<?php
+	session_start();
+	
+?>
+<html>
 <?php
 	include "head.php";
 	include "config.php";
+	
+	$password = $_SESSION['psw'];
+	$username = $_SESSION['name'];
+	include "CheckEditMode.php";
+	$_SESSION['psw'] = $password;
+	$_SESSION['name'] = $username;
 ?>
 
 <?php
-	if ($db_found) {
-		$result1 = mysql_query("SELECT DISTINCT user.UID FROM UOI,USER WHERE User.name ='".$_GET["class"]."' AND UOI.USERID = USER.UID");
+	if ($db_found && $EditMode == 1) {
+		$result1 = mysql_query("SELECT DISTINCT user.UID FROM UOI,USER WHERE User.name ='".$username."' AND UOI.USERID = USER.UID");
 		$row2 = mysql_fetch_array($result1);
 		$SQL = "DELETE FROM UOI WHERE UOI.OtherInfoID= '".$_GET["infoid"]."' AND UOI.USERID = ".$row2[0];
 		echo "infoid = ".$_GET["infoid"]." and user id = ".$row2[0];
@@ -15,12 +25,12 @@
 		
 		echo '<div class="container">';
 		echo '<div class="jumbotron">';
-		echo '<h1>Поздравления, '.$_GET["class"].'!</h1>';
+		echo '<h1>Поздравления, '.$username.'!</h1>';
 
 		echo '</div>';
 		
 		echo '<div class="alert alert-success" role="alert">Информацията беше изтрито успешно. ';
-		echo '<a href="home.php?class='.$_GET["class"].'" class="alert-link">Върни ме обратно</a>';
+		echo '<a href="home.php" class="alert-link">Върни ме обратно</a>';
 		echo '!</div>';
 		echo '</div>';
 	}

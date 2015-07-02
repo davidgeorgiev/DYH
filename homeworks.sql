@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
   `Title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Data` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Rank` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `homeworks`
@@ -50,7 +50,11 @@ INSERT INTO `homeworks` (`UID`, `Date`, `Title`, `Data`, `Rank`) VALUES
 (18, '2015-06-30', 'Домашно4', 'Да си гледаш Hell girl 15 ep', 2),
 (20, '2015-06-30', 'Напомняне', 'Отивай да ядеш бе!!!', 3),
 (21, '0000-00-00', '', '', 0),
-(22, '2015-06-30', '123', '123', 2);
+(22, '2015-06-30', '123', '123', 2),
+(23, '2015-07-03', 'Отивай да учиш бе тъпак!', 'всичко да си научил щото ще те убия', 3),
+(24, '2015-06-30', 'Домашно', 'хвърли боклука', 2),
+(25, '2015-06-30', 'Домашно', 'отивай да простираш', 2),
+(26, '2015-06-30', 'Напомняне', 'Кажи на Косьо да спре да се хили', 3);
 
 -- --------------------------------------------------------
 
@@ -82,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `uh` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `USERID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uh`
@@ -96,7 +100,11 @@ INSERT INTO `uh` (`UID`, `HWID`, `USERID`) VALUES
 (7, 16, 1),
 (8, 17, 1),
 (9, 18, 1),
-(10, 20, 1);
+(10, 20, 1),
+(13, 23, 1),
+(14, 24, 1),
+(15, 25, 3),
+(16, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +135,7 @@ INSERT INTO `uoi` (`UID`, `OtherInfoID`, `UserID`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `UID` int(10) unsigned NOT NULL,
   `Name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `user`
@@ -135,7 +143,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`UID`, `Name`) VALUES
 (1, 'David'),
-(2, 'Ivan');
+(2, 'Ivan'),
+(3, 'yoana');
 
 --
 -- Indexes for dumped tables
@@ -179,7 +188,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `homeworks`
 --
 ALTER TABLE `homeworks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
@@ -189,7 +198,7 @@ ALTER TABLE `otherinfo`
 -- AUTO_INCREMENT for table `uh`
 --
 ALTER TABLE `uh`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `uoi`
 --
@@ -199,7 +208,7 @@ ALTER TABLE `uoi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Ограничения за дъмпнати таблици
 --

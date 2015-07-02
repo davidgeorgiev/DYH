@@ -25,7 +25,23 @@
 	} else {
 		echo 'FAIL';
 	}
-	echo '<div id = "my_page">';
+	
+	$SQL = "SELECT DISTINCT COUNT(homeworks.date), WEEKDAY(homeworks.date) FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND Homeworks.date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.date ASC";
+	$result3 = mysql_query($SQL);
+	$row3 = mysql_fetch_array($result3);
+	$SQL = "SELECT DISTINCT COUNT(otherinfo.title) FROM otherinfo,User,UOI WHERE USER.NAME = '".$_GET["class"]."' AND UOI.UserID = User.UID AND UOI.OtherInfoID = OtherInfo.UID  ORDER BY otherinfo.UID DESC";
+	$result4 = mysql_query($SQL);
+	$row4 = mysql_fetch_array($result4);
+	if (($row3[0] > 0) || ($row4[0] > 0)) {
+		$there_is_some_info = 1;
+	} else {
+		$there_is_some_info = 0;
+	}
+	
+	
+	if ($there_is_some_info) {
+		echo '<div id = "my_page">';
+	}
 	while ($row = mysql_fetch_array($result)){
 		//print_r($row);
 		echo '<div class="page-header">';
@@ -106,8 +122,11 @@
   </div>
   <?php
 	//echo '<div class="alert alert-success" role="alert">...</div><div class="alert alert-info" role="alert">...</div><div class="alert alert-warning" role="alert">...</div><div class="alert alert-danger" role="alert">Много важно събитие</div>';
+	if ($there_is_some_info) {
+		echo '</div>';
+	}
   ?>
-	</div>
+	
 <div>
 	<div class="jumbotron" >
 	<h2>Учебната програма</h2>

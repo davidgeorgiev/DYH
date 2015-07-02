@@ -48,7 +48,7 @@
 		echo '<h1>'.$weekday.' <small>'.$row[0].'</small></h1>';
 		echo '</div>';
 		echo '<div class="row">';
-		$result2 = mysql_query("SELECT homeworks.title, homeworks.data, homeworks.rank FROM Homeworks,User,UH WHERE UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND homeworks.date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
+		$result2 = mysql_query("SELECT homeworks.title, homeworks.data, homeworks.rank FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND homeworks.date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
 		while ($row2 = mysql_fetch_array($result2)){
 			echo '	<div class="col-sm-4">';
 			switch($row2[2]){

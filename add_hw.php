@@ -29,19 +29,19 @@
   <form role="form" <?php echo 'action='; echo "hw_added.php?class="; echo $_GET["class"];?> method="post">
     <div class="form-group">
       <label for="text">Дата</label>
-      <input type="text" class="form-control" name="date" placeholder="">
+      <input type="text" class="form-control" name="date" placeholder="2015-06-30">
     </div>
     <div class="form-group">
       <label for="text">Заглавие</label>
-      <input type="text" class="form-control" name="title" placeholder="">
+      <input type="text" class="form-control" name="title" placeholder="Домашно - Математика">
     </div>
 	<div class="form-group">
       <label for="text">Описание</label>
-      <input type="text" class="form-control" name="data" placeholder="">
+      <input type="text" class="form-control" name="data" placeholder="Решете целия учебник">
     </div>
 	<div class="form-group">
       <label for="text">Сложност (от 1 до 4)</label>
-      <input type="text" class="form-control" name="rank" placeholder="">
+      <input type="text" class="form-control" name="rank" placeholder="4">
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>

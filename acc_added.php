@@ -18,9 +18,25 @@ include "config.php";
 			echo '<div class="alert alert-danger" role="alert">Вече съществува акаунт с такова име, ';
 			echo '<a href="index.php" class="alert-link">опитай с друго</a>';
 			echo '!</div>';
+			
+			
+			
 		} else {
 			$SQL = "INSERT INTO User (Name) VALUES ('".$name."')";
 			$result = mysql_query($SQL);
+			
+			$SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (9, 9)";
+			$result = mysql_query($SQL);
+			$uid = mysql_query("SELECT MAX(TWOWEEKS.UID) FROM TWOWEEKS");
+			$row = mysql_fetch_array($uid);
+			
+			$SQL = "SELECT USER.UID FROM USER WHERE USER.NAME = '".$name."'";
+			$result = mysql_query($SQL);
+			$row2 = mysql_fetch_array($result);
+			
+			$SQL = "INSERT INTO UW (USERID, TWOWEEKSID) VALUES ('".$row2[0]."', ".$row[0].")";
+			$result = mysql_query($SQL);
+			
 			mysql_close($dbLink);
 			echo '<h1>Поздравления, '.$name.'!</h1>';
 			echo '<p><a class="btn btn-primary btn-lg" href="home.php?class='.$name.'" role="button">Начало</a></p></div>';

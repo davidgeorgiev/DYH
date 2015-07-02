@@ -111,7 +111,21 @@
 <div>
 	<div class="jumbotron" >
 	<h2>Учебната програма</h2>
-	<p>Седмицата е четна</p> 
+	<?php
+		$eoweek = 0;
+		$ddate = date("Y-m-d");
+		$date = new DateTime($ddate);
+		$week = $date->format("W");
+		//echo "Weeknummer: $week";
+		if($week&1) {
+			$eoweek = 1;
+			echo '<p>Седмицата е нечетна</p>';
+		} else {
+			$eoweek = 0;
+			echo '<p>Седмицата е четна</p>';
+		}
+	?>
+	
 	</div>
   <table class="table table-bordered">
     <thead>

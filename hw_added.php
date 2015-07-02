@@ -30,14 +30,14 @@ $_SESSION['name'] = $username;
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('".$date."', '".$title."', '".$data."', '".$rank."')";
 		$result = mysql_query($SQL);
 		
-		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, User.UID FROM Homeworks,User WHERE USER.NAME = '".$username."' AND homeworks.date = '".$date."' AND homeworks.title = '".$title."' AND homeworks.data = '".$data."' AND homeworks.rank = '".$rank."'")){
+		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, user.UID FROM homeworks,user WHERE user.Name = '".$username."' AND homeworks.Date = '".$date."' AND homeworks.Title = '".$title."' AND homeworks.Data = '".$data."' AND homeworks.Rank = '".$rank."'")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';
 		}
 		$row = mysql_fetch_array($result);
 		//print_r ($row);
-		$SQL = "INSERT INTO UH (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
+		$SQL = "INSERT INTO uh (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
 		$result = mysql_query($SQL);
 
 		mysql_close($dbLink);

@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
   `Title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Data` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Rank` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `homeworks`
@@ -418,7 +418,9 @@ INSERT INTO `homeworks` (`UID`, `Date`, `Title`, `Data`, `Rank`) VALUES
 (53, '2015-06-30', 'Домашно', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 2),
 (54, '2015-07-03', 'Домашно', 'Да си в Национален студентски дом в 14:30', 3),
 (55, '2015-07-03', 'Напомняне', 'Да си в Национален студентски дом в 14:30', 3),
-(56, '2015-07-02', 'Домашно4', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 2);
+(56, '2015-07-02', 'Домашно4', 'Да се представи служебната бележка (издадена от фирмата) и отчета (самоотчет, дневник - трябва да съдържа какво сме правили повреме на стажа, поне 2 страници - хронологично)', 2),
+(57, '2015-07-02', 'СОКИ', 'Погледни следните сайтове: <a href="http://mgames-youth.org/">http://mgames-youth.org/</a>, <a href="http://computerspace.org/">http://computerspace.org/</a>, <a href="http://invisibleserdica.org/index.php/bg/">http://invisibleserdica.org/index.php/bg/</a>, <a href="http://qycguidance.org/index.php/en/">http://qycguidance.org/index.php/en/</a>', 3),
+(58, '2015-07-03', 'Разучаване на UNITY', 'Гледай следните клипчета <br> <a href="https://www.youtube.com/watch?v=6Bp_DDlgCdY">2D Game Art for Non-Artists #1 - Introduction</a> <br> <a href="https://www.youtube.com/watch?v=tp9PRN2TMy0">Creating 2D Games in Unity 4.5 #2 - Intro to 2D</a>', 4);
 
 -- --------------------------------------------------------
 
@@ -507,7 +509,7 @@ CREATE TABLE IF NOT EXISTS `uh` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `USERID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uh`
@@ -519,8 +521,8 @@ INSERT INTO `uh` (`UID`, `HWID`, `USERID`) VALUES
 (35, 45, 26),
 (37, 47, 29),
 (38, 48, 29),
-(41, 51, 31),
-(46, 56, 31);
+(47, 57, 31),
+(48, 58, 31);
 
 -- --------------------------------------------------------
 
@@ -532,15 +534,14 @@ CREATE TABLE IF NOT EXISTS `uoi` (
   `UID` int(10) unsigned NOT NULL,
   `OtherInfoID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `uoi`
 --
 
 INSERT INTO `uoi` (`UID`, `OtherInfoID`, `UserID`) VALUES
-(1, 19, 29),
-(2, 20, 31);
+(1, 19, 29);
 
 -- --------------------------------------------------------
 
@@ -751,7 +752,7 @@ ALTER TABLE `day`
 -- AUTO_INCREMENT for table `homeworks`
 --
 ALTER TABLE `homeworks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
@@ -766,12 +767,12 @@ ALTER TABLE `twoweeks`
 -- AUTO_INCREMENT for table `uh`
 --
 ALTER TABLE `uh`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `uoi`
 --
 ALTER TABLE `uoi`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --

@@ -28,14 +28,14 @@ $_SESSION['name'] = $username;
 		$SQL = "INSERT INTO otherinfo (Title, Data) VALUES ('".$title."', '".$data."')";
 		$result = mysql_query($SQL);
 		
-		if ($result = mysql_query("SELECT DISTINCT otherinfo.UID, User.UID FROM otherinfo,User WHERE USER.NAME = '".$username."' AND otherinfo.title = '".$title."' AND otherinfo.data = '".$data."'")){
+		if ($result = mysql_query("SELECT DISTINCT otherinfo.UID, user.UID FROM otherinfo,uer WHERE user.Name = '".$username."' AND otherinfo.Title = '".$title."' AND otherinfo.Data = '".$data."'")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';
 		}
 		$row = mysql_fetch_array($result);
 		//print_r ($row);
-		$SQL = "INSERT INTO UOI (OtherInfoID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
+		$SQL = "INSERT INTO uoi (OtherInfoID, UserID) VALUES ('".$row[0]."', '".$row[1]."')";
 		$result = mysql_query($SQL);
 
 		mysql_close($dbLink);

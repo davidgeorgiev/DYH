@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <?php
 	include "head.php";
 ?>
@@ -77,7 +77,8 @@ function test_input($data) {
 				     
 				  <div class="control-group" style = "margin-top: 20px;">
 					<!-- Username -->
-					Name: <input type="text" name="name" value="<?php echo $name;?>">
+					<label for="text" style = "margin-right: 10px;" >Име: </label>
+					<input type="text" name="name" value="<?php echo $name;?>">
 				   <span class="error">* <?php echo $nameErr;?></span>
 				   <br><br>
 				  </div>
@@ -87,22 +88,20 @@ function test_input($data) {
 				  <div class="control-group">
 					<!-- Button -->
 					<div class="controls" style = "margin-top:10px;">
-					  <input class="btn btn-primary" type="submit" name="submit" value="login"> 
+					  <input class="btn btn-default" type="submit" name="submit" value="Влез"> 
 					</div>
 				  </div>
 				</fieldset>
 			  </form>                
 			</div>
 			<div class="tab-pane fade" id="create">
-			  <form id="tab">
-				<label>Username</label>
-				<input type="text" value="" class="input-xlarge">
-				
-
-				<div>
-				  <button class="btn btn-primary"style = "margin-top:10px;">Create Account</button>
-				</div>
-			  </form>
+				<form id="tab" role="form" <?php echo 'action='; echo "acc_added.php";?> method="post">
+					<div class="form-group">
+					  <label for="text" style = "margin-top: 10px;">Име: </label>
+					  <input type="text" class="form-control" name="name" placeholder="">
+					</div>
+					<button class="btn btn-primary" type="submit" >Създай профил</button>
+				</form>
 			</div>
 		</div>
 	  </div>

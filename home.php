@@ -67,15 +67,24 @@
 		}
 		echo '	</div>';
 	}
-	echo '<div class="page-header">';
-	echo '<h1>ДОПЪЛНИТЕЛНО</h1>';
-	echo '</div>';
+	
+	if ($result = mysql_query("SELECT DISTINCT COUNT(otherinfo.title) FROM otherinfo,User,UOI WHERE USER.NAME = '".$_GET["class"]."' AND UOI.UserID = User.UID AND UOI.OtherInfoID = OtherInfo.UID  ORDER BY otherinfo.UID DESC")){
+	//echo 'Success';
+	} else {
+		echo 'FAIL';
+	}
+	$row = mysql_fetch_array($result);
+	if ($row[0] > 0){
+		echo '<div class="page-header">';
+		echo '<h1>ДОПЪЛНИТЕЛНО</h1>';
+		echo '</div>';
+	}
   ?>
   
   <div class="row">
     
 	<?php
-		if ($result = mysql_query("SELECT DISTINCT otherinfo.title,otherinfo.data FROM otherinfo,User,UH WHERE USER.NAME = '".$_GET["class"]."'  ORDER BY otherinfo.UID DESC")){
+		if ($result = mysql_query("SELECT DISTINCT otherinfo.title,otherinfo.data FROM otherinfo,User,UOI WHERE USER.NAME = '".$_GET["class"]."' AND UOI.UserID = User.UID AND UOI.OtherInfoID = OtherInfo.UID  ORDER BY otherinfo.UID DESC")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';
@@ -93,7 +102,7 @@
   ?>
 	
 <div>
-	<div class="jumbotron">
+	<div class="jumbotron" style = "margin-top:30px;">
 	<h2>Учебната програма</h2>
 	<p>Седмицата е четна</p> 
 	</div>

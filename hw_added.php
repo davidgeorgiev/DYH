@@ -1,18 +1,28 @@
-﻿<html>
+﻿<?php
+	session_start();
+?>
+<html>
 <?php 
 include "head.php";
 include "config.php";
+
+$password = $_SESSION['psw'];
+$username = $_SESSION['name'];
+include "CheckEditMode.php";
+$_SESSION['psw'] = $password;
+$_SESSION['name'] = $username;
+
 ?>
 <body>
 
 <div class="container">
 	<div class="jumbotron">
 		<h1>Домашни</h1>
-		<p><?php echo $_GET["class"]?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Home</a></p>
+		<p><?php echo $username?></p> 
+		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $username;?>" role="button">Home</a></p>
 	</div>
 	<?php
-	if ($db_found) {
+	if ($db_found && $EditMode == 1) {
 		$date = $_POST["date"];
 		$title = $_POST["title"];
 		$data = $_POST["data"];
@@ -20,7 +30,7 @@ include "config.php";
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('".$date."', '".$title."', '".$data."', '".$rank."')";
 		$result = mysql_query($SQL);
 		
-		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, User.UID FROM Homeworks,User WHERE USER.NAME = '".$_GET["class"]."' AND homeworks.date = '".$date."' AND homeworks.title = '".$title."' AND homeworks.data = '".$data."' AND homeworks.rank = '".$rank."'")){
+		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, User.UID FROM Homeworks,User WHERE USER.NAME = '".$username."' AND homeworks.date = '".$date."' AND homeworks.title = '".$title."' AND homeworks.data = '".$data."' AND homeworks.rank = '".$rank."'")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';

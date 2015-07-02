@@ -17,7 +17,7 @@
   <div class="jumbotron">
     <h1>Домашни</h1>
     <p><?php echo $_GET["class"]?></p> 
-	<p><a class="btn btn-primary btn-lg" style = "margin:10px;" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Начало</a><a class="btn btn-primary btn-lg" href="add_hw.php?class=<?php echo $_GET["class"];?>" role="button">Добави ново домашно</a><a class="btn btn-primary btn-lg" style = "margin:10px;" href="add_info.php?class=<?php echo $_GET["class"];?>" role="button">Добави допълнителна информация</a></p>
+	<p><a class="btn btn-primary btn-lg" style = "margin:10px;" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Начало</a><a class="btn btn-primary btn-lg" href="add_hw.php?class=<?php echo $_GET["class"];?>" role="button">Добави ново домашно</a><a class="btn btn-primary btn-lg" style = "margin:10px;" href="add_info.php?class=<?php echo $_GET["class"];?>" role="button">Добави допълнителна информация</a><a class="btn btn-primary btn-lg" href="add_wp.php?class=<?php echo $_GET["class"];?>" role="button">Нова програма</a></p>
   </div>
   <?php
 	if ($result = mysql_query("SELECT DISTINCT homeworks.date, WEEKDAY(homeworks.date) FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID ORDER BY homeworks.date ASC")){

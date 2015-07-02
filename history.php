@@ -25,7 +25,22 @@
 	} else {
 		echo 'FAIL';
 	}
-	echo '<div id = "my_page">';
+	$SQL = "SELECT DISTINCT COUNT(homeworks.date), WEEKDAY(homeworks.date) FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND Homeworks.date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.date ASC";
+	$result3 = mysql_query($SQL);
+	$row3 = mysql_fetch_array($result3);
+	$SQL = "SELECT DISTINCT COUNT(otherinfo.title) FROM otherinfo,User,UOI WHERE USER.NAME = '".$_GET["class"]."' AND UOI.UserID = User.UID AND UOI.OtherInfoID = OtherInfo.UID  ORDER BY otherinfo.UID DESC";
+	$result4 = mysql_query($SQL);
+	$row4 = mysql_fetch_array($result4);
+	if (($row3[0] > 0) || ($row4[0] > 0)) {
+		$there_is_some_info = 1;
+	} else {
+		$there_is_some_info = 0;
+	}
+	
+	if ($there_is_some_info) {
+		echo '<div id = "my_page">';
+	}
+	
 	while ($row = mysql_fetch_array($result)){
 		//print_r($row);
 		echo '<div class="page-header">';
@@ -106,51 +121,201 @@
   </div>
   <?php
 	//echo '<div class="alert alert-success" role="alert">...</div><div class="alert alert-info" role="alert">...</div><div class="alert alert-warning" role="alert">...</div><div class="alert alert-danger" role="alert">Много важно събитие</div>';
-  ?>
-	</div>
+	if ($there_is_some_info) {
+		echo '</div>';
+	}
+	?>
 <div>
 	<div class="jumbotron" >
 	<h2>Учебната програма</h2>
-	<p>Седмицата е четна</p> 
+	<?php
+		$eoweek = 0;
+		$ddate = date("Y-m-d");
+		$date = new DateTime($ddate);
+		$week = $date->format("W");
+		//echo "Weeknummer: $week";
+		if($week&1) {
+			$eoweek = "ODDWEEKID";
+			echo '<p>Седмицата е нечетна</p>';
+		} else {
+			$eoweek = "EVENWEEKID";
+			echo '<p>Седмицата е четна</p>';
+		}
+	?>
 	</div>
-  <table class="table table-bordered">
+   <table class="table table-bordered" style = "float:left;width:49%;">
     <thead>
       <tr>
 		<th colspan="4">Понеделник</th>
+      </tr>
+    </thead>
+	<?php
+		for ($i=1; $i<=9; $i++){
+			
+			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.MONDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			
+				
+			$result3 = mysql_query($SQL);
+			$row3 = mysql_fetch_array($result3);
+		
+		
+			echo '<tbody>';
+			echo '<td>'.$i.'</td>
+				<td>'.$row3[0].'</td>
+				<td>'.$row3[1].'</td>
+				<td>'.$row3[2].'</td>';
+			echo '</tbody>';
+		}
+	?>
+  </table>
+  <table class="table table-bordered" style = "float:right;width:49%;">
+    <thead>
+      <tr>
 		<th colspan="4">Вторник</th>
+      </tr>
+    </thead>
+	<?php
+		for ($i=1; $i<=9; $i++){
+			
+			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.TUESDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			
+				
+			$result3 = mysql_query($SQL);
+			$row3 = mysql_fetch_array($result3);
+		
+		
+			echo '<tbody>';
+			echo '<td>'.$i.'</td>
+				<td>'.$row3[0].'</td>
+				<td>'.$row3[1].'</td>
+				<td>'.$row3[2].'</td>';
+			echo '</tbody>';
+		}
+	?>
+  </table>
+  <table class="table table-bordered" style = "float:left;width:49%;">
+    <thead>
+      <tr>
 		<th colspan="4">Сряда</th>
       </tr>
     </thead>
 	<?php
-		for ($i=1; $i<=10; $i++){
+		for ($i=1; $i<=9; $i++){
+			
+			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.WEDNESDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			
+				
+			$result3 = mysql_query($SQL);
+			$row3 = mysql_fetch_array($result3);
+		
+		
 			echo '<tbody>';
-			for ($k=1; $k<=3; $k++){
-				echo '<td>01</td>
-					<td>13:00 - 13:30</td>
-					<td>Някакъв час</td>
-					<td>47 стая</td>';
-			}
-			echo '<tbody>';
+			echo '<td>'.$i.'</td>
+				<td>'.$row3[0].'</td>
+				<td>'.$row3[1].'</td>
+				<td>'.$row3[2].'</td>';
+			echo '</tbody>';
 		}
 	?>
   </table>
-  <table class="table table-bordered">
-	<thead>
+  <table class="table table-bordered" style = "float:right;width:49%;">
+    <thead>
       <tr>
 		<th colspan="4">Четвъртък</th>
+      </tr>
+    </thead>
+	<?php
+		for ($i=1; $i<=9; $i++){
+			
+			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.THURSDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			
+				
+			$result3 = mysql_query($SQL);
+			$row3 = mysql_fetch_array($result3);
+		
+		
+			echo '<tbody>';
+			echo '<td>'.$i.'</td>
+				<td>'.$row3[0].'</td>
+				<td>'.$row3[1].'</td>
+				<td>'.$row3[2].'</td>';
+			echo '</tbody>';
+		}
+	?>
+  </table>
+  <table class="table table-bordered" style = "float:left;width:49%;">
+    <thead>
+      <tr>
 		<th colspan="4">Петък</th>
       </tr>
     </thead>
 	<?php
-		for ($i=1; $i<=10; $i++){
+		for ($i=1; $i<=9; $i++){
+			
+			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.FRIDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			
+				
+			$result3 = mysql_query($SQL);
+			$row3 = mysql_fetch_array($result3);
+		
+		
 			echo '<tbody>';
-			for ($k=1; $k<=2; $k++){
-				echo '<td>01</td>
-					<td>13:00 - 13:30</td>
-					<td>Някакъв час</td>
-					<td>47 стая</td>';
-			}
+			echo '<td>'.$i.'</td>
+				<td>'.$row3[0].'</td>
+				<td>'.$row3[1].'</td>
+				<td>'.$row3[2].'</td>';
+			echo '</tbody>';
+		}
+	?>
+  </table>
+  <table class="table table-bordered" style = "float:right;width:49%;">
+    <thead>
+      <tr>
+		<th colspan="4">Събота</th>
+      </tr>
+    </thead>
+	<?php
+		for ($i=1; $i<=9; $i++){
+			
+			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.SATURDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			
+				
+			$result3 = mysql_query($SQL);
+			$row3 = mysql_fetch_array($result3);
+		
+		
 			echo '<tbody>';
+			echo '<td>'.$i.'</td>
+				<td>'.$row3[0].'</td>
+				<td>'.$row3[1].'</td>
+				<td>'.$row3[2].'</td>';
+			echo '</tbody>';
+		}
+	?>
+  </table>
+   </table>
+  <table class="table table-bordered" style = "float:left;width:49%;">
+    <thead>
+      <tr>
+		<th colspan="4">Неделя</th>
+      </tr>
+    </thead>
+	<?php
+		for ($i=1; $i<=9; $i++){
+			
+			$SQL = "SELECT CLASS.TIME, CLASS.SUBJECT, CLASS.INFO FROM CLASS, DAY, WEEKS, TWOWEEKS, UW, USER WHERE USER.UID = UW.USERID AND TWOWEEKS.UID = UW.TWOWEEKSID AND TWOWEEKS.".$eoweek." = WEEKS.UID AND DAY.UID = WEEKS.SUNDAYID AND CLASS.UID = DAY.CLASS".$i."ID AND USER.NAME = '".$_GET["class"]."' ORDER BY TWOWEEKS.UID DESC";
+			
+				
+			$result3 = mysql_query($SQL);
+			$row3 = mysql_fetch_array($result3);
+		
+		
+			echo '<tbody>';
+			echo '<td>'.$i.'</td>
+				<td>'.$row3[0].'</td>
+				<td>'.$row3[1].'</td>
+				<td>'.$row3[2].'</td>';
+			echo '</tbody>';
 		}
 	?>
   </table>

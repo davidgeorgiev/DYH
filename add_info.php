@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+	session_start();
+	
+?>
+<html>
 <?php
 	include "config.php";
 	include "head.php";
@@ -16,18 +20,23 @@
 		print "Database NOT Found ";
 		mysql_close($dbLink);
 	}*/
+	$password = $_SESSION['psw'];
+	$username = $_SESSION['name'];
+	include "CheckEditMode.php";
+	$_SESSION['psw'] = $password;
+	$_SESSION['name'] = $username;
 ?>
 <body>
 
 <div class="container">
 	<div class="jumbotron">
 		<h1>Домашни</h1>
-		<p><?php echo $_GET["class"]?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Home</a></p>
+		<p><?php echo $username?></p> 
+		<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Home</a></p>
 	</div>
 	<div id = "my_page">
   <h2>Добави допълнителна информация</h2>
-  <form role="form" <?php echo 'action='; echo "info_added.php?class="; echo $_GET["class"];?> method="post">
+  <form role="form" <?php echo 'action='; echo "info_added.php";?> method="post">
     <div class="form-group">
       <label for="text">Заглавие</label>
       <input type="text" class="form-control" name="title" placeholder="">
@@ -36,8 +45,11 @@
       <label for="text">Описание</label>
       <input type="text" class="form-control" name="data" placeholder="">
     </div>
-
-    <button type="submit" class="btn btn-default">Submit</button>
+	<?php
+		if ($EditMode == 1) {
+			echo '<button type="submit" class="btn btn-default">Submit</button>';
+		}
+	?>
   </form>
 </div>
 </div>

@@ -1,24 +1,34 @@
-﻿<html>
+﻿<?php
+	session_start();
+	
+?>
+<html>
 <?php 
 include "head.php";
 include "config.php";
+
+$password = $_SESSION['psw'];
+$username = $_SESSION['name'];
+include "CheckEditMode.php";
+$_SESSION['psw'] = $password;
+$_SESSION['name'] = $username;
 ?>
 <body>
 
 <div class="container">
 	<div class="jumbotron">
 		<h1>Домашни</h1>
-		<p><?php echo $_GET["class"]?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Home</a></p>
+		<p><?php echo $username?></p> 
+		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $username;?>" role="button">Home</a></p>
 	</div>
 	<?php
-	if ($db_found) {
+	if ($db_found && $EditMode == 1) {
 		$title = $_POST["title"];
 		$data = $_POST["data"];
 		$SQL = "INSERT INTO otherinfo (Title, Data) VALUES ('".$title."', '".$data."')";
 		$result = mysql_query($SQL);
 		
-		if ($result = mysql_query("SELECT DISTINCT otherinfo.UID, User.UID FROM otherinfo,User WHERE USER.NAME = '".$_GET["class"]."' AND otherinfo.title = '".$title."' AND otherinfo.data = '".$data."'")){
+		if ($result = mysql_query("SELECT DISTINCT otherinfo.UID, User.UID FROM otherinfo,User WHERE USER.NAME = '".$username."' AND otherinfo.title = '".$title."' AND otherinfo.data = '".$data."'")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';

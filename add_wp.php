@@ -1,4 +1,7 @@
-﻿<html>
+﻿<?php
+	session_start();
+?>
+<html>
 <?php
 	include "config.php";
 	include "head.php";
@@ -16,18 +19,24 @@
 		print "Database NOT Found ";
 		mysql_close($dbLink);
 	}*/
+	
+	$password = $_SESSION['psw'];
+	$username = $_SESSION['name'];
+	include "CheckEditMode.php";
+	$_SESSION['psw'] = $password;
+	$_SESSION['name'] = $username;
 ?>
 <body>
 
 <div class="container">
 	<div class="jumbotron">
 		<h1>Домашни</h1>
-		<p><?php echo $_GET["class"]?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Home</a></p>
+		<p><?php echo $username?></p> 
+		<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Home</a></p>
 	</div>
 	<div id = "my_page">
   <h2>Добави нова програма</h2>
-  <form role="form" <?php echo 'action='; echo "wp_added.php?class="; echo $_GET["class"];?> method="post">
+  <form role="form" <?php echo 'action='; echo "wp_added.php";?> method="post">
     <div class="form-group">
 		<div class="row">
 			<div class="col-sm-6">
@@ -96,7 +105,11 @@
       <input type="text" class="form-control" name="time9" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject9" placeholder="Математика"><input type="text" class="form-control" name="info9" placeholder="Информация">
     </div>
 	</div>
-    <button type="submit" class="btn btn-default" style = "margin-left: 15px;">Submit</button>
+	<?php
+		if ($EditMode == 1) {
+			echo '<button type="submit" class="btn btn-default" style = "margin-left: 15px;">Submit</button>';
+		}
+	?>
 	</form>
 	</div>
 </div>

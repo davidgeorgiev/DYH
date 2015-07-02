@@ -1,6 +1,7 @@
 ﻿<html>
 <?php
 	include "head.php";
+	include "config.php";
 ?>
 <body>
 <?php
@@ -109,8 +110,21 @@ function test_input($data) {
 </div>
 <?php
 if($name != ""){
-    $home = 'home.php?class='.$name;
-    header('Location: '.$home) and exit;
+	if ($db_found) {
+		$result = mysql_query("SELECT Count(user.name) FROM USER WHERE User.name = '".$name."'");
+		$row = mysql_fetch_array($result);
+		
+		if ($row[0] > 0){
+			$home = 'home.php?class='.$name;
+		} else {
+			$home = 'notreg.php';
+		}
+		header('Location: '.$home) and exit;
+	}
+	else {
+		echo 'Database not found!';
+		mysql_close($dbLink);
+	}
 }
 // echo "<h2>Your Input:</h2>";
 // echo $name;

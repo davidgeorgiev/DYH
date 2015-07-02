@@ -48,7 +48,7 @@
 		echo '<h1>'.$weekday.' <small>'.$row[0].'</small></h1>';
 		echo '</div>';
 		echo '<div class="row">';
-		$result2 = mysql_query("SELECT homeworks.title, homeworks.data, homeworks.rank FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND homeworks.date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
+		$result2 = mysql_query("SELECT homeworks.title, homeworks.data, homeworks.rank, homeworks.UID FROM Homeworks,User,UH WHERE USER.NAME = '".$_GET["class"]."' AND UH.HWID = HomeWorks.UID AND UH.USERID = USER.UID AND homeworks.date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
 		while ($row2 = mysql_fetch_array($result2)){
 			echo '	<div class="col-sm-4">';
 			switch($row2[2]){
@@ -62,7 +62,10 @@
 				break;
 			} 
 			echo '	<h3 style = "background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 3px;">'.$row2[0].'</h3>';
-			echo '	<p style = "border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 3px;">'.$row2[1].'</p>';
+			echo '	<p style = "border-width:thin; border-style: solid;background-color:#EAEAEA;border-color: #BEBEBE;border-radius:5px; padding: 3px;">'.$row2[1].'</p>';
+			echo '<form id="tab" role="form"'; echo "action="; echo '"delete_hw.php?hwid='.$row2[3].'&class='.$_GET["class"].'"'; echo ' method="post">
+				<button class="btn btn-default" style = "background-color:white;width:40%;;height:27px;padding:3px;" type="submit" >Изтрий</button>
+			</form>';
 			echo '</div>';
 		}
 		echo '	</div>';

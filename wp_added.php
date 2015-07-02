@@ -12,7 +12,7 @@ include "config.php";
 		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $_GET["class"];?>" role="button">Home</a></p>
 	</div>
 	<?php
-	//if ($db_found) {
+	if ($db_found) {
 		$week = $_POST["week"];
 		$day = $_POST["day"];
 		
@@ -46,29 +46,139 @@ include "config.php";
 		$info8 = $_POST["info8"];
 		$info9 = $_POST["info9"];
 		
-		/*$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('".$date."', '".$title."', '".$data."', '".$rank."')";
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time1."', '".$subject1."', '".$info1."')";
 		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		$CLASSUIDS = array($row[0]);
 		
-		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, User.UID FROM Homeworks,User WHERE USER.NAME = '".$_GET["class"]."' AND homeworks.date = '".$date."' AND homeworks.title = '".$title."' AND homeworks.data = '".$data."' AND homeworks.rank = '".$rank."'")){
-			//echo 'Success';
-		} else {
-			echo 'FAIL';
-		}
-		$row = mysql_fetch_array($result);
-		//print_r ($row);
-		$SQL = "INSERT INTO UH (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time2."', '".$subject2."', '".$info2."')";
 		$result = mysql_query($SQL);
-
-		mysql_close($dbLink);
-
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time3."', '".$subject3."', '".$info3."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time4."', '".$subject4."', '".$info4."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time4."', '".$subject4."', '".$info4."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time5."', '".$subject5."', '".$info5."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time6."', '".$subject6."', '".$info6."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time7."', '".$subject7."', '".$info7."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time8."', '".$subject8."', '".$info8."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time9."', '".$subject9."', '".$info9."')";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
+		$row = mysql_fetch_array($uid);
+		//echo $row[0];
+		array_push($CLASSUIDS, $row[0]);
+		
+		//print_r ($CLASSUIDS);
+		
+		$SQL = "INSERT INTO day (Class1ID, Class2ID, Class3ID, Class4ID, Class5ID, Class6ID, Class7ID, Class8ID, Class9ID) VALUES (".$CLASSUIDS[0].", ".$CLASSUIDS[1].", ".$CLASSUIDS[2].", ".$CLASSUIDS[3].", ".$CLASSUIDS[4].", ".$CLASSUIDS[5].", ".$CLASSUIDS[6].", ".$CLASSUIDS[7].", ".$CLASSUIDS[8].")";
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(day.UID) FROM day");
+		$row = mysql_fetch_array($uid);
+		
+		//print_r ($row[0]);
+		
+		switch ($week) {
+			case "Четна": $SQL = "SELECT EVENWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = ".$_GET["class"];
+			break;
+			case "Нечетна": $SQL = "SELECT ODDWEEKID FROM TWOWEEKS, UW, USER WHERE TWOWEEKS.UID = UW.TWOWEEKSID AND USER.UID = UW.USERID AND USER.NAME = ".$_GET["class"];
+			break;
+		}
+		$result = mysql_query($SQL);
+		$row2 = mysql_fetch_array($result);
+		
+		$result = mysql_query("SELECT MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID FROM WEEKS WHERE WEEKS.UID = ".$row2[0]);
+		$row2 = mysql_fetch_array($result);
+		$row2 = array(13,13,13,13,13,13,13);
+		
+		switch ($day) {
+			case "Понеделник": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row[0].", ".$row2[1].", ".$row2[2].", ".$row2[3].", ".$row2[4].", ".$row2[5].", ".$row2[6].")";
+			break;
+			case "Вторник": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row2[0].", ".$row[0].", ".$row2[2].", ".$row2[3].", ".$row2[4].", ".$row2[5].", ".$row2[6].")";
+			break;
+			case "Сряда": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row2[0].", ".$row2[1].", ".$row[0].", ".$row2[3].", ".$row2[4].", ".$row2[5].", ".$row2[6].")";
+			break;
+			case "Четвъртък": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row2[0].", ".$row2[1].", ".$row2[2].", ".$row[0].", ".$row2[4].", ".$row2[5].", ".$row2[6].")";
+			break;
+			case "Петък": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row2[0].", ".$row2[1].", ".$row2[2].", ".$row2[3].", ".$row[0].", ".$row2[5].", ".$row2[6].")";
+			break;
+			case "Събота": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row2[0].", ".$row2[1].", ".$row2[2].", ".$row2[3].", ".$row2[4].", ".$row[0].", ".$row2[6].")";
+			break;
+			case "Неделя": $SQL = "INSERT INTO WEEKS (MondayID, TuesdayID, WednesdayID, ThursdayID, FridayID, SaturdayID, SundayID) VALUES (".$row2[0].", ".$row2[1].", ".$row2[2].", ".$row2[3].", ".$row2[4].", ".$row2[5].", ".$row[0].")";
+			break;
+		}
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(WEEKS.UID) FROM WEEKS");
+		$row = mysql_fetch_array($uid);
+		
+		switch ($week) {
+			case "Четна": $SQL = "INSERT INTO TWOWEEKS (EVENWEEKID, ODDWEEKID) VALUES (".$row[0].", 9)";
+			break;
+			case "Нечетна": $SQL = "INSERT INTO TWOWEEKS (ODDWEEKID, ODDWEEKID) VALUES (9, ".$row[0].")";
+			break;
+		}
+		$result = mysql_query($SQL);
+		$uid = mysql_query("SELECT MAX(TWOWEEKS.UID) FROM TWOWEEKS");
+		$row = mysql_fetch_array($uid);
+		
+		$result2 = mysql_query("SELECT USER.UID FROM USER WHERE USER.NAME = '".$_GET["class"]."'");
+		$row2 = mysql_fetch_array($result2);
+		$SQL = "INSERT INTO UW (TWOWEEKSID,USERID) VALUES (".$row[0].", ".$row2[0].")";
+		$result = mysql_query($SQL);
+		//$uid = mysql_query("SELECT MAX(WEEKS.UID) FROM WEEKS");
+		//$row = mysql_fetch_array($uid);
+		
+		
+		
 		echo '<div class="alert alert-success" role="alert"><a href="" class="alert-link"></a>Програмата е добавена успешно</div>';
-
 	}
-	else {
-
-		echo '<div class="alert alert-danger" role="alert"><a href="" class="alert-link"></a>Програмата не можа да се добави</div>';
-		mysql_close($dbLink);
-	}*/
 	?>
   <div class="panel panel-default">
   <div class="panel-heading">

@@ -23,6 +23,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Структура на таблица `class`
+--
+
+CREATE TABLE IF NOT EXISTS `class` (
+  `UID` int(10) unsigned NOT NULL,
+  `time` time NOT NULL,
+  `subject` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `info` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `day`
+--
+
+CREATE TABLE IF NOT EXISTS `day` (
+  `UID` int(10) unsigned NOT NULL,
+  `class1ID` int(10) unsigned NOT NULL,
+  `class2ID` int(10) unsigned NOT NULL,
+  `class3ID` int(10) unsigned NOT NULL,
+  `class4ID` int(10) unsigned NOT NULL,
+  `class5ID` int(10) unsigned NOT NULL,
+  `class6ID` int(10) unsigned NOT NULL,
+  `class7ID` int(10) unsigned NOT NULL,
+  `class8ID` int(10) unsigned NOT NULL,
+  `class9ID` int(10) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Структура на таблица `homeworks`
 --
 
@@ -69,6 +101,18 @@ CREATE TABLE IF NOT EXISTS `otherinfo` (
 INSERT INTO `otherinfo` (`UID`, `Title`, `Data`) VALUES
 (15, 'Напомняне', 'Да си в Национален студентски дом в 14:30'),
 (16, 'Напомняне', 'Да си гледаш работата идиот такъв!');
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `twoweeks`
+--
+
+CREATE TABLE IF NOT EXISTS `twoweeks` (
+  `UID` int(10) unsigned NOT NULL,
+  `EvenWeekID` int(10) unsigned NOT NULL,
+  `OddWeekID` int(10) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -134,9 +178,50 @@ INSERT INTO `user` (`UID`, `Name`) VALUES
 (14, 'David'),
 (24, 'Давид');
 
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `uw`
+--
+
+CREATE TABLE IF NOT EXISTS `uw` (
+  `UID` int(10) unsigned NOT NULL,
+  `UserID` int(10) unsigned NOT NULL,
+  `TwoWeeksID` int(10) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `weeks`
+--
+
+CREATE TABLE IF NOT EXISTS `weeks` (
+  `UID` int(10) unsigned NOT NULL,
+  `MondayID` int(10) unsigned NOT NULL,
+  `TuesdayID` int(10) unsigned NOT NULL,
+  `WednesdayID` int(10) unsigned NOT NULL,
+  `ThursdayID` int(10) unsigned NOT NULL,
+  `FridayID` int(10) unsigned NOT NULL,
+  `SaturdayID` int(10) unsigned NOT NULL,
+  `SundayID` int(10) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `class`
+--
+ALTER TABLE `class`
+  ADD UNIQUE KEY `UID` (`UID`);
+
+--
+-- Indexes for table `day`
+--
+ALTER TABLE `day`
+  ADD UNIQUE KEY `UID` (`UID`), ADD KEY `class1ID` (`class1ID`), ADD KEY `class2ID` (`class2ID`), ADD KEY `class3ID` (`class3ID`), ADD KEY `class4ID` (`class4ID`), ADD KEY `class5ID` (`class5ID`), ADD KEY `class6ID` (`class6ID`), ADD KEY `class7ID` (`class7ID`), ADD KEY `class8ID` (`class8ID`), ADD KEY `class9ID` (`class9ID`);
 
 --
 -- Indexes for table `homeworks`
@@ -149,6 +234,12 @@ ALTER TABLE `homeworks`
 --
 ALTER TABLE `otherinfo`
   ADD UNIQUE KEY `UID` (`UID`);
+
+--
+-- Indexes for table `twoweeks`
+--
+ALTER TABLE `twoweeks`
+  ADD UNIQUE KEY `UID` (`UID`), ADD KEY `EvenWeekID` (`EvenWeekID`), ADD KEY `OddWeekID` (`OddWeekID`);
 
 --
 -- Indexes for table `uh`
@@ -169,9 +260,31 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `UID` (`UID`);
 
 --
+-- Indexes for table `uw`
+--
+ALTER TABLE `uw`
+  ADD UNIQUE KEY `UID` (`UID`), ADD KEY `UserID` (`UserID`), ADD KEY `TwoWeeksID` (`TwoWeeksID`);
+
+--
+-- Indexes for table `weeks`
+--
+ALTER TABLE `weeks`
+  ADD UNIQUE KEY `UID` (`UID`), ADD KEY `MondayID` (`MondayID`), ADD KEY `TuesdayID` (`TuesdayID`), ADD KEY `WednesdayID` (`WednesdayID`), ADD KEY `ThursdayID` (`ThursdayID`), ADD KEY `FridayID` (`FridayID`), ADD KEY `SaturdayID` (`SaturdayID`), ADD KEY `SundayID` (`SundayID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `class`
+--
+ALTER TABLE `class`
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `day`
+--
+ALTER TABLE `day`
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `homeworks`
 --
@@ -182,6 +295,11 @@ ALTER TABLE `homeworks`
 --
 ALTER TABLE `otherinfo`
   MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `twoweeks`
+--
+ALTER TABLE `twoweeks`
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `uh`
 --
@@ -198,8 +316,39 @@ ALTER TABLE `uoi`
 ALTER TABLE `user`
   MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
+-- AUTO_INCREMENT for table `uw`
+--
+ALTER TABLE `uw`
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `weeks`
+--
+ALTER TABLE `weeks`
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
 -- Ограничения за дъмпнати таблици
 --
+
+--
+-- Ограничения за таблица `day`
+--
+ALTER TABLE `day`
+ADD CONSTRAINT `day_ibfk_1` FOREIGN KEY (`class1ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_2` FOREIGN KEY (`class2ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_3` FOREIGN KEY (`class3ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_4` FOREIGN KEY (`class4ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_5` FOREIGN KEY (`class5ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_6` FOREIGN KEY (`class6ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_7` FOREIGN KEY (`class7ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_8` FOREIGN KEY (`class8ID`) REFERENCES `class` (`UID`),
+ADD CONSTRAINT `day_ibfk_9` FOREIGN KEY (`class9ID`) REFERENCES `class` (`UID`);
+
+--
+-- Ограничения за таблица `twoweeks`
+--
+ALTER TABLE `twoweeks`
+ADD CONSTRAINT `twoweeks_ibfk_1` FOREIGN KEY (`EvenWeekID`) REFERENCES `weeks` (`UID`),
+ADD CONSTRAINT `twoweeks_ibfk_2` FOREIGN KEY (`OddWeekID`) REFERENCES `weeks` (`UID`);
 
 --
 -- Ограничения за таблица `uh`
@@ -214,6 +363,25 @@ ADD CONSTRAINT `uh_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `user` (`UID`);
 ALTER TABLE `uoi`
 ADD CONSTRAINT `uoi_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UID`),
 ADD CONSTRAINT `uoi_ibfk_2` FOREIGN KEY (`OtherInfoID`) REFERENCES `otherinfo` (`UID`);
+
+--
+-- Ограничения за таблица `uw`
+--
+ALTER TABLE `uw`
+ADD CONSTRAINT `uw_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UID`),
+ADD CONSTRAINT `uw_ibfk_2` FOREIGN KEY (`TwoWeeksID`) REFERENCES `twoweeks` (`UID`);
+
+--
+-- Ограничения за таблица `weeks`
+--
+ALTER TABLE `weeks`
+ADD CONSTRAINT `weeks_ibfk_1` FOREIGN KEY (`MondayID`) REFERENCES `day` (`UID`),
+ADD CONSTRAINT `weeks_ibfk_2` FOREIGN KEY (`TuesdayID`) REFERENCES `day` (`UID`),
+ADD CONSTRAINT `weeks_ibfk_3` FOREIGN KEY (`WednesdayID`) REFERENCES `day` (`UID`),
+ADD CONSTRAINT `weeks_ibfk_4` FOREIGN KEY (`ThursdayID`) REFERENCES `day` (`UID`),
+ADD CONSTRAINT `weeks_ibfk_5` FOREIGN KEY (`FridayID`) REFERENCES `day` (`UID`),
+ADD CONSTRAINT `weeks_ibfk_6` FOREIGN KEY (`SaturdayID`) REFERENCES `day` (`UID`),
+ADD CONSTRAINT `weeks_ibfk_7` FOREIGN KEY (`SundayID`) REFERENCES `day` (`UID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

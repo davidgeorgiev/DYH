@@ -74,13 +74,6 @@ include "config.php";
 		//echo $row[0];
 		array_push($CLASSUIDS, $row[0]);
 		
-		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time4."', '".$subject4."', '".$info4."')";
-		$result = mysql_query($SQL);
-		$uid = mysql_query("SELECT MAX(class.UID) FROM class");
-		$row = mysql_fetch_array($uid);
-		//echo $row[0];
-		array_push($CLASSUIDS, $row[0]);
-		
 		$SQL = "INSERT INTO class (Time, Subject, Info) VALUES ('".$time5."', '".$subject5."', '".$info5."')";
 		$result = mysql_query($SQL);
 		$uid = mysql_query("SELECT MAX(class.UID) FROM class");

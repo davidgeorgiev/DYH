@@ -53,6 +53,10 @@ include "main_menu.php"; ?>
       <input type="text" class="form-control" name="data" placeholder="Решете целия учебник">
     </div>
 	<div class="form-group">
+      <label for="text">URL към изображение</label>
+      <input type="text" class="form-control" name="imgurl" placeholder="http://somesite/img.png">
+    </div>
+	<div class="form-group">
       <label for="text">Важност (от 1 до 4)</label>
 		<select class="form-control" name="rank">
 			<option value="1">1</option>

@@ -65,6 +65,6 @@ include "main_menu.php"; ?>
 </div>
 
 
-
+</div>
 </body>
 </html>

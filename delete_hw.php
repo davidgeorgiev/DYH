@@ -24,6 +24,8 @@
 		mysql_close($dbLink);
 		
 		echo '<div class="container">';
+		$_SESSION['page'] = "other";
+		include "main_menu.php";
 		echo '<div class="jumbotron">';
 		echo '<h1>Поздравления, '.$username.'!</h1>';
 

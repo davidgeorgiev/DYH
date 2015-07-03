@@ -1,6 +1,6 @@
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
+	//padding-top: 40px;
+	//padding-bottom: 40px;
   position: relative;
 }
 
@@ -44,4 +44,4 @@ td {
 	margin: 0px;
 	margin-top: 1%;
 	width:100%;
-}
+}	

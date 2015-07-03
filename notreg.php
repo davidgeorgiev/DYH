@@ -20,6 +20,6 @@ include "head.php";
 </div>
 
 
-
+</div>
 </body>
 </html>

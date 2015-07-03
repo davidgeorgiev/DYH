@@ -28,7 +28,7 @@ $_SESSION['name'] = $username;
 		$SQL = "INSERT INTO otherinfo (Title, Data) VALUES ('".$title."', '".$data."')";
 		$result = mysql_query($SQL);
 		
-		if ($result = mysql_query("SELECT DISTINCT otherinfo.UID, user.UID FROM otherinfo,uer WHERE user.Name = '".$username."' AND otherinfo.Title = '".$title."' AND otherinfo.Data = '".$data."'")){
+		if ($result = mysql_query("SELECT DISTINCT otherinfo.UID, user.UID FROM otherinfo,user WHERE user.Name = '".$username."' AND otherinfo.Title = '".$title."' AND otherinfo.Data = '".$data."'")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';

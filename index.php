@@ -122,6 +122,29 @@ function test_input($data) {
 			</div>
 		</div>
 	  </div>
+	  <div class="panel panel-primary"><div class="panel-heading">Информация</div>
+  <div class="panel-body">
+	<?php
+	
+		$SQL = "SELECT COUNT(user.Name) FROM user";
+		$result = mysql_query($SQL);
+		$row = mysql_fetch_array($result);
+		echo '<p>Регистрирани потребители: ';
+		echo $row[0].'</p>';
+		
+		$SQL = "SELECT COUNT(homeworks.UID) FROM homeworks";
+		$result = mysql_query($SQL);
+		$row = mysql_fetch_array($result);
+		echo '<p>Домашни: ';
+		echo $row[0].'</p>';
+		
+		$SQL = "SELECT COUNT(otherinfo.UID) FROM otherinfo";
+		$result = mysql_query($SQL);
+		$row = mysql_fetch_array($result);
+		echo '<p>Други: ';
+		echo $row[0].'</p>';
+	?>
+  </div></div>
 	</div>
 </div>
 <?php
@@ -145,5 +168,6 @@ if($name != ""){
 // echo "<h2>Your Input:</h2>";
 // echo $name;
 ?>
+
 </body>
 </html>

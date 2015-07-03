@@ -13,18 +13,9 @@
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;
 ?>
-
+<body>
 <?php
 	if ($db_found && $EditMode == 1) {
-		$SQL = "SELECT DISTINCT user.UID FROM uoi,user WHERE user.Name ='".$username."' AND uoi.UserID = user.UID";
-		//echo $SQL.'</br>';
-		$result1 = mysql_query($SQL);
-		$row2 = mysql_fetch_array($result1);
-		$SQL = "DELETE FROM uoi WHERE uoi.OtherInfoID = ".$_GET["infoid"]." AND uoi.UserID = ".$row2[0];
-		//echo $SQL;
-		$result = mysql_query($SQL);
-		mysql_close($dbLink);
-		
 		echo '<div class="container">';
 		$_SESSION['page'] = "other";
 		include "main_menu.php";
@@ -37,6 +28,16 @@
 		echo '<a href="home.php" class="alert-link">Върни ме обратно</a>';
 		echo '!</div>';
 		echo '</div>';
+		$SQL = "SELECT DISTINCT user.UID FROM uoi,user WHERE user.Name ='".$username."' AND uoi.UserID = user.UID";
+		//echo $SQL.'</br>';
+		$result1 = mysql_query($SQL);
+		$row2 = mysql_fetch_array($result1);
+		$SQL = "DELETE FROM uoi WHERE uoi.OtherInfoID = ".$_GET["infoid"]." AND uoi.UserID = ".$row2[0];
+		//echo $SQL;
+		$result = mysql_query($SQL);
+		mysql_close($dbLink);
+		
+		
 	}
 	else {
 
@@ -46,7 +47,8 @@
 		mysql_close($dbLink);
 	}
 	?>
-
+	</div>
+</body>
 </html>
 
 

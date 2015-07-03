@@ -127,5 +127,6 @@ include "main_menu.php"; ?>
 	</div>
 </div>
 </div>
+</div>
 </body>
 </html>

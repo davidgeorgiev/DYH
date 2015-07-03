@@ -16,10 +16,12 @@ $_SESSION['name'] = $username;
 <body>
 
 <div class="container">
+<?php
+$_SESSION['page'] = "other";
+include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<h1>Домашни</h1>
 		<p><?php echo $username?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $username;?>" role="button">Home</a></p>
 	</div>
 	<?php
 	if ($db_found && $EditMode == 1) {

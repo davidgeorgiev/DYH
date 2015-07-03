@@ -1,15 +1,23 @@
-﻿<html>
+﻿<?php
+	session_start();
+?>
+<html>
 <?php 
 include "head.php";
 include "config.php";
+
+
 ?>
 <body>
 
 <div class="container">
+<?php include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<?php 
 			$name = $_POST["name"];
 			$psw = $_POST["psw"];
+			$_SESSION['psw'] = $psw;
+			$_SESSION['name'] = $username;
 	if ($db_found) {
 		$SQL = "SELECT Count(user.Name) FROM user WHERE user.Name = '".$name."'";
 		$result = mysql_query($SQL);

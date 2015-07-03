@@ -90,7 +90,7 @@
 			echo '	<p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;">'.$row2[1].'</p>';
 			
 			if (strlen($row2[4]) > 0) {
-				echo ' <p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$row2[4].'" rel="lightbox"><img src="'.$row2[4].'" alt="HomeWork image" height="33%"></a></p>';
+				echo ' <p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$row2[4].'" rel="lightbox"><img src="'.$row2[4].'" alt="HomeWork image" width="100%"></a></p>';
 			}
 			if ($EditMode == 1) {
 				echo '<form id="tab" role="form"'; echo "action="; echo '"delete_hw.php?hwid='.$row2[3].'&class='.$username.'"'; echo ' method="post">

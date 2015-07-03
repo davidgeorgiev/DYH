@@ -31,6 +31,8 @@ include "main_menu.php"; ?>
 		$title = $_POST["title"];
 		$data = $_POST["data"];
 		$rank = $_POST["rank"];
+		
+		
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('".$new_date."', '".$title."', '".$data."', '".$rank."')";
 		$result = mysql_query($SQL);
 		
@@ -43,6 +45,18 @@ include "main_menu.php"; ?>
 		//print_r ($row);
 		$SQL = "INSERT INTO uh (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
 		$result = mysql_query($SQL);
+		
+		if (isset($_POST["imgurl"])) {
+			$imgurl = $_POST["imgurl"];
+			$SQL = "INSERT INTO imgurl (URL) VALUES ('".$imgurl."')";
+			$uid = mysql_query("SELECT MAX(imgurl.UID) FROM imgurl");
+			$row2 = mysql_fetch_array($uid);
+			
+			
+			$result = mysql_query($SQL);
+			$SQL = "INSERT INTO hwimg (HWID, IMGURLID) VALUES ('".$row[0]."', '".$row2[0]."')";
+			$result = mysql_query($SQL);
+		}
 
 		mysql_close($dbLink);
 
@@ -65,6 +79,7 @@ include "main_menu.php"; ?>
 		echo '<p>Заглавие: '.$title.'</p>'; 
 		echo '<p>Описание: '.$data.'</p>'; 
 		echo '<p>Трудност: '.$rank.'</p>'; 
+		echo ' <img src="'.$imgurl.'" alt="HomeWork image" height="42" width="42">';
 	?>
   </div>
 </div>

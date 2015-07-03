@@ -45,7 +45,7 @@ include "main_menu.php"; ?>
     </div>
 	<div class="form-group">
       <label for="text">Описание</label>
-      <input type="text" class="form-control" name="data" placeholder="">
+      <textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder=""></textarea>
     </div>
 	<?php
 		if ($EditMode == 1) {

@@ -50,7 +50,7 @@ include "main_menu.php"; ?>
     </div>
 	<div class="form-group">
       <label for="text">Описание</label>
-      <input type="text" class="form-control" name="data" placeholder="Решете целия учебник">
+      <textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник"></textarea>
     </div>
 	<div class="form-group">
       <label for="text">URL към изображение</label>

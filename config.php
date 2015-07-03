@@ -8,6 +8,6 @@ $servername = "localhost";
 	}else{
 	}
 	mysql_query("SET character_set_results=utf8", $dbLink);
-	$db_found = mysql_select_db('homeWorks') or die('Could not select database');
+	$db_found = mysql_select_db('dyh') or die('Could not select database');
 	mysql_query("set names 'utf8'",$dbLink);
 ?>

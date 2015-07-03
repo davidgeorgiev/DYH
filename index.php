@@ -87,7 +87,7 @@ function test_input($data) {
 			<form method="post" class="form-horizontal" <?php echo 'action='; echo "home.php";?>> 
 				<fieldset>
 				     
-				  <div class="control-group" style = "margin-top: 20px; margin-right: 80%;margin-left: 2%;">
+				  <div class="control-group" style = "margin-left: 1%;margin-right: 1%;">
 					<!-- Username -->
 					<div class="form-group" >
 					<label for="text" style = "margin-right: 10px;" >Име: </label>

@@ -40,3 +40,8 @@ td {
 #smalltag {
 	//color: rgb(255, 255, 255);
 }
+.container {
+	margin: 0px;
+	margin-top: 1%;
+	width:100%;
+}

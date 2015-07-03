@@ -2,7 +2,7 @@
 	$page = $_SESSION['page'];
 ?>
 <!-- <a class="btn btn-primary btn-lg"  style = "margin:10px;" href="add_hw.php" role="button">Добави ново домашно</a><a class="btn btn-primary btn-lg" href="add_info.php" role="button">Добави допълнителна информация</a><a class="btn btn-primary btn-lg" style = "margin-left:10px;" href="add_wp.php" role="button">Нова програма</a>'; -->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -11,7 +11,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">DYH</a>
+			<a class="navbar-brand" href="home.php">DYH</a>
 	</div>
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -30,21 +30,21 @@
 
 ?>
 
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Опции <span class="caret"></span></a>
+
 <?php
 	//include "CheckEditMode.php";
 	if ($EditMode == 1){
-		echo 	'<ul class="dropdown-menu">
+		echo 	'<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Опции <span class="caret"></span></a><ul class="dropdown-menu">
 				<li><a href="add_hw.php">Добави ново домашно</a></li>
 				<li><a href="add_info.php">Добави допълнителна информация</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="add_wp.php">Нова програма</a></li>
 				<li role="separator" class="divider"></li>
-				</ul>';
+				</ul></li>';
 	}
 ?>
-</li>
+
 </ul>
 <form class="navbar-form navbar-left" role="search">
 <div class="form-group">

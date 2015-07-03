@@ -14,13 +14,14 @@
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;
+	$_SESSION['page'] = "history";
 ?>
 
 <div class="container">
+<?php include "main_menu.php"; ?>
   <div class="jumbotron">
     <h1>Домашни</h1>
     <p><?php echo $username?></p> 
-	<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Начало</a><?php if ($EditMode == 1){include "main_menu.php";}?><a class="btn btn-primary btn-lg" style = "margin:10px;" href="index.php" role="button">Изход</a></p>
   </div>
   <?php
 	if ($result = mysql_query("SELECT DISTINCT homeworks.Date, WEEKDAY(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID ORDER BY homeworks.Date ASC")){

@@ -29,10 +29,12 @@
 <body>
 
 <div class="container">
+<?php
+$_SESSION['page'] = "other";
+include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<h1>Домашни</h1>
 		<p><?php echo $username?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Home</a></p>
 	</div>
 	<div id = "my_page">
   <h2>Добави допълнителна информация</h2>

@@ -16,26 +16,28 @@ $_SESSION['name'] = $username;
 <body>
 
 <div class="container">
+<?php
+$_SESSION['page'] = "other";
+include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<h1>Домашни</h1>
 		<p><?php echo $username?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Home</a></p>
 	</div>
 	<?php
 	if ($db_found && $EditMode == 1) {
 		$week = $_POST["week"];
 		$day = $_POST["day"];
 		
-		$time1 = $_POST["time1"];
-		$time2 = $_POST["time2"];
-		$time3 = $_POST["time3"];
-		$time4 = $_POST["time4"];
-		$time5 = $_POST["time5"];
-		$time6 = $_POST["time6"];
-		$time7 = $_POST["time7"];
-		$time8 = $_POST["time8"];
-		$time9 = $_POST["time9"];
-		
+		$time1 = date('H:i',strtotime($_POST["time1"]));
+		$time2 = date('H:i',strtotime($_POST["time2"]));
+		$time3 = date('H:i',strtotime($_POST["time3"]));
+		$time4 = date('H:i',strtotime($_POST["time4"]));
+		$time5 = date('H:i',strtotime($_POST["time5"]));
+		$time6 = date('H:i',strtotime($_POST["time6"]));
+		$time7 = date('H:i',strtotime($_POST["time7"]));
+		$time8 = date('H:i',strtotime($_POST["time8"]));
+		$time9 = date('H:i',strtotime($_POST["time9"]));
+	
 		$subject1 = $_POST["subject1"];
 		$subject2 = $_POST["subject2"];
 		$subject3 = $_POST["subject3"];
@@ -129,15 +131,15 @@ $_SESSION['name'] = $username;
 		//print_r ($row[0]);
 		
 		switch ($week) {
-			case "Четна": $SQL = "SELECT EvenWeekID FROM twoweeks, uw, user WHERE twoseeks.UID = uw.TwoWeeksID AND user.UID = uw.UserID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
+			case "Четна": $SQL = "SELECT EvenWeekID FROM twoweeks, uw, user WHERE twoweeks.UID = uw.TwoWeeksID AND user.UID = uw.UserID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			break;
-			case "Нечетна": $SQL = "SELECT OddWeekID FROM twoweeks, uw, user WHERE twoseeks.UID = uw.TwoWeeksID AND user.UID = uw.UserID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
+			case "Нечетна": $SQL = "SELECT OddWeekID FROM twoweeks, uw, user WHERE twoweeks.UID = uw.TwoWeeksID AND user.UID = uw.UserID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 			break;
 		}
 		$result = mysql_query($SQL);
 		$row2 = mysql_fetch_array($result);
 		
-		$SQL = "SELECT EvenWeekID, OddWeekID FROM twoweeks, uw, user WHERE twoseeks.UID = uw.TwoWeeksID AND user.UID = uw.UserID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
+		$SQL = "SELECT EvenWeekID, OddWeekID FROM twoweeks, uw, user WHERE twoweeks.UID = uw.TwoWeeksID AND user.UID = uw.UserID AND user.Name = '".$username."' ORDER BY twoweeks.UID DESC";
 		$result3 = mysql_query($SQL);
 		$row3 = mysql_fetch_array($result3);
 		

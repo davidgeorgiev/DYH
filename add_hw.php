@@ -30,17 +30,19 @@
 <body>
 
 <div class="container">
+<?php
+$_SESSION['page'] = "other";
+include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<h1>Домашни</h1>
 		<p><?php echo $username?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php" role="button">Home</a></p>
 	</div>
 	<div id = "my_page">
   <h2>Добави ново домашно</h2>
   <form role="form" <?php echo 'action='; echo "hw_added.php"?> method="post">
     <div class="form-group">
-      <label for="text">Дата</label>
-      <input type="text" class="form-control" name="date" placeholder="2015-06-30">
+      <label for="date">Дата</label>
+      <input type="date" class="form-control" name="date" placeholder="2015-06-30">
     </div>
     <div class="form-group">
       <label for="text">Заглавие</label>
@@ -51,8 +53,13 @@
       <input type="text" class="form-control" name="data" placeholder="Решете целия учебник">
     </div>
 	<div class="form-group">
-      <label for="text">Сложност (от 1 до 4)</label>
-      <input type="text" class="form-control" name="rank" placeholder="4">
+      <label for="text">Важност (от 1 до 4)</label>
+		<select class="form-control" name="rank">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
     </div>
 	<?php 
 		if ($EditMode == 1) {

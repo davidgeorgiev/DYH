@@ -14,7 +14,7 @@
 			$result7 = mysql_query($SQL);
 			$row7 = mysql_fetch_array($result7);
 			
-			$SQL = "SELECT DISTINCT user.Name FROM user WHERE user.Name != '".$name."'";
+			$SQL = "SELECT DISTINCT user.Name FROM user WHERE user.Name != '".$name."' ORDER BY user.Name";
 			$result5 = mysql_query($SQL);
 		?>
         <div id="sidebar-wrapper" style = "background: rgba(255, 255, 255, 1);margin-top:-0.2%;">

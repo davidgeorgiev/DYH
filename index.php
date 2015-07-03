@@ -4,6 +4,13 @@
 	include "config.php";
 ?>
 <body>
+<div class="container">
+<div class="jumbotron">
+  <h1>Do your homework!</h1>
+  <p>Организирай си домашните бързо и лесно!</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+
 <?php
 // define variables and set to empty values
 $nameErr = $emailErr = $genderErr = $passErr = $websiteErr = "";
@@ -168,6 +175,6 @@ if($name != ""){
 // echo "<h2>Your Input:</h2>";
 // echo $name;
 ?>
-
+</div>
 </body>
 </html>

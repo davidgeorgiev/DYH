@@ -49,11 +49,11 @@ include "main_menu.php"; ?>
 		if (isset($_POST["imgurl"])) {
 			$imgurl = $_POST["imgurl"];
 			$SQL = "INSERT INTO imgurl (URL) VALUES ('".$imgurl."')";
+			$result = mysql_query($SQL);
 			$uid = mysql_query("SELECT MAX(imgurl.UID) FROM imgurl");
 			$row2 = mysql_fetch_array($uid);
 			
 			
-			$result = mysql_query($SQL);
 			$SQL = "INSERT INTO hwimg (HWID, IMGURLID) VALUES ('".$row[0]."', '".$row2[0]."')";
 			$result = mysql_query($SQL);
 		}
@@ -79,7 +79,7 @@ include "main_menu.php"; ?>
 		echo '<p>Заглавие: '.$title.'</p>'; 
 		echo '<p>Описание: '.$data.'</p>'; 
 		echo '<p>Трудност: '.$rank.'</p>'; 
-		echo ' <img src="'.$imgurl.'" alt="HomeWork image" height="42" width="42">';
+		echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
 	?>
   </div>
 </div>

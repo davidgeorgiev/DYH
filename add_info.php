@@ -55,5 +55,6 @@ include "main_menu.php"; ?>
   </form>
 </div>
 </div>
+</div>
 </body>
 </html>

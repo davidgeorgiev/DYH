@@ -31,6 +31,7 @@
 ?>
 
 
+
 <?php
 	//include "CheckEditMode.php";
 	if ($EditMode == 1){
@@ -58,4 +59,4 @@
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
-	
+<?php include "sideaccounts.php"?>

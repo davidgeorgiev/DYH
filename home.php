@@ -3,6 +3,7 @@
 	echo '<html>';
 	include "head.php";
 	include "config.php";
+	
 ?>
 <body>
 
@@ -18,13 +19,14 @@
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;
+	$_SESSION['page'] = "home";
 ?>
 
 <div class="container">
+<?php include "main_menu.php"; ?>
   <div class="jumbotron">
     <h1>Домашни</h1>
     <p><?php echo $username?></p> 
-	<p><a class="btn btn-primary btn-lg" href="history.php" role="button">История</a><?php if ($EditMode == 1){include "main_menu.php";}?><a class="btn btn-primary btn-lg" style = "margin:10px;" href="index.php" role="button">Изход</a></p>
   </div>	
 <?php
 	if ($result = mysql_query("SELECT DISTINCT homeworks.Date, WEEKDAY(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC" )){

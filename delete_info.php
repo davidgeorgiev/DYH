@@ -16,14 +16,18 @@
 
 <?php
 	if ($db_found && $EditMode == 1) {
-		$result1 = mysql_query("SELECT DISTINCT user.UID FROM uoi,USER WHERE user.Name ='".$username."' AND uoi.UserID = user.UID");
+		$SQL = "SELECT DISTINCT user.UID FROM uoi,user WHERE user.Name ='".$username."' AND uoi.UserID = user.UID";
+		//echo $SQL.'</br>';
+		$result1 = mysql_query($SQL);
 		$row2 = mysql_fetch_array($result1);
-		$SQL = "DELETE FROM UOI WHERE uoi.OtherInfoID= '".$_GET["infoid"]."' AND oui.UserID = ".$row2[0];
-		echo "infoid = ".$_GET["infoid"]." and user id = ".$row2[0];
+		$SQL = "DELETE FROM uoi WHERE uoi.OtherInfoID = ".$_GET["infoid"]." AND uoi.UserID = ".$row2[0];
+		//echo $SQL;
 		$result = mysql_query($SQL);
 		mysql_close($dbLink);
 		
 		echo '<div class="container">';
+		$_SESSION['page'] = "other";
+		include "main_menu.php";
 		echo '<div class="jumbotron">';
 		echo '<h1>Поздравления, '.$username.'!</h1>';
 

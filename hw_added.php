@@ -16,21 +16,25 @@ $_SESSION['name'] = $username;
 <body>
 
 <div class="container">
+<?php
+$_SESSION['page'] = "other";
+include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<h1>Домашни</h1>
 		<p><?php echo $username?></p> 
-		<p><a class="btn btn-primary btn-lg" href="home.php?class=<?php echo $username;?>" role="button">Home</a></p>
 	</div>
 	<?php
 	if ($db_found && $EditMode == 1) {
-		$date = $_POST["date"];
+		$date = mysql_real_escape_string($_POST['date']);
+		$new_date = date('Y-m-d',strtotime($date));
+		//echo $new_date;
 		$title = $_POST["title"];
 		$data = $_POST["data"];
 		$rank = $_POST["rank"];
-		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('".$date."', '".$title."', '".$data."', '".$rank."')";
+		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('".$new_date."', '".$title."', '".$data."', '".$rank."')";
 		$result = mysql_query($SQL);
 		
-		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, user.UID FROM homeworks,user WHERE user.Name = '".$username."' AND homeworks.Date = '".$date."' AND homeworks.Title = '".$title."' AND homeworks.Data = '".$data."' AND homeworks.Rank = '".$rank."'")){
+		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, user.UID FROM homeworks,user WHERE user.Name = '".$username."' AND homeworks.Date = '".$new_date."' AND homeworks.Title = '".$title."' AND homeworks.Data = '".$data."' AND homeworks.Rank = '".$rank."'")){
 			//echo 'Success';
 		} else {
 			echo 'FAIL';
@@ -57,7 +61,7 @@ $_SESSION['name'] = $username;
   </div>
   <div class="panel-body">
     <?php
-		echo '<p>Дата: '.$date.'</p>'; 
+		echo '<p>Дата: '.$new_date.'</p>'; 
 		echo '<p>Заглавие: '.$title.'</p>'; 
 		echo '<p>Описание: '.$data.'</p>'; 
 		echo '<p>Трудност: '.$rank.'</p>'; 

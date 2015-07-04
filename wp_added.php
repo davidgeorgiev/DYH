@@ -268,5 +268,6 @@ include "main_menu.php"; ?>
 
 
 </div>
+<?php include "garbage_collector.php";?>
 </body>
 </html>

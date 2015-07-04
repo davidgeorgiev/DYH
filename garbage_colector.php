@@ -40,7 +40,7 @@
 	}
 
 
-	$SQL = "SELECT uw.UID, uw.UserID, MAX(uw.TwoWeeksID) FROM uw GROUP BY uw.UserID";
+	$SQL = "SELECT MAX(uw.UID), uw.UserID, MAX(uw.TwoWeeksID) FROM uw GROUP BY uw.UserID";
 	$result = mysql_query($SQL);
 	$importantTWID = array();
 	$allTWID = array();
@@ -59,7 +59,11 @@
 	
 	foreach ($allTWID as $value) {
 		if (in_array($value, $importantTWID)) {
+			//print $value;
+		} else {
 			array_push($uwfordeletion, $value);
+			//print "pushing";
+			//print ($value);
 		}
 	}
 	
@@ -121,16 +125,16 @@ $num_of_deleted_garbage = 0;
 	foreach ($uwfordeletion as $value) {
 		echo $value.'</br>';
 		$SQL = "DELETE FROM uw WHERE uw.UID = ".$value;
-		//$result = mysql_query($SQL);
-		//$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
 	echo '<div class="page-header"><h1>twoweeks.UID for deletion...</h1></div>';
 	foreach ($twoweeksfordeletion as $value) {
 		echo $value.'</br>';
 		$SQL = "DELETE FROM twoweeks WHERE twoweeks.UID = ".$value;
-		//$result = mysql_query($SQL);
-		//$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
 //CONTINUE SEARCHING GARBAGE
@@ -157,8 +161,8 @@ $num_of_deleted_garbage = 0;
 	foreach ($weeksfordeletion as $value) {
 		echo $value.'</br>';
 		$SQL = "DELETE FROM weeks WHERE weeks.UID = ".$value;
-		//$result = mysql_query($SQL);
-		//$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
 	echo '<div class="page-header"><h1>hwimg.UID for deletion...</h1></div>';

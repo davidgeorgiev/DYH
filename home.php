@@ -53,24 +53,29 @@
 	while ($row = mysql_fetch_array($result)){
 		//print_r($row);
 		echo '<div class="page-header">';
+		
 		switch($row[1]){
-				case 0: $weekday = 'ЗА ПОНЕДЕЛНИК';
-				break;
-				case 1: $weekday = 'ЗА ВТОРНИК';
-				break;
-				case 2: $weekday = 'ЗА СРЯДА';
-				break;
-				case 3: $weekday = 'ЗА ЧЕТВЪРТЪК';
-				break;
-				case 4: $weekday = 'ЗА ПЕТЪК';
-				break;
-				case 5: $weekday = 'ЗА СЪБОТА';
-				break;
-				case 6: $weekday = 'ЗА НЕДЕЛЯ';
-				break;
-					
+			case 0: $weekday = 'ЗА ПОНЕДЕЛНИК';
+			break;
+			case 1: $weekday = 'ЗА ВТОРНИК';
+			break;
+			case 2: $weekday = 'ЗА СРЯДА';
+			break;
+			case 3: $weekday = 'ЗА ЧЕТВЪРТЪК';
+			break;
+			case 4: $weekday = 'ЗА ПЕТЪК';
+			break;
+			case 5: $weekday = 'ЗА СЪБОТА';
+			break;
+			case 6: $weekday = 'ЗА НЕДЕЛЯ';
+			break;
 		}
-		echo '<h1>'.$weekday.' <small id = "smalltag">'.$row[0].'</small></h1>';
+		if ($row[0] == date("Y-m-d")) {
+			$weekday2 = '(днес) ';
+		} else {
+			$weekday2 = '';
+		}
+		echo '<h1>'.$weekday.' <small id = "smalltag">'.$weekday2.$row[0].'</small></h1>';
 		echo '</div>';
 		echo '<div class="row">';
 		$result2 = mysql_query("SELECT homeworks.Title, homeworks.Data, homeworks.Rank, homeworks.UID, imgurl.URL FROM homeworks,user,uh,imgurl,hwimg WHERE imgurl.UID = hwimg.IMGURLID AND hwimg.HWID = homeworks.UID AND user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");

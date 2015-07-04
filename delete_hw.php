@@ -47,6 +47,7 @@
 	}
 	?>
 	</div>
+	<?php include "garbage_collector.php";?>
 </body>
 </html>
 

@@ -54,6 +54,7 @@
 <button type="submit" class="btn btn-default">Submit</button>
 </form>
 <ul class="nav navbar-nav navbar-right">
+<li><a href="garbage_colector.php">Оптимизирай базата</a></li>
 <li><a href="index.php">Изход</a></li>
 </ul>
 </div><!-- /.navbar-collapse -->

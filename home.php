@@ -337,5 +337,11 @@
 	?>
   </table>
 </div>
+<?php
+if (isset($_SESSION['garbage'])) {
+	echo '<script>alert("Thank you! You deleted '.$_SESSION['garbage'].' useless data.")</script>';
+	unset($_SESSION['garbage']);
+}
+?>
 </body>
 </html>

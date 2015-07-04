@@ -11,7 +11,6 @@ include "config.php";
 <body>
 
 <div class="container">
-<?php include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<?php 
 			$name = $_POST["name"];
@@ -71,9 +70,6 @@ include "config.php";
 	?>
   </div>
 </div>
-</div>
-
-
 </div>
 </body>
 </html>

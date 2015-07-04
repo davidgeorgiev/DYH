@@ -1,16 +1,14 @@
 <?php
-	session_start();
-	echo '<html>';
-	include "head.php";
+	//session_start();
+	//echo '<html>';
+	//include "head.php";
 	include "config.php";
 	
 ?>
 
-<body>
-<div id = "container">
-<div id = "my_page">
-<?php
 
+<?php
+	//echo '<body><div id = "container"><div id = "my_page">';
 //SEARCHING GARBAGE
 
 	$SQL = "SELECT homeworks.UID FROM homeworks WHERE homeworks.UID NOT IN (SELECT uh.HWID FROM uh)";
@@ -97,41 +95,41 @@
 $num_of_deleted_garbage = 0;
 //DELETING GARBAGE
 	
-	echo '<div class="page-header"><h1>homeworks.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>homeworks.UID for deletion...</h1></div>';
 	foreach ($hwuidfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM homeworks WHERE homeworks.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
-	echo '<div class="page-header"><h1>imgurl.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>imgurl.UID for deletion...</h1></div>';
 	foreach ($imgurluidfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM imgurl WHERE imgurl.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
-	echo '<div class="page-header"><h1>otherinfo.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>otherinfo.UID for deletion...</h1></div>';
 	foreach ($otherinfouidfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM otherinfo WHERE otherinfo.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
-	echo '<div class="page-header"><h1>uw.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>uw.UID for deletion...</h1></div>';
 	foreach ($uwfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM uw WHERE uw.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
-	echo '<div class="page-header"><h1>twoweeks.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>twoweeks.UID for deletion...</h1></div>';
 	foreach ($twoweeksfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM twoweeks WHERE twoweeks.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
@@ -157,17 +155,17 @@ $num_of_deleted_garbage = 0;
 	
 //DELETING GARBAGE
 	
-	echo '<div class="page-header"><h1>weeks.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>weeks.UID for deletion...</h1></div>';
 	foreach ($weeksfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM weeks WHERE weeks.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	
-	echo '<div class="page-header"><h1>hwimg.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>hwimg.UID for deletion...</h1></div>';
 	foreach ($hwimguidfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM hwimg WHERE hwimg.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
@@ -184,9 +182,9 @@ $num_of_deleted_garbage = 0;
 	
 //DELETING GARBAGE
 
-	echo '<div class="page-header"><h1>day.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>day.UID for deletion...</h1></div>';
 	foreach ($dayfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM day WHERE day.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
@@ -203,20 +201,17 @@ $num_of_deleted_garbage = 0;
 	
 //DELETING GARBAGE
 
-	echo '<div class="page-header"><h1>class.UID for deletion...</h1></div>';
+	//echo '<div class="page-header"><h1>class.UID for deletion...</h1></div>';
 	foreach ($classfordeletion as $value) {
-		echo $value.'</br>';
+		//echo $value.'</br>';
 		$SQL = "DELETE FROM class WHERE class.UID = ".$value;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
-	$_SESSION['garbage'] = $num_of_deleted_garbage;
-	header('Location: home.php') and exit;
+	//$_SESSION['garbage'] = $num_of_deleted_garbage;
+	//header('Location: home.php') and exit;
+	//echo '</div></body></html>';
 ?>
 
 
 
-</div>
-</body>
-
-</html>

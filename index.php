@@ -84,7 +84,7 @@ function test_input($data) {
 		  </ul>
 		  <div id="myTabContent" class="tab-content">
 			<div class="tab-pane active in" id="login">
-			<form method="post" class="form-horizontal" <?php echo 'action='; echo "home.php";?>> 
+			<form method="post" class="form-horizontal" <?php echo 'action='; echo "check_user.php";?>> 
 				<fieldset>
 				     
 				  <div class="control-group" style = "margin-left: 1%;margin-right: 1%;">

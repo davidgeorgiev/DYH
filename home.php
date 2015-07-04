@@ -339,7 +339,11 @@
 </div>
 <?php
 if (isset($_SESSION['garbage'])) {
-	echo '<script>alert("Thank you! You deleted '.$_SESSION['garbage'].' useless data.")</script>';
+	if ($_SESSION['garbage'] > 0) {
+		echo '<script>alert("Thank you! You deleted '.$_SESSION['garbage'].' useless data.")</script>';
+	} else {
+		echo '<script>alert("There is not garbage for deletion!")</script>';
+	}
 	unset($_SESSION['garbage']);
 }
 ?>

@@ -211,7 +211,7 @@ $num_of_deleted_garbage = 0;
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	$_SESSION['garbage'] = $num_of_deleted_garbage;
-	//header('Location: home.php') and exit;
+	header('Location: home.php') and exit;
 ?>
 
 

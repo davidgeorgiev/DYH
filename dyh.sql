@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `time` time NOT NULL,
   `subject` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `info` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=503 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=647 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `class`
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `day` (
   `class7ID` int(10) unsigned NOT NULL,
   `class8ID` int(10) unsigned NOT NULL,
   `class9ID` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `day`
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `hwimg` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `IMGURLID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `hwimg` (
 CREATE TABLE IF NOT EXISTS `imgurl` (
   `UID` int(10) unsigned NOT NULL,
   `URL` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `twoweeks` (
   `UID` int(10) unsigned NOT NULL,
   `EvenWeekID` int(10) unsigned NOT NULL,
   `OddWeekID` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `UID` int(10) unsigned NOT NULL,
   `Name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `uw` (
   `UID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL,
   `TwoWeeksID` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `weeks` (
   `FridayID` int(10) unsigned NOT NULL,
   `SaturdayID` int(10) unsigned NOT NULL,
   `SundayID` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `weeks`
@@ -291,12 +291,12 @@ ALTER TABLE `weeks`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=503;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=647;
 --
 -- AUTO_INCREMENT for table `day`
 --
 ALTER TABLE `day`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `homeworks`
 --
@@ -306,12 +306,12 @@ ALTER TABLE `homeworks`
 -- AUTO_INCREMENT for table `hwimg`
 --
 ALTER TABLE `hwimg`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `imgurl`
 --
 ALTER TABLE `imgurl`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
@@ -321,7 +321,7 @@ ALTER TABLE `otherinfo`
 -- AUTO_INCREMENT for table `twoweeks`
 --
 ALTER TABLE `twoweeks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `uh`
 --
@@ -336,17 +336,17 @@ ALTER TABLE `uoi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `uw`
 --
 ALTER TABLE `uw`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `weeks`
 --
 ALTER TABLE `weeks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -172,9 +172,49 @@ $num_of_deleted_garbage = 0;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
+
+//CONTINUE SEARCHING GARBAGE
+
+	$SQL = "SELECT DISTINCT day.UID FROM day, weeks WHERE day.UID NOT IN (SELECT weeks.MondayID FROM weeks) AND day.UID NOT IN (SELECT weeks.TuesdayID FROM weeks) AND day.UID NOT IN (SELECT weeks.WednesdayID FROM weeks) AND day.UID NOT IN (SELECT weeks.ThursdayID FROM weeks) AND day.UID NOT IN (SELECT weeks.FridayID FROM weeks) AND day.UID NOT IN (SELECT weeks.SaturdayID FROM weeks) AND day.UID NOT IN (SELECT weeks.SundayID FROM weeks) AND day.UID != 13";
+	$result = mysql_query($SQL);
+	$dayfordeletion = array();
+	while ($row = mysql_fetch_array($result)){
+		array_push($dayfordeletion, $row[0]);
+	}
+	
+//DELETING GARBAGE
+
+	echo '<div class="page-header"><h1>day.UID for deletion...</h1></div>';
+	foreach ($dayfordeletion as $value) {
+		echo $value.'</br>';
+		$SQL = "DELETE FROM day WHERE day.UID = ".$value;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+	}
+	
+//CONTINUE SEARCHING GARBAGE
+
+	$SQL = "SELECT DISTINCT class.UID FROM class, day WHERE class.UID NOT IN (SELECT day.class1ID FROM day) AND class.UID NOT IN (SELECT day.class2ID FROM day) AND class.UID NOT IN (SELECT day.class3ID FROM day) AND class.UID NOT IN (SELECT day.class4ID FROM day) AND class.UID NOT IN (SELECT day.class5ID FROM day) AND class.UID NOT IN (SELECT day.class6ID FROM day) AND class.UID NOT IN (SELECT day.class7ID FROM day) AND class.UID NOT IN (SELECT day.class8ID FROM day) AND class.UID NOT IN (SELECT day.class9ID FROM day) AND ((class.UID < 201) OR (class.UID > 209))";
+	$result = mysql_query($SQL);
+	$classfordeletion = array();
+	while ($row = mysql_fetch_array($result)){
+		array_push($classfordeletion, $row[0]);
+	}
+	
+//DELETING GARBAGE
+
+	echo '<div class="page-header"><h1>class.UID for deletion...</h1></div>';
+	foreach ($classfordeletion as $value) {
+		echo $value.'</br>';
+		$SQL = "DELETE FROM class WHERE class.UID = ".$value;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+	}
 	$_SESSION['garbage'] = $num_of_deleted_garbage;
-	header('Location: home.php') and exit;
+	//header('Location: home.php') and exit;
 ?>
+
+
 
 </div>
 </body>

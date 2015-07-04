@@ -143,6 +143,14 @@ $num_of_deleted_garbage = 0;
 		array_push($weeksfordeletion, $row[0]);
 	}
 	
+	$SQL = "SELECT hwimg.UID FROM hwimg WHERE hwimg.IMGURLID NOT IN (SELECT imgurl.UID FROM imgurl)";
+	$result = mysql_query($SQL);
+	$hwimguidfordeletion = array();
+	while ($row = mysql_fetch_array($result)){
+		//echo $row[0].'</br>';
+		array_push($hwimguidfordeletion, $row[0]);
+	}
+	
 //DELETING GARBAGE
 	
 	echo '<div class="page-header"><h1>weeks.UID for deletion...</h1></div>';
@@ -151,6 +159,14 @@ $num_of_deleted_garbage = 0;
 		$SQL = "DELETE FROM weeks WHERE weeks.UID = ".$value;
 		//$result = mysql_query($SQL);
 		//$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+	}
+	
+	echo '<div class="page-header"><h1>hwimg.UID for deletion...</h1></div>';
+	foreach ($hwimguidfordeletion as $value) {
+		echo $value.'</br>';
+		$SQL = "DELETE FROM hwimg WHERE hwimg.UID = ".$value;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
 	$_SESSION['garbage'] = $num_of_deleted_garbage;
 	header('Location: home.php') and exit;

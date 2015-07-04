@@ -5,7 +5,6 @@ include "head.php";
 <body>
 
 <div class="container">
-<?php include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<?php 
 			echo '<h1>Грешка!</h1>';

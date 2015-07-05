@@ -51,6 +51,19 @@ INSERT INTO `class` (`UID`, `time`, `subject`, `info`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура на таблица `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `UID` int(10) unsigned NOT NULL,
+  `userID` int(10) unsigned NOT NULL,
+  `hwID` int(10) unsigned NOT NULL,
+  `Data` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Структура на таблица `day`
 --
 
@@ -218,6 +231,12 @@ ALTER TABLE `class`
   ADD UNIQUE KEY `UID` (`UID`);
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD UNIQUE KEY `UID` (`UID`), ADD KEY `userID` (`userID`), ADD KEY `hwID` (`hwID`);
+
+--
 -- Indexes for table `day`
 --
 ALTER TABLE `day`
@@ -292,6 +311,11 @@ ALTER TABLE `weeks`
 --
 ALTER TABLE `class`
   MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=647;
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `day`
 --

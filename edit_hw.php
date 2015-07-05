@@ -52,7 +52,7 @@ include "main_menu.php"; ?>
 		<p><?php echo $username?></p> 
 	</div>
 	<div id = "my_page">
-  <h2>Добави ново домашно</h2>
+  <h2>Редактирай домашно</h2>
   <form role="form" <?php echo 'action='; echo "hw_edited.php"?> method="post">
     <div class="form-group">
       <label for="date">Дата</label>

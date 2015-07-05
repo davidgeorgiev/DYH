@@ -79,7 +79,9 @@ include "main_menu.php"; ?>
 		echo '<p>Заглавие: '.$title.'</p>'; 
 		echo '<p>Описание: '.$data.'</p>'; 
 		echo '<p>Трудност: '.$rank.'</p>'; 
-		echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
+		if (strlen($imgurl) > 0) {
+			echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
+		}
 	?>
   </div>
 </div>

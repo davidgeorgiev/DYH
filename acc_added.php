@@ -17,7 +17,11 @@ include "config.php";
 			$psw = $_POST["psw"];
 			$_SESSION['psw'] = $psw;
 			$_SESSION['name'] = $username;
-	if ($db_found) {
+	$EmptyLine = 1;
+	if ((strlen($_POST["name"]) > 0) && ((strlen($_POST["psw"]) > 0))) {
+		$EmptyLine = 0;
+	}
+	if (($db_found) && ($EmptyLine == 0)) {
 		$SQL = "SELECT Count(user.Name) FROM user WHERE user.Name = '".$name."'";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
@@ -50,25 +54,26 @@ include "config.php";
 			echo '<p><a class="btn btn-primary btn-lg" href="index.php" role="button">Начало</a></p></div>';
 			
 			echo '<div class="alert alert-success" role="alert">Вашият акаунт беше създаден успешно!</div>';
+			echo '<div class="panel panel-default">';
+			echo '<div class="panel-heading">';
+			echo '<h3 class="panel-title">Информация за акаунта</h3>';
+			echo '</div>';
+			echo '<div class="panel-body">';
+			
+		echo '<p>Име: '.$name.'</p>';
+		echo '<p>Парола: '.$psw.'</p>';
+		echo '</div>';
 		}
 		
 	}
 	else {
-		echo '<div class="alert alert-danger" role="alert">Датабазата не съществува!';
-		echo '</div>';
+		echo '<div class="alert alert-danger" role="alert">';
+		echo '<a href = "index.php" class="alert-link">Върнете се</a> и попълнете всички полета!</div>';
+		//echo '<p><a class="btn btn-primary btn-lg" href="index.php" role="button">Начало</a></p></div>';
 		mysql_close($dbLink);
 	}
 	?>
-  <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Информация за акаунта</h3>
-  </div>
-  <div class="panel-body">
-    <?php 
-		echo '<p>Име: '.$name.'</p>';
-		echo '<p>Парола: '.$psw.'</p>';
-	?>
-  </div>
+ 
 </div>
 </div>
 </body>

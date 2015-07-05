@@ -80,7 +80,7 @@
 		echo '<div class="row">';
 		$result2 = mysql_query("SELECT homeworks.Title, homeworks.Data, homeworks.Rank, homeworks.UID, imgurl.URL FROM homeworks,user,uh,imgurl,hwimg WHERE imgurl.UID = hwimg.IMGURLID AND hwimg.HWID = homeworks.UID AND user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
 		while ($row2 = mysql_fetch_array($result2)){
-			echo '	<div class="col-sm-3" style = "margin:10px;background-color: white;">';
+			echo '	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">';
 			switch($row2[2]){
 				case 1: $color = "white";
 				break;
@@ -92,11 +92,11 @@
 				break;
 			} 
 			echo '	<h3 style = "background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">'.$row2[0].'</h3>';
-			echo '	<p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;">'.$row2[1].'</p>';
-			
 			if (strlen($row2[4]) > 0) {
 				echo ' <p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$row2[4].'" rel="lightbox"><img src="'.$row2[4].'" alt="HomeWork image" width="100%"></a></p>';
 			}
+			echo '	<p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;">'.$row2[1].'</p>';
+			
 			if ($EditMode == 1) {
 				echo '<table style = "margin-bottom: 15px;"><tr>';
 				echo '<form id="tab" role="form"'; echo "action="; echo '"delete_hw.php?hwid='.$row2[3].'&class='.$username.'"'; echo ' method="post">
@@ -134,13 +134,18 @@
 			echo 'FAIL';
 		}
 		while ($row = mysql_fetch_array($result)){
-			echo '<div class="col-sm-4">';
+			echo '<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">';
 			echo '<h3>'.$row[0].'</h3>';
 			echo '<p>'.$row[1].'</p>';
 			if ($EditMode == 1) {
+				echo '<table style = "margin-bottom: 15px;"><tr>';
 				echo '<form id="tab" role="form"'; echo "action="; echo '"delete_info.php?infoid='.$row[2].'&class='.$username.'"'; echo ' method="post">
-					<button class="btn btn-default" style = "background-color:white;width:40%;;height:27px;padding:3px;" type="submit" >Изтрий</button>
+					<td style = "width: 50%;"><button class="btn btn-default" style = "width: 100%;background-color:white;height:27px;padding:3px;" type="submit" >Изтрий</button></td>
 				</form>';
+				echo '<form id="tab" role="form"'; echo "action="; echo '"edit_info.php?infoid='.$row[2].'&class='.$username.'"'; echo ' method="post">
+					<td style = "width: 50%;"><button class="btn btn-default" style = "margin-left:10px;width: 100%;background-color:white;height:27px;padding:3px;" type="submit" >Редактирай</button></td>
+				</form>';
+				echo '</tr></table>';
 			}
 			echo '</div>';
 		}

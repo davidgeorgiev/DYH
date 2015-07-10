@@ -56,10 +56,9 @@ INSERT INTO `class` (`UID`, `time`, `subject`, `info`) VALUES
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `UID` int(10) unsigned NOT NULL,
-  `userID` int(10) unsigned NOT NULL,
-  `hwID` int(10) unsigned NOT NULL,
-  `Data` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Data` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Date` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -99,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `homeworks` (
   `Title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Data` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Rank` int(11) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -111,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `hwimg` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `IMGURLID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -122,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `hwimg` (
 CREATE TABLE IF NOT EXISTS `imgurl` (
   `UID` int(10) unsigned NOT NULL,
   `URL` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -146,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `twoweeks` (
   `UID` int(10) unsigned NOT NULL,
   `EvenWeekID` int(10) unsigned NOT NULL,
   `OddWeekID` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -158,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `uh` (
   `UID` int(10) unsigned NOT NULL,
   `HWID` int(10) unsigned NOT NULL,
   `USERID` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -182,7 +181,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   `UID` int(10) unsigned NOT NULL,
   `Name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `usercommenthomework`
+--
+
+CREATE TABLE IF NOT EXISTS `usercommenthomework` (
+  `UID` int(10) unsigned NOT NULL,
+  `HWID` int(10) unsigned NOT NULL,
+  `USERID` int(10) unsigned NOT NULL,
+  `COMMENTID` int(10) unsigned NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -194,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `uw` (
   `UID` int(10) unsigned NOT NULL,
   `UserID` int(10) unsigned NOT NULL,
   `TwoWeeksID` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -234,7 +246,7 @@ ALTER TABLE `class`
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
-  ADD UNIQUE KEY `UID` (`UID`), ADD KEY `userID` (`userID`), ADD KEY `hwID` (`hwID`);
+  ADD UNIQUE KEY `UID` (`UID`);
 
 --
 -- Indexes for table `day`
@@ -291,6 +303,12 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `UID` (`UID`);
 
 --
+-- Indexes for table `usercommenthomework`
+--
+ALTER TABLE `usercommenthomework`
+  ADD UNIQUE KEY `UID` (`UID`), ADD KEY `HWID` (`HWID`), ADD KEY `USERID` (`USERID`), ADD KEY `COMMENTID` (`COMMENTID`);
+
+--
 -- Indexes for table `uw`
 --
 ALTER TABLE `uw`
@@ -315,7 +333,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `day`
 --
@@ -325,17 +343,17 @@ ALTER TABLE `day`
 -- AUTO_INCREMENT for table `homeworks`
 --
 ALTER TABLE `homeworks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=71;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `hwimg`
 --
 ALTER TABLE `hwimg`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `imgurl`
 --
 ALTER TABLE `imgurl`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `otherinfo`
 --
@@ -345,12 +363,12 @@ ALTER TABLE `otherinfo`
 -- AUTO_INCREMENT for table `twoweeks`
 --
 ALTER TABLE `twoweeks`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `uh`
 --
 ALTER TABLE `uh`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `uoi`
 --
@@ -360,12 +378,17 @@ ALTER TABLE `uoi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+--
+-- AUTO_INCREMENT for table `usercommenthomework`
+--
+ALTER TABLE `usercommenthomework`
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `uw`
 --
 ALTER TABLE `uw`
-  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+  MODIFY `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `weeks`
 --

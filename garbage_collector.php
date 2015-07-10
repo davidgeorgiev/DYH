@@ -208,6 +208,43 @@ $num_of_deleted_garbage = 0;
 		$result = mysql_query($SQL);
 		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
 	}
+	
+//CONTINUE SEARCHING GARBAGE
+
+	$SQL = "SELECT DISTINCT usercommenthomework.UID FROM usercommenthomework WHERE usercommenthomework.HWID NOT IN (SELECT homeworks.UID FROM homeworks)";
+	$result = mysql_query($SQL);
+	$usercommenthomeworkfordeletion = array();
+	while ($row = mysql_fetch_array($result)){
+		array_push($usercommenthomeworkfordeletion, $row[0]);
+	}
+	
+//DELETING GARBAGE
+
+	//echo '<div class="page-header"><h1>usercommenthomework.UID for deletion...</h1></div>';
+	foreach ($usercommenthomeworkfordeletion as $value) {
+		//echo $value.'</br>';
+		$SQL = "DELETE FROM usercommenthomework WHERE usercommenthomework.UID = ".$value;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+	}
+//CONTINUE SEARCHING GARBAGE
+
+	$SQL = "SELECT DISTINCT comments.UID FROM comments WHERE comments.UID NOT IN (SELECT usercommenthomework.COMMENTID FROM usercommenthomework)";
+	$result = mysql_query($SQL);
+	$commentsfordeletion = array();
+	while ($row = mysql_fetch_array($result)){
+		array_push($commentsfordeletion, $row[0]);
+	}
+	
+//DELETING GARBAGE
+
+	//echo '<div class="page-header"><h1>comments.UID for deletion...</h1></div>';
+	foreach ($commentsfordeletion as $value) {
+		//echo $value.'</br>';
+		$SQL = "DELETE FROM comments WHERE comments.UID = ".$value;
+		$result = mysql_query($SQL);
+		$num_of_deleted_garbage = $num_of_deleted_garbage+1;
+	}
 	//$_SESSION['garbage'] = $num_of_deleted_garbage;
 	//header('Location: home.php') and exit;
 	//echo '</div></body></html>';

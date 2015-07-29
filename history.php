@@ -86,8 +86,8 @@
 				echo '<span class="caret"></span>';
 				echo '</button>';
 				echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
-				echo '<li><a href="delete_hw.php?hwid='.$row2[3].'&class='.$username.'">Изтрий</a></li>';
-				echo '<li><a href="edit_hw.php?hwid='.$row2[3].'&class='.$username.'">Редактирай</a></li>';
+				echo '<li><a href="delete_hw.php?hwid='.$row2[3].'&class='.$username.'"><span class="glyphicon glyphicon-trash"></span> Изтрий</a></li>';
+				echo '<li><a href="edit_hw.php?hwid='.$row2[3].'&class='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Редактирай</a></li>';
 				echo '</ul>';
 				echo '</div>';
 			}

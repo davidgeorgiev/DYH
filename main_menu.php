@@ -54,7 +54,7 @@
 <button type="submit" class="btn btn-default">Submit</button>
 </form>
 <ul class="nav navbar-nav navbar-right">
-<li><a href="#">Влезли сте като <?php echo $username?></a></li>
+<li><a href="#">Страницата на <?php echo $username?></a></li>
 <li><a href="index.php">Изход</a></li>
 </ul>
 </div><!-- /.navbar-collapse -->

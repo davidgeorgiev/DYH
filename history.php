@@ -19,10 +19,6 @@
 
 <div class="container">
 <?php include "main_menu.php"; ?>
-  <div class="jumbotron">
-    <h1>Домашни</h1>
-    <p><?php echo $username?></p> 
-  </div>
   <?php
 	if ($result = mysql_query("SELECT DISTINCT homeworks.Date, WEEKDAY(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID ORDER BY homeworks.Date DESC")){
 		//echo 'Success';
@@ -81,28 +77,46 @@
 				case 4: $color = "#fa7194";
 				break;
 			} 
-			echo '	<h3 style = "background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">'.$row2[0].'</h3>';
+			if ($EditMode == 0) {
+				echo '	<h3 style = "background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">'.$row2[0].'</h3>';
+			} else {
+				echo '<div class="dropdown" style = "margin-bottom:10px;margin-top:15px;">';
+				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">';
+				echo $row2[0];
+				echo '<span class="caret"></span>';
+				echo '</button>';
+				echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+				echo '<li><a href="delete_hw.php?hwid='.$row2[3].'&class='.$username.'">Изтрий</a></li>';
+				echo '<li><a href="edit_hw.php?hwid='.$row2[3].'&class='.$username.'">Редактирай</a></li>';
+				echo '</ul>';
+				echo '</div>';
+			}
 			if (strlen($row2[4]) > 0) {
 				echo ' <p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$row2[4].'" rel="lightbox"><img src="'.$row2[4].'" alt="HomeWork image" width="100%"></a></p>';
 			}
 			echo '	<p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;">'.$row2[1].'</p>';
 			
 			if ($EditMode == 1) {
-				echo '<div style = "margin-bottom: 13px;"><div>';
-				echo '<form id="tab" role="form"'; echo "action="; echo '"delete_hw.php?hwid='.$row2[3].'&class='.$username.'"'; echo ' method="post">
-					<div><button class="btn btn-default" style = "width: 100%;background-color:white;height:27px;padding:3px;" type="submit" >Изтрий</button></div>
-				</form>';
-				echo '<form id="tab" role="form"'; echo "action="; echo '"edit_hw.php?hwid='.$row2[3].'&class='.$username.'"'; echo ' method="post">
-					<div><button class="btn btn-default" style = "width: 100%;background-color:white;height:27px;padding:3px;" type="submit" >Редактирай</button></div>
-				</form>';
-				echo '</div></div>';
+				// echo '<div style = "margin-bottom: 13px;"><div>';
+				// echo '<form id="tab" role="form"'; echo "action="; echo '"delete_hw.php?hwid='.$row2[3].'&class='.$username.'"'; echo ' method="post">
+					// <div><button class="btn btn-default" style = "width: 100%;background-color:white;height:27px;padding:3px;" type="submit" >Изтрий</button></div>
+				// </form>';
+				// echo '<form id="tab" role="form"'; echo "action="; echo '"edit_hw.php?hwid='.$row2[3].'&class='.$username.'"'; echo ' method="post">
+					// <div><button class="btn btn-default" style = "width: 100%;background-color:white;height:27px;padding:3px;" type="submit" >Редактирай</button></div>
+				// </form>';
+				// echo '</div></div>';
 			}
 			$SQL = "SELECT COUNT(usercommenthomework.UID) FROM usercommenthomework WHERE usercommenthomework.HWID = ".$row2[5];
 			$result4 = mysql_query($SQL);
 			$row4 = mysql_fetch_array($result4);
-			echo '<form id="tab" role="form"'; echo "action="; echo 'comments.php?hwid='.$row2[3]; echo ' method="post">
-					<button class="btn btn-default" style = "width: 100%;background-color:white;" type="submit" >Коментари - '.$row4[0].'</button>
-				</form>';
+			echo '<p>';
+			echo '<a href="comments.php?hwid='.$row2[3].'" style = "text-decoration: none;">';
+			echo '<span class="glyphicon glyphicon-comment"></span>';
+			echo ' Коментари '.$row4[0].'</a>';
+			echo '</p>';
+			// echo '<form id="tab" role="form"'; echo "action="; echo 'comments.php?hwid='.$row2[3]; echo ' method="post">
+					// <button class="btn btn-default" style = "width: 100%;background-color:white;" type="submit" >Коментари - '.$row4[0].'</button>
+				// </form>';
 			echo '</div>';
 		}
 		echo '	</div>';

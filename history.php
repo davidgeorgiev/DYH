@@ -168,24 +168,29 @@
 	}
 	?>
 <div>
-	<div class="jumbotron" >
-	<h2>Учебната програма</h2>
 	<?php
 		$eoweek = 0;
 		$ddate = date("Y-m-d");
 		$date = new DateTime($ddate);
 		$week = $date->format("W");
-		//echo "Weeknummer: $week";
+	?>
+	<div id = "my_page">
+	<div class="page-header">
+	<h1>Учебната програма <small id = "smalltag">
+	<?php
 		if($week&1) {
 			$eoweek = "OddWeekID";
-			echo '<p>Седмицата е нечетна</p>';
+			echo 'Седмицата е нечетна';
 		} else {
 			$eoweek = "EvenWeekID";
-			echo '<p>Седмицата е четна</p>';
+			echo 'Седмицата е четна';
 		}
 	?>
+	</small></h1>
 	</div>
-   <table class="table table-bordered" style = "float:left;width:49%;">
+   <div class="row">
+	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+   <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
 		<th colspan="4">Понеделник</th>
@@ -210,7 +215,9 @@
 		}
 	?>
   </table>
-  <table class="table table-bordered" style = "float:right;width:49%;">
+	</div>
+	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+  <table class="table table-bordered" style = "float:left;margin-top:15px;font-size:13px;">
     <thead>
       <tr>
 		<th colspan="4">Вторник</th>
@@ -235,7 +242,9 @@
 		}
 	?>
   </table>
-  <table class="table table-bordered" style = "float:left;width:49%;">
+	</div>
+	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+  <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
 		<th colspan="4">Сряда</th>
@@ -260,7 +269,9 @@
 		}
 	?>
   </table>
-  <table class="table table-bordered" style = "float:right;width:49%;">
+  </div>
+	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+  <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
 		<th colspan="4">Четвъртък</th>
@@ -285,7 +296,9 @@
 		}
 	?>
   </table>
-  <table class="table table-bordered" style = "float:left;width:49%;">
+  </div>
+	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+  <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
 		<th colspan="4">Петък</th>
@@ -310,7 +323,9 @@
 		}
 	?>
   </table>
-  <table class="table table-bordered" style = "float:right;width:49%;">
+  </div>
+	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+  <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
 		<th colspan="4">Събота</th>
@@ -335,8 +350,9 @@
 		}
 	?>
   </table>
-   </table>
-  <table class="table table-bordered" style = "float:left;width:49%;">
+   </div>
+	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+  <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
 		<th colspan="4">Неделя</th>
@@ -361,6 +377,8 @@
 		}
 	?>
   </table>
+  </div></div>
+  </div>
 </div>
 </div>
 </body>

@@ -200,7 +200,7 @@
 	</small></h1>
 	</div>
 	<div class="row">
-	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+	<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">
    <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
@@ -227,7 +227,7 @@
 	?>
   </table>
 	</div>
-	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+	<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">
   <table class="table table-bordered" style = "float:left;margin-top:15px;font-size:13px;">
     <thead>
       <tr>
@@ -254,7 +254,9 @@
 	?>
   </table>
 	</div>
-	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+	</div>
+	<div class="row">
+	<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">
   <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
@@ -281,7 +283,7 @@
 	?>
   </table>
   </div>
-	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+	<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">
   <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
@@ -308,7 +310,9 @@
 	?>
   </table>
   </div>
-	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+  </div>
+	<div class="row">
+	<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">
   <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
@@ -335,7 +339,7 @@
 	?>
   </table>
   </div>
-	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+	<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">
   <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
@@ -362,7 +366,9 @@
 	?>
   </table>
    </div>
-	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">
+   </div>
+	<div class="row">
+	<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">
   <table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">
     <thead>
       <tr>
@@ -388,7 +394,7 @@
 		}
 	?>
   </table>
-  </div></div>
+  </div></div></div>
 </div>
 </div>
 <?php

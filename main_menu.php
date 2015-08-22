@@ -40,7 +40,7 @@
 		if ($number_of_users[0] > 0) {
 			echo '<li class="active"><a href="home.php?user='.$username.'">Начало 3<span class="sr-only">(current)</span></a></li>';
 		} else {
-			echo '<li class="unactive"><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
+			echo '<li><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
 		}
 	}
 	

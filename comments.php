@@ -8,7 +8,13 @@
 
 <?php
 	$comment_mode = "on";
-	$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Name = '".$username."' AND user.Password = '".$password."'";
+	
+	if (isset($_SESSION['psw']) && isset($_SESSION['name'])) {
+		$password = $_SESSION['psw'];
+		$username = $_SESSION['name'];
+	}
+	
+	$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Password = '".$password."'";
 	$result = mysql_query($SQL);
 	$number_of_users = mysql_fetch_array($result);
 	

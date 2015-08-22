@@ -7,8 +7,18 @@
 <body>
 
 <?php
-	$password = $_SESSION['psw'];
-	$username = $_SESSION['name'];
+	$comment_mode = "on";
+	$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Name = '".$username."' AND user.Password = '".$password."'";
+	$result = mysql_query($SQL);
+	$number_of_users = mysql_fetch_array($result);
+	
+	if ($number_of_users[0] <= 0) {
+		$comment_mode = "off";
+	}
+	if (isset($_SESSION['psw']) && isset($_SESSION['name'])) {
+		$password = $_SESSION['psw'];
+		$username = $_SESSION['name'];
+	}
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;
 	$_SESSION['page'] = "other";
@@ -26,7 +36,15 @@
 <?php include "main_menu.php"; ?>
 <div class="jumbotron">
 <h1>Коментари</h1>
-<p><?php echo $username?></p> 
+<p><?php 
+
+if ($comment_mode == "off") {
+	echo 'Още не сте се регистрирали? Направете го от <a href = "index.php">тук</a>';
+} else {
+	echo $username;
+}
+
+?></p> 
 </div>
 
 <?php
@@ -85,17 +103,12 @@
 		
 		echo '	<div class="col-sm-8" style = "margin:10px;background-color: white;border-radius:7px;">';
 			echo '	<h3 style = "background-color: white;border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">Коментари</h3>';
-			?>
-			<form role="form" <?php echo 'action='; echo "comment_added.php";?> method="post">
-			<div class="form-group">
-			<label for="text">Описание</label>
-			<textarea type="text" cols="50" rows="3" class="form-control" name="comment" placeholder=""></textarea>
-			</div>
-			<?php
-			echo '<button class="btn btn-default" style = "width: 100%;background-color:white;" type="submit" >Коментирай</button>';
-			?>
-			</form>
-			<?php
+			
+			if ($comment_mode == "on") {
+				include "comment_form.php";
+			}
+			
+			
 			$SQL = "SELECT usercommenthomework.COMMENTID, usercommenthomework.USERID FROM usercommenthomework WHERE usercommenthomework.HWID = ".$hwid." ORDER BY usercommenthomework.UID DESC";
 			$result = mysql_query($SQL);
 			

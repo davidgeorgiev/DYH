@@ -23,25 +23,16 @@
 		$result = mysql_query($SQL);
 		$number_of_users = mysql_fetch_array($result);
 		
-		if ($number_of_users[0] > 0) {
-			if ($page == "home") {
-				echo '<li class="active"><a href="history.php?user='.$username.'">История <span class="sr-only">(current)</span></a></li>';
-			} else {
-				echo '<li class="active"><a href="home.php?user='.$username.'">Начало <span class="sr-only">(current)</span></a></li>';
-			}
-		} else {
+		if ($number_of_users[0] <= 0) {
 			echo '<li class="active"><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
 		}
-	} else {
-		$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Password = '".$password."'";
-		$result = mysql_query($SQL);
-		$number_of_users = mysql_fetch_array($result);
-		
-		if ($number_of_users[0] > 0) {
-			echo '<li class="active"><a href="home.php?user='.$username.'">Начало 3<span class="sr-only">(current)</span></a></li>';
-		} else {
-			echo '<li><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
+		if ($page == "home") {
+			echo '<li class="active"><a href="history.php?user='.$username.'">История <span class="sr-only">(current)</span></a></li>';
+		} else if ($page == "history") {
+			echo '<li class="active"><a href="home.php?user='.$username.'">Начало <span class="sr-only">(current)</span></a></li>';
 		}
+	} else {
+			echo '<li><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
 	}
 	
 

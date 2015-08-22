@@ -19,9 +19,9 @@
 <?php
 	if (isset($_SESSION['page'])) {
 		if ($page == "home") {
-			echo '<li class="active"><a href="history.php">История <span class="sr-only">(current)</span></a></li>';
+			echo '<li class="active"><a href="history.php?user='.$username.'">История <span class="sr-only">(current)</span></a></li>';
 		} else {
-			echo '<li class="active"><a href="home.php">Начало <span class="sr-only">(current)</span></a></li>';
+			echo '<li class="active"><a href="home.php?user='.$username.'">Начало <span class="sr-only">(current)</span></a></li>';
 		}
 	} else {
 		echo '<li class="active"><a href="home.php">Начало <span class="sr-only">(current)</span></a></li>';

@@ -13,7 +13,7 @@
 	if ($row[0] > 0) {
 		$_SESSION['psw'] = $password;
 		$_SESSION['name'] = $username;
-		header('Location: home.php') and exit;
+		header('Location: home.php?user='.$username) and exit;
 	} else {
 		header('Location: notreg.php') and exit;
 	}

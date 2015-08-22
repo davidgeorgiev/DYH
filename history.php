@@ -8,9 +8,15 @@
 
 <?php
 	$EditMode = 0;
-	
+	$name_is_set = 0;
+	if (isset($_GET["user"])) {
+		$username = $_GET["user"];
+		$name_is_set = 1;
+	}
 	$password = $_SESSION['psw'];
-	$username = $_SESSION['name'];
+	if ($name_is_set == 0) {
+		$username = $_SESSION['name'];
+	}
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;

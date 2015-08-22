@@ -36,8 +36,9 @@
 				
 				<?php
 						
-						
-						echo '<tr style = "background-color: #dfd0a4;"><td><li><span style = "color:#d2700b;text-align:center;">'.$row6[0].'</span></li></td><td><li><span style = "color:#d2700b;text-align:center;">'.$row7[0].'</span></li></td><td><li><a href = "redirect.php?acc='.$name.'" style = "padding-right: 20px;text-align:center;">My wall</a></li></td></tr>';
+						if (isset($name)) {
+							echo '<tr style = "background-color: #dfd0a4;"><td><li><span style = "color:#d2700b;text-align:center;">'.$row6[0].'</span></li></td><td><li><span style = "color:#d2700b;text-align:center;">'.$row7[0].'</span></li></td><td><li><a href = "redirect.php?acc='.$name.'" style = "padding-right: 20px;text-align:center;">My wall</a></li></td></tr>';
+						}
 					while ($row5 = mysql_fetch_array($result5)) {
 						//echo "Name = ".$row[0];
 						$SQL = "SELECT COUNT(uh.UID) FROM uh, user WHERE uh.USERID = user.UID AND user.Name = '".$row5[0]."'";

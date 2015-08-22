@@ -63,11 +63,13 @@
 </form>
 <ul class="nav navbar-nav navbar-right">
 <?php
-	if (strlen($username == 0)) {
+	if (strlen($username > 0)) {
+		$temp_username = $username;
+	} else {
 		$temp_username = "гост";
 	}
 ?>
-<li><a href="#">Страницата на <?php echo $temp_username?></a></li>
+<li><a href="#">Страницата на <?php echo $username?></a></li>
 <li><a href="index.php">Изход</a></li>
 </ul>
 </div><!-- /.navbar-collapse -->

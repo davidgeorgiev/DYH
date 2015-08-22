@@ -17,14 +17,31 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <ul class="nav navbar-nav">
 <?php
+	
 	if (isset($_SESSION['page'])) {
-		if ($page == "home") {
-			echo '<li class="active"><a href="history.php?user='.$username.'">История <span class="sr-only">(current)</span></a></li>';
+		$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Password = '".$password."'";
+		$result = mysql_query($SQL);
+		$number_of_users = mysql_fetch_array($result);
+		
+		if ($number_of_users[0] > 0) {
+			if ($page == "home") {
+				echo '<li class="active"><a href="history.php?user='.$username.'">История <span class="sr-only">(current)</span></a></li>';
+			} else {
+				echo '<li class="active"><a href="home.php?user='.$username.'">Начало <span class="sr-only">(current)</span></a></li>';
+			}
 		} else {
-			echo '<li class="active"><a href="home.php?user='.$username.'">Начало <span class="sr-only">(current)</span></a></li>';
+			echo '<li class="active"><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
 		}
 	} else {
-		echo '<li class="active"><a href="home.php">Начало <span class="sr-only">(current)</span></a></li>';
+		$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Password = '".$password."'";
+		$result = mysql_query($SQL);
+		$number_of_users = mysql_fetch_array($result);
+		
+		if ($number_of_users[0] > 0) {
+			echo '<li class="active"><a href="home.php?user='.$username.'">Начало 3<span class="sr-only">(current)</span></a></li>';
+		} else {
+			echo '<li class="unactive"><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
+		}
 	}
 	
 
@@ -54,7 +71,12 @@
 <button type="submit" class="btn btn-default">Submit</button>
 </form>
 <ul class="nav navbar-nav navbar-right">
-<li><a href="#">Страницата на <?php echo $username?></a></li>
+<?php
+	if (strlen($username == 0)) {
+		$temp_username = "гост";
+	}
+?>
+<li><a href="#">Страницата на <?php echo $temp_username?></a></li>
 <li><a href="index.php">Изход</a></li>
 </ul>
 </div><!-- /.navbar-collapse -->

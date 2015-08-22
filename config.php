@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbLink = mysql_connect($servername, $username, $password);
+	$root_username = "root";
+	$root_password = "";
+	$dbLink = mysql_connect($servername, $root_username, $root_password);
 	if (!$dbLink) {
 		exit;
 	}else{

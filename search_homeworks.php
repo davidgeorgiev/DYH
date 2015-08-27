@@ -71,18 +71,29 @@ if ($row3[0] <= 0) {
 			echo '<div class="panel-body" style = "background-color: '.$current_rank.'"><strong>';
 			echo $row[1]." (за ".$row[0]." - ".$convertered_weekday.")";
 			echo '</strong></div>';
-			echo '<div class="panel-footer">'.$row[2].'</div>';
+			//echo '<div class="panel-footer">'.$row[2].'</div>';
+			echo '<div class="row">';
 			if (strlen($row[5])>0){
-				echo ' <p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$row[5].'" rel="lightbox"><img src="'.$row[5].'" alt="HomeWork image" width="20%"></a></p>';
+				$preview_image = $row[5];
+			} else {
+				$preview_image = "themes/no-image.jpg";
 			}
+				echo ' <div class="col-sm-3" style = "margin:10px;border-radius:7px;">';
+				echo ' <div style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$preview_image.'" rel="lightbox"><img src="'.$preview_image.'" alt="HomeWork image" width="100%"></a></div>';
+				echo '</div>';
+			
+			echo ' <div class="col-sm-8" style = "margin-top:10px;border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;">';
+			echo '<div>'.$row[2].'</div>';
+			echo '</div>';
+			echo '</div>';
 			if ($EditMode == 0) {
 				//echo '	<h3 style = "background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">'.$row2[0].'</h3>';
 			} else {
 				
-				echo '<ul>';
+				echo '<div style = "margin-top:10px;border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;">';
 				echo '<li><a href="delete_hw.php?hwid='.$row[6].'&class='.$username.'"><span class="glyphicon glyphicon-trash"></span> Изтрий</a></li>';
 				echo '<li><a href="edit_hw.php?hwid='.$row[6].'&class='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Редактирай</a></li>';
-				echo '</ul>';
+				echo '</div>';
 			}
 		echo '</div>';
 

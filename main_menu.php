@@ -28,7 +28,7 @@
 		}
 		if ($page == "home") {
 			echo '<li class="active"><a href="history.php?user='.$username.'">История <span class="sr-only">(current)</span></a></li>';
-		} else if ($page == "history") {
+		} else if (($page == "history") || ($page == "other")){
 			echo '<li class="active"><a href="home.php?user='.$username.'">Начало <span class="sr-only">(current)</span></a></li>';
 		}
 	} else {
@@ -55,11 +55,17 @@
 ?>
 
 </ul>
-<form class="navbar-form navbar-left" role="search">
+<form class="navbar-form navbar-left" <?php echo 'action='; echo "search_homeworks.php?user=".$username;?> method="post">
 <div class="form-group">
-<input type="text" class="form-control" placeholder="Search">
+<input type="text" name="what_to_search" class="form-control" placeholder="Търси домашни">
 </div>
-<button type="submit" class="btn btn-default">Submit</button>
+<button type="submit" class="btn btn-default">Давай</button>
+</form>
+<form class="navbar-form navbar-left" <?php echo 'action='; echo "search/search_users.php";?> method="post">
+<div class="form-group">
+<input type="text" name="what_to_search" class="form-control" placeholder="Търси потребители">
+</div>
+<button type="submit" class="btn btn-default">Давай</button>
 </form>
 <ul class="nav navbar-nav navbar-right">
 <?php

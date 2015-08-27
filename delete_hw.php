@@ -25,7 +25,7 @@
 		echo '</div>';
 		
 		echo '<div class="alert alert-success" role="alert">Домашното беше изтрито успешно. ';
-		echo '<a href="home.php" class="alert-link">Върни ме обратно</a>';
+		echo '<a href="home.php?user='.$username.'" class="alert-link">Върни ме обратно</a>';
 		echo '!</div>';
 		echo '</div>';
 		
@@ -39,10 +39,6 @@
 		
 	}
 	else {
-
-		echo '<div class="alert alert-danger" role="alert">Вашият акаунт не е създаден.';
-		echo '<a href="index.php" class="alert-link">Опитай с друго име</a>';
-		echo '.</div>';
 		mysql_close($dbLink);
 	}
 	?>

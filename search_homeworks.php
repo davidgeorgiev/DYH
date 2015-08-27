@@ -1,0 +1,89 @@
+<?php
+	session_start();
+	echo '<html>';
+	include "head.php";
+	include "config.php";
+	
+?>
+<body>
+<?php
+	$EditMode = 0;
+	$name_is_set = 0;
+	if (isset($_GET["user"])) {
+		$username = $_GET["user"];
+		$name_is_set = 1;
+	}
+	if (isset($_POST["psw"]) && isset($_POST["name"])) {
+		$password = $_POST["psw"];
+		if ($name_is_set == 0) {
+			$username = $_POST["name"];
+		}
+	} else {
+		$password = $_SESSION['psw'];
+		if ($name_is_set == 0) {
+			$username = $_SESSION['name'];
+		}
+	}
+	include "CheckEditMode.php";
+	$_SESSION['psw'] = $password;
+	$_SESSION['name'] = $username;
+	$_SESSION['page'] = "other";
+	
+?>
+
+<div class="container">
+<?php
+include "main_menu.php";
+echo '<div id = "my_page">';
+
+
+$SQL = "SELECT DISTINCT COUNT(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND ((homeworks.Data LIKE '%".$_POST['what_to_search']."%') OR (homeworks.Title LIKE '%".$_POST['what_to_search']."%')) ORDER BY homeworks.Date DESC";
+$result3 = mysql_query($SQL);
+$row3 = mysql_fetch_array($result3);
+
+echo '<div class="page-header">';
+echo '<h1>Търсене за <spam style = "color: #006600">"'.$_POST['what_to_search'].'"</spam><small id = "smalltag"> (резултати: '.$row3[0].')</small></h1>';
+echo '</div>';
+
+if ($row3[0] <= 0) {
+	echo 'Няма съвпадения';
+} else {
+	$SQL = "SELECT DISTINCT homeworks.Date, homeworks.Title, homeworks.Data, homeworks.Rank, WEEKDAY(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND ((homeworks.Data LIKE '%".$_POST['what_to_search']."%') OR (homeworks.Title LIKE '%".$_POST['what_to_search']."%')) ORDER BY homeworks.Date DESC";
+	$result = mysql_query($SQL);
+	while ($row = mysql_fetch_array($result)){
+		
+		$weekday = $row[4];
+		include "convert_weekday.php";
+		
+		switch($row[3]){
+			case 1: $current_rank = '#99D6AD';
+			break;
+			case 2: $current_rank = '#FFFF66';
+			break;
+			case 3: $current_rank = '#FFAD33';
+			break;
+			case 4: $current_rank = '#FFB2B2';
+			break;
+		}
+		
+		echo '<div class="alert alert-warning alert-dismissible" role="alert">';
+			echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+			echo '<div class="panel-body" style = "background-color: '.$current_rank.'"><strong>';
+			echo $row[1]." (за ".$row[0]." - ".$convertered_weekday.")";
+			echo '</strong></div>';
+			echo '<div class="panel-footer">'.$row[2].'</div>';
+		echo '</div>';
+
+	
+		//echo $row[0];
+		//echo $row[1];
+		//echo $row[2];
+		//echo $row[3];
+	}
+}
+?>
+	
+</div>
+
+</body>
+</html>

@@ -48,7 +48,7 @@ echo '</div>';
 if ($row3[0] <= 0) {
 	echo 'Няма съвпадения';
 } else {
-	$SQL = "SELECT DISTINCT user.Name FROM user WHERE user.Name LIKE '%".$searched_string."%' ORDER BY user.Name DESC";
+	$SQL = "SELECT DISTINCT user.Name FROM user WHERE user.Name LIKE '%".$searched_string."%' ORDER BY user.Name ASC";
 	$result = mysql_query($SQL);
 	while ($row = mysql_fetch_array($result)){
 		
@@ -58,7 +58,7 @@ if ($row3[0] <= 0) {
 			echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 			echo '<div class="panel-body"><a href = "home.php?user='.$row[0].'"><strong>';
 			echo $row[0];
-			echo '</strong></div>';
+			echo '</strong></div></div>';
 			//echo '<div class="panel-footer">'.$row[2].'</div>';
 			
 

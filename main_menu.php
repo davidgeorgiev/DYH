@@ -55,13 +55,13 @@
 ?>
 
 </ul>
-<form class="navbar-form navbar-left" <?php echo 'action='; echo "redirect_to_search.php?user=".$username;?> method="post">
+<form class="navbar-form navbar-left" <?php echo 'action='; echo "redirect_to_search_hw.php?user=".$username;?> method="post">
 <div class="form-group">
 <input type="text" name="what_to_search" class="form-control" placeholder="Търси домашни">
 </div>
 <button type="submit" class="btn btn-default">Давай</button>
 </form>
-<form class="navbar-form navbar-left" <?php echo 'action='; echo "search/search_users.php";?> method="post">
+<form class="navbar-form navbar-left" <?php echo 'action='; echo "redirect_to_search_us.php?user=".$username;?> method="post">
 <div class="form-group">
 <input type="text" name="what_to_search" class="form-control" placeholder="Търси потребители">
 </div>

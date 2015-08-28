@@ -9,7 +9,11 @@
 <body>
 
 <?php
+	$ViewAllDays = false;
 	$EditMode = 0;
+	if (isset($_GET['show_all_days'])){
+		$ViewAllDays = $_GET['show_all_days'];
+	}
 	
 	if (isset($_GET['user'])) {
 		$username = $_GET['user'];

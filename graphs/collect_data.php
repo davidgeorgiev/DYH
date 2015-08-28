@@ -27,7 +27,11 @@
 	$days = " ";
 	$hardness = " ";
 	
-	$SQL = "SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC";
+	if ($ViewAllDays == true) {
+		$SQL = "SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID ORDER BY homeworks.Date ASC";
+	} else {
+		$SQL = "SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC";
+	}
 	$result = mysql_query($SQL);
 	
 	$temp_dates = array();
@@ -54,6 +58,9 @@
 		//echo $SQL;
 		$result = mysql_query($SQL);
 		$daily_rank_sum = mysql_fetch_array($result);
+		if ($daily_rank_sum[0] <= 0) {
+			$daily_rank_sum[0] = 0;
+		}
 		array_push($daily_rank_sum_arr, $daily_rank_sum[0]);
 	}
 	unset($value);

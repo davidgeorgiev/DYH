@@ -75,8 +75,10 @@
 		$temp_username = "гост";
 	}
 ?>
+
+<li><a href="homeworks_time_chart.php?user=<?php echo $username?>"><strong>Виж графиката</strong></a></li>
 <li><a href="#">Страницата на <?php echo $username?></a></li>
-<li><a href="index.php">Изход</a></li>
+<li><a href="index.php"><strong>Изход</strong></a></li>
 </ul>
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->

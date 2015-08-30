@@ -1,28 +1,5 @@
 <?php
-	function createDateRangeArray($strDateFrom,$strDateTo)
-	{
-		// takes two dates formatted as YYYY-MM-DD and creates an
-		// inclusive array of the dates between the from and to dates.
-
-		// could test validity of dates here but I'm already doing
-		// that in the main script
-
-		$aryRange=array();
-
-		$iDateFrom=mktime(1,0,0,substr($strDateFrom,5,2),     substr($strDateFrom,8,2),substr($strDateFrom,0,4));
-		$iDateTo=mktime(1,0,0,substr($strDateTo,5,2),     substr($strDateTo,8,2),substr($strDateTo,0,4));
-
-		if ($iDateTo>=$iDateFrom)
-		{
-			array_push($aryRange,date('Y-m-d',$iDateFrom)); // first entry
-			while ($iDateFrom<$iDateTo)
-			{
-				$iDateFrom+=86400; // add 24 hours
-				array_push($aryRange,date('Y-m-d',$iDateFrom));
-			}
-		}
-		return $aryRange;
-	}
+	
 	
 	$days = " ";
 	$hardness = " ";
@@ -54,7 +31,7 @@
 	foreach ($dates_array as &$value) {
 		//echo $value;
 		
-		$SQL = "SELECT DISTINCT SUM(homeworks.Rank) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$value."'";
+		$SQL = "SELECT DISTINCT SUM(homeworks.Rank) FROM homeworks,user,uh WHERE homeworks.Type = ".$type_for_search." AND user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$value."'";
 		//echo $SQL;
 		$result = mysql_query($SQL);
 		$daily_rank_sum = mysql_fetch_array($result);

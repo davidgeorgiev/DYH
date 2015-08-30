@@ -68,7 +68,7 @@ echo '<div id = "my_page">';
 
 if (($there_is_a_such_user[0] > 0) && ($there_are_some_homeworks[0] > 0)) {
 	//echo 'START COLLECTING DATA...';
-	$type_for_search = 0;
+	$type_for_search = 1;
 	include "graphs/create_date_range.php";
 	include "graphs/collect_data.php";
 	// NOW LET'S USE $dates_array and $daily_rank_sum_arr for the graph :D
@@ -114,7 +114,7 @@ unset($value);
 ?>
 ],['Изпити'
 <?php
-	$type_for_search = 1;
+	$type_for_search = 0;
 	include "graphs/collect_data.php";
 	foreach ($daily_rank_sum_arr as &$value) {
 		echo ", ".$value;

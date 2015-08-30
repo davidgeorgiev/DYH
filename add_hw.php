@@ -44,6 +44,13 @@ include "main_menu.php"; ?>
       <label for="date">Дата</label>
       <input type="date" class="form-control" name="date" placeholder="2015-06-30">
     </div>
+	<div class="form-group">
+      <label for="text">Тип</label>
+		<select class="form-control" name="type">
+			<option value="0">Домашно</option>
+			<option value="1">Изпит</option>
+		</select>
+    </div>
     <div class="form-group">
       <label for="text">Заглавие</label>
       <input type="text" class="form-control" name="title" placeholder="Домашно - Математика">

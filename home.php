@@ -97,9 +97,9 @@
 				break;
 			}
 			switch($row2[6]){
-				case 0: $type_color = "#fbc777";
+				case 1: $type_color = "#ffe1a8";
 				break;
-				case 1: $type_color = "#779afb";
+				case 0: $type_color = "#a8c0ff";
 				break;
 			}			
 			if ($EditMode == 0) {

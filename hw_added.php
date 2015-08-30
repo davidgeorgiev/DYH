@@ -31,9 +31,10 @@ include "main_menu.php"; ?>
 		$title = $_POST["title"];
 		$data = $_POST["data"];
 		$rank = $_POST["rank"];
+		$type = $_POST["type"];
 		
 		
-		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('".$new_date."', '".$title."', '".$data."', '".$rank."')";
+		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank, Type) VALUES ('".$new_date."', '".$title."', '".$data."', '".$rank."', ".$type.")";
 		$result = mysql_query($SQL);
 		
 		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, user.UID FROM homeworks,user WHERE user.Name = '".$username."' AND homeworks.Date = '".$new_date."' AND homeworks.Title = '".$title."' AND homeworks.Data = '".$data."' AND homeworks.Rank = '".$rank."'")){

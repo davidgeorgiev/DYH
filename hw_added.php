@@ -51,11 +51,10 @@ include "main_menu.php"; ?>
 			$imgurl = $_POST["imgurl"];
 			$SQL = "INSERT INTO imgurl (URL) VALUES ('".$imgurl."')";
 			$result = mysql_query($SQL);
-			$uid = mysql_query("SELECT MAX(imgurl.UID) FROM imgurl");
-			$row2 = mysql_fetch_array($uid);
+			$uid = mysql_insert_id();
 			
 			
-			$SQL = "INSERT INTO hwimg (HWID, IMGURLID) VALUES ('".$row[0]."', '".$row2[0]."')";
+			$SQL = "INSERT INTO hwimg (HWID, IMGURLID) VALUES ('".$row[0]."', '".$uid."')";
 			$result = mysql_query($SQL);
 		}
 

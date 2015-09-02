@@ -39,14 +39,13 @@ include "config.php";
 			
 			$SQL = "INSERT INTO twoweeks (EvenWeekID, OddWeekID) VALUES (9, 9)";
 			$result = mysql_query($SQL);
-			$uid = mysql_query("SELECT MAX(twoweeks.UID) FROM twoweeks");
-			$row = mysql_fetch_array($uid);
+			$uid = mysql_insert_id();
 			
 			$SQL = "SELECT user.UID FROM user WHERE user.Name = '".$name."'";
 			$result = mysql_query($SQL);
 			$row2 = mysql_fetch_array($result);
 			
-			$SQL = "INSERT INTO uw (UserID, TwoWeeksID) VALUES ('".$row2[0]."', ".$row[0].")";
+			$SQL = "INSERT INTO uw (UserID, TwoWeeksID) VALUES ('".$row2[0]."', ".$uid.")";
 			$result = mysql_query($SQL);
 			
 			mysql_close($dbLink);

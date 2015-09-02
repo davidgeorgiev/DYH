@@ -32,12 +32,10 @@ $username = $_SESSION['class'];
 		$current_date_time = gmdate("Y-m-j H:i:s", time() + 3600*($timezone+date("I"))); 
 		$SQL = "INSERT INTO comments (Data, Date) VALUES ('".$comment."', '".$current_date_time."')";
 		$result = mysql_query($SQL);
-		$SQL = "SELECT MAX(comments.UID) FROM comments";
-		$uid = mysql_query($SQL);
-		$row2 = mysql_fetch_array($uid);
+		$uid = mysql_insert_id();
 		
 		
-		$SQL = "INSERT INTO usercommenthomework (HWID,USERID,COMMENTID) VALUES ('".$hwid."', '".$row[0]."', '".$row2[0]."')";
+		$SQL = "INSERT INTO usercommenthomework (HWID,USERID,COMMENTID) VALUES ('".$hwid."', '".$row[0]."', '".$uid."')";
 		$result = mysql_query($SQL);
 		
 		mysql_close($dbLink);

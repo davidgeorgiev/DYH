@@ -49,6 +49,7 @@
 				<li><a href="add_info.php">Добави допълнителна информация</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="add_wp.php">Нова програма</a></li>
+				<li><a href="update_subject_list.php?user='.$username.'">Обнови списъка с предмети</a></li>
 				<li role="separator" class="divider"></li>
 				</ul></li>';
 	}

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	session_start();
 	echo '<html>';
 	include "head.php";
@@ -15,7 +15,7 @@ if (fields <= 35) {
 
 
 var newdiv = document.createElement('div');
-newdiv.innerHTML = '<br> <br/><div class="form-group"><label for="text">Предмет '+(fields+1)+'</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>';
+newdiv.innerHTML = '<br> <br/><div class="form-group"><label for="text">Предмет '+(fields+1)+'</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><?php for ($i = 1; $i <=10; $i++) {echo '<option value="'.$i.'">';$rank_of_subject = $i;include "subject_scale_to_words.php";echo $rank_of_subject_with_words."</option>";}?></select></div>';
 document.getElementById(divName).appendChild(newdiv);
 fields++;
 
@@ -37,10 +37,75 @@ document.form.add.disabled=true;
 <?php
 include "main_menu.php";
 echo '<div id = "my_page">';
+
+$SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
+$result = mysql_query($SQL);
+$row = mysql_fetch_array($result);
+
+//echo "<p>Внимание веднъж въведен предмет не може да се изтрива или редактира!</p>";
+
+if ($row[0] <= 0) {
+	echo "<p>Още нямате списък с предмети! Въведете ги долу!</p>";
+} else {
+	$SQL = "SELECT usersubjectlist.SUBJECTLISTID FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
+	//echo $SQL;
+	$result = mysql_query($SQL);
+	$row = mysql_fetch_array($result);
+	//echo "<p>".$row[0]."</p>";
+	$subject_ids_arr = explode(",", $row[0]);
+	
+	echo '<div class="row">';
+	echo '<div class="list-group">';
+	echo '<a href="#" class="list-group-item active">';
+	echo '<h4 class="list-group-item-heading">Вашите предмети</h4>';
+	echo '<p class="list-group-item-text"></p>';
+	echo '</a>';
+	echo '<div style = "margin:10px;padding:0px;background-color: white;border-radius:7px;">';
+	echo '<div style = "overflow-y: scroll; height:70%;">';
+	for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
+		$SQL = "SELECT subjects.Name, subjects.Rank FROM subjects WHERE subjects.UID = ".$subject_ids_arr[$i];
+		$result = mysql_query($SQL);
+		$row = mysql_fetch_array($result);
+		
+		//echo $row[0].$row[1];
+		
+		$rank_of_subject = $row[1];
+		include "subject_scale_to_words.php";
+		echo '<div class="col-sm-3" style = "margin:10px;padding:0px;background-color: white;border-radius:7px;">';
+		echo '<a href="#" class="list-group-item unactive">';
+		echo '<h4 class="list-group-item-heading">'.($i+1).'. '.$row[0].'</h4>';
+		echo '<p class="list-group-item-text" style = "padding-left:20px;padding-top:10px;">'.$rank_of_subject_with_words.'</p>';
+		echo '<div class="progress" style = "margin-top:20px;">';
+		$percentage = $row[1]*10;
+		if (($percentage < 25) && ($percentage >= 0)){
+			$bar_style = "progress-bar-danger";
+		} else if (($percentage < 50) && ($percentage >= 25)){
+			$bar_style = "progress-bar-warning";
+		} else if (($percentage < 75) && ($percentage >= 50)){
+			$bar_style = "progress-bar-info";
+		} else if (($percentage < 100) && ($percentage >= 75)){
+			$bar_style = "progress-bar-success";
+		}
+		echo '<div class="progress-bar '.$bar_style.'" role="progressbar" aria-valuenow="'.$percentage.'" ';
+		
+		echo 'aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">';
+		echo 'Любимост '.$percentage.'%';
+		echo '</div>';
+		echo '</div>';
+		echo '</a>';
+		
+		echo '</div>';
+		//echo "<p>".$SQL."</p>";
+	}
+	echo '</div></div></div></div>';
+}
 ?>
-<form id="subject_input" role="form" <?php echo 'action='; echo "subjects_added.php"?> method="post">
+
+
+
+<form id="subject_input" role="form" <?php echo 'action='; echo "subjects_added.php?user=".$username?> method="post">
      <div id="dynamicInput">
-          <br> <br/><div class="form-group"><label for="text">Предмет 1</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
+          <br> <br/><div class="form-group"><label for="text">Предмет 1</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><?php for ($i = 1; $i <=10; $i++) {echo '<option value="'.$i.'">';$rank_of_subject = $i;include "subject_scale_to_words.php";echo $rank_of_subject_with_words."</option>";}?></select></div>
      </div>
      <input type="button" class="btn btn-default" value="Още един" onClick="addInput('dynamicInput');">
 	 

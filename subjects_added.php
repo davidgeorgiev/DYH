@@ -49,7 +49,10 @@ $SQL = "SELECT user.UID FROM user WHERE user.Name = '".$username."'";
 $result = mysql_query($SQL);
 $row2 = mysql_fetch_array($result);
 
+
+
 if ($row[0] <= 0){
+	include "some_external_phps/sort_string_of_subject_ids_by_rank.php";
 	$SQL = "INSERT INTO usersubjectlist (USERID,SUBJECTLISTID) VALUES (".$row2[0].", '".$string_of_ids."')";
 	$result = mysql_query($SQL);
 	echo "<p>".$SQL."</p>";
@@ -60,7 +63,9 @@ if ($row[0] <= 0){
 	echo "<p>".$SQL."</p>";
 	
 	
-	$SQL = "UPDATE usersubjectlist SET SUBJECTLISTID = '".$row[0].$string_of_ids."' WHERE usersubjectlist.USERID = ".$row2[0];
+	$string_of_ids = $row[0].$string_of_ids;
+	include "some_external_phps/sort_string_of_subject_ids_by_rank.php";
+	$SQL = "UPDATE usersubjectlist SET SUBJECTLISTID = '".$string_of_ids."' WHERE usersubjectlist.USERID = ".$row2[0];
 	$result = mysql_query($SQL);
 	echo "<p>".$SQL."</p>";
 }

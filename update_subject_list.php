@@ -50,8 +50,6 @@ $SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE users
 $result = mysql_query($SQL);
 $row = mysql_fetch_array($result);
 
-//echo "<p>Внимание веднъж въведен предмет не може да се изтрива или редактира!</p>";
-
 if ($row[0] <= 0) {
 	echo "<p>Още нямате списък с предмети! Въведете ги долу!</p>";
 } else {
@@ -150,6 +148,7 @@ if ($row[0] <= 0) {
      <div id="dynamicInput">
           <br> <br/><div class="form-group"><label for="text">Предмет 1</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><?php for ($i = 1; $i <=10; $i++) {echo '<option value="'.$i.'">';$rank_of_subject = $i;include "subject_scale_to_words.php";echo $rank_of_subject_with_words."</option>";}?></select></div>
      </div>
+	 <p>Внимание веднъж въведен предмет не може да се изтрива или редактира!</p>
      <input type="button" class="btn btn-default" value="Още един" onClick="addInput('dynamicInput');">
 	 
 	 

@@ -41,10 +41,11 @@
 						}
 					while ($row5 = mysql_fetch_array($result5)) {
 						//echo "Name = ".$row[0];
-						$SQL = "SELECT COUNT(uh.UID) FROM uh, user WHERE uh.USERID = user.UID AND user.Name = '".$row5[0]."'";
+						$SQL = "SELECT COUNT(uh.UID) FROM uh, user, homeworks WHERE uh.USERID = user.UID AND user.Name = '".$row5[0]."' AND homeworks.UID = uh.HWID";
+						
 						$result6 = mysql_query($SQL);
 						$row6 = mysql_fetch_array($result6);
-						$SQL = "SELECT COUNT(uoi.UID) FROM uoi, user WHERE uoi.UserID = user.UID AND user.Name = '".$row5[0]."'";
+						$SQL = "SELECT COUNT(uoi.UID) FROM uoi, user, otherinfo WHERE uoi.UserID = user.UID AND user.Name = '".$row5[0]."' AND otherinfo.UID = uoi.OtherInfoID";
 						$result7 = mysql_query($SQL);
 						$row7 = mysql_fetch_array($result7);
 						echo '<tr style = "background-color: #e5dec6;"><td><li><span style = "color:#d2700b;text-align:center;">'.$row6[0].'</span></li></td><td><li><span style = "color:#d2700b;text-align:center;">'.$row7[0].'</span></li></td><td><li><a href="redirect.php?acc='.$row5[0].'" style = "padding-right: 20px;text-align:center;">'.$row5[0].' </a></li></td></tr>';

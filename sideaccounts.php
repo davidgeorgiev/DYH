@@ -7,10 +7,10 @@
 			$row8 = mysql_fetch_array($result8);
 			$name = $row8[0];
 			
-			$SQL = "SELECT COUNT(uh.UID) FROM uh, user WHERE uh.USERID = user.UID AND user.Name = '".$name."'";
+			$SQL = "SELECT COUNT(uh.UID) FROM uh, user, homeworks WHERE uh.USERID = user.UID AND user.Name = '".$name."' AND homeworks.UID = uh.HWID";
 			$result6 = mysql_query($SQL);
 			$row6 = mysql_fetch_array($result6);
-			$SQL = "SELECT COUNT(uoi.UID) FROM uoi, user WHERE uoi.UserID = user.UID AND user.Name = '".$name."'";
+			$SQL = "SELECT COUNT(uoi.UID) FROM uoi, user, otherinfo WHERE uoi.UserID = user.UID AND user.Name = '".$name."' AND otherinfo.UID = uoi.OtherInfoID";
 			$result7 = mysql_query($SQL);
 			$row7 = mysql_fetch_array($result7);
 			

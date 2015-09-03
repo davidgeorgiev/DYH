@@ -10,6 +10,7 @@
 <?php
 
 	include "start_check.php";
+	
 	$_SESSION['page'] = "other";
 
 ?>
@@ -18,7 +19,6 @@
 <?php
 include "main_menu.php";
 echo '<div id = "my_page">';
-
 $subject_ids = array();
 
 for ($i = 0 ;$i < sizeof($_POST['myInputs']); $i++){

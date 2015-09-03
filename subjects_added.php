@@ -17,7 +17,7 @@
 
 <div class="container">
 <?php
-include "main_menu.php";
+//include "main_menu.php";
 echo '<div id = "my_page">';
 $subject_ids = array();
 
@@ -67,7 +67,7 @@ if ($row[0] <= 0){
 
 
 
-
+header('Location: check_width_and_send_to_update_homeworks.php?user='.$username) and exit;
 ?>
 
 

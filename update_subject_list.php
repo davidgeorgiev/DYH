@@ -4,6 +4,7 @@
 	include "head.php";
 	include "config.php";
 	
+	
 ?>
 <body>
 
@@ -29,6 +30,10 @@ document.form.add.disabled=true;
 <?php
 
 	include "start_check.php";
+	$my_temp = $_SESSION['page'];
+	if ($my_temp != 'check_whidth') {
+		header('Location: check_width_and_send_to_update_homeworks.php?user='.$username) and exit;
+	}
 	$_SESSION['page'] = "other";
 
 ?>
@@ -37,7 +42,10 @@ document.form.add.disabled=true;
 <?php
 include "main_menu.php";
 echo '<div id = "my_page">';
+?>
 
+
+<?php
 $SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
 $result = mysql_query($SQL);
 $row = mysql_fetch_array($result);
@@ -54,14 +62,26 @@ if ($row[0] <= 0) {
 	//echo "<p>".$row[0]."</p>";
 	$subject_ids_arr = explode(",", $row[0]);
 	
-	echo '<div class="row">';
+	
 	echo '<div class="list-group">';
 	echo '<a href="#" class="list-group-item active">';
 	echo '<h4 class="list-group-item-heading">Вашите предмети</h4>';
 	echo '<p class="list-group-item-text"></p>';
 	echo '</a>';
 	echo '<div style = "margin:10px;padding:0px;background-color: white;border-radius:7px;">';
-	echo '<div style = "overflow-y: scroll; height:70%;">';
+	$subjects_window_height = $_GET["height"]*0.70;
+	echo '<div style = "overflow-y: scroll; height:'.$subjects_window_height.';">';
+	echo '<table class="table" style = "float:left;font-size:13px;margin-top:15px;">';
+	
+	if ($_GET["width"] > 1250){
+		$number_of_tds = 4;
+	} else if (($_GET["width"] <= 1250) && ($_GET["width"] > 1070)) {
+		$number_of_tds = 3;
+	} else if ((($_GET["width"] <= 1070) && ($_GET["width"] > 870)) || (($_GET["width"] <= 768) && ($_GET["width"] > 657))) {
+		$number_of_tds = 2;
+	} else {
+		$number_of_tds = 1;
+	}
 	for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
 		$SQL = "SELECT subjects.Name, subjects.Rank FROM subjects WHERE subjects.UID = ".$subject_ids_arr[$i];
 		$result = mysql_query($SQL);
@@ -71,7 +91,14 @@ if ($row[0] <= 0) {
 		
 		$rank_of_subject = $row[1];
 		include "subject_scale_to_words.php";
-		echo '<div class="col-sm-3" style = "margin:10px;padding:0px;background-color: white;border-radius:7px;">';
+		
+		if (!(($i+$number_of_tds) % $number_of_tds)){
+			if ($i > 0){
+				echo '</tbody>';
+			}
+			echo '<tbody>';
+		}
+		echo '<td>';
 		echo '<a href="#" class="list-group-item unactive">';
 		echo '<h4 class="list-group-item-heading">'.($i+1).'. '.$row[0].'</h4>';
 		echo '<p class="list-group-item-text" style = "padding-left:20px;padding-top:10px;">'.$rank_of_subject_with_words.'</p>';
@@ -83,7 +110,7 @@ if ($row[0] <= 0) {
 			$bar_style = "progress-bar-warning";
 		} else if (($percentage < 75) && ($percentage >= 50)){
 			$bar_style = "progress-bar-info";
-		} else if (($percentage < 100) && ($percentage >= 75)){
+		} else if (($percentage <= 100) && ($percentage >= 75)){
 			$bar_style = "progress-bar-success";
 		}
 		echo '<div class="progress-bar '.$bar_style.'" role="progressbar" aria-valuenow="'.$percentage.'" ';
@@ -93,14 +120,30 @@ if ($row[0] <= 0) {
 		echo '</div>';
 		echo '</div>';
 		echo '</a>';
-		
-		echo '</div>';
+		echo '</td>';
 		//echo "<p>".$SQL."</p>";
 	}
-	echo '</div></div></div></div>';
+	echo '</tbody>';
+	echo '</table></div></div></div>';
+	
 }
 ?>
 
+<?php
+	// echo '<table class="table table-bordered" style = "float:left;font-size:13px;margin-top:15px;">';
+	// for ($i = 0;$i <= 100;$i++){
+		// if (!(($i+4) % 4)){
+			// if ($i > 0){
+				// echo '</tbody>';
+			// }
+			// echo '<tbody>';
+		// }
+			// echo '<td>'.$i.'</td>';
+		
+	// }
+	// echo '</tbody>';
+	// echo '</table>';
+// ?>
 
 
 <form id="subject_input" role="form" <?php echo 'action='; echo "subjects_added.php?user=".$username?> method="post">

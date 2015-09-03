@@ -15,7 +15,7 @@ if (fields <= 35) {
 
 
 var newdiv = document.createElement('div');
-newdiv.innerHTML = '<br> <br/><div class="form-group"><label for="text">Предмет '+(fields+1)+'</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"></div>';
+newdiv.innerHTML = '<br> <br/><div class="form-group"><label for="text">Предмет '+(fields+1)+'</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>';
 document.getElementById(divName).appendChild(newdiv);
 fields++;
 
@@ -40,7 +40,7 @@ echo '<div id = "my_page">';
 ?>
 <form id="subject_input" role="form" <?php echo 'action='; echo "subjects_added.php"?> method="post">
      <div id="dynamicInput">
-          <br> <br/><div class="form-group"><label for="text">Предмет 1</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"></div>
+          <br> <br/><div class="form-group"><label for="text">Предмет 1</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
      </div>
      <input type="button" class="btn btn-default" value="Още един" onClick="addInput('dynamicInput');">
 	 

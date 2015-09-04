@@ -3,13 +3,54 @@
 	include "head.php";
 	include "config.php";
 ?>
+<head>
+<style>
+.shakeimage {POSITION: relative}
+</style>
+<script>
+/*
+In header
+*/
+var rector=3
+var stopit=0
+var a=1
+function init(which){
+stopit=0
+shake=which
+shake.style.left=0
+shake.style.top=0
+}
+function rattleimage(){
+if ((!document.all&&!document.getElementById)||stopit==1)
+return
+if (a==1){
+shake.style.top=parseInt(shake.style.top)+rector
+}
+else if (a==2){
+shake.style.left=parseInt(shake.style.left)+rector
+}
+else if (a==3){
+shake.style.top=parseInt(shake.style.top)-rector
+}
+else{
+shake.style.left=parseInt(shake.style.left)-rector
+}
+if (a<4)
+a++
+else
+a=1
+setTimeout("rattleimage()",50)
+}
+function stoprattle(which){
+stopit=1
+which.style.left=0
+which.style.top=0
+}
+</script>
+</head>
 <body>
 <div class="container">
-<div class="jumbotron">
-  <h1>Do your homework!</h1>
-  <p>Организирай си домашните бързо и лесно!</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-</div>
+
 
 <?php
 // define variables and set to empty values
@@ -70,8 +111,10 @@ function test_input($data) {
    $data = htmlspecialchars($data);
    return $data;
 }
+
 ?>
-<div class="" id="loginModal" ">
+
+<div class="" id="loginModal" >
 	  <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">?</button>
 		<h3 style = "color:rgba(243, 243, 243, 0.8);">Have an Account?</h3>
@@ -129,9 +172,12 @@ function test_input($data) {
 			</div>
 		</div>
 	  </div>
+	  <a href="history.php?user=david" id = "index_image" style = "position:fixed;right:130;top:105;" target=_blank><img class=shakeimage onmouseout="stoprattle(this)" onmouseover="init(this);rattleimage()" src="css/features.jpg" border=0 width="500px"></a>
 	  <div class="panel panel-primary"><div class="panel-heading">Информация</div>
   <div class="panel-body">
+  
 	<?php
+	
 	
 		$SQL = "SELECT COUNT(user.Name) FROM user";
 		$result = mysql_query($SQL);

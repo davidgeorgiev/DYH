@@ -39,7 +39,7 @@
 	}
 	
 	if ($there_is_some_info) {
-		echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4)">';
+		echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.7)">';
 	} ?>
 	<section id="cd-timeline" class="cd-container">
 	<?php

@@ -104,16 +104,18 @@
 					}
 					echo '<div class="cd-timeline-img cd-'.$img_bg_color.'">';
 					if ($_GET["width"] <= 768) {
-						$margin_top = 20;
+						$margin_top = "";
+						$class_zoom = ' ';
 					} else {
-						$margin_top = 30;
+						$margin_top = "margin-top: 30px;";
+						$class_zoom = 'class="zoom_img"';
 					}
 						if (strlen($row2[4]) <= 0){
 							//echo '<div class="zoom_img" style = "margin-top:'.$margin_top.'px;z-index: 5;">';
 							echo '<img src="vertical-timeline/img/cd-icon-picture.svg" alt="Picture">';
 							//echo '</div>';
 						} else {
-							echo '<div class="zoom_img" style = "margin-top:'.$margin_top.'px; z-index:10;position:relative;">';
+							echo '<div '.$class_zoom.' style = "'.$margin_top.' z-index:10;position:relative;">';
 							echo '<a href = "'.$row2[4].'" rel="lightbox"><img style= "border-width:thin; border-style: solid;background-color:#afb7c3;border-color: white;border-radius:15px;" src="'.$row2[4].'" alt="HomeWork image" width="100%" height="100%"></a>';
 							echo '</div>';
 						}

@@ -4,21 +4,33 @@
 	$days = " ";
 	$hardness = " ";
 	
-	if ($ViewAllDays == true) {
-		$SQL = "SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID ORDER BY homeworks.Date ASC";
-	} else {
-		$SQL = "SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC";
-	}
-	$result = mysql_query($SQL);
+	// if ($ViewAllDays == true) {
+		// $SQL = "SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID ORDER BY homeworks.Date ASC";
+	// } else {
+		// $SQL = "SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC";
+	// }
+	// $result = mysql_query($SQL);
 	
-	$temp_dates = array();
-	while ($dates = mysql_fetch_array($result)) {
-		array_push($temp_dates, $dates[0]);
-		//echo $dates[0];
-	}
-	$max = sizeof($temp_dates);
-	$strDateFrom = $temp_dates[0];
-	$strDateTo = $temp_dates[$max - 1];
+	// $temp_dates = array();
+	// while ($dates = mysql_fetch_array($result)) {
+		// array_push($temp_dates, $dates[0]);
+		// //echo $dates[0];
+	// }
+	// $max = sizeof($temp_dates);
+	// $strDateFrom = $temp_dates[0];
+	// $strDateTo = $temp_dates[$max - 1];
+	
+	// $current_dayname = date("l");
+	// echo $date = date("Y-m-d",strtotime('monday this week')).' To '.date("Y-m-d",strtotime("sunday this week"));
+	
+	$week_number = $_GET["weeknum"];
+	$year = date("Y");
+	
+	$strDateFrom = date('Y-m-d', strtotime($year."W".$week_number.'1'));
+	$strDateTo = date('Y-m-d', strtotime($year."W".$week_number.'7'));
+	
+	// $strDateFrom = date("Y-m-d",strtotime('monday this week'));
+	// $strDateTo = date("Y-m-d",strtotime("sunday this week"));
 	
 	// echo 'from';
 	// echo $strDateFrom;

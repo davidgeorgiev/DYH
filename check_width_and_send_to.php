@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	session_start();
 	$_SESSION['page'] = 'check_width';
 ?>
@@ -18,8 +18,7 @@ function getQueryVariable(variable)
        return(false);
 }
 	if (width > 0 && height >0) {
-		window.location.href = getQueryVariable("page")+".php?user="+getQueryVariable("user")+"&width=" + width + "&height=" + height + "&hwid=" + getQueryVariable("hwid");
+		window.location.href = getQueryVariable("page")+".php?user="+getQueryVariable("user")+"&width=" + width + "&height=" + height + "&hwid=" + getQueryVariable("hwid") + "&weeknum=" + getQueryVariable("weeknum");
 	} else;
 		exit();
-
 </script>

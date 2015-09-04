@@ -103,8 +103,8 @@
 						$img_bg_color = "movie";
 					}
 					echo '<div class="cd-timeline-img cd-'.$img_bg_color.'">';
-					if ($_GET["width"] <= 768) {
-						$margin_top = "";
+					if ($_GET["width"] <= 1170) {
+						$margin_top = "margin-top: 20px;";
 						$class_zoom = ' ';
 					} else {
 						$margin_top = "margin-top: 30px;";

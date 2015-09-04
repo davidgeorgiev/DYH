@@ -1,7 +1,11 @@
 ﻿<?php
 	echo '<head><meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">';
-  echo '<title>DYH - '.$_SESSION['name'].'</title>';
+	if (isset($_SESSION['name'])) {
+		echo '<title>DYH - '.$_SESSION['name'].'</title>';
+	} else {
+		echo '<title>DYH</title>';
+	}
   echo '<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/my.css">
   <link rel="stylesheet" href="simple-sidebar-1.0.4/css/simple-sidebar.css">

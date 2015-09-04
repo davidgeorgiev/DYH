@@ -31,11 +31,24 @@
 <div class="container">
 <?php
 $_SESSION['page'] = "other";
-include "main_menu.php"; ?>
-	<div class="jumbotron">
-		<h1>Домашни</h1>
-		<p><?php echo $username?></p> 
-	</div>
+include "main_menu.php"; 
+
+$SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
+$result = mysql_query($SQL);
+$row = mysql_fetch_array($result);
+
+$theresnosubjects = 0;
+if ($row[0] <= 0) {
+	$theresnosubjects = 1;
+} else {
+	$SQL = "SELECT usersubjectlist.SUBJECTLISTID FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
+	//echo $SQL;
+	$result = mysql_query($SQL);
+	$row = mysql_fetch_array($result);
+	//echo "<p>".$row[0]."</p>";
+	$subject_ids_arr = explode(",", $row[0]);
+}
+?>
 	<div id = "my_page">
   <h2>Добави нова програма</h2>
   <form role="form" <?php echo 'action='; echo "wp_added.php";?> method="post">
@@ -64,63 +77,30 @@ include "main_menu.php"; ?>
 		</div>
     </div>
 	<div class="row">
-	<div class="col-sm-4">
-    <div class="form-group">
-      <label for="text">Първи час</label>
-      <input type="time" class="form-control" name="time1" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject1" placeholder="Математика"><input type="text" class="form-control" name="info1" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Втори час</label>
-      <input type="time" class="form-control" name="time2" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject2" placeholder="Математика"><input type="text" class="form-control" name="info2" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Трети час</label>
-      <input type="time" class="form-control" name="time3" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject3" placeholder="Математика"><input type="text" class="form-control" name="info3" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Четвърти час</label>
-      <input type="time" class="form-control" name="time4" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject4" placeholder="Математика"><input type="text" class="form-control" name="info4" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Пети час</label>
-      <input type="time" class="form-control" name="time5" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject5" placeholder="Математика"><input type="text" class="form-control" name="info5" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Шести час</label>
-      <input type="time" class="form-control" name="time6" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject6" placeholder="Математика"><input type="text" class="form-control" name="info6" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Седми час</label>
-      <input type="time" class="form-control" name="time7" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject7" placeholder="Математика"><input type="text" class="form-control" name="info7" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Осми час</label>
-      <input type="time" class="form-control" name="time8" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject8" placeholder="Математика"><input type="text" class="form-control" name="info8" placeholder="Информация">
-    </div>
-	</div>
-	<div class="col-sm-4">
-	<div class="form-group">
-      <label for="text">Девети час</label>
-      <input type="time" class="form-control" name="time9" placeholder="13:00 - 13:30"><input type="text" class="form-control" name="subject9" placeholder="Математика"><input type="text" class="form-control" name="info9" placeholder="Информация">
-    </div>
-	</div>
 	<?php
+	for ($k=1;$k<=9;$k++){
+		echo '<div class="col-sm-4">';
+		echo '<div class="form-group">';
+			echo '<label for="text">';
+			$class_number = $k;
+			include "some_external_phps/convert_class_number_to_words.php";
+			echo $class_number." час";
+			echo '</label>';
+			$name = "hours".$k;
+			$name2 = "mins".$k;
+			include "some_external_phps/time_picker.php";
+			//echo '<input type="time" class="form-control" name="time'.$k.'" placeholder="13:00">';
+			$name = "subject".$k;
+			include "some_external_phps/subject_select_list_menu.php";
+			echo '<input type="text" class="form-control" name="info'.$k.'" placeholder="Информация">';
+		echo '</div>';
+		echo '</div>';
+	}
+	
+	
+	
 		if ($EditMode == 1) {
-			echo '<button type="submit" class="btn btn-default" style = "margin-left: 15px;">Submit</button>';
+			echo '<button type="submit" class="btn btn-default" style = "margin-left: 15px;">Запиши</button>';
 		}
 	?>
 	</form>

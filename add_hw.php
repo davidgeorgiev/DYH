@@ -29,6 +29,26 @@
 ?>
 <body>
 
+<script type="text/javascript">
+    var datefield=document.createElement("input")
+    datefield.setAttribute("type", "date")
+    if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+        document.write('<link href="jquery/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+        document.write('<script src="jquery/jquery.min.js"><\/script>\n')
+        document.write('<script src="jquery/jquery-ui.min.js"><\/script>\n') 
+    }
+</script>
+ 
+<script>
+if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
+    jQuery(function($){ //on document.ready
+        $('#select_date').datepicker();
+    })
+}
+</script>
+
+
+
 <div class="container">
 <?php
 $_SESSION['page'] = "other";
@@ -57,9 +77,11 @@ if ($row[0] <= 0) {
 	<div id = "my_page">
   <h2>Добави ново домашно</h2>
   <form role="form" <?php echo 'action='; echo "hw_added.php"?> method="post">
+  
+  
     <div class="form-group">
       <label for="date">Дата</label>
-      <input type="date" class="form-control" name="date" placeholder="2015-06-30">
+      <input type="date" id="select_date" class="form-control" name="date" size="20" placeholder="30/06/2015">
     </div>
 	<div class="form-group">
       <label for="text">Тип</label>

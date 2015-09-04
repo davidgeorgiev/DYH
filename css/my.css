@@ -19,8 +19,8 @@ body {
   /* SHORTHAND CSS NOTATION
    * background: url(background-photo.jpg) center center cover no-repeat fixed;
    */
-   //padding-top: 40px;
-	//padding-bottom: 40px;
+   /*padding-top: 40px;
+	padding-bottom: 40px;*/
   position: relative;
 }
 /* For mobile devices */
@@ -28,7 +28,7 @@ body {
   body {
     /* The file size of this background image is 93% smaller
      * to improve page load speed on mobile internet connections */
-    background-image: url(bckgrnd_mobile.jpg);
+    background-image: url(bckgrnd_mobile3.jpg);
 	background-repeat: repeat-y;
   }
 	}

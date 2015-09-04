@@ -28,15 +28,15 @@ include "main_menu.php"; ?>
 		$week = $_POST["week"];
 		$day = $_POST["day"];
 		
-		$time1 = date('H:i',strtotime($_POST["time1"]));
-		$time2 = date('H:i',strtotime($_POST["time2"]));
-		$time3 = date('H:i',strtotime($_POST["time3"]));
-		$time4 = date('H:i',strtotime($_POST["time4"]));
-		$time5 = date('H:i',strtotime($_POST["time5"]));
-		$time6 = date('H:i',strtotime($_POST["time6"]));
-		$time7 = date('H:i',strtotime($_POST["time7"]));
-		$time8 = date('H:i',strtotime($_POST["time8"]));
-		$time9 = date('H:i',strtotime($_POST["time9"]));
+		$time1 = $_POST["hours1"].":".$_POST["mins1"];
+		$time2 = $_POST["hours2"].":".$_POST["mins2"];
+		$time3 = $_POST["hours3"].":".$_POST["mins3"];
+		$time4 = $_POST["hours4"].":".$_POST["mins4"];
+		$time5 = $_POST["hours5"].":".$_POST["mins5"];
+		$time6 = $_POST["hours6"].":".$_POST["mins6"];
+		$time7 = $_POST["hours7"].":".$_POST["mins7"];
+		$time8 = $_POST["hours8"].":".$_POST["mins8"];
+		$time9 = $_POST["hours9"].":".$_POST["mins9"];
 	
 		$subject1 = $_POST["subject1"];
 		$subject2 = $_POST["subject2"];

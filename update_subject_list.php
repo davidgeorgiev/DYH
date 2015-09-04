@@ -62,14 +62,14 @@ if ($row[0] <= 0) {
 	
 	
 	echo '<div class="list-group">';
-	echo '<a href="#" class="list-group-item active">';
+	echo '<a href="#" class="list-group-item unactive">';
 	echo '<h4 class="list-group-item-heading">Вашите предмети</h4>';
 	echo '<p class="list-group-item-text"></p>';
 	echo '</a>';
-	echo '<div style = "margin:10px;padding:0px;background-color: white;border-radius:7px;">';
+	echo '<div style = "margin:10px;padding:0px;border-radius:7px;">';
 	$subjects_window_height = $_GET["height"]*0.70;
-	echo '<div style = "overflow-y: scroll; height:'.$subjects_window_height.';">';
-	echo '<table class="table" style = "float:left;font-size:13px;margin-top:15px;">';
+	echo '<div style = "border-radius:7px;overflow-y: scroll; height:'.$subjects_window_height.';">';
+	echo '<table style = "float:left;font-size:13px;">';
 	
 	if ($_GET["width"] > 1250){
 		$number_of_tds = 4;
@@ -97,7 +97,7 @@ if ($row[0] <= 0) {
 			echo '<tbody>';
 		}
 		echo '<td>';
-		echo '<a href="#" class="list-group-item unactive">';
+		echo '<a href="#" class="list-group-item unactive" style = "height: 200px;">';
 		echo '<h4 class="list-group-item-heading">'.($i+1).'. '.$row[0].'</h4>';
 		echo '<p class="list-group-item-text" style = "padding-left:20px;padding-top:10px;">'.$rank_of_subject_with_words.'</p>';
 		echo '<div class="progress" style = "margin-top:20px;">';

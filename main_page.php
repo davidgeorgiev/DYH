@@ -1,7 +1,20 @@
-﻿<body>
+﻿<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="vertical-timeline/css/reset.css">
+	<link rel="stylesheet" href="vertical-timeline/css/style.css">
+	<script src="vertical-timeline/js/modernizr.js"></script>
+</head>
+<body>
 
 <?php
 	include "start_check.php";
+	if ($_SESSION['page'] != 'check_width'){
+		header('Location: check_width_and_send_to.php?user='.$username.'&page='.$current_page_is) and exit;
+	}
 	$_SESSION['page'] = $current_page_is;
 ?>
 
@@ -26,12 +39,14 @@
 	}
 	
 	if ($there_is_some_info) {
-		echo '<div id = "my_page">';
-	}
-	
+		echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4)">';
+	} ?>
+	<section id="cd-timeline" class="cd-container">
+	<?php
 	while ($row = mysql_fetch_array($result)){
 		//print_r($row);
-		echo '<div class="page-header">';
+		
+		//echo '<div class="page-header" style = "font-size:17px;">';
 		
 		switch($row[1]){
 			case 0: $weekday = 'ЗА ПОНЕДЕЛНИК';
@@ -54,12 +69,13 @@
 		} else {
 			$weekday2 = '';
 		}
-		echo '<h1>'.$weekday.' <small id = "smalltag">'.$weekday2.$row[0].'</small></h1>';
-		echo '</div>';
-		echo '<div class="row">';
+		
+		//echo '<h1>'.$weekday.' <small id = "smalltag" style = "font-size:15px;">'.$weekday2.$row[0].'</small></h1>';
+		//echo '</div>';
+		//echo '<div class="row">';
 		$result2 = mysql_query("SELECT homeworks.Title, homeworks.Data, homeworks.Rank, homeworks.UID, imgurl.URL, homeworks.UID, homeworks.Type FROM homeworks,user,uh,imgurl,hwimg WHERE imgurl.UID = hwimg.IMGURLID AND hwimg.HWID = homeworks.UID AND user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$row[0]." 00:00:00' ORDER BY homeworks.UID DESC");
 		while ($row2 = mysql_fetch_array($result2)){
-			echo '	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">';
+			//echo '	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">';
 			switch($row2[2]){
 				case 1: $color = "white";
 				break;
@@ -75,13 +91,46 @@
 				break;
 				case 0: $type_color = "#a8c0ff";
 				break;
-			}			
+			}
+				echo '<div class="cd-timeline-block">';
+					if ($row2[2] == 1){
+						$img_bg_color = "";
+					} else if ($row2[2] == 2){
+						$img_bg_color = "picture";
+					} else if ($row2[2] == 3){
+						$img_bg_color = "location";
+					} else if ($row2[2] == 4){
+						$img_bg_color = "movie";
+					}
+					echo '<div class="cd-timeline-img cd-'.$img_bg_color.'">';
+					if ($_GET["width"] <= 768) {
+						$margin_top = 20;
+					} else {
+						$margin_top = 30;
+					}
+						if (strlen($row2[4]) <= 0){
+							//echo '<div class="zoom_img" style = "margin-top:'.$margin_top.'px;z-index: 5;">';
+							echo '<img src="vertical-timeline/img/cd-icon-picture.svg" alt="Picture">';
+							//echo '</div>';
+						} else {
+							echo '<div class="zoom_img" style = "margin-top:'.$margin_top.'px; z-index:10;position:relative;">';
+							echo '<a href = "'.$row2[4].'" rel="lightbox"><img style= "border-width:thin; border-style: solid;background-color:#afb7c3;border-color: white;border-radius:15px;" src="'.$row2[4].'" alt="HomeWork image" width="100%" height="100%"></a>';
+							echo '</div>';
+						}
+					echo '</div> <!-- cd-timeline-img -->';
+					echo '<div class="cd-timeline-content">';
+					
+				if ($row2[6] == 0){
+					$type_of_event = "Домашно по ";
+				} else {
+					$type_of_event = "Изпит по ";
+				}
 			if ($EditMode == 0) {
-				echo '	<h3 style = "background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">'.$row2[0].'</h3>';
+				echo '	<h2>'.$type_of_event.$row2[0].'</h2>';
 			} else {
-				echo '<div class="dropdown" style = "margin-bottom:10px;margin-top:15px;">';
-				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">';
-				echo $row2[0];
+				echo '<div class="dropdown" style = "float:left;padding-right:10px;margin-top:-6px;">';
+				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
+				echo '<span class="glyphicon glyphicon-wrench"></span>';
 				echo '<span class="caret"></span>';
 				echo '</button>';
 				echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
@@ -89,11 +138,14 @@
 				echo '<li><a href="edit_hw.php?hwid='.$row2[3].'&class='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Редактирай</a></li>';
 				echo '</ul>';
 				echo '</div>';
+				echo '<h2>';
+				echo $type_of_event.$row2[0];
+				echo '</h2>';
 			}
-			if (strlen($row2[4]) > 0) {
-				echo ' <p style = "border-width:thin; border-style: solid;background-color:'.$type_color.';border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$row2[4].'" rel="lightbox"><img src="'.$row2[4].'" alt="HomeWork image" width="100%"></a></p>';
-			}
-			echo '	<p style = "border-width:thin; border-style: solid;background-color:'.$type_color.';border-color: #BEBEBE;border-radius:5px; padding: 9px;">'.$row2[1].'</p>';
+			// if (strlen($row2[4]) > 0) {
+				//echo ' <p style = "border-width:thin; border-style: solid;background-color:'.$type_color.';border-color: #BEBEBE;border-radius:5px; padding: 9px;"></p>';
+			// }
+				echo '	<p style = "font-family:Book Antiqua;font-size:18px;">'.$row2[1].'</p>';
 			
 			if ($EditMode == 1) {
 				// echo '<div style = "margin-bottom: 13px;"><div>';
@@ -117,10 +169,14 @@
 					// <button class="btn btn-default" style = "width: 100%;background-color:white;" type="submit" >Коментари - '.$row4[0].'</button>
 				// </form>';
 			
-			echo '</div>';
+			//echo '</div>';
+			echo '<span class="cd-date"><h1 style="color:black;">'.$weekday.' <small id = "smalltag" style = "color:black;font-size:15px;">'.$weekday2.$row[0].'</small></h1></span>';
+			echo '</div> <!-- cd-timeline-content -->';
+			echo '</div> <!-- cd-timeline-block -->';
 		}
-		echo '	</div>';
+		//echo '	</div>';
 	}
+	echo '</section> <!-- cd-timeline -->';
 	
 	if ($result = mysql_query("SELECT DISTINCT COUNT(otherinfo.Title) FROM otherinfo,user,uoi WHERE user.Name = '".$username."' AND uoi.UserID = user.UID AND uoi.OtherInfoID = otherinfo.UID  ORDER BY otherinfo.UID DESC")){
 	//echo 'Success';
@@ -386,5 +442,7 @@
   </div></div></div>
 </div>
 </div>
+<script src="vertical-timeline/jquery.min.js"></script>
+<script src="vertical-timeline/js/main.js"></script> <!-- Resource jQuery -->
 </body>
 </html>

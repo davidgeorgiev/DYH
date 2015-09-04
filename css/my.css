@@ -23,6 +23,7 @@ body {
 	padding-bottom: 40px;*/
   position: relative;
 }
+#loginModal {width: 30%;}
 /* For mobile devices */
 @media only screen and (max-width: 767px) {
   body {
@@ -30,7 +31,10 @@ body {
      * to improve page load speed on mobile internet connections */
     background-image: url(bckgrnd_mobile3.jpg);
 	background-repeat: repeat-y;
+	
   }
+  #loginModal {width: 100%;}
+  #index_image {margin-top:10000px;}
 	}
 .jumbotron {
 	background: rgba(243, 243, 243, 0.8);

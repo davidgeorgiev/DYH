@@ -49,7 +49,7 @@
 				<li><a href="add_info.php">Добави допълнителна информация</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="add_wp.php">Нова програма</a></li>
-				<li><a href="check_width_and_send_to_update_homeworks.php?user='.$username.'">Обнови списъка с предмети</a></li>
+				<li><a href="check_width_and_send_to.php?user='.$username.'&page=update_subject_list'.'">Обнови списъка с предмети</a></li>
 				<li role="separator" class="divider"></li>
 				</ul></li>';
 	}

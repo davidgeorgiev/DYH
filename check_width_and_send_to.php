@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$_SESSION['page'] = 'check_whidth';
+	$_SESSION['page'] = 'check_width';
 ?>
 <script type="text/javascript">
 
@@ -17,10 +17,9 @@ function getQueryVariable(variable)
        }
        return(false);
 }
-
-if (width > 0 && height >0) {
-    window.location.href = "add_hw.php?width=" + width + "&height=" + height;
-} else 
-    exit();
+	if (width > 0 && height >0) {
+		window.location.href = getQueryVariable("page")+".php?user="+getQueryVariable("user")+"&width=" + width + "&height=" + height + "&hwid=" + getQueryVariable("hwid");
+	} else;
+		exit();
 
 </script>

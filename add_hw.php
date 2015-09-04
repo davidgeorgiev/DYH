@@ -20,11 +20,11 @@
 		print "Database NOT Found ";
 		mysql_close($dbLink);
 	}*/
-	if ($_SESSION['page'] != 'check_whidth'){
-		header('Location: check_width_and_send_to_add_hw.php'.$username) and exit;
-	}
 	$password = $_SESSION['psw'];
 	$username = $_SESSION['name'];
+	if ($_SESSION['page'] != 'check_width'){
+		header('Location: check_width_and_send_to.php?user='.$username.'&page=add_hw') and exit;
+	}
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;

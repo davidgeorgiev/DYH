@@ -1,6 +1,6 @@
 ﻿<?php
 	session_start();
-	echo '<html>';
+	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
 

@@ -56,7 +56,11 @@ echo '<div id = "my_page">';
 		echo '<strong>Грешка! </strong>Няма такъв потребител!';
 		echo '</div>';
 	} else {	
-		$result = mysql_query("SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC");
+		if ($ViewAllDays == false) {
+			$result = mysql_query("SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC");
+		} else {
+			$result = mysql_query("SELECT DISTINCT homeworks.Date FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID");
+		}
 		$there_are_some_homeworks = mysql_fetch_array($result);
 		
 		if ($there_are_some_homeworks[0] <= 0) {	

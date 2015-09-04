@@ -19,10 +19,6 @@ $_SESSION['name'] = $username;
 <?php
 $_SESSION['page'] = "other";
 include "main_menu.php"; ?>
-	<div class="jumbotron">
-		<h1>Домашни</h1>
-		<p><?php echo $username?></p> 
-	</div>
 	<?php
 	if ($db_found && $EditMode == 1) {
 		$date = mysql_real_escape_string($_POST['date']);
@@ -75,10 +71,16 @@ include "main_menu.php"; ?>
   </div>
   <div class="panel-body">
     <?php
-		echo '<p>Дата: '.$new_date.'</p>'; 
-		echo '<p>Заглавие: '.$title.'</p>'; 
+		echo '<p>Дата: '.$new_date.'</p>';
+		if ($type == 0){
+			$type = "Домашно";
+		} else {
+			$type = "Изпит";
+		}
+		echo '<p>Тип: '.$type.'</p>';
+		echo '<p>Предмет: '.$title.'</p>'; 
 		echo '<p>Описание: '.$data.'</p>'; 
-		echo '<p>Трудност: '.$rank.'</p>'; 
+		echo '<p>Трудност: '.$rank.'</p>';
 		if (strlen($imgurl) > 0) {
 			echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
 		}

@@ -78,8 +78,7 @@
 
 echo 	'<li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Виж графиката </strong><span class="caret"></span></a><ul class="dropdown-menu">
-<li><a href="homeworks_time_chart.php?user='.$username.'">За предстоящи</a></li>
-<li><a href="homeworks_time_chart.php?user='.$username.'&show_all_days=true">За цялата история</a></li>
+<li><a href="homeworks_time_chart.php?user='.$username.'&weeknum='.date("W").'">За тази седмица</a></li>
 <li role="separator" class="divider"></li>
 <li><a href="#">Всички потребители (предстоящи)</a></li>
 <li><a href="#">Всички потребители (история)</a></li>

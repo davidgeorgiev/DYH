@@ -22,6 +22,9 @@
 	}*/
 	$password = $_SESSION['psw'];
 	$username = $_SESSION['name'];
+	if ($_SESSION['page'] != 'check_width'){
+		header('Location: check_width_and_send_to.php?page=edit_hw&user='.$username.'&hwid='.$_GET["hwid"]) and exit;
+	}
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;

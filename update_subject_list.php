@@ -31,8 +31,8 @@ document.form.add.disabled=true;
 
 	include "start_check.php";
 	$my_temp = $_SESSION['page'];
-	if ($my_temp != 'check_whidth') {
-		header('Location: check_width_and_send_to_update_homeworks.php?user='.$username) and exit;
+	if ($my_temp != 'check_width') {
+		header('Location: check_width_and_send_to.php?user='.$username.'&page=update_subject_list') and exit;
 	}
 	$_SESSION['page'] = "other";
 

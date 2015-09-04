@@ -21,10 +21,6 @@ $_SESSION['name'] = $username;
 <?php
 $_SESSION['page'] = "other";
 include "main_menu.php"; ?>
-	<div class="jumbotron">
-		<h1>Домашни</h1>
-		<p><?php echo $username?></p> 
-	</div>
 	<?php
 	if ($db_found && $EditMode == 1) {
 		$date = mysql_real_escape_string($_POST['date']);
@@ -32,12 +28,13 @@ include "main_menu.php"; ?>
 		$title = $_POST["title"];
 		$data = $_POST["data"];
 		$rank = $_POST["rank"];
+		$type = $_POST["type"];
 		
 		
 		if (isset($_POST["imgurl"])) {
 			$imgurl = $_POST["imgurl"];
 		}
-		$SQL = "UPDATE homeworks SET Date = '".$new_date."', Title = '".$title."', Data = '".$data."', Rank = ".$rank." WHERE homeworks.UID = ".$hwid;
+		$SQL = "UPDATE homeworks SET Date = '".$new_date."', Title = '".$title."', Data = '".$data."', Rank = ".$rank.", Type = ".$type." WHERE homeworks.UID = ".$hwid;
 		$result = mysql_query($SQL);
 		$SQL = "UPDATE imgurl SET URL = '".$imgurl."' WHERE imgurl.UID = ".$imgurlid;
 		$result = mysql_query($SQL);
@@ -61,8 +58,14 @@ include "main_menu.php"; ?>
     <?php
 		//echo '<p>IMGURLID: '.$imgurlid.'</p>'; 
 		//echo '<p>HWID: '.$hwid.'</p>'; 
-		echo '<p>Дата: '.$new_date.'</p>'; 
-		echo '<p>Заглавие: '.$title.'</p>'; 
+		echo '<p>Дата: '.$new_date.'</p>';
+		if ($type == 0){
+			$type = "Домашно";
+		} else {
+			$type = "Изпит";
+		}
+		echo '<p>Тип: '.$type.'</p>';
+		echo '<p>Предмет: '.$title.'</p>'; 
 		echo '<p>Описание: '.$data.'</p>'; 
 		echo '<p>Трудност: '.$rank.'</p>';
 		if (strlen($imgurl) > 0) {

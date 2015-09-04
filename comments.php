@@ -40,18 +40,6 @@
 
 <div class="container">
 <?php include "main_menu.php"; ?>
-<div class="jumbotron">
-<h1>Коментари</h1>
-<p><?php 
-
-if ($comment_mode == "off") {
-	echo 'Още не сте се регистрирали? Направете го от <a href = "index.php">тук</a>';
-} else {
-	echo $username;
-}
-
-?></p> 
-</div>
 
 <?php
 	echo '<div id = "my_page">';

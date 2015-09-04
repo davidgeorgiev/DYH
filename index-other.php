@@ -20,9 +20,6 @@
 		print "Database NOT Found ";
 		mysql_close($dbLink);
 	}*/
-	if ($_SESSION['page'] != 'check_whidth'){
-		header('Location: check_width_and_send_to_add_hw.php'.$username) and exit;
-	}
 	$password = $_SESSION['psw'];
 	$username = $_SESSION['name'];
 	include "CheckEditMode.php";
@@ -40,23 +37,6 @@
 }
 
 </style>
-<script type="text/javascript">
-    var datefield=document.createElement("input")
-    datefield.setAttribute("type", "date")
-    if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
-        document.write('<link href="jquery/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
-        document.write('<script src="jquery/jquery.min.js"><\/script>\n')
-        document.write('<script src="jquery/jquery-ui.min.js"><\/script>\n') 
-    }
-</script>
- 
-<script>
-if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
-    jQuery(function($){ //on document.ready
-        $('#pickdate').datepicker();
-    })
-}
-</script>
 </head>
 <body>
 <div class="container">
@@ -87,13 +67,7 @@ if ($row[0] <= 0) {
   
     <div class="form-group">
       <label for="date">Дата</label>
-	  <?php
-		if ($_GET["width"] <= 768){
-			echo '<input type="date" class="form-control" id="pickdate" name="date" size="20" />';
-		} else {
-			echo '<input type="text" id="datetimepicker4" class="form-control" class="some_class" name="date" size="20" placeholder="30/06/2015">';
-		}
-	  ?>
+      <input type="text" id="datetimepicker4" class="form-control" class="some_class" name="date" size="20" placeholder="30/06/2015">
     </div>
 	<div class="form-group">
       <label for="text">Тип</label>

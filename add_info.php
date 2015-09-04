@@ -32,10 +32,6 @@
 <?php
 $_SESSION['page'] = "other";
 include "main_menu.php"; ?>
-	<div class="jumbotron">
-		<h1>Домашни</h1>
-		<p><?php echo $username?></p> 
-	</div>
 	<div id = "my_page">
   <h2>Добави допълнителна информация</h2>
   <form role="form" <?php echo 'action='; echo "info_added.php";?> method="post">

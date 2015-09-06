@@ -133,7 +133,7 @@
 				echo '<div class="dropdown" style = "float:left;padding-right:10px;margin-top:-6px;">';
 				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
 				echo '<span class="glyphicon glyphicon-wrench"></span>';
-				echo '<span class="caret"></span>';
+				//echo '<span class="caret"></span>';
 				echo '</button>';
 				echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
 				echo '<li><a href="delete_hw.php?hwid='.$row2[3].'&class='.$username.'"><span class="glyphicon glyphicon-trash"></span> Изтрий</a></li>';
@@ -143,6 +143,47 @@
 				echo '<h2>';
 				echo $type_of_event.$row2[0];
 				echo '</h2>';
+				
+				$SQL = "SELECT (user.UID) FROM user WHERE user.Name = '".$username."'";
+				$result4 = mysql_query($SQL);
+				$user_id = mysql_fetch_array($result4);
+				$SQL = "SELECT DISTINCT COUNT(solvedhomeworks.UID) FROM solvedhomeworks,user WHERE solvedhomeworks.USERID = '".$user_id[0]."' AND solvedhomeworks.HWID = ".$row2[3];
+				$result4 = mysql_query($SQL);
+				$number_of_solved_hws = mysql_fetch_array($result4);
+				echo '<div class="dropdown" style = "width:40%;padding-right:10px;margin-top:10px;">';
+				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
+				if ($number_of_solved_hws[0] > 0){
+					echo '<span style = "color:green;" class = "glyphicon glyphicon-ok"> Решено</span></a>';
+				} else {
+					echo '<span style = "color:red;" class = "glyphicon glyphicon-remove"> Нерешено</span>';
+				}
+				//echo '<span class="caret"></span>';
+				echo '</button>';
+				
+				echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+				if ($row2[6] == 0){
+					$Label1 = "Реших това домашно";
+					$Label2 = "решили това домашно";
+				} else {
+					$Label1 = "Взех този изпит";
+					$Label2 = "взели този изпит";
+				}
+				if ($number_of_solved_hws[0] <= 0){
+					//echo $number_of_solved_hws[0];
+					$SQL = "SELECT user.Name FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
+					//echo $SQL;
+					$current_logged_in_username_result = mysql_query($SQL);
+					$current_logged_in_username = mysql_fetch_array($current_logged_in_username_result);
+					echo '<li><a style = "color:green;" href = "solve_homework.php?hwid='.$row2[3].'&user='.$current_logged_in_username[0].'"><span class="glyphicon glyphicon-ok"></span> '.$Label1.'</a></li>';
+				}
+				$SQL = "SELECT COUNT(solvedhomeworks.UID) FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$row2[3];
+				$result4 = mysql_query($SQL);
+				$number_of_solvers = mysql_fetch_array($result4);
+				echo '<li><a href="homework_solvers.php?hwid='.$row2[3].'&user='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Виж всички '.$Label2.' ('.$number_of_solvers[0].')</a></li>';
+				echo '</ul>';
+				echo '</div>';
+				
+				
 			}
 			// if (strlen($row2[4]) > 0) {
 				//echo ' <p style = "border-width:thin; border-style: solid;background-color:'.$type_color.';border-color: #BEBEBE;border-radius:5px; padding: 9px;"></p>';

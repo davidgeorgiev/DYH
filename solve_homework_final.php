@@ -42,13 +42,24 @@
 		$length = $_POST["length"];
 		$learned = $_POST["learned"];
 		$cheat = $_POST["cheat"];
-		$SQL = "INSERT INTO solvedhomeworks (USERID, HWID, TimeForSolve, Assessment, PleasureInPercents, LengthInPages, LearnedInPercents, IfCheating) VALUES (".$num_of_found_users_with_this_psw[1].", ".$_SESSION["hwid"].", ".$time_for_solving.", ".$assessment.", ".$pleasure.", ".$length.", ".$learned.", ".$cheat.")";
+		$timezone  = +2; //(GMT -5:00) EST (U.S. & Canada) 
+		$current_date_time = gmdate("Y-m-j H:i:s", time() + 3600*($timezone+date("I")));
+		$SQL = "INSERT INTO solvedhomeworks (USERID, HWID, TimeForSolve, Assessment, PleasureInPercents, LengthInPages, LearnedInPercents, IfCheating, Date) VALUES (".$num_of_found_users_with_this_psw[1].", ".$_SESSION["hwid"].", ".$time_for_solving.", ".$assessment.", ".$pleasure.", ".$length.", ".$learned.", ".$cheat.", '".$current_date_time."')";
 		//echo $SQL;
 		$result = mysql_query($SQL);
 		include "Convert_data_from_solvedhomeworks_to_sentence.php";
 		$sentence = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"])[0];
 		$percents = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"])[1];
+		$date = " ";
+		echo '<div class="list-group">';
+		echo '<a href="#" class="list-group-item active">';
+			echo '<h4 class="list-group-item-heading">Благодарим ви за информацията :)!</h4>';
+			echo '<p class="list-group-item-text">'.$current_date_time.'</p>';
+		echo '</a>';
+		echo '<a href="#" class="list-group-item unactive">';
 		include "some_external_phps/show_solved_info.php";
+		echo '</a>';
+		echo '</div>';
 	}
 ?>
 

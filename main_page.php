@@ -12,8 +12,14 @@
 
 <?php
 	include "start_check.php";
+	$pars_time_period_to_check_with_page = "";
+	if (isset($_GET["time_period"])){
+		if (strlen($_GET["time_period"]) > 0){
+			$pars_time_period_to_check_with_page = '&time_period='.$_GET["time_period"];
+		}
+	}
 	if ($_SESSION['page'] != 'check_width'){
-		header('Location: check_width_and_send_to.php?user='.$username.'&page='.$current_page_is) and exit;
+		header('Location: check_width_and_send_to.php?user='.$username.'&page='.$current_page_is.$pars_time_period_to_check_with_page) and exit;
 	}
 	$_SESSION['page'] = $current_page_is;
 ?>
@@ -27,6 +33,7 @@
 		echo 'FAIL';
 	}
 	$SQL = "SELECT DISTINCT COUNT(homeworks.Date), WEEKDAY(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID ".$the_end_of_query;
+	//echo '<div style="margin-top:100px;">'.$SQL."</div>";
 	$result3 = mysql_query($SQL);
 	$row3 = mysql_fetch_array($result3);
 	$SQL = "SELECT DISTINCT COUNT(otherinfo.Title) FROM otherinfo,user,uoi WHERE user.Name = '".$username."' AND uoi.UserID = user.UID AND uoi.OtherInfoID = otherinfo.UID  ORDER BY otherinfo.UID DESC";
@@ -40,7 +47,9 @@
 	
 	if ($there_is_some_info) {
 		echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.7)">';
-	} ?>
+	}
+	echo $button_to_render;
+	?>
 	<section id="cd-timeline" class="cd-container">
 	<?php
 	while ($row = mysql_fetch_array($result)){
@@ -150,7 +159,12 @@
 				$SQL = "SELECT DISTINCT COUNT(solvedhomeworks.UID) FROM solvedhomeworks,user WHERE solvedhomeworks.USERID = '".Get_Logged_users_id()."' AND solvedhomeworks.HWID = ".$row2[3];
 				$result4 = mysql_query($SQL);
 				$number_of_solved_hws = mysql_fetch_array($result4);
-				echo '<div class="dropdown" style = "width:40%;padding-right:10px;margin-top:10px;">';
+				if ($_GET["width"] <= 768) {
+					$mywidth = 60;
+				} else {
+					$mywidth = 40;
+				}
+				echo '<div class="dropdown" style = "width:'.$mywidth.'%;padding-right:10px;margin-top:10px;">';
 				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
 				if ($number_of_solved_hws[0] > 0){
 					echo '<span style = "color:green;" class = "glyphicon glyphicon-ok"> Решено</span></a>';

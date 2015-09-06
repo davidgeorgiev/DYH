@@ -2,6 +2,7 @@
 echo $sentence;
 $index = 0;
 $title = "";
+$style_of_prograssbar = "";
 foreach ($percents as $value) {
 	
 	switch ($index){

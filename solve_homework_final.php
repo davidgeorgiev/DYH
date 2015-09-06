@@ -35,6 +35,7 @@
 	$solvers_id = mysql_fetch_array($result);
 	
 	if ($loged == 1){
+		//echo "logged";
 		$time_for_solving = $_POST["time_for_solving"];
 		$assessment = $_POST["assessment"];
 		$pleasure = $_POST["pleasure"];
@@ -43,7 +44,7 @@
 		$cheat = $_POST["cheat"];
 		$SQL = "INSERT INTO solvedhomeworks (USERID, HWID, TimeForSolve, Assessment, PleasureInPercents, LengthInPages, LearnedInPercents, IfCheating) VALUES (".$num_of_found_users_with_this_psw[1].", ".$_SESSION["hwid"].", ".$time_for_solving.", ".$assessment.", ".$pleasure.", ".$length.", ".$learned.", ".$cheat.")";
 		//echo $SQL;
-		//$result = mysql_query($SQL);
+		$result = mysql_query($SQL);
 		include "Convert_data_from_solvedhomeworks_to_sentence.php";
 		$sentence = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"])[0];
 		$percents = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"])[1];

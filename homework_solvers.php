@@ -51,9 +51,10 @@
 		} else {
 			echo "<h2>".$solvers_names[0]."</h2>";
 			//echo $solvers_names[1];
-			$sentence = ConvertDataFromSolvedHomewokrsToSentence($solvers_names[0],$_GET["hwid"])[0];
-			$percents = ConvertDataFromSolvedHomewokrsToSentence($solvers_names[0],$_GET["hwid"])[1];
-			$date = ConvertDataFromSolvedHomewokrsToSentence($solvers_names[0],$_GET["hwid"])[2];
+			$returned_array = ConvertDataFromSolvedHomewokrsToSentence($solvers_names[0],$_GET["hwid"]);
+			$sentence = $returned_array[0];
+			$percents = $returned_array[1];
+			$date = $returned_array[2];
 			include "some_external_phps/show_solved_info.php";
 			echo "</div> <!-- cd-timeline-content -->";
 			echo "</div> <!-- cd-timeline-block -->";

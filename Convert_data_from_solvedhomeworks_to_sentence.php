@@ -13,8 +13,9 @@
 		
 		//echo $mydata["TimeForSolve"];
 		//echo "sdsdf".$mydata[0];
-		$mydatesolved = explode(" ", $mydata["Date"])[0];
-		$mytimesolved = explode(" ", $mydata["Date"])[1];
+		$dareTimeArray = explode(" ", $mydata["Date"]);
+		$mydatesolved = $dareTimeArray[0];
+		$mytimesolved = $dareTimeArray[1];
 		switch ($mydata["TimeForSolve"]) {
 			case 0: $FirstPartOfSentence = "Реших го за по-малко от един час на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;

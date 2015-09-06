@@ -56,14 +56,48 @@ if ($row[0] <= 0) {
 		<div class="row">
 			<div class="col-sm-6">
 				<label for="text">Седмица</label>
-				<select class="form-control" name="week">
-					<option value="Четна">Четна</option>
-					<option value="Нечетна">Нечетна</option>
-				</select>
+				<?php
+					$ddate = date("Y-m-d");
+					$date = new DateTime($ddate);
+					$week = $date->format("W");
+					if($week&1) {
+						echo '<select class="form-control" name="week">
+							<option value="Нечетна">Нечетна (текущата седмица)</option>
+							<option value="Четна">Четна</option>
+						</select>';
+					} else {
+						echo '<select class="form-control" name="week">
+							<option value="Четна">Четна (текущата седмица)</option>
+							<option value="Нечетна">Нечетна</option>
+						</select>';
+					}
+				?>
 			</div>
 			<div class="col-sm-6">
 				<label for="text">Ден</label>
 				<select class="form-control" name="day">
+				<?php
+					$timestamp = strtotime(date("Y-m-d"));
+					$weekday = date( "w", $timestamp);
+					switch($weekday){
+						case 1: $convertered_weekday = 'Понеделник';
+						break;
+						case 2: $convertered_weekday = 'Вторник';
+						break;
+						case 3: $convertered_weekday = 'Сряда';
+						break;
+						case 4: $convertered_weekday = 'Четвъртък';
+						break;
+						case 5: $convertered_weekday = 'Петък';
+						break;
+						case 6: $convertered_weekday = 'Събота';
+						break;
+						case 7: $convertered_weekday = 'Неделя';
+						break;
+					}
+					echo '<option value="'.$weekday.'">Днес</option>';
+					
+				?>
 					<option value="Понеделник">Понеделник</option>
 					<option value="Вторник">Вторник</option>
 					<option value="Сряда">Сряда</option>

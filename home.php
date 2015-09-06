@@ -13,9 +13,9 @@
 	$TimePeriod = $_GET["time_period"];
 	if ($TimePeriod == "today_and_tomorrow"){
 		$the_end_of_query = "AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' AND homeworks.Date <= '".$datetime."' ORDER BY homeworks.Date ASC";
-	} else if ($TimePeriod == "future_only_unsolved") {
+	} else if ($TimePeriod == "only_unsolved") {
 		$the_end_of_query = "AND homeworks.UID NOT IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE homeworks.UID = solvedhomeworks.HWID AND solvedhomeworks.USERID = ".Get_Logged_users_id().") ORDER BY homeworks.Date ASC";
-	} else if ($TimePeriod == "future_only_solved") {
+	} else if ($TimePeriod == "only_solved") {
 		$the_end_of_query = "AND homeworks.UID IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE homeworks.UID = solvedhomeworks.HWID AND solvedhomeworks.USERID = ".Get_Logged_users_id().") ORDER BY homeworks.Date ASC";
 	} else if ($TimePeriod == "with_past_unsolved") {
 		$the_end_of_query = "AND ((homeworks.Date >= '".date("Y-m-d")." 00:00:00') OR (homeworks.UID NOT IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE homeworks.UID = solvedhomeworks.HWID AND solvedhomeworks.USERID = ".Get_Logged_users_id()."))) ORDER BY homeworks.Date ASC";
@@ -31,8 +31,8 @@
 				<li><a href="home.php?user='.$_GET["user"].'&time_period=today_and_tomorrow"><span class="glyphicon glyphicon-trash"></span> Покажи само за днес и за утре</a></li>
 				<li><a href="home.php?user='.$_GET["user"].'&time_period=with_past_unsolved"><span class="glyphicon glyphicon-pencil"></span> Покажи всички предстоящи включително и пропуснатите</a></li>
 				<li><a href="home.php?user='.$_GET["user"].'"><span class="glyphicon glyphicon-pencil"></span> Покажи всички предстоящи като игнорираш пропуснатите</a></li>
-				<li><a href="home.php?user='.$_GET["user"].'&time_period=future_only_unsolved"><span class="glyphicon glyphicon-pencil"></span> Покажи само нерешените</a></li>
-				<li><a href="home.php?user='.$_GET["user"].'&time_period=future_only_solved"><span class="glyphicon glyphicon-pencil"></span> Покажи само решените</a></li>
+				<li><a href="home.php?user='.$_GET["user"].'&time_period=only_unsolved"><span class="glyphicon glyphicon-pencil"></span> Покажи само нерешените</a></li>
+				<li><a href="home.php?user='.$_GET["user"].'&time_period=only_solved"><span class="glyphicon glyphicon-pencil"></span> Покажи само решените</a></li>
 				</ul>
 				</div>';
 	} else {

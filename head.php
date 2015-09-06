@@ -12,4 +12,10 @@
   <script src="jquery.min.js"></script>
   <script src="themes/5/smooth-scroll.js"></script><script src="lightbox/js/jquery-1.11.0.min.js"></script><script src="lightbox/js/lightbox.min.js"></script><link href="lightbox/css/lightbox.css" rel="stylesheet" />
   <script src="js/bootstrap.min.js"></script></head>';
+	function Get_Logged_users_name() {
+		$SQL = "SELECT user.Name FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
+		$logged_user_name_is = mysql_query($SQL);
+		$logged_user_name_is = mysql_fetch_array($logged_user_name_is);
+		return $logged_user_name_is[0];
+	}
 ?>

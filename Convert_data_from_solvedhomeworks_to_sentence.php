@@ -1,15 +1,18 @@
 ﻿<?php
 	function ConvertDataFromSolvedHomewokrsToSentence($myusername,$myhwid){
+		$FirstPartOfSentence = $SecondPartOfSentence = $ThirdPartOfSentence = $FourthPartOfSentence = $FifthPartOfSentence = $SixthPartOfSentence = "";
 		$SQL = "SELECT user.UID FROM user WHERE user.Name = '".$myusername."'";
 		$myuseridresult = mysql_query($SQL);
 		$myuserid = mysql_fetch_array($myuseridresult);
+		//echo $myuserid[0];
 		$SQL = "SELECT solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$myhwid." AND solvedhomeworks.USERID = ".$myuserid[0];
+		//echo $SQL;
 		$mydataresult = mysql_query($SQL);
 		$mydata = mysql_fetch_array($mydataresult);
 		//print_r($mydata);
 		
 		//echo $mydata["TimeForSolve"];
-		
+		//echo "sdsdf".$mydata[0];
 		switch ($mydata["TimeForSolve"]) {
 			case 0: $FirstPartOfSentence = "Реших го за по-малко от един час, ";
 			break;

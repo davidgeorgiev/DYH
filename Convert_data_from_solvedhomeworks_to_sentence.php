@@ -5,7 +5,7 @@
 		$myuseridresult = mysql_query($SQL);
 		$myuserid = mysql_fetch_array($myuseridresult);
 		//echo $myuserid[0];
-		$SQL = "SELECT solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$myhwid." AND solvedhomeworks.USERID = ".$myuserid[0];
+		$SQL = "SELECT solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating, solvedhomeworks.Date FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$myhwid." AND solvedhomeworks.USERID = ".$myuserid[0];
 		//echo $SQL;
 		$mydataresult = mysql_query($SQL);
 		$mydata = mysql_fetch_array($mydataresult);
@@ -13,24 +13,26 @@
 		
 		//echo $mydata["TimeForSolve"];
 		//echo "sdsdf".$mydata[0];
+		$mydatesolved = explode(" ", $mydata["Date"])[0];
+		$mytimesolved = explode(" ", $mydata["Date"])[1];
 		switch ($mydata["TimeForSolve"]) {
-			case 0: $FirstPartOfSentence = "Реших го за по-малко от един час, ";
+			case 0: $FirstPartOfSentence = "Реших го за по-малко от един час на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;
-			case 1: $FirstPartOfSentence = "Реших го за един час, ";
+			case 1: $FirstPartOfSentence = "Реших го за един час на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;
-			case 2: $FirstPartOfSentence = "Реших го за около два часа, ";
+			case 2: $FirstPartOfSentence = "Реших го за около два часа на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;
-			case 5: $FirstPartOfSentence = "Трудих се неуморно повече от два часа, ";
+			case 5: $FirstPartOfSentence = "Трудих се неуморно повече от два часа на ".$mydatesolved." и в крайна сметка успях да го завърша в ".$mytimesolved." часа, ";
 			break;
-			case 12: $FirstPartOfSentence = "Мъчих се цял ден, или нощ беше не си спомням, да го решавам, направо се скапах от умора, ";
+			case 12: $FirstPartOfSentence = "Мъчих се цял ден, или нощ беше не си спомням, да го решавам, направо се скапах от умора, но все пак успях да го завърша в ".$mytimesolved." часа, ";
 			break;
-			case 44: $FirstPartOfSentence = "Решавах го в продължение на няколко дни, направо се скапах, ";
+			case 44: $FirstPartOfSentence = "Решавах го в продължение на няколко дни, направо се скапах, но все пак успях да го завърша в ".$mytimesolved." часа, ";
 			break;
-			case 84: $FirstPartOfSentence = "Решавах го цяла седмица, направо се скапах, ";
+			case 84: $FirstPartOfSentence = "Решавах го цяла седмица, направо се скапах, но все пак успях да го завърша в ".$mytimesolved." часа, ";
 			break;
-			case 252: $FirstPartOfSentence = "Мъчих се цял месец да го решавам, направо се скапах, ";
+			case 252: $FirstPartOfSentence = "Мъчих се цял месец да го решавам, направо се скапах, но все пак успях да го завърша в ".$mytimesolved." часа, ";
 			break;
-			case 400: $FirstPartOfSentence = "Мъчих се няколко месеца да го решавам, направо се скапах, ";
+			case 400: $FirstPartOfSentence = "Мъчих се няколко месеца да го решавам, направо се скапах, но все пак успях да го завърша в ".$mytimesolved." часа, ";
 			break;
 		}
 		$SecondPartOfSentence = "като трябва да се има предвид, че ";
@@ -144,6 +146,6 @@
 			
 			$array_for_return[$MyCounter] = $value/$maxNumber;
 		}
-		return array("<p>".$FirstPartOfSentence.$SecondPartOfSentence.$ThirdPartOfSentence.$FourthPartOfSentence.$FifthPartOfSentence.$SixthPartOfSentence."</p>", $array_for_return);
+		return array($FirstPartOfSentence.$SecondPartOfSentence.$ThirdPartOfSentence.$FourthPartOfSentence.$FifthPartOfSentence.$SixthPartOfSentence, $array_for_return,$mydata["Date"]);
 	}
 ?>

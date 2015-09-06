@@ -48,8 +48,9 @@
 		//echo $SQL;
 		$result = mysql_query($SQL);
 		include "Convert_data_from_solvedhomeworks_to_sentence.php";
-		$sentence = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"])[0];
-		$percents = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"])[1];
+		$returned_array = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"]);
+		$sentence = $returned_array[0];
+		$percents = $returned_array[1];
 		$date = " ";
 		echo '<div class="list-group">';
 		echo '<a href="#" class="list-group-item active">';

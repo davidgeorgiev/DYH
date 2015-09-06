@@ -143,11 +143,11 @@
 				echo '<h2>';
 				echo $type_of_event.$row2[0];
 				echo '</h2>';
-				
-				$SQL = "SELECT (user.UID) FROM user WHERE user.Name = '".$username."'";
+			}
+			$SQL = "SELECT (user.UID) FROM user WHERE user.Name = '".$username."'";
 				$result4 = mysql_query($SQL);
 				$user_id = mysql_fetch_array($result4);
-				$SQL = "SELECT DISTINCT COUNT(solvedhomeworks.UID) FROM solvedhomeworks,user WHERE solvedhomeworks.USERID = '".$user_id[0]."' AND solvedhomeworks.HWID = ".$row2[3];
+				$SQL = "SELECT DISTINCT COUNT(solvedhomeworks.UID) FROM solvedhomeworks,user WHERE solvedhomeworks.USERID = '".Get_Logged_users_id()."' AND solvedhomeworks.HWID = ".$row2[3];
 				$result4 = mysql_query($SQL);
 				$number_of_solved_hws = mysql_fetch_array($result4);
 				echo '<div class="dropdown" style = "width:40%;padding-right:10px;margin-top:10px;">';
@@ -179,12 +179,12 @@
 				$SQL = "SELECT COUNT(solvedhomeworks.UID) FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$row2[3];
 				$result4 = mysql_query($SQL);
 				$number_of_solvers = mysql_fetch_array($result4);
-				echo '<li><a href="homework_solvers.php?hwid='.$row2[3].'&user='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Виж всички '.$Label2.' ('.$number_of_solvers[0].')</a></li>';
+				if ($number_of_solvers[0] > 0){
+					echo '<li><a href="homework_solvers.php?hwid='.$row2[3].'&user='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Виж всички '.$Label2.' ('.$number_of_solvers[0].')</a></li>';
+				}
 				echo '</ul>';
+				//echo $username;
 				echo '</div>';
-				
-				
-			}
 			// if (strlen($row2[4]) > 0) {
 				//echo ' <p style = "border-width:thin; border-style: solid;background-color:'.$type_color.';border-color: #BEBEBE;border-radius:5px; padding: 9px;"></p>';
 			// }

@@ -19,13 +19,23 @@
 
 
 <?php
-	$SQL = "SELECT user.Name, COUNT(solvedhomeworks.UID) FROM user, solvedhomeworks WHERE solvedhomeworks.USERID = user.UID AND solvedhomeworks.HWID = ".$_GET["hwid"];
+	$SQL = "SELECT COUNT(solvedhomeworks.UID) FROM user, solvedhomeworks WHERE solvedhomeworks.USERID = user.UID AND solvedhomeworks.HWID = ".$_GET["hwid"];
 	$result = mysql_query($SQL);
+	$solvers_counter = mysql_fetch_array($result);
+	$SQL = "SELECT user.Name FROM user, solvedhomeworks WHERE solvedhomeworks.USERID = user.UID AND solvedhomeworks.HWID = ".$_GET["hwid"];
+	//echo $SQL;
+	//print_r($solvers_counter);
+	$result = mysql_query($SQL);
+	include "Convert_data_from_solvedhomeworks_to_sentence.php";
 	while ($solvers_names = mysql_fetch_array($result)){
-		if ($solvers_names[1] <= 0){
+		//print_r($solvers_names);
+		if ($solvers_counter[0] <= 0){
 			echo 'Никой не е решил още това домашно :(';
 		} else {
 			echo $solvers_names[0];
+			$sentence = ConvertDataFromSolvedHomewokrsToSentence($solvers_names[0],$_GET["hwid"])[0];
+			$percents = ConvertDataFromSolvedHomewokrsToSentence($solvers_names[0],$_GET["hwid"])[1];
+			include "some_external_phps/show_solved_info.php";
 		}
 	}
 ?>

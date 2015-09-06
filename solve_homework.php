@@ -108,7 +108,7 @@ $SQL = "SELECT COUNT(user.UID) FROM user WHERE user.Password = '".$_SESSION["psw
 //echo $SQL;
 $result = mysql_query($SQL);
 $num_of_found_users_with_this_psw = mysql_fetch_array($result);
-if ($num_of_found_users_with_this_psw > 0){
+if ($num_of_found_users_with_this_psw[0] > 0){
 	$loged = 1;
 }
 if ($loged == 1) {

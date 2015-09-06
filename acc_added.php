@@ -16,7 +16,7 @@ include "config.php";
 			$name = $_POST["name"];
 			$psw = $_POST["psw"];
 			$_SESSION['psw'] = $psw;
-			$_SESSION['name'] = $username;
+			//$_SESSION['name'] = $username;
 	$EmptyLine = 1;
 	if ((strlen($_POST["name"]) > 0) && ((strlen($_POST["psw"]) > 0))) {
 		$EmptyLine = 0;

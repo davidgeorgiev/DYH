@@ -1,8 +1,13 @@
 ﻿<?php
-echo $sentence;
 $index = 0;
 $title = "";
 $style_of_prograssbar = "";
+echo '<div>';
+echo '<div class="dropdown" style = "width:40%;padding-right:10px;margin-top:10px;">';
+echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
+echo 'Графики';
+echo '</button>';
+echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style = "width:280%;">';
 foreach ($percents as $value) {
 	
 	switch ($index){
@@ -33,12 +38,19 @@ foreach ($percents as $value) {
 	} else {
 		$visual_parameter = $value;
 	}
-	echo '<div class="progress">
+	echo '<div style = "float:left;margin:10px;border-radius:10px;border:solid #c8ccc1;padding-left:15px;padding-right:15px;"><p style = "font-size:16px;text-align:center;color:gray;">'.$title.'</p><div class="progress" style = "text-align:center;">
+		
 		<div class="'.$style_of_prograssbar.'" role="progressbar" aria-valuenow="'.$visual_parameter.'"aria-valuemin="0" aria-valuemax="100" style="width:'.$visual_parameter.'%">
-			'.number_format($value,0).'% '.$title.'
+			<span style = "color:black;">'.number_format($value,0).'%</span>
 		</div>
-	</div>';
+		
+	</div></div>';
 	$index++;
 }
+echo '</ul>';
+echo '</div>';
+echo '<p style = "font-size:16px;">'.$sentence.'</p>';
+echo '<span class="cd-date" style = "font-size:16px;">'.$date.'</span>';
+echo "</div>";
 unset($value);
 ?>

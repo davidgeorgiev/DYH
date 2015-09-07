@@ -11,7 +11,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="home.php">DYH</a>
+			<a class="navbar-brand" href="home.php"><span class = "glyphicon glyphicon-education"></span> DYH</a>
 	</div>
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -24,12 +24,12 @@
 		$number_of_users = mysql_fetch_array($result);
 		
 		if ($number_of_users[0] <= 0) {
-			echo '<li class="active"><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
+			echo '<li><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
 		}
 		if ($page == "home") {
-			echo '<li class="active"><a href="history.php?user='.$username.'">История <span class="sr-only">(current)</span></a></li>';
+			echo '<li><a href="history.php?user='.$username.'"><span class = "glyphicon glyphicon-time"></span> Отиди на историята<span class="sr-only">(current)</span></a></li>';
 		} else if (($page == "history") || ($page == "other")){
-			echo '<li class="active"><a href="home.php?user='.$username.'">Начало <span class="sr-only">(current)</span></a></li>';
+			echo '<li><a href="home.php?user='.$username.'"><span class = "glyphicon glyphicon-home"></span> Върни ме на началото<span class="sr-only">(current)</span></a></li>';
 		}
 	} else {
 			echo '<li><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
@@ -44,7 +44,7 @@
 	//include "CheckEditMode.php";
 	if ($EditMode == 1){
 		echo 	'<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Опции <span class="caret"></span></a><ul class="dropdown-menu">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class = "glyphicon glyphicon-align-justify"></span> Опции </a><ul class="dropdown-menu">
 				<li><a href="add_hw.php">Добави ново домашно</a></li>
 				<li><a href="add_info.php">Добави допълнителна информация</a></li>
 				<li role="separator" class="divider"></li>
@@ -54,8 +54,8 @@
 				</ul></li>';
 	}
 ?>
-
-</ul>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class = "glyphicon glyphicon-search"></span> Търсене</a><ul class="dropdown-menu">
 <form class="navbar-form navbar-left" <?php echo 'action='; echo "redirect_to_search_hw.php?user=".$username;?> method="post">
 <div class="form-group">
 <input type="text" name="what_to_search" class="form-control" placeholder="Търси домашни">
@@ -68,6 +68,8 @@
 </div>
 <button type="submit" class="btn btn-default">Давай</button>
 </form>
+</ul>
+</ul></li>
 <ul class="nav navbar-nav navbar-right">
 <?php
 	if (strlen($username > 0)) {
@@ -77,8 +79,8 @@
 	}
 
 echo 	'<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Виж графиката </strong><span class="caret"></span></a><ul class="dropdown-menu">
-<li><a href="homeworks_time_chart.php?user='.$username.'&weeknum='.date("W").'">За тази седмица</a></li>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong><span class = "glyphicon glyphicon-calendar"></span> Графики</strong></a><ul class="dropdown-menu">
+<li><a href="homeworks_time_chart.php?user='.$username.'&weeknum='.date("W").'">Задачи за тази седмица</a></li>
 <li role="separator" class="divider"></li>
 <li><a href="#">Всички потребители (предстоящи)</a></li>
 <li><a href="#">Всички потребители (история)</a></li>
@@ -87,7 +89,7 @@ echo 	'<li class="dropdown">
 
 ?>
 <li><a href="#">Страницата на <?php echo $username?></a></li>
-<li><a href="index.php"><strong>Изход</strong></a></li>
+<li><a href="index.php"><strong><span class = "glyphicon glyphicon-log-out"></span> Изход</strong></a></li>
 </ul>
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->

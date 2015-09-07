@@ -5,7 +5,7 @@
 		$myuseridresult = mysql_query($SQL);
 		$myuserid = mysql_fetch_array($myuseridresult);
 		//echo $myuserid[0];
-		$SQL = "SELECT solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating, solvedhomeworks.Date FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$myhwid." AND solvedhomeworks.USERID = ".$myuserid[0];
+		$SQL = "SELECT solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating, solvedhomeworks.Date, solvedhomeworks.SomePersonalText FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$myhwid." AND solvedhomeworks.USERID = ".$myuserid[0];
 		//echo $SQL;
 		$mydataresult = mysql_query($SQL);
 		$mydata = mysql_fetch_array($mydataresult);
@@ -191,6 +191,6 @@
 			
 			$array_for_return[$MyCounter] = $value/$maxNumber;
 		}
-		return array($FirstPartOfSentence.$SecondPartOfSentence.$ThirdPartOfSentence.$FourthPartOfSentence.$FifthPartOfSentence.$SixthPartOfSentence, $array_for_return,$mydata["Date"]);
+		return array($FirstPartOfSentence.$SecondPartOfSentence.$ThirdPartOfSentence.$FourthPartOfSentence.$FifthPartOfSentence.$SixthPartOfSentence, $array_for_return,$mydata["Date"], $array_for_return, $mydata["SomePersonalText"]);
 	}
 ?>

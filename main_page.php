@@ -47,6 +47,9 @@
 		$there_is_some_info = 0;
 	}
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.7)">';
+	
+	include "some_external_phps/show_today_and_tomorrow_div.php";
+	
 	if (!$there_is_some_info) {
 		echo '<div class="alert alert-success">';
 		echo 'За съжаление желаният списък е <strong>празен!</strong>';

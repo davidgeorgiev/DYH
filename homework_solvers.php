@@ -29,16 +29,12 @@
 
 
 <?php
-	$SQL = "SELECT COUNT(solvedhomeworks.UID) FROM user, solvedhomeworks WHERE solvedhomeworks.USERID = user.UID AND solvedhomeworks.HWID = ".$_GET["hwid"];
-	$result = mysql_query($SQL);
-	$solvers_counter = mysql_fetch_array($result);
-	$SQL = "SELECT user.Name, solvedhomeworks.Date FROM user, solvedhomeworks WHERE solvedhomeworks.USERID = user.UID AND solvedhomeworks.HWID = ".$_GET["hwid"]." ORDER BY Date DESC";
-	//echo $SQL;
-	//print_r($solvers_counter);
-	$result = mysql_query($SQL);
-	include "Convert_data_from_solvedhomeworks_to_sentence.php";
+	include "some_external_phps/return_hw_info_by_id.php";
+	$MyHomeworkInfoArray = returnHomeworkInfoByID($_GET["hwid"]);
 	echo '<section id="cd-timeline" class="cd-container">';
-	while ($solvers_names = mysql_fetch_array($result)){
+	for ($count = 0; $count < sizeof($MyHomeworkInfoArray["Solvings"]); $count++){
+		$currentUserID = $MyHomeworkInfoArray["SolversIDs"][$count];
+		$myCurrentArray = $MyHomeworkInfoArray["Solvings"];
 		echo '<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-picture">
 				<img src="vertical-timeline/img/cd-icon-picture.svg" alt="Picture">
@@ -46,16 +42,15 @@
 
 			<div class="cd-timeline-content">';
 		//print_r($solvers_names);
-		if ($solvers_counter[0] <= 0){
+		if ($MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"] <= 0){
 			echo 'Никой не е решил още това домашно :(';
 		} else {
-			echo "<h2>".$solvers_names[0]."</h2>";
+			echo "<h2>".$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"]."</h2>";
 			//echo $solvers_names[1];
-			$returned_array = ConvertDataFromSolvedHomewokrsToSentence($solvers_names[0],$_GET["hwid"]);
-			$sentence = $returned_array[0];
-			$percents = $returned_array[1];
-			$date = $returned_array[2];
-			$SomePersonalText = $returned_array[4];
+			$sentence = $MyHomeworkInfoArray["SolveSentences"][$currentUserID];
+			$percents = $MyHomeworkInfoArray["SolvingsPercents"][$currentUserID];
+			$date = $myCurrentArray[$currentUserID]["Date"];
+			$SomePersonalText = $myCurrentArray[$currentUserID]["SomePersonalText"];
 			include "some_external_phps/show_solved_info.php";
 			echo "</div> <!-- cd-timeline-content -->";
 			echo "</div> <!-- cd-timeline-block -->";

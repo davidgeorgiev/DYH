@@ -33,6 +33,9 @@ foreach ($percents as $value) {
 	} else if ($value > 75) {
 		$style_of_prograssbar = "progress-bar progress-bar-success";
 	}
+	if (($title == "Оценка") && ($value < 0)){
+		$value = 0;
+	}
 	if ($value > 100) {
 		$visual_parameter = 100;
 	} else {

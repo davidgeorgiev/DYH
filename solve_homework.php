@@ -124,6 +124,10 @@
 		<option value="5">Не съм, това не е в мой стил</option>
 	</select>
 </div>
+<div class="form-group">
+      <label for="text">Допълнителни впечатления</label>
+      <textarea type="text" cols="50" rows="7" class="form-control" name="SomePersonalText" placeholder="Напишете нещо тук"></textarea>
+    </div>
 <?php
 $loged = 0;
 $SQL = "SELECT COUNT(user.UID) FROM user WHERE user.Password = '".$_SESSION["psw"]."'";

@@ -55,6 +55,7 @@
 			$sentence = $returned_array[0];
 			$percents = $returned_array[1];
 			$date = $returned_array[2];
+			$SomePersonalText = $returned_array[4];
 			include "some_external_phps/show_solved_info.php";
 			echo "</div> <!-- cd-timeline-content -->";
 			echo "</div> <!-- cd-timeline-block -->";

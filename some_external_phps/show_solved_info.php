@@ -53,6 +53,7 @@ foreach ($percents as $value) {
 echo '</ul>';
 echo '</div>';
 echo '<p style = "font-size:16px;">'.$sentence.'</p>';
+echo '<p style = "font-size:16px;">'.$SomePersonalText.'</p>';
 echo '<span class="cd-date" style = "font-size:16px;">'.$date.'</span>';
 echo "</div>";
 unset($value);

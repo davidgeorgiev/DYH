@@ -27,7 +27,7 @@
 <div class="form-group">
   <label for="text">За колко време решихте домашното</label>
 	<select class="form-control" name="time_for_solving">
-		<option value="8.33">Пет минути</option>
+		<option value="0.83">Пет минути</option>
 		<option value="0.16">Десет минути</option>
 		<option value="0.33">Двайсет минути</option>
 		<option value="0.5">Половин час</option>

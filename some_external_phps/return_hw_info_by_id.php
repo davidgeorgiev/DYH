@@ -1,23 +1,10 @@
 ﻿<?php
-	function ConvertDataFromSolvedHomewokrsToSentence($myusername,$myhwid){
-		$FirstPartOfSentence = $SecondPartOfSentence = $ThirdPartOfSentence = $FourthPartOfSentence = $FifthPartOfSentence = $SixthPartOfSentence = "";
-		$SQL = "SELECT user.UID FROM user WHERE user.Name = '".$myusername."'";
-		$myuseridresult = mysql_query($SQL);
-		$myuserid = mysql_fetch_array($myuseridresult);
-		//echo $myuserid[0];
-		$SQL = "SELECT solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating, solvedhomeworks.Date, solvedhomeworks.SomePersonalText FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$myhwid." AND solvedhomeworks.USERID = ".$myuserid[0];
-		//echo $SQL;
-		$mydataresult = mysql_query($SQL);
-		$mydata = mysql_fetch_array($mydataresult);
-		//print_r($mydata);
-		
-		//echo $mydata["TimeForSolve"];
-		//echo "sdsdf".$mydata[0];
-		$dareTimeArray = explode(" ", $mydata["Date"]);
-		$mydatesolved = $dareTimeArray[0];
-		$mytimesolved = $dareTimeArray[1];
-		switch ($mydata["TimeForSolve"]) {
-			case 8.33: $FirstPartOfSentence = "Реших го за пет минути на ".$mydatesolved." в ".$mytimesolved." часа, ";
+	function ConvertDataFromSolvedHomewokrsToSentence($ArraySolvings){
+		$dateTimeArray = explode(" ", $ArraySolvings["Date"]);
+		$mydatesolved = $dateTimeArray[0];
+		$mytimesolved = $dateTimeArray[1];
+		switch ($ArraySolvings["TimeForSolve"]) {
+			case 0.83: $FirstPartOfSentence = "Реших го за пет минути на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;
 			case 0.16: $FirstPartOfSentence = "Реших го за десет минути на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;
@@ -73,7 +60,7 @@
 			break;
 		}
 		$SecondPartOfSentence = "като трябва да се има предвид, че ";
-		switch ($mydata["PleasureInPercents"]) {
+		switch ($ArraySolvings["PleasureInPercents"]) {
 			case 10: $SecondPartOfSentence = $SecondPartOfSentence."даже не си направих труда да го пиша като хората.";
 			break;
 			case 20: $SecondPartOfSentence = $SecondPartOfSentence."беше много гадно и даже не го реших цялото.";
@@ -96,7 +83,7 @@
 			break;
 		}
 		$ThirdPartOfSentence = " Написах ";
-		switch ($mydata["LengthInPages"]) {
+		switch ($ArraySolvings["LengthInPages"]) {
 			case 0: $ThirdPartOfSentence = $ThirdPartOfSentence."по-малко от една страница";
 			break;
 			case 1: $ThirdPartOfSentence = $ThirdPartOfSentence."една страница";
@@ -125,7 +112,7 @@
 			break;
 		}
 		$ThirdPartOfSentence = $ThirdPartOfSentence." голям формат";
-		switch ($mydata["LearnedInPercents"]) {
+		switch ($ArraySolvings["LearnedInPercents"]) {
 			case 10: $FourthPartOfSentence = ", но нищичко не научих, само си изгубих времето. ";
 			break;
 			case 20: $FourthPartOfSentence = ", но в главата ми е пълна каша. ";
@@ -142,7 +129,7 @@
 			break;
 			
 		}
-		switch ($mydata["Assessment"]) {
+		switch ($ArraySolvings["Assessment"]) {
 			case 1: $FifthPartOfSentence = "Нямаше оценка. ";
 			break;
 			case 2: $FifthPartOfSentence = "Писаха ми двойка, но другият път ще си я поправя на всяка цена :). ";
@@ -157,7 +144,7 @@
 			break;
 			
 		}
-		switch ($mydata["IfCheating"]) {
+		switch ($ArraySolvings["IfCheating"]) {
 			case 1: $SixthPartOfSentence = "Все пак искам да си призная, че преписвах толкова много, че направо цялото е преписано.";
 			break;
 			case 2: $SixthPartOfSentence = "Все пак искам да си призная, че преписвах от части.";
@@ -168,29 +155,108 @@
 			break;
 			case 5: $SixthPartOfSentence = "Написах го без никакво преписване от никъде.";
 			break;
-			
 		}
-		$array_for_return = array();
-		for ($MyCounter = 0; $MyCounter <= 5; $MyCounter++){
-			$value = $mydata[$MyCounter]*100;
-			switch ($MyCounter){
-				case 0: $maxNumber = 3.75;
-				break;
-				case 1: $maxNumber = 4; $value-=200;
-				break;
-				case 2: $maxNumber = 100;
-				break;
-				case 3: $maxNumber = 4.5;
-				break;
-				case 4: $maxNumber = 100;
-				break;
-				case 5: $maxNumber = 5;
-				break;
-			}
-			//echo "<p>".$value."/".$maxNumber."</p>";
-			
-			$array_for_return[$MyCounter] = $value/$maxNumber;
-		}
-		return array($FirstPartOfSentence.$SecondPartOfSentence.$ThirdPartOfSentence.$FourthPartOfSentence.$FifthPartOfSentence.$SixthPartOfSentence, $array_for_return,$mydata["Date"], $array_for_return, $mydata["SomePersonalText"]);
+		return $FirstPartOfSentence.$SecondPartOfSentence.$ThirdPartOfSentence.$FourthPartOfSentence.$FifthPartOfSentence.$SixthPartOfSentence;
 	}
+
+	function returnHomeworkInfoByID($homeworkId) {
+		$PosterUserNameSQL = "SELECT user.Name FROM user, uh WHERE uh.HWID = ".$homeworkId;
+		$PosterUserNameResult = mysql_query($PosterUserNameSQL);
+		$MyPosterUserName = mysql_fetch_array($PosterUserNameResult);
+		
+		$HWSQL = "SELECT homeworks.Title, homeworks.Data, homeworks.Type, homeworks.Date, homeworks.Rank, WEEKDAY(homeworks.Date) FROM homeworks WHERE homeworks.UID = ".$homeworkId;
+		$hwresult = mysql_query($HWSQL);
+		$myhwdata = mysql_fetch_array($hwresult);
+		
+		$URLSQL = "SELECT imgurl.URL FROM imgurl, hwimg WHERE hwimg.HWID = ".$homeworkId." AND hwimg.IMGURLID = imgurl.UID";
+		$imgurlresult = mysql_query($URLSQL);
+		$myhwimgurl = mysql_fetch_array($imgurlresult);
+		
+		$NumOfCommentsSQL = "SELECT COUNT(usercommenthomework.UID) FROM usercommenthomework WHERE usercommenthomework.HWID = ".$homeworkId;
+		$NumOfCommentsResult = mysql_query($NumOfCommentsSQL);
+		$MyNumOfComments = mysql_fetch_array($NumOfCommentsResult);
+		
+		$COMMENTSQL = "SELECT user.Name, comments.Date, comments.Data FROM user, comments, usercommenthomework WHERE usercommenthomework.HWID = ".$homeworkId." AND user.UID = usercommenthomework.USERID AND usercommenthomework.COMMENTID = comments.UID";
+		$commentresult = mysql_query($COMMENTSQL);
+		//$MyComments = mysql_fetch_array($commentresult);
+		
+		$COUNTSOLVERSSQL = "SELECT COUNT(solvedhomeworks.UID) FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$homeworkId;
+		$NumOfSolversResult = mysql_query($COUNTSOLVERSSQL);
+		$MyNumOfSolvers = mysql_fetch_array($NumOfSolversResult);
+		
+		$SOLVINGSSQL = "SELECT user.Name, solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating, solvedhomeworks.Date, solvedhomeworks.SomePersonalText, user.UID FROM solvedhomeworks, user WHERE solvedhomeworks.HWID = ".$homeworkId." AND user.UID = solvedhomeworks.USERID";
+		//echo $SOLVINGSSQL;
+		$SolvingsResult = mysql_query($SOLVINGSSQL);
+		//$MySolvings = mysql_fetch_array($SolvingsResult);
+		
+		$ArrayToReturn = array();
+		
+		$HomeworkInfoArray = array();
+		
+		$SolvingArray = array();
+		$SolvingsArray = array();
+		$SolvingPercentsArray = array();
+		$SolvingsPercentsArray = array();
+		$SolversIDsArray = array();
+		
+		$CommentArray = array();
+		$CommentsArray = array();
+		
+		$counter = 0;
+		while ($MyComments = mysql_fetch_array($commentresult)) {
+			$CommentArray["Name"] = $MyComments[0];
+			$CommentArray["Date"] = $MyComments[1];
+			$CommentArray["Data"] = $MyComments[2];
+			
+			$CommentsArray[$counter] = $CommentArray;
+			$counter++;
+		}
+		
+		while ($MySolvings = mysql_fetch_array($SolvingsResult)) {
+			$MyUserUID = 							$MySolvings[9];
+			array_push($SolversIDsArray, $MyUserUID);
+			$SolvingArray["Name"] = 				$MySolvings[0];
+			$SolvingArray["TimeForSolve"] = 		$MySolvings[1];
+			$SolvingArray["Assessment"] = 			$MySolvings[2];
+			$SolvingArray["PleasureInPercents"] = 	$MySolvings[3];
+			$SolvingArray["LengthInPages"] = 		$MySolvings[4];
+			$SolvingArray["LearnedInPercents"] = 	$MySolvings[5];
+			$SolvingArray["IfCheating"] = 			$MySolvings[6];
+			$SolvingArray["Date"] = 				$MySolvings[7];
+			$SolvingArray["SomePersonalText"] = 	$MySolvings[8];
+			
+			$SolvingPercentsArray["TimeForSolve"] = (($SolvingArray["TimeForSolve"]*100)/3.75);
+			$SolvingPercentsArray["Assessment"] = ((($SolvingArray["Assessment"]-2)*100)/4);
+			$SolvingPercentsArray["PleasureInPercents"] = $SolvingArray["PleasureInPercents"];
+			$SolvingPercentsArray["LengthInPages"] = (($SolvingArray["LengthInPages"]*100)/4.5);
+			$SolvingPercentsArray["LearnedInPercents"] = $SolvingArray["LearnedInPercents"];
+			$SolvingPercentsArray["IfCheating"] = (($SolvingArray["IfCheating"]*100)/5);
+			
+			$SolvingsPercentsArray[$MyUserUID] = $SolvingPercentsArray;
+			$SolvingsArray[$MyUserUID] = $SolvingArray;
+		}
+		
+		$HomeworkInfoArray["Name"] = $MyPosterUserName["Name"];
+		$HomeworkInfoArray["Title"] = $myhwdata["Title"];
+		$HomeworkInfoArray["Data"] = $myhwdata["Data"];
+		$HomeworkInfoArray["Date"] = $myhwdata["Date"];
+		$HomeworkInfoArray["Type"] = $myhwdata["Type"];
+		$HomeworkInfoArray["Rank"] = $myhwdata["Rank"];
+		$HomeworkInfoArray["WEEKDAY"] = $myhwdata[5];
+		$HomeworkInfoArray["IMGURL"] = $myhwimgurl[0];
+		$HomeworkInfoArray["NumOfComments"] = $MyNumOfComments[0];
+		$HomeworkInfoArray["NumOfSolvers"] = $MyNumOfSolvers[0];
+		
+		$ArrayToReturn["MainInfo"] = $HomeworkInfoArray;
+		$ArrayToReturn["Comments"] = $CommentsArray;
+		$ArrayToReturn["Solvings"] = $SolvingsArray;
+		$ArrayToReturn["SolversIDs"] = $SolversIDsArray;
+		$ArrayToReturn["SolvingsPercents"] = $SolvingsPercentsArray;
+		
+		for ($counter = 0; $counter < sizeof($ArrayToReturn["Solvings"]); $counter++){
+			$ArrayToReturn["SolveSentences"][$ArrayToReturn["SolversIDs"][$counter]] = ConvertDataFromSolvedHomewokrsToSentence($ArrayToReturn["Solvings"][$ArrayToReturn["SolversIDs"][$counter]]);
+		}
+		return $ArrayToReturn;
+	}
+
 ?>

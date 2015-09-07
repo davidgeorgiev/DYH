@@ -48,11 +48,11 @@
 		$SQL = "INSERT INTO solvedhomeworks (USERID, HWID, TimeForSolve, Assessment, PleasureInPercents, LengthInPages, LearnedInPercents, IfCheating, Date, SomePersonalText) VALUES (".$num_of_found_users_with_this_psw[1].", ".$_SESSION["hwid"].", ".$time_for_solving.", ".$assessment.", ".$pleasure.", ".$length.", ".$learned.", ".$cheat.", '".$current_date_time."', '".$SomePersonalText."')";
 		//echo $SQL;
 		$result = mysql_query($SQL);
-		include "Convert_data_from_solvedhomeworks_to_sentence.php";
-		$returned_array = ConvertDataFromSolvedHomewokrsToSentence(Get_Logged_users_name(),$_SESSION["hwid"]);
-		$sentence = $returned_array[0];
-		$percents = $returned_array[1];
-		$SomePersonalText = $returned_array[4];
+		include "some_external_phps/return_hw_info_by_id.php";
+		$MyHomeworkInfoArray = returnHomeworkInfoByID($_SESSION["hwid"]);
+		$sentence = $MyHomeworkInfoArray["SolveSentences"][$solvers_id[0]];
+		$percents = $MyHomeworkInfoArray["SolvingsPercents"][$solvers_id[0]];
+		$SomePersonalText = $MyHomeworkInfoArray["Solvings"][$solvers_id[0]]["SomePersonalText"];
 		$date = " ";
 		echo '<div class="list-group">';
 		echo '<a href="#" class="list-group-item active">';

@@ -46,9 +46,11 @@
 	} else {
 		$there_is_some_info = 0;
 	}
-	
-	if ($there_is_some_info) {
-		echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.7)">';
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.7)">';
+	if (!$there_is_some_info) {
+		echo '<div class="alert alert-success">';
+		echo 'За съжаление желаният списък е <strong>празен!</strong>';
+		echo '</div>';
 	}
 	echo $button_to_render;
 	?>
@@ -167,11 +169,11 @@
 				$result4 = mysql_query($SQL);
 				$number_of_solved_hws = mysql_fetch_array($result4);
 				if ($_GET["width"] <= 768) {
-					$mywidth = 60;
+					$mywidth = 100;
 				} else {
 					$mywidth = 40;
 				}
-				echo '<div class="dropdown" style = "width:'.$mywidth.'%;padding-right:10px;margin-top:10px;">';
+				echo '<div class="dropdown" style = "width:'.$mywidth.'px;padding-right:10px;margin-top:10px;">';
 				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
 				if ($number_of_solved_hws[0] > 0){
 					echo '<span style = "color:green;" class = "glyphicon glyphicon-ok"> Решено</span></a>';
@@ -283,9 +285,7 @@
   </div>
   <?php
 	//echo '<div class="alert alert-success" role="alert">...</div><div class="alert alert-info" role="alert">...</div><div class="alert alert-warning" role="alert">...</div><div class="alert alert-danger" role="alert">Много важно събитие</div>';
-	if ($there_is_some_info) {
-		echo '</div>';
-	}
+	echo '</div>';
 	?>
 <div>
 	<?php

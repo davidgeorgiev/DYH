@@ -27,15 +27,33 @@
 <div class="form-group">
   <label for="text">За колко време решихте домашното</label>
 	<select class="form-control" name="time_for_solving">
-		<option value="0">По-малко от час</option>
+		<option value="8.33">Пет минути</option>
+		<option value="0.16">Десет минути</option>
+		<option value="0.33">Двайсет минути</option>
+		<option value="0.5">Половин час</option>
+		<option value="0.66">Четиресет минути</option>
+		<option value="0.83">Петдесет минути</option>
 		<option value="1">Цял час</option>
+		<option value="1.25">Час и четвърт</option>
+		<option value="1.5">Час и половина</option>
+		<option value="1.75">Час и три четвърти</option>
 		<option value="2">Около два часа</option>
-		<option value="5">Много повече от два часа</option>
-		<option value="12">Мъчих се цял ден/нощ</option>
-		<option value="44">Няколко дни</option>
-		<option value="84">Седмица</option>
-		<option value="252">Месец</option>
-		<option value="400">Няколко месеца</option>
+		<option value="3">Около три часа</option>
+		<option value="4">Около четири часа</option>
+		<option value="5">Около пет часа</option>
+		<option value="8">Мъчих се цял ден</option>
+		<option value="9">Мъчих се цяла нощ</option>
+		<option value="16">Два дни</option>
+		<option value="24">Три дни</option>
+		<option value="32">Четири дни</option>
+		<option value="40">Пет дни</option>
+		<option value="48">Шест дни</option>
+		<option value="56">Седмица</option>
+		<option value="112">Две седмици</option>
+		<option value="168">Три седмици</option>
+		<option value="224">Месец</option>
+		<option value="448">Два месеца</option>
+		<option value="600">Много повече от два месеца</option>
 	</select>
 </div>
 <div class="form-group">
@@ -70,8 +88,12 @@
 	<select class="form-control" name="length">
 		<option value="0">По-малко от една</option>
 		<option value="1">Една</option>
+		<option value="1.5">Една и половина</option>
 		<option value="2">Две</option>
+		<option value="2.5">Две и половина</option>
+		<option value="3">Три</option>
 		<option value="4">От три до пет</option>
+		<option value="7">Седем</option>
 		<option value="10">Около десет</option>
 		<option value="20">Около двайсет</option>
 		<option value="30">Около трийсет</option>

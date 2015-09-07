@@ -133,7 +133,7 @@
 							echo '<img src="vertical-timeline/img/cd-icon-picture.svg" alt="Picture">';
 							//echo '</div>';
 						} else {
-							echo '<div '.$class_zoom.' style = "'.$margin_top.' z-index:10;position:relative;">';
+							echo '<div '.$class_zoom.' style = "'.$margin_top.' z-index:100;position:relative;">';
 							echo '<a href = "'.$row2[4].'" rel="lightbox"><img style= "border-width:thin; border-style: solid;background-color:#afb7c3;border-color: white;border-radius:15px;" src="'.$row2[4].'" alt="HomeWork image" width="100%" height="100%"></a>';
 							echo '</div>';
 						}
@@ -168,12 +168,7 @@
 				$SQL = "SELECT DISTINCT COUNT(solvedhomeworks.UID) FROM solvedhomeworks,user WHERE solvedhomeworks.USERID = '".Get_Logged_users_id()."' AND solvedhomeworks.HWID = ".$row2[3];
 				$result4 = mysql_query($SQL);
 				$number_of_solved_hws = mysql_fetch_array($result4);
-				if ($_GET["width"] <= 768) {
-					$mywidth = 100;
-				} else {
-					$mywidth = 40;
-				}
-				echo '<div class="dropdown" style = "width:'.$mywidth.'px;padding-right:10px;margin-top:10px;">';
+				echo '<div class="dropdown" style = "width:130px;padding-right:10px;margin-top:10px;">';
 				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
 				if ($number_of_solved_hws[0] > 0){
 					echo '<span style = "color:green;" class = "glyphicon glyphicon-ok"> Решено</span></a>';

@@ -4,7 +4,7 @@
 		$mydatesolved = $dateTimeArray[0];
 		$mytimesolved = $dateTimeArray[1];
 		switch ($ArraySolvings["TimeForSolve"]) {
-			case 0.83: $FirstPartOfSentence = "Реших го за пет минути на ".$mydatesolved." в ".$mytimesolved." часа, ";
+			case 0.083: $FirstPartOfSentence = "Реших го за пет минути на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;
 			case 0.16: $FirstPartOfSentence = "Реших го за десет минути на ".$mydatesolved." в ".$mytimesolved." часа, ";
 			break;

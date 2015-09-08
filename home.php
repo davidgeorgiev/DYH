@@ -3,7 +3,8 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
-
+	include "some_external_phps/checkIfHaveToShowOtherWeek.php";
+	include "some_external_phps/ReturnUserIDByUserName.php";
 	//$current_page_is = 'history';
 	$current_page_is = 'home';
 	$timezone  = +2;
@@ -33,6 +34,33 @@
 				<li><a href="home.php?user='.$_GET["user"].'"><span class="glyphicon glyphicon-share-alt"></span> Всички предстоящи задачи без пропуснатите от мен</a></li>
 				<li><a href="home.php?user='.$_GET["user"].'&time_period=only_unsolved"><span class="glyphicon glyphicon-remove"></span> Покажи само нерешените от мен задачи</a></li>
 				<li><a href="home.php?user='.$_GET["user"].'&time_period=only_solved"><span class="glyphicon glyphicon-ok"></span> Покажи само решените от мен задачи</a></li>
+				</ul>
+				</div>';
+				$myButtonLabel = "";
+				switch ($TimePeriod){
+					case "with_past_unsolved": $myButtonLabel = "Всички предстоящи задачи на ".$_GET["user"]." включително пропуснатите от вас";
+					break;
+					case "false": $myButtonLabel = "Всички предстоящи задачи на ".$_GET["user"]." без пропуснатите от вас";
+					break;
+					case "only_unsolved": $myButtonLabel = "Всички задачи на ".$_GET["user"].", които сте пропуснали";
+					break;
+					case "only_solved": $myButtonLabel = "Всички задачи на ".$_GET["user"].", които сте решили";
+					break;
+					
+				}
+		
+		if (CheckIfHaveToShowOtherWeek(ReturnUserIdByUserName($_GET["user"])) == 0) {
+			$PartOfLabel = '<span class="glyphicon glyphicon-ok"></span> Активирай';
+		} else {
+			$PartOfLabel = '<span class="glyphicon glyphicon-remove"></span> Дективирай';
+		}
+		$button_to_render2 = '<div><div class="dropdown" style = "float:left;padding-right:10px;">
+				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:46px;">
+				<span class="glyphicon glyphicon-wrench"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+				<li><a href="ExchangeWeeks.php?user='.$_GET["user"].'"><span class="glyphicon glyphicon-random"></span> Размени четна с нечетна</a></li>
+				<li><a href="DeactivateOrActivateOtherWeek.php?user='.$_GET["user"].'">'.$PartOfLabel.' извънредната</a></li>
 				</ul>
 				</div>';
 				$myButtonLabel = "";

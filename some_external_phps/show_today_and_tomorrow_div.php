@@ -1,19 +1,20 @@
 ﻿<?php
-	$today = date('Y-m-d');
-	$tomorrow = date('Y-m-d', strtotime("tomorrow"));
+	$timezone  = +2;
+	$today_date = gmdate("Y-m-d", time() + 3600*($timezone+date("I")));
+	//$tomorrow = date('Y-m-d', strtotime("tomorrow"));
 	
 	include "return_hw_info_by_id.php";
 	$MyHomeworkInfoArray = returnHomeworkInfoByID(87);
 	
 	//echo '<div class = "todayandtomorrow" style = ""margin:100px;">';
-	$date = new DateTime($today);
+	$date = new DateTime($today_date);
 	$week = $date->format("W");
 	
 	function getWeekday($date) {
 		return date('w', strtotime($date));
 	}
-	$today =  getWeekday($today);
-	$tomorrow = getWeekday($tomorrow);
+	$today = getWeekday($today_date);
+	$tomorrow = getWeekday($today_date)+1;
 	
 	if($week&1) {
 		$eoweek = "OddWeekID";

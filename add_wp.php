@@ -33,21 +33,7 @@
 $_SESSION['page'] = "other";
 include "main_menu.php"; 
 
-$SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
-$result = mysql_query($SQL);
-$row = mysql_fetch_array($result);
 
-$theresnosubjects = 0;
-if ($row[0] <= 0) {
-	$theresnosubjects = 1;
-} else {
-	$SQL = "SELECT usersubjectlist.SUBJECTLISTID FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
-	//echo $SQL;
-	$result = mysql_query($SQL);
-	$row = mysql_fetch_array($result);
-	//echo "<p>".$row[0]."</p>";
-	$subject_ids_arr = explode(",", $row[0]);
-}
 ?>
 	<div id = "my_page">
   <h2>Добави нова програма</h2>
@@ -62,13 +48,13 @@ if ($row[0] <= 0) {
 					$week = $date->format("W");
 					if($week&1) {
 						echo '<select class="form-control" name="week">
-							<option value="Нечетна">Нечетна (текущата седмица)</option>
-							<option value="Четна">Четна</option>
+							<option value="1">Нечетна (текущата седмица)</option>
+							<option value="2">Четна</option>
 						</select>';
 					} else {
 						echo '<select class="form-control" name="week">
-							<option value="Четна">Четна (текущата седмица)</option>
-							<option value="Нечетна">Нечетна</option>
+							<option value="2">Четна (текущата седмица)</option>
+							<option value="1">Нечетна</option>
 						</select>';
 					}
 				?>
@@ -98,13 +84,13 @@ if ($row[0] <= 0) {
 					echo '<option value="'.$weekday.'">Днес</option>';
 					
 				?>
-					<option value="Понеделник">Понеделник</option>
-					<option value="Вторник">Вторник</option>
-					<option value="Сряда">Сряда</option>
-					<option value="Четвъртък">Четвъртък</option>
-					<option value="Петък">Петък</option>
-					<option value="Събота">Събота</option>
-					<option value="Неделя">Неделя</option>
+					<option value="1">Понеделник</option>
+					<option value="2">Вторник</option>
+					<option value="3">Сряда</option>
+					<option value="4">Четвъртък</option>
+					<option value="5">Петък</option>
+					<option value="6">Събота</option>
+					<option value="7">Неделя</option>
 				</select>
 			</div>
 			
@@ -112,21 +98,24 @@ if ($row[0] <= 0) {
     </div>
 	<div class="row">
 	<?php
+	include "some_external_phps/subject_select_list_menu.php";
+	include "some_external_phps/convert_class_number_to_words.php";
 	for ($k=1;$k<=9;$k++){
 		echo '<div class="col-sm-4">';
 		echo '<div class="form-group">';
 			echo '<label for="text">';
-			$class_number = $k;
-			include "some_external_phps/convert_class_number_to_words.php";
-			echo $class_number." час";
+			echo ConvertClassNumberToWords($k)." час";
 			echo '</label>';
-			$name = "hours".$k;
-			$name2 = "mins".$k;
+			$name = "hours[]";
+			//echo $name;
+			$name2 = "mins[]";
+			//echo $name2;
 			include "some_external_phps/time_picker.php";
 			//echo '<input type="time" class="form-control" name="time'.$k.'" placeholder="13:00">';
-			$name = "subject".$k;
-			include "some_external_phps/subject_select_list_menu.php";
-			echo '<input type="text" class="form-control" name="info'.$k.'" placeholder="Информация">';
+			$name = "subjects[]";
+			
+			MakeSubjectMenu($username, $name);
+			echo '<input type="text" class="form-control" name="info[]" placeholder="Информация">';
 		echo '</div>';
 		echo '</div>';
 	}

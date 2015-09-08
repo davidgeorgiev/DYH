@@ -23,7 +23,7 @@
 		$the_end_of_query = "AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC";
 	}
 	if (ifLogged() > 0){
-	$button_to_render = '<div class="dropdown" style = "float:left;padding-right:10px;">
+	$button_to_render = '<div><div class="dropdown" style = "float:left;padding-right:10px;">
 				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:46px;">
 				<span class="glyphicon glyphicon-wrench"></span>
 				</button>
@@ -49,7 +49,7 @@
 				}
 				
 				
-				$button_to_render = $button_to_render.'<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$myButtonLabel.'</div>';
+				$button_to_render = $button_to_render.'<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$myButtonLabel.'</div></div>';
 	} else {
 		$button_to_render = "";
 	}

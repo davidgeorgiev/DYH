@@ -13,7 +13,7 @@
 ?>
 <body>
 <div class="container">
-<?php include "main_menu.php";?>
+<?php include "main_menu.php";include "some_external_phps/checkIfHaveToShowOtherWeek.php";include "some_external_phps/ReturnUserIDByUserName.php";?>
 
 <?php
 		$eoweek = 0;
@@ -27,11 +27,18 @@
 		<?php
 			if($week&1) {
 				$eoweek = "OddWeekID";
-				echo 'Седмицата е нечетна';
+				$Label = 'Седмицата е нечетна';
 			} else {
 				$eoweek = "EvenWeekID";
-				echo 'Седмицата е четна';
+				$Label = 'Седмицата е четна';
 			}
+			//$eoweek = "OtherWeekID";
+			
+			if (CheckIfHaveToShowOtherWeek(ReturnUserIdByUserName($username)) == 1) {
+				$eoweek = "OtherWeekID";
+				$Label = 'Седмицата е извънредна';
+			}
+			echo $Label;
 		?>
 		</small></h1>
 		</div>

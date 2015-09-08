@@ -44,10 +44,24 @@
 					echo '<tbody>';
 						for ($i = 1; $i <= 9; $i++){
 							echo "<tr>";
+							
+							if (mb_strlen($MyCurriculum[$WeekDay][$i]["Subject"], 'UTF-8') > 20){
+								$IsLonger = 1;
+								$MySymbol = "...";
+							} else {
+								$IsLonger = 0;
+								$MySymbol = "";
+							}
+							
 							echo '<td>'.$i.'</td>
-								<td>'.$MyCurriculum[$WeekDay][$i]["Time"].'</td>
-								<td>'.$MyCurriculum[$WeekDay][$i]["Subject"].'</td>
-								<td>'.$MyCurriculum[$WeekDay][$i]["Info"].'</td>';
+								<td style = "font-size:16px;">'.$MyCurriculum[$WeekDay][$i]["Time"].'</td>';
+								if ($IsLonger == 1){
+									$onhover = 'title="'.$MyCurriculum[$WeekDay][$i]["Subject"].'"';
+								} else {
+									$onhover = "";
+								}
+								echo '<td '.$onhover.' style = "font-size:13px;">'.mb_substr($MyCurriculum[$WeekDay][$i]["Subject"],0,20,'UTF-8').$MySymbol.'</td>';
+								echo '<td style = "font-size:16px;">'.$MyCurriculum[$WeekDay][$i]["Info"].'</td>';
 							echo '</tr>';
 						}
 					echo '<tbody>';

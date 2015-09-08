@@ -37,7 +37,7 @@ include "config.php";
 			$SQL = "INSERT INTO user (Name, Password) VALUES ('".$name."', '".$psw."')";
 			$result = mysql_query($SQL);
 			
-			$SQL = "INSERT INTO twoweeks (EvenWeekID, OddWeekID) VALUES (9, 9)";
+			$SQL = "INSERT INTO twoweeks (EvenWeekID, OddWeekID, OtherWeekID) VALUES (9, 9, 9)";
 			$result = mysql_query($SQL);
 			$uid = mysql_insert_id();
 			

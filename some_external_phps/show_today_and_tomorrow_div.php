@@ -4,7 +4,8 @@
 	//$tomorrow = date('Y-m-d', strtotime("tomorrow"));
 	
 	include "return_hw_info_by_id.php";
-	
+	//include "checkIfHaveToShowOtherWeek.php";
+	//include "ReturnUserIDByUserName.php";
 	//echo '<div class = "todayandtomorrow" style = ""margin:100px;">';
 	$date = new DateTime($today_date);
 	$week = $date->format("W");
@@ -22,7 +23,15 @@
 		$eoweek = "EvenWeekID";
 		$Label = "<h1>Седмицата е четна</h1>";
 	}
+	if (CheckIfHaveToShowOtherWeek(ReturnUserIdByUserName($username)) == 1) {
+		$eoweek = "OtherWeekID";
+		$Label = "<h1>Седмицата е извънредна</h1>";
+	}
 	
+	//$eoweek = "OtherWeekID";
+	if ($EditMode == 1) {
+		echo $button_to_render2;
+	}
 	echo '<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$Label.'</div>';
 	include "some_external_phps/print_curriculum.php";
 	echo '<div class="row" style = "margin-left: 9%;margin-bottom: 10%;>';

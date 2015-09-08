@@ -137,7 +137,7 @@ $num_of_deleted_garbage = 0;
 	
 //CONTINUE SEARCHING GARBAGE
 
-	$SQL = "SELECT DISTINCT weeks.UID FROM weeks, twoweeks WHERE weeks.UID NOT IN (SELECT EvenWeekID FROM twoweeks) AND weeks.UID NOT IN (SELECT OddWeekID FROM twoweeks) AND weeks.UID != 9";
+	$SQL = "SELECT DISTINCT weeks.UID FROM weeks, twoweeks WHERE weeks.UID NOT IN (SELECT EvenWeekID FROM twoweeks) AND weeks.UID NOT IN (SELECT OddWeekID FROM twoweeks) AND weeks.UID NOT IN (SELECT OtherWeekID FROM twoweeks) AND weeks.UID != 9";
 	$result = mysql_query($SQL);
 	$weeksfordeletion = array();
 	while ($row = mysql_fetch_array($result)){

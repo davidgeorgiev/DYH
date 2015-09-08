@@ -6,21 +6,21 @@
 
 	//$current_page_is = 'history';
 	$current_page_is = 'home';
-	
+	$timezone  = +2;
 	//$the_end_of_query = 'ORDER BY homeworks.Date DESC';
 	$datetime = new DateTime('tomorrow');
 	$datetime = $datetime->format('Y-m-d H:i:s');
 	$TimePeriod = $_GET["time_period"];
 	if ($TimePeriod == "today_and_tomorrow"){
-		$the_end_of_query = "AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' AND homeworks.Date <= '".$datetime."' ORDER BY homeworks.Date ASC";
+		$the_end_of_query = "AND homeworks.Date >= '".gmdate("Y-m-d", time() + 3600*($timezone+date("I")))." 00:00:00' AND homeworks.Date <= '".$datetime."' ORDER BY homeworks.Date ASC";
 	} else if ($TimePeriod == "only_unsolved") {
 		$the_end_of_query = "AND homeworks.UID NOT IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE homeworks.UID = solvedhomeworks.HWID AND solvedhomeworks.USERID = ".Get_Logged_users_id().") ORDER BY homeworks.Date ASC";
 	} else if ($TimePeriod == "only_solved") {
 		$the_end_of_query = "AND homeworks.UID IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE homeworks.UID = solvedhomeworks.HWID AND solvedhomeworks.USERID = ".Get_Logged_users_id().") ORDER BY homeworks.Date ASC";
 	} else if ($TimePeriod == "with_past_unsolved") {
-		$the_end_of_query = "AND ((homeworks.Date >= '".date("Y-m-d")." 00:00:00') OR (homeworks.UID NOT IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE homeworks.UID = solvedhomeworks.HWID AND solvedhomeworks.USERID = ".Get_Logged_users_id()."))) ORDER BY homeworks.Date ASC";
+		$the_end_of_query = "AND ((homeworks.Date >= '".gmdate("Y-m-d", time() + 3600*($timezone+date("I")))." 00:00:00') OR (homeworks.UID NOT IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE homeworks.UID = solvedhomeworks.HWID AND solvedhomeworks.USERID = ".Get_Logged_users_id()."))) ORDER BY homeworks.Date ASC";
 	} else {
-		$the_end_of_query = "AND homeworks.Date >= '".date("Y-m-d")." 00:00:00' ORDER BY homeworks.Date ASC";
+		$the_end_of_query = "AND homeworks.Date >= '".gmdate("Y-m-d", time() + 3600*($timezone+date("I")))." 00:00:00' ORDER BY homeworks.Date ASC";
 	}
 	if (ifLogged() > 0){
 	$button_to_render = '<div><div class="dropdown" style = "float:left;padding-right:10px;">

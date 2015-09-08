@@ -5,6 +5,38 @@
 	include "return_hw_info_by_id.php";
 	$MyHomeworkInfoArray = returnHomeworkInfoByID(87);
 	
+	//echo '<div class = "todayandtomorrow" style = ""margin:100px;">';
+	$date = new DateTime($today);
+	$week = $date->format("W");
+	
+	function getWeekday($date) {
+		return date('w', strtotime($date));
+	}
+	$today =  getWeekday($today);
+	$tomorrow = getWeekday($tomorrow);
+	
+	if($week&1) {
+		$eoweek = "OddWeekID";
+		$Label = "Седмицата е нечетна</h1>";
+	} else {
+		$eoweek = "EvenWeekID";
+		$Label = "<h1>Седмицата е четна</h1>";
+	}
+	echo '<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$Label.'</div>';
+	include "some_external_phps/print_curriculum.php";
+	echo '<div class="row" style = "margin-left: 9%;margin-bottom: 10%;>';
+		echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
+			echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
+			PrintCurriculum($_GET["user"], $eoweek, $today, "- днес");
+			echo "</div>";
+			echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
+			PrintCurriculum($_GET["user"], $eoweek, $tomorrow, "- утре");
+			echo "</div>";
+		echo "</div>";
+	echo "</div>";
+?>	
+<?php	
+	/*
 	echo '<div style = "font-size:20px;color:black;">';
 	echo "<p>//START PRINTING MAININFO</p>";
 	echo "<p>Публикувано от ".$MyHomeworkInfoArray["MainInfo"]["Name"]."</p>";
@@ -50,8 +82,8 @@
 		echo "<p>Дължина в страници в проценти ".$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["LengthInPages"]."</p>";
 		echo "<p>Научено в проценти ".$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["LearnedInPercents"]."</p>";
 		echo "<p>Честност в проценти ".$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["IfCheating"]."</p>";
-	}
+	}*/
 	//echo "<p>".$today."</p>";
 	//echo "<p>".$tomorrow."</p>";
-	echo "</div>";
+	//echo "</div>";
 ?>

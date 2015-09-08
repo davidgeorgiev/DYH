@@ -71,12 +71,15 @@
 				$TwoWeeksID = mysql_fetch_array($TwoWeeksIDResult);
 				
 				if ($classesArray["WEEK"] == 1) {
-					$NextWeek = "EvenWeekID";
+					//$NextWeek = "EvenWeekID";
 					$CurrentWeek = "OddWeekID";
-				} else {
-					$NextWeek = "OddWeekID";
+				} else if ($classesArray["WEEK"] == 2){
+					//$NextWeek = "OddWeekID";
 					$CurrentWeek = "EvenWeekID";
+				} else if ($classesArray["WEEK"] == 3){
+					$CurrentWeek = "OtherWeekID";
 				}
+				
 				$SQL = "SELECT twoweeks.".$CurrentWeek.", twoweeks.UID FROM twoweeks WHERE twoweeks.UID = ".$TwoWeeksID[0];
 				//echo $SQL;
 				$WeekIDResult = mysql_query($SQL);
@@ -118,13 +121,14 @@
 				
 				//$dayIDs = mysql_fetch_array($dayIDsResult);
 				
-				$SQL = "SELECT twoweeks.".$NextWeek." FROM twoweeks WHERE twoweeks.UID = ".$TwoWeeksID[0];
+				$SQL = "SELECT twoweeks.EvenWeekID, twoweeks.OddWeekID, twoweeks.OtherWeekID, twoweeks.CheckToOtherWeek FROM twoweeks WHERE twoweeks.UID = ".$TwoWeeksID[0];
 				$NextWeekIdResult = mysql_query($SQL);
-				$MyNextWeekID = mysql_fetch_array($NextWeekIdResult);
+				$MyOldWeeksIDs = mysql_fetch_array($NextWeekIdResult);
 				
+				$MyOldWeeksIDs[($classesArray["WEEK"] - 1)] = $AddedWeekId;
 				//echo $MyNextWeekID[0];
 				
-				$SQL = "INSERT INTO twoweeks (EvenWeekID, OddWeekID) VALUES (".$MyNextWeekID[0].", ".$AddedWeekId.")";
+				$SQL = "INSERT INTO twoweeks (OddWeekID, EvenWeekID, OtherWeekID, CheckToOtherWeek) VALUES (".$MyOldWeeksIDs[0].", ".$MyOldWeeksIDs[1].", ".$MyOldWeeksIDs[2].", ".$MyOldWeeksIDs[3].")";
 				$InsertingNewTwoWeeksResult = mysql_query($SQL);
 				$MyInsertedNewTwoWeeksId = mysql_insert_id();
 				

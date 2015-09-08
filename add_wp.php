@@ -50,11 +50,13 @@ include "main_menu.php";
 						echo '<select class="form-control" name="week">
 							<option value="1">Нечетна (текущата седмица)</option>
 							<option value="2">Четна</option>
+							<option value="3">Извънредна</option>
 						</select>';
 					} else {
 						echo '<select class="form-control" name="week">
 							<option value="2">Четна (текущата седмица)</option>
 							<option value="1">Нечетна</option>
+							<option value="3">Извънредна</option>
 						</select>';
 					}
 				?>
@@ -63,7 +65,8 @@ include "main_menu.php";
 				<label for="text">Ден</label>
 				<select class="form-control" name="day">
 				<?php
-					$timestamp = strtotime(date("Y-m-d"));
+					$timezone  = +2;
+					$timestamp = strtotime(gmdate("Y-m-d", time() + 3600*($timezone+date("I"))));
 					$weekday = date( "w", $timestamp);
 					switch($weekday){
 						case 1: $convertered_weekday = 'Понеделник';
@@ -81,7 +84,7 @@ include "main_menu.php";
 						case 7: $convertered_weekday = 'Неделя';
 						break;
 					}
-					echo '<option value="'.$weekday.'">Днес</option>';
+					echo '<option value="'.$weekday.'">Днес </option>';
 					
 				?>
 					<option value="1">Понеделник</option>

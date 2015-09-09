@@ -21,7 +21,7 @@
 		$date = new DateTime($ddate);
 		$week = $date->format("W");
 	?>
-	<div id = "my_page">
+	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 		<div class="page-header">
 		<h1>Учебната програма <small id = "smalltag">
 		<?php

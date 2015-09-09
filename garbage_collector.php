@@ -8,7 +8,7 @@
 
 
 <?php
-	//echo '<body><div id = "container"><div id = "my_page">';
+	//echo '<body><div id = "container"><div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 //SEARCHING GARBAGE
 
 	$SQL = "SELECT homeworks.UID FROM homeworks WHERE homeworks.UID NOT IN (SELECT uh.HWID FROM uh)";

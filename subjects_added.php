@@ -72,7 +72,7 @@ if ($row[0] <= 0){
 
 
 
-header('Location: check_width_and_send_to_update_homeworks.php?user='.$username) and exit;
+header('Location: check_width_and_send_to.php?user='.$username.'&page=update_subject_list') and exit;
 ?>
 
 

@@ -103,7 +103,7 @@ if (($there_is_a_such_user[0] > 0) && ($there_are_some_homeworks[0] > 0)) {
 		$MyFinalArray = array($done_array1,$done_array0, $done_array2);
 		$MyChart = MakeMyChart($MyFinalArray, "Напрегнатост", "area", "c".$counter);
 		
-		PrintMyWeekDropdownButtons($MyFinalArray[0]);
+		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username);
 		echo '<div style="width:100%;height:'.($_GET["height"]-200).'px; min-width:100px;">';
 			echo $MyChart; 
 		echo '</div>';

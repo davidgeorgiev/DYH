@@ -29,5 +29,6 @@
 			}
 			echo '</select>';
 		}
+		return $theresnosubjects;
 	}
   ?>

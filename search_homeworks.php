@@ -34,7 +34,7 @@
 <div class="container">
 <?php
 include "main_menu.php";
-echo '<div id = "my_page">';
+echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 
 $searched_string = $_GET['searching_for'];
 $SQL = "SELECT DISTINCT COUNT(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND ((homeworks.Data LIKE '%".$searched_string."%') OR (homeworks.Title LIKE '%".$searched_string."%')) ORDER BY homeworks.Date DESC";

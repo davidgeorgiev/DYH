@@ -53,7 +53,7 @@ if ($row[0] <= 0) {
 	$subject_ids_arr = explode(",", $row[0]);
 }
 ?>
-	<div id = "my_page">
+	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
   <h2>Добави ново домашно</h2>
   <form role="form" <?php echo 'action='; echo "hw_added.php"?> method="post">
   

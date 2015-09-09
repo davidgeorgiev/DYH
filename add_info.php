@@ -32,7 +32,7 @@
 <?php
 $_SESSION['page'] = "other";
 include "main_menu.php"; ?>
-	<div id = "my_page">
+	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
   <h2>Добави допълнителна информация</h2>
   <form role="form" <?php echo 'action='; echo "info_added.php";?> method="post">
     <div class="form-group">

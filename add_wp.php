@@ -117,7 +117,7 @@ include "main_menu.php";
 			//echo '<input type="time" class="form-control" name="time'.$k.'" placeholder="13:00">';
 			$name = "subjects[]";
 			
-			MakeSubjectMenu($username, $name);
+			$thereisnosubjects = MakeSubjectMenu($username, $name);
 			echo '<input type="text" class="form-control" name="info[]" placeholder="Информация">';
 		echo '</div>';
 		echo '</div>';
@@ -125,7 +125,7 @@ include "main_menu.php";
 	
 	
 	
-		if ($EditMode == 1) {
+		if (($EditMode == 1) && ($thereisnosubjects == 0)) {
 			echo '<button type="submit" class="btn btn-default" style = "margin-left: 15px;">Запиши</button>';
 		}
 	?>

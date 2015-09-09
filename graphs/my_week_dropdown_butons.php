@@ -14,9 +14,10 @@
 	font-weight: normal;
 }
 </style>
+
 <?php
 	//print_r($done_array1);
-	function PrintMyWeekDropdownButtons($done_array1){
+	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username){
 		echo '<style>.btn-group {width:'.(93/(sizeof($done_array1))).'%;}.btn btn-default dropdown-toggle{width: 100%;}</style>';
 		echo '<div style = "margin-left: 5%;">';
 		foreach ($done_array1 as $value){
@@ -38,10 +39,11 @@
 			} else {
 				$MyDropdownMenuWidth = 300;
 			}
+			
 			echo '<ul class="dropdown-menu" style = "background-color: white;width:'.$MyDropdownMenuWidth.'px;padding-right:10px;padding-left:10px;padding-top:10px;padding-bottom:0px;">';
-			$SQL = "SELECT homeworks.Data, homeworks.Title, homeworks.Rank, homeworks.Type FROM homeworks WHERE homeworks.Date = '".$value[0]."'";
+			$SQL = "SELECT homeworks.Data, homeworks.Title, homeworks.Rank, homeworks.Type, homeworks.UID FROM homeworks, user, uh WHERE homeworks.Date = '".$value[0]."' AND homeworks.UID = uh.HWID AND user.UID = uh.USERID AND user.Name = '".$username."'";
 			$result4 = mysql_query($SQL);
-			$SQL = "SELECT COUNT(homeworks.UID) FROM homeworks WHERE homeworks.Date = '".$value[0]."'";
+			$SQL = "SELECT COUNT(homeworks.UID) FROM homeworks, user, uh WHERE homeworks.Date = '".$value[0]."' AND homeworks.UID = uh.HWID AND user.UID = uh.USERID AND user.Name = '".$username."'";
 			$result5 = mysql_query($SQL);
 			$number_of_hws = mysql_fetch_array($result5);
 			if ($number_of_hws[0] <= 0){
@@ -53,19 +55,32 @@
 					if ($homework_info[3] == 0) {
 						$myHeadingBackgroundColor = "#86cf4b";
 						$myHeadingContent = "Домашно";
+						$headingPadding = 19;
 					} else if ($homework_info[3] == 1) {
 						$myHeadingBackgroundColor = "#4ba8cf";
 						$myHeadingContent = "Изпит";
+						$headingPadding = 24;
 					} else if ($homework_info[3] == 2) {
 						$myHeadingBackgroundColor = "#dd8043";
 						$myHeadingContent = "Друго";
+						$headingPadding = 24;
 					}
 					
-					echo '<p style = "background-color:'.$myHeadingBackgroundColor.';text-align:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$myHeadingContent.'</p>';
+					if ($EditMode == 1){
+						$Trash = '<a href="delete_hw_confirm.php?hwid='.$homework_info[4].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:white;font-size:13px;padding:4px;"><span class="glyphicon glyphicon-trash"></span> </a>';
+						$Pencil = '<a href="edit_hw.php?hwid='.$homework_info[4].'&class='.$username.'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-pencil"></span> </a>'; 
+					} else {
+						$Trash = "";
+						$Pencil = "";
+					}
+					
+					echo '<p style = "background-color:'.$myHeadingBackgroundColor.';text-left:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$Trash.$Pencil.'<span style = "padding-left:'.$headingPadding.'%;">'.$myHeadingContent.'<span></p>';
 					echo '<div style = "padding:0px;">';
 					echo '<a href="#" style = "text-decoration:none;"><p style = "margin-top:-12px;padding:3px;text-align:center;background-color:#837d7c;color:#d2c9c6;font-weight:bold;">'.$homework_info[1].'</p></a>';
 					if (strlen($homeworks_info[0]) >= 0) {
-						echo '<a href="#" style = "text-decoration:none;"><p style = "background-color:#d2c9c6;border:solid #837d7c;padding-left:4px;padding-right:4px;padding-bottom:15px;padding-top:12px;margin-top:-10px;margin-bottom:-6px;color:#837d7c;font-size:15px;">'.$homework_info[0].'</p></a>';
+						echo '<div style = "background-color:#d2c9c6;border:solid #837d7c;padding-left:4px;padding-right:4px;padding-bottom:15px;padding-top:12px;margin-top:-10px;margin-bottom:-6px;color:#837d7c;font-size:15px;"><p>'.$homework_info[0]."</p>";
+						
+						echo '</div>';
 					}
 					//echo '<li><a href="#">'.$homework_info[2].'</a></li>';
 					echo '</div>';

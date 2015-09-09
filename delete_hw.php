@@ -19,13 +19,16 @@
 		echo '<div class="container">';
 		$_SESSION['page'] = "other";
 		include "main_menu.php";
-		echo '<div class="jumbotron">';
-		echo '<h1>Поздравления, '.$username.'!</h1>';
-
-		echo '</div>';
 		
 		echo '<div class="alert alert-success" role="alert">Домашното беше изтрито успешно. ';
-		echo '<a href="home.php?user='.$username.'" class="alert-link">Върни ме обратно</a>';
+		if (isset($_GET["page"])){
+			if ($_GET["page"] == "homeworks_time_chart"){
+				$MyURL = 'homeworks_time_chart.php?user='.$username.'&weeknum='.date("W").'&numofweeks=4';
+			} 
+		} else {
+			$MyURL = 'home.php?user='.$username;
+		}
+		echo '<a href="'.$MyURL.'" class="alert-link">Върни ме обратно</a>';
 		echo '!</div>';
 		echo '</div>';
 		

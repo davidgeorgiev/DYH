@@ -35,7 +35,7 @@ include "main_menu.php";
 
 
 ?>
-	<div id = "my_page">
+	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
   <h2>Добави нова програма</h2>
   <form role="form" <?php echo 'action='; echo "wp_added.php";?> method="post">
     <div class="form-group">

@@ -68,7 +68,7 @@ if ($row3[0] <= 0) {
 	$result = mysql_query($SQL);
 	$row2 = mysql_fetch_array($result)
 ?>
-	<div id = "my_page">
+	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
   <h2>Редактирай домашно</h2>
   <form role="form" <?php echo 'action='; echo "hw_edited.php"?> method="post">
     <div class="form-group">

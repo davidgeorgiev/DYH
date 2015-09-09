@@ -42,7 +42,7 @@
 <?php include "main_menu.php"; ?>
 
 <?php
-	echo '<div id = "my_page">';
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 	
 	$SQL = "SELECT homeworks.Date, homeworks.Title, homeworks.Data, homeworks.Rank, WEEKDAY(homeworks.Date) FROM homeworks WHERE homeworks.UID = ".$hwid;
 	$result = mysql_query($SQL);

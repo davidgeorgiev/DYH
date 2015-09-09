@@ -25,7 +25,7 @@
 <div class="container">
 <?php include "main_menu.php"; ?>
 
-<div id = "my_page" style = "background: rgba(243, 243, 243, 0.6)">
+<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 
 
 <?php

@@ -39,7 +39,7 @@ include "main_menu.php"; ?>
 		<h1>Домашни</h1>
 		<p><?php echo $username?></p> 
 	</div>
-	<div id = "my_page">
+	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
   <h2>Добави коментар</h2>
   <form role="form" <?php echo 'action='; echo "comment_added.php";?> method="post">
 	<div class="form-group">

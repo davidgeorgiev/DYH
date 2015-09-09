@@ -17,7 +17,7 @@
 <div class="container">
 <?php include "main_menu.php";?>
 
-<div id = "my_page" style = "background: rgba(243, 243, 243, 0.6)">
+<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 
 <?php
 	echo '<p style = "font-size:30px;font-family:Arial;background-color:white;padding:10px;border-radius:10px;text-align:center;">';

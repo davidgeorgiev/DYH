@@ -47,12 +47,12 @@
 		$there_is_some_info = 0;
 	}
 	echo '<div class="container">';
-	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.7)">';
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
 	
 	include "some_external_phps/show_today_and_tomorrow_div.php";
 	echo '</div>';
 	
-	echo '<div id = "my_page" style = "width:98%;margin-left:-3px;margin-top:20%;background: rgba(243, 243, 243, 0.7)">';
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 	if (!$there_is_some_info) {
 		echo '<div class="alert alert-success">';
 		echo 'За съжаление желаният списък е <strong>празен!</strong>';

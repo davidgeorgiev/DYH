@@ -15,7 +15,7 @@
 <div class="container">
 <?php include "main_menu.php"; $_SESSION["hwid"] = $_GET["hwid"]?>
 
-<div id = "my_page" style = "background: rgba(243, 243, 243, 0.6)">
+<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 
 
 <form role="form" <?php echo 'action='; echo "solve_homework_final.php?user=".$_GET["user"]."&hwid=".$_GET["hwid"]?> method="post">

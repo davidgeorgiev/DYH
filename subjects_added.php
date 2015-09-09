@@ -18,7 +18,7 @@
 <div class="container">
 <?php
 //include "main_menu.php";
-echo '<div id = "my_page">';
+echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 $subject_ids = array();
 
 for ($i = 0 ;$i < sizeof($_POST['myInputs']); $i++){

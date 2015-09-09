@@ -121,7 +121,7 @@
 				
 				//$dayIDs = mysql_fetch_array($dayIDsResult);
 				
-				$SQL = "SELECT twoweeks.EvenWeekID, twoweeks.OddWeekID, twoweeks.OtherWeekID, twoweeks.CheckToOtherWeek FROM twoweeks WHERE twoweeks.UID = ".$TwoWeeksID[0];
+				$SQL = "SELECT twoweeks.OddWeekID, twoweeks.EvenWeekID, twoweeks.OtherWeekID, twoweeks.CheckToOtherWeek FROM twoweeks WHERE twoweeks.UID = ".$TwoWeeksID[0];
 				$NextWeekIdResult = mysql_query($SQL);
 				$MyOldWeeksIDs = mysql_fetch_array($NextWeekIdResult);
 				

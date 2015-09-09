@@ -83,7 +83,7 @@
 			case 6: $weekday = 'ЗА НЕДЕЛЯ';
 			break;
 		}
-		$timezone  = +2;
+		
 		if ($row[0] == gmdate("Y-m-d", time() + 3600*($timezone+date("I")))) {
 			$weekday2 = '(днес) ';
 		} else {

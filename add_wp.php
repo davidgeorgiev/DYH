@@ -65,7 +65,7 @@ include "main_menu.php";
 				<label for="text">Ден</label>
 				<select class="form-control" name="day">
 				<?php
-					$timezone  = +2;
+					
 					$timestamp = strtotime(gmdate("Y-m-d", time() + 3600*($timezone+date("I"))));
 					$weekday = date( "w", $timestamp);
 					switch($weekday){

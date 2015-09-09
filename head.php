@@ -30,4 +30,5 @@
 		$logged_user_name_is = mysql_fetch_array($logged_user_name_is);
 		return $logged_user_name_is[0];
 	}
+	$timezone  = +2;
 ?>

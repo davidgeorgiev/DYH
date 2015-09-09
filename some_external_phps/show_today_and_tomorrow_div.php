@@ -1,5 +1,5 @@
 ﻿<?php
-	$timezone  = +2;
+	
 	$today_date = gmdate("Y-m-d", time() + 3600*($timezone+date("I")));
 	//$tomorrow = date('Y-m-d', strtotime("tomorrow"));
 	

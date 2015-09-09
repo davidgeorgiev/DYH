@@ -119,16 +119,6 @@ if ($row[0] <= 0) {
 		echo '<p class="list-group-item-text" style = "padding-left:20px;padding-top:10px;font-size: 15px;">'.$rank_of_subject_with_words.'</p>';
 		echo '<div id="progressbar" style = "margin:15px;">';
 		$percentage = $row[1]*10;
-		if (($percentage < 25) && ($percentage >= 0)){
-			$bar_style = "progress-bar-danger";
-		} else if (($percentage < 50) && ($percentage >= 25)){
-			$bar_style = "progress-bar-warning";
-		} else if (($percentage < 75) && ($percentage >= 50)){
-			$bar_style = "progress-bar-info";
-		} else if (($percentage <= 100) && ($percentage >= 75)){
-			$bar_style = "progress-bar-success";
-		}
-		$bar_style = "";
 		echo '<div style = "width: '.$percentage.'%;">';
 		echo $percentage.'%';
 		echo '</div>';

@@ -28,7 +28,7 @@ $username = $_SESSION['class'];
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
 		
-		$timezone  = +2; //(GMT -5:00) EST (U.S. & Canada) 
+		 //(GMT -5:00) EST (U.S. & Canada) 
 		$current_date_time = gmdate("Y-m-j H:i:s", time() + 3600*($timezone+date("I"))); 
 		$SQL = "INSERT INTO comments (Data, Date) VALUES ('".$comment."', '".$current_date_time."')";
 		$result = mysql_query($SQL);

@@ -33,7 +33,7 @@
 	$_SESSION['name'] = $username;
 	
 	if ($_SESSION['page'] != 'check_width'){
-		header('Location: check_width_and_send_to.php?user='.$username.'&page=homeworks_time_chart&weeknum='.$_GET["weeknum"]) and exit;
+		header('Location: check_width_and_send_to.php?user='.$username.'&page=homeworks_time_chart&weeknum='.$_GET["weeknum"].'&numofweeks='.$_GET["numofweeks"]) and exit;
 	}
 	
 	$_SESSION['page'] = "other";
@@ -42,6 +42,23 @@
 <?php 
 include "main_menu.php"; 
 echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
+
+echo '<div><div class="dropdown" style = "float:left;padding-right:10px;">
+	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:46px;">
+	<span class="glyphicon glyphicon-wrench"></span>
+	</button>
+	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+	
+	for ($counter = 1; $counter <= 15; $counter++) {
+		if ($counter == 1){
+			$MyWord = " седмица";
+		} else {
+			$MyWord = " седмици";
+		}
+		echo '<li><a href="check_width_and_send_to.php?user='.$username.'&page=homeworks_time_chart&weeknum='.$_GET["weeknum"].'&numofweeks='.$counter.'">Покажи '.$counter.$MyWord.'</a></li>';
+	}
+	
+	echo '</div><div style = "margin-bottom:30px;text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 4.5px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">Графики на натовареност (показани '.$_GET["numofweeks"].' седмици)</div></div>';
 ?>
 <?php
 	
@@ -68,66 +85,38 @@ echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 			echo '</div>';
 		}
 	}
-
+if (isset($_GET["numofweeks"])){
+	$numberOfWeeks = $_GET["numofweeks"];
+} else {
+	$numberOfWeeks = 1;
+}
 if (($there_is_a_such_user[0] > 0) && ($there_are_some_homeworks[0] > 0)) {
 	//echo 'START COLLECTING DATA...';
 	$week_number = $_GET["weeknum"];
 	$year = date("Y");
-	$done_array1 = CollectData(1, $username, $week_number, $year);
-	$done_array0 = CollectData(0, $username, $week_number, $year);
-	$MyFinalArray1 = array($done_array1,$done_array0);
-	$MyChart = MakeMyChart($MyFinalArray1, "Напрегнатост", "area", "c1");
 	
-	$week_number++;
-	$year = date("Y");
-	$done_array1 = CollectData(1, $username, $week_number, $year);
-	$done_array0 = CollectData(0, $username, $week_number, $year);
-	$MyFinalArray2 = array($done_array1,$done_array0);
+	for ($counter = 1; $counter <= $numberOfWeeks; $counter++){
 	
-	$MyChart2 = MakeMyChart($MyFinalArray2, "Напрегнатост", "area", "c2");
+		$done_array1 = CollectData(1, $username, $week_number, $year);
+		$done_array0 = CollectData(0, $username, $week_number, $year);
+		$done_array2 = CollectData(2, $username, $week_number, $year);
+		$MyFinalArray = array($done_array1,$done_array0, $done_array2);
+		$MyChart = MakeMyChart($MyFinalArray, "Напрегнатост", "area", "c".$counter);
+		
+		PrintMyWeekDropdownButtons($MyFinalArray[0]);
+		echo '<div style="width:100%;height:'.($_GET["height"]-200).'px; min-width:100px;">';
+			echo $MyChart; 
+		echo '</div>';
+		
+		$week_number++;
+		if ($week_number == 53){
+			$week_number = 1;
+			$year++;
+		}
+	}
+	
 }
 ?>
-
-<?php PrintMyWeekDropdownButtons($MyFinalArray1[0]);?>
-<div style="width:100%;height:<?php echo $_GET["height"]-200;?>px; min-width:100px;">
-	<?php echo $MyChart; ?>
-</div>
-
-<?php PrintMyWeekDropdownButtons($MyFinalArray2[0]);?>
-<div style="width:100%;height:<?php echo $_GET["height"]-200;?>px; min-width:100px;">
-	<?php echo $MyChart2; ?>
-</div>
-
-
-
-<nav style = " margin: auto;width: 98%;border-radius:10px;border:3px solid #d2c9c6;background-color:#837d7c;">
-	<ul class="pager">
-		<li>
-			<a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum-1;?>" aria-label="Previous">
-				<span aria-hidden="true">Предишна</span>
-			</a>
-		</li>
-		<?php
-			$weeknum = $_GET["weeknum"];
-		?>
-		<li><a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum-3;?>"><?php echo $weeknum-3;?></a></li>
-		<li><a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum-2;?>"><?php echo $weeknum-2;?></a></li>
-		<li><a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum-1;?>"><?php echo $weeknum-1;?></a></li>
-		<li class="active"><a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum;?>"><?php echo $weeknum;?></a></li>
-		<li><a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum+1;?>"><?php echo $weeknum+1;?></a></li>
-		<li><a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum+2;?>"><?php echo $weeknum+2;?></a></li>
-		<li><a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum+3;?>"><?php echo $weeknum+3;?></a></li>
-		<li>
-			<a href="homeworks_time_chart.php?user=david&weeknum=<?php echo $weeknum+1;?>" aria-label="Next">
-				<span aria-hidden="true">Следваща</span>
-			</a>
-		</li>
-	</ul>
-</nav>
-
-
-
-
 </div>
 </body>
 </html>

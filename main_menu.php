@@ -82,7 +82,7 @@ echo '<li><a href = "curriculum.php?user='.$username.'"><strong><span class = "g
 echo 	'<li class="dropdown">
 
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong><span class = "glyphicon glyphicon-calendar"></span> Графики</strong></a><ul class="dropdown-menu">
-<li><a href="homeworks_time_chart.php?user='.$username.'&weeknum='.date("W").'">Задачи за тази седмица</a></li>
+<li><a href="homeworks_time_chart.php?user='.$username.'&weeknum='.date("W").'&numofweeks=4">Задачи за тази седмица</a></li>
 <li role="separator" class="divider"></li>
 <li><a href="#">Всички потребители (предстоящи)</a></li>
 <li><a href="#">Всички потребители (история)</a></li>

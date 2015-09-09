@@ -73,6 +73,7 @@ if ($row[0] <= 0) {
 		<select class="form-control" name="type">
 			<option value="0">Домашно</option>
 			<option value="1">Изпит</option>
+			<option value="2">Друго</option>
 		</select>
     </div>
 	  <?php

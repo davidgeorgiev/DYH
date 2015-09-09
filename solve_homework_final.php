@@ -43,7 +43,7 @@
 		$learned = $_POST["learned"];
 		$cheat = $_POST["cheat"];
 		$SomePersonalText = $_POST["SomePersonalText"];
-		$timezone  = +2; //(GMT -5:00) EST (U.S. & Canada) 
+		 //(GMT -5:00) EST (U.S. & Canada) 
 		$current_date_time = gmdate("Y-m-j H:i:s", time() + 3600*($timezone+date("I")));
 		$SQL = "INSERT INTO solvedhomeworks (USERID, HWID, TimeForSolve, Assessment, PleasureInPercents, LengthInPages, LearnedInPercents, IfCheating, Date, SomePersonalText) VALUES (".$num_of_found_users_with_this_psw[1].", ".$_SESSION["hwid"].", ".$time_for_solving.", ".$assessment.", ".$pleasure.", ".$length.", ".$learned.", ".$cheat.", '".$current_date_time."', '".$SomePersonalText."')";
 		//echo $SQL;

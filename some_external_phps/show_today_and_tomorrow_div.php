@@ -5,6 +5,8 @@
 	
 	include "return_hw_info_by_id.php";
 	include "SettingButtonTT.php";
+	include (dirname("../")."/css/progressbar.php");
+	include "return_percents_of_schoolyear.php";
 	//include "checkIfHaveToShowOtherWeek.php";
 	//include "ReturnUserIDByUserName.php";
 	//echo '<div class = "todayandtomorrow" style = ""margin:100px;">';
@@ -19,7 +21,7 @@
 	
 	if($week&1) {
 		$eoweek = "OddWeekID";
-		$Label = "Седмицата е нечетна</h1>";
+		$Label = "<h1>Седмицата е нечетна</h1>";
 	} else {
 		$eoweek = "EvenWeekID";
 		$Label = "<h1>Седмицата е четна</h1>";
@@ -33,6 +35,16 @@
 	if ($EditMode == 1) {
 		echo $button_to_render2;
 	}
+	
+	
+	
+	
+	$PercentWidth = ReturnPercentsOfShoolYear($username, $timezone);
+	echo '<div id="progressbar" style = "margin-left:60px;">';
+	echo '<div style = "width: '.$PercentWidth.'%;color:#514d4c;font-weight:bold;white-space: nowrap;">';
+	echo 'Учебна година '.$PercentWidth.'%';
+	echo '</div>';
+	echo '</div>';
 	echo '<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$Label.'</div>';
 	include "some_external_phps/print_curriculum.php";
 	echo '<div class="row" style = "margin-left: 9%;margin-bottom: 10%;>';

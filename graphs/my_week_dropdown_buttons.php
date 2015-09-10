@@ -83,7 +83,7 @@
 					echo '<span style = "padding-left:'.$headingPadding.'%;">'.$myHeadingContent.'<span></p>';
 					echo '<div style = "padding:0px;">';
 					echo '<a href="#" style = "text-decoration:none;"><p style = "margin-top:-12px;padding:3px;text-align:center;background-color:#837d7c;color:#d2c9c6;font-weight:bold;">'.$MyHomeworkInfoArray["MainInfo"]["Title"].'</p></a>';
-					if (strlen($MyHomeworkInfoArray["MainInfo"]["IMGURL"]) >= 0) {
+					if (strlen($MyHomeworkInfoArray["MainInfo"]["IMGURL"]) > 0) {
 						echo '<div style = "background-color:#d2c9c6;border:solid #837d7c;border-bottom:none;margin-top:-10px;margin-bottom:-6px;color:#837d7c;font-size:15px;">';
 						echo '<a href = "'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" rel="lightbox"><img src = "'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" style = "border:solid #9f9593;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom:10px;" width = "100%"></a>';
 						echo '</div>';

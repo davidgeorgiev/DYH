@@ -7,7 +7,7 @@ if (CheckIfHaveToShowOtherWeek(ReturnUserIdByUserName($_GET["user"])) == 0) {
 	$PartOfLabel = '<span class="glyphicon glyphicon-remove"></span> Дективирай';
 }
 $button_to_render2 = '<div><div class="dropdown" style = "float:left;padding-right:10px;">
-	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:46px;">
+	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:72px;font-size:20px;">
 	<span class="glyphicon glyphicon-wrench"></span>
 	</button>
 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">

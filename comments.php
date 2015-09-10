@@ -3,8 +3,62 @@
 	echo '<html>';
 	include "head.php";
 	include "config.php";
+	include ("/css/progressbar.php");
+	include ("/some_external_phps/CheckIfUserIsSolver.php");
+	include "graphs/lib/inc/chartphp_dist.php";
+?>
+	<script src = "graphs/lib/js/jquery.min.js"></script>
+	<script src = "graphs/lib/js/chartphp.js"></script>
+	<link rel="stylesheet" href="graphs/lib/js/chartphp.css">
+	
+<?php	
+	
+	function MakeAreaChart($MyPercentSolvingsArray){
+		$p = new chartphp();
+
+		$p->data = array(array(array('Време',$MyPercentSolvingsArray["TimeForSolve"]), array('Оценка',$MyPercentSolvingsArray["Assessment"]), array('Мнение',$MyPercentSolvingsArray["PleasureInPercents"]), array('Дължина',$MyPercentSolvingsArray["LengthInPages"]), array('Научено',$MyPercentSolvingsArray["LearnedInPercents"]), array('Честност',$MyPercentSolvingsArray["IfCheating"])));
+		$p->chart_type = "donut";
+
+		
+		// Common Options
+		$p->title = "Средна стойност на всички решили";
+
+		return $p->render('c1'); 
+	}
+	
+	function AverageOfIndexInPercents($MyHomeworkInfoArray, $index){
+		$ReturnAverageVal = 0;
+		for ($count = 0; $count < sizeof($MyHomeworkInfoArray["Solvings"]); $count++){
+			$ReturnAverageVal += $MyHomeworkInfoArray["SolvingsPercents"][$MyHomeworkInfoArray["SolversIDs"][$count]][$index];
+		}
+		return $ReturnAverageVal/$count;
+	}
+	
+	function MakeAverageArray($MyHomeworkInfoArray){
+		$DoneArray = array();
+		$DoneArray["TimeForSolve"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "TimeForSolve");
+		$DoneArray["Assessment"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "Assessment");
+		$DoneArray["PleasureInPercents"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "PleasureInPercents");
+		$DoneArray["LengthInPages"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "LengthInPages");
+		$DoneArray["LearnedInPercents"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "LearnedInPercents");
+		$DoneArray["IfCheating"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "IfCheating");
+		return $DoneArray;
+	}
+	function PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, $index, $text) {
+		echo '<div id="progressbar" style = "margin-left:-20px;border-radius:0px;padding:5px;width:100%;">';
+		if ($myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]][$index] <= 100){
+			$MyWidthPercentage = $myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]][$index];
+		} else {
+			$MyWidthPercentage = 100;
+		}
+		echo '<div style = "width: '.$MyWidthPercentage.'%;color:#514d4c;font-weight:bold;white-space: nowrap;">';
+		echo '<p style = "text-align:center;">'.$text.'</p>';
+		echo '</div>';
+		echo '</div>';
+	}
 ?>
 <body>
+
 
 <?php
 	$comment_mode = "on";
@@ -39,20 +93,21 @@
 
 
 <div class="container">
-<?php include "main_menu.php"; ?>
+<?php include "main_menu.php";include "some_external_phps/return_hw_info_by_id.php"; ?>
 
 <?php
+	if ($EditMode == 1){
+		$Trash = '<a href="delete_hw_confirm.php?hwid='.$_GET['hwid'].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:white;font-size:15px;padding:4px;"><span class="glyphicon glyphicon-trash"></span> </a>';
+		$Pencil = '<a href="edit_hw.php?hwid='.$_GET['hwid'].'&class='.$username.'" style = "text-decoration:none;color:white;font-size:15px;"><span class="glyphicon glyphicon-pencil"></span> </a>'; 
+	} else {
+		$Trash = "";
+		$Pencil = "";
+	}
+	$MyHomeworkInfoArray = returnHomeworkInfoByID($hwid);
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 	
-	$SQL = "SELECT homeworks.Date, homeworks.Title, homeworks.Data, homeworks.Rank, WEEKDAY(homeworks.Date) FROM homeworks WHERE homeworks.UID = ".$hwid;
-	$result = mysql_query($SQL);
-	$row = mysql_fetch_array($result);
-	$SQL = "SELECT imgurl.URL FROM imgurl, hwimg WHERE imgurl.UID = hwimg.IMGURLID AND hwimg.HWID = ".$hwid;
-	$result = mysql_query($SQL);
-	$row2 = mysql_fetch_array($result);
-	
 	echo '<div class="page-header">';
-		switch($row[4]){
+		switch($MyHomeworkInfoArray["MainInfo"]["WEEKDAY"]){
 			case 0: $weekday = 'ЗА ПОНЕДЕЛНИК';
 			break;
 			case 1: $weekday = 'ЗА ВТОРНИК';
@@ -68,17 +123,17 @@
 			case 6: $weekday = 'ЗА НЕДЕЛЯ';
 			break;
 		}
-		if ($row[0] == date("Y-m-d")) {
+		if ($MyHomeworkInfoArray["MainInfo"]["Date"] == gmdate("Y-m-d", time() + 3600*($timezone+date("I")))) {
 			$weekday2 = '(днес) ';
 		} else {
 			$weekday2 = '';
 		}
-		echo '<h1>'.$weekday.' <small id = "smalltag">'.$weekday2.$row[0].'</small></h1>';
+		echo '<h1 style = "color:#3e3a3a;">'.$weekday.' <small id = "smalltag">'.$weekday2.$MyHomeworkInfoArray["MainInfo"]["Date"].'</small></h1>';
 		echo '</div>';
 		echo '<div class="row">';
 		
-		echo '	<div class="col-sm-3" style = "margin:10px;background-color: white;border-radius:7px;">';
-			switch($row[3]){
+		echo '	<div class="col-sm-7" style = "margin:10px;background-color: #d2c9c6;border-radius:0px;padding:0px;">';
+			switch($MyHomeworkInfoArray["MainInfo"]["Rank"]){
 				case 1: $color = "white";
 				break;
 				case 2: $color = "#a8f293";
@@ -87,49 +142,132 @@
 				break;
 				case 4: $color = "#fa7194";
 				break;
-			} 
-			echo '	<h3 style = "background-color: '.$color.';border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">'.$row[1].'</h3>';
-			if (strlen($row2[0]) > 0) {
-				echo ' <p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;"><a href = "'.$row2[0].'" rel="lightbox"><img src="'.$row2[0].'" alt="HomeWork image" width="100%"></a></p>';
 			}
-			echo '	<p style = "border-width:thin; border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px; padding: 9px;">'.$row[2].'</p>';
+			
+			switch ($MyHomeworkInfoArray["MainInfo"]["Type"]) {
+				case 0: $MyType = "Домашно по ";
+				break;
+				case 1: $MyType = "Изпит по ";
+				break;
+				case 2: $MyType = "Напомняне по ";
+				break;
+			}
+			
+			echo '<h3 style = "background-color: #837d7c;border-width:thin;border-top-left-radius: 0px;border-top-right-radius: 0px; padding: 10px;margin:auto;color:#d2c9c6;"><span style = "background-color:#6b6665;padding:9px;margin-left:-10px;">'.$Trash.$Pencil."</span>".'<span style = "padding-left:13px;">'.$MyType.$MyHomeworkInfoArray["MainInfo"]["Title"].'</span>'.'</h3>';
+			if (strlen($MyHomeworkInfoArray["MainInfo"]["IMGURL"]) > 0) {
+				echo ' <p style = "border-width:thin; border-style: solid;background-color:#d2c9c6;border-color: #BEBEBE;border-radius:5px; padding: 0px;"><a href = "'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" rel="lightbox"><img src="'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" style = "border-bottom:solid #837d7c;border-width:1px;" alt="HomeWork image" width="100%"></a></p>';
+			}
+			echo '	<p style = "background-color:#d2c9c6;border-radius:5px; padding: 0px;font-size:18px;padding:20px;color:#565252">'.$MyHomeworkInfoArray["MainInfo"]["Data"].'</p>';
+		
+		$MyPercentage = ($MyHomeworkInfoArray["MainInfo"]["Rank"]*25);
+					
+		echo '<div id="progressbar">';
+		echo '<div style = "width: '.$MyPercentage.'%;color:#514d4c;font-weight:bold;white-space: nowrap;">';
+		echo 'Важност '.$MyPercentage.'%';
+		echo '</div>';
 		echo '</div>';
 		
-		echo '	<div class="col-sm-8" style = "margin:10px;background-color: white;border-radius:7px;">';
-			echo '	<h3 style = "background-color: white;border-width:thin; border-style: solid;border-color: #d0d0d0;border-radius:5px; padding: 5px;">Коментари</h3>';
+		echo '<div style="margin-top:50px;margin-left:20px;width:100%;height:400px;min-width:100px;">';
+		
+			echo MakeAreaChart(MakeAverageArray($MyHomeworkInfoArray));
+			
+		echo '</div>';
+		
+		echo '</div>';
+		
+		
+		echo '	<div class="col-sm-4" style = "margin:10px;background-color: #837d7c;border-radius:0px;">';
+			echo '	<h3 style = "color:#d2c9c6;padding: 5px;font-weight:-900;">Коментари</h3>';
 			
 			if ($comment_mode == "on") {
 				include "comment_form.php";
 			}
 			
 			
-			$SQL = "SELECT usercommenthomework.COMMENTID, usercommenthomework.USERID FROM usercommenthomework WHERE usercommenthomework.HWID = ".$hwid." ORDER BY usercommenthomework.UID DESC";
-			$result = mysql_query($SQL);
 			
-			while ($row = mysql_fetch_array($result)) {
-			
-				$SQL = "SELECT user.Name FROM user, usercommenthomework WHERE usercommenthomework.USERID = user.UID AND user.UID = ".$row[1];
-				$result2 = mysql_query($SQL);
-				$c_user = mysql_fetch_array($result2);
-				
-				$SQL = "SELECT comments.Data, comments.Date FROM comments, usercommenthomework WHERE comments.UID = usercommenthomework.COMMENTID AND usercommenthomework.COMMENTID = ".$row[0];
-				$result3 = mysql_query($SQL);
-				$c_data_date = mysql_fetch_array($result3);
-				echo '<div style = "border-width:thin;border-style: solid;background-color:#F3F3F3;border-color: #BEBEBE;border-radius:5px;padding: 9px;margin-bottom:20px;">';
-				echo '	<p style = " font-weight: bold;">'.$c_user[0].'<span style = "color:gray;font-size:10px;"> (Публикувано на '.$c_data_date[1].')</span></p>';
-				echo '	<p style = "border-width:thin; border-style: solid;background-color:white;border-color: #BEBEBE;border-radius:5px; padding: 9px;">'.$c_data_date[0].'</p>';
+			echo '<div style = "overflow-y: scroll; height:320px;padding:12px;margin-bottom:15px;">';
+			foreach($MyHomeworkInfoArray["Comments"] as $value){
+				echo '<div style = "background-color:#746f6e;border:solid white;border-width:1px;padding: 9px;margin-bottom:20px;">';
+				echo '	<p style = " font-weight: bold;color:white;">'.$value["Name"].'<span style = "color:#d2c9c6;font-size:10px;"> (Публикувано на '.$value["Date"].')</span></p>';
+				echo '	<p style = "background-color:#746f6e;color:#d2c9c6;border-radius:5px; padding: 9px;">'.$value["Data"].'</p>';
 				echo '</div>';
 			}
+			unset($value);
+			echo '</div>';
 		echo '</div>';
 		
 		echo '</div>';
-	
 	
 ?>
 
 
 
 </div>
-</div>
+
+<?php
+
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
+	
+	if (CheckIfUserIsSolver(Get_Logged_users_id(), $_GET['hwid']) == 1){
+		$SolveButton = '<span style = "background-color:#6b6665;padding:12px;margin-left:-10px;"><button class="btn btn-default" style = "background:#6b6665;border:none;color:#d2c9c6;" >Решeно</button></span>';
+	} else {
+		$SQL = "SELECT user.Name FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
+		//echo $SQL;
+		$current_logged_in_username_result = mysql_query($SQL);
+		$current_logged_in_username = mysql_fetch_array($current_logged_in_username_result);
+		$SolveButton = '<a href = "solve_homework.php?hwid='.$_GET['hwid'].'&user='.$current_logged_in_username[0].'"><span style = "background-color:#6b6665;padding:12px;margin-left:-10px;"><button class="btn btn-default" style = "background:#6b6665;border:none;color:#d2c9c6;" >Реши</button></span></a>';
+	}
+	
+	echo '<h3 style = "background-color: #837d7c;border-width:thin;border-top-left-radius: 0px;border-top-right-radius: 0px; padding: 10px;margin:auto;color:#d2c9c6;">'.$SolveButton.'<span style = "padding-left:13px;">Решавания - '.$MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"].'</span></h3>';
+			
+			for ($count = 0; $count < sizeof($MyHomeworkInfoArray["Solvings"]); $count++){
+				$myCurrentArray = $MyHomeworkInfoArray["Solvings"];
+				//echo "<h3>user.UID ".$MyHomeworkInfoArray["SolversIDs"][$count]."</h3";
+				//echo "<p>".$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["UID"]."</p>";
+				echo '<div style = "padding-left:20px;padding-bottom:0px;padding-top:5px;background-color:#d2c9c6;">';
+				echo '<h2 style = "color:#514d4c;">'.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"].'<small id = "smalltag"> '.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Date"]."</small></h2>";
+				
+				//echo '<div class="col-sm-4" style = "background-color:white;">';
+				
+				echo '<div style = "width:100%;background-color:#837d7c;padding:20px;font-size:18px;margin-left:-20px;color:white;">';
+				echo '<p>'.$MyHomeworkInfoArray["SolveSentences"][$MyHomeworkInfoArray["SolversIDs"][$count]].'</p>';
+				echo '<p style = "color:#514d4c;font-size:21px;">'.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["SomePersonalText"]."</p>";
+				echo '</div>';
+				
+				
+				$myCurrentArray = $MyHomeworkInfoArray["SolvingsPercents"];
+				
+				
+				PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, "TimeForSolve", "Време");
+				PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, "Assessment", "Оценка");
+				PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, "PleasureInPercents", "Мнение");
+				PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, "LengthInPages", "Дължина");
+				PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, "LearnedInPercents", "Научено");
+				PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, "IfCheating", "Честност");
+				
+				
+				
+				
+				
+				//echo '</div>';
+				echo '</div>';
+			}
+			
+			
+			
+			for ($count = 0; $count < sizeof($MyHomeworkInfoArray["SolvingsPercents"]); $count++){
+				
+			}
+			if ($count == 0){
+				echo '<h3>Още не е решено от никого!</h3>';
+			}
+			
+			
+			
+			
+			
+			echo '</div>';
+
+?>
 </body>
 </html>

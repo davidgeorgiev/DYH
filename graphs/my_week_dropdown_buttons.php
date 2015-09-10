@@ -1,21 +1,8 @@
-﻿<style>
-#progressbar {
-	background-color: #837d7c;
-	border-radius: 3px; /* (height of inner div) / 2 + padding */
-	padding: 3px;
-}
-
-#progressbar > div {
-	background-color: #d2c9c6;
-	width: 40%; /* Adjust with JavaScript */
-	height: 20px;
-	border-radius: 3px;
-	text-align:center;font-size:16px;
-	font-weight: normal;
-}
-</style>
+﻿
 
 <?php
+	include (dirname("../")."/some_external_phps/return_hw_info_by_id.php");
+	include (dirname("../")."/some_external_phps/CheckIfUserIsSolver.php");
 	//print_r($done_array1);
 	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username){
 		echo '<style>.btn-group {width:'.(93/(sizeof($done_array1))).'%;}.btn btn-default dropdown-toggle{width: 100%;}</style>';
@@ -40,8 +27,8 @@
 				$MyDropdownMenuWidth = 300;
 			}
 			
-			echo '<ul class="dropdown-menu" style = "background-color: white;width:'.$MyDropdownMenuWidth.'px;padding-right:10px;padding-left:10px;padding-top:10px;padding-bottom:0px;">';
-			$SQL = "SELECT homeworks.Data, homeworks.Title, homeworks.Rank, homeworks.Type, homeworks.UID FROM homeworks, user, uh WHERE homeworks.Date = '".$value[0]."' AND homeworks.UID = uh.HWID AND user.UID = uh.USERID AND user.Name = '".$username."'";
+			echo '<ul class="dropdown-menu" style = "background-color: white;width:'.$MyDropdownMenuWidth.'px;padding-right:10px;padding-left:10px;padding-top:10px;padding-bottom:0px;overflow-y: scroll; height:320px;">';
+			$SQL = "SELECT homeworks.UID FROM homeworks, user, uh WHERE homeworks.Date = '".$value[0]."' AND homeworks.UID = uh.HWID AND user.UID = uh.USERID AND user.Name = '".$username."'";
 			$result4 = mysql_query($SQL);
 			$SQL = "SELECT COUNT(homeworks.UID) FROM homeworks, user, uh WHERE homeworks.Date = '".$value[0]."' AND homeworks.UID = uh.HWID AND user.UID = uh.USERID AND user.Name = '".$username."'";
 			$result5 = mysql_query($SQL);
@@ -50,43 +37,68 @@
 				echo '<p><a href="#">Няма нищо</a></p>';
 			} else {
 				while ($homework_info = mysql_fetch_array($result4)){
+					$MyHomeworkInfoArray = returnHomeworkInfoByID($homework_info[0]);
 					$myHeadingBackgroundColor = "white";
 					$myHeadingContent = "Неопределено събитие";
-					if ($homework_info[3] == 0) {
+					if ($MyHomeworkInfoArray["MainInfo"]["Type"] == 0) {
 						$myHeadingBackgroundColor = "#86cf4b";
 						$myHeadingContent = "Домашно";
 						$headingPadding = 19;
-					} else if ($homework_info[3] == 1) {
+					} else if ($MyHomeworkInfoArray["MainInfo"]["Type"] == 1) {
 						$myHeadingBackgroundColor = "#4ba8cf";
 						$myHeadingContent = "Изпит";
 						$headingPadding = 24;
-					} else if ($homework_info[3] == 2) {
+					} else if ($MyHomeworkInfoArray["MainInfo"]["Type"] == 2) {
 						$myHeadingBackgroundColor = "#dd8043";
 						$myHeadingContent = "Друго";
 						$headingPadding = 24;
 					}
 					
 					if ($EditMode == 1){
-						$Trash = '<a href="delete_hw_confirm.php?hwid='.$homework_info[4].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:white;font-size:13px;padding:4px;"><span class="glyphicon glyphicon-trash"></span> </a>';
-						$Pencil = '<a href="edit_hw.php?hwid='.$homework_info[4].'&class='.$username.'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-pencil"></span> </a>'; 
+						$Trash = '<a href="delete_hw_confirm.php?hwid='.$homework_info[0].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:white;font-size:13px;padding:4px;"><span class="glyphicon glyphicon-trash"></span> </a>';
+						$Pencil = '<a href="edit_hw.php?hwid='.$homework_info[0].'&class='.$username.'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-pencil"></span> </a>'; 
 					} else {
 						$Trash = "";
 						$Pencil = "";
 					}
 					
-					echo '<p style = "background-color:'.$myHeadingBackgroundColor.';text-left:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$Trash.$Pencil.'<span style = "padding-left:'.$headingPadding.'%;">'.$myHeadingContent.'<span></p>';
+					echo '<p style = "background-color:'.$myHeadingBackgroundColor.';text-left:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$Trash.$Pencil.'<a href="comments.php?hwid='.$homework_info[0].'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-comment"></span> '.$MyHomeworkInfoArray["MainInfo"]["NumOfComments"];
+					
+					if ($MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"] > 0){						
+						echo'<a href="homework_solvers.php?hwid='.$homework_info[0].'&user='.$username;
+						echo '" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-stats"></span> '.$MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"];
+						echo '</a>';
+					}
+					
+					if (CheckIfUserIsSolver(Get_Logged_users_id(), $homework_info[0]) == 0){
+						$SQL = "SELECT user.Name FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
+						//echo $SQL;
+						$current_logged_in_username_result = mysql_query($SQL);
+						$current_logged_in_username = mysql_fetch_array($current_logged_in_username_result);
+						echo'<a href="'.'solve_homework.php?hwid='.$homework_info[0].'&user='.$current_logged_in_username[0];
+						echo '" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-ok"></span> ';
+						echo '</a>';
+					}
+					
+					echo '<span style = "padding-left:'.$headingPadding.'%;">'.$myHeadingContent.'<span></p>';
 					echo '<div style = "padding:0px;">';
-					echo '<a href="#" style = "text-decoration:none;"><p style = "margin-top:-12px;padding:3px;text-align:center;background-color:#837d7c;color:#d2c9c6;font-weight:bold;">'.$homework_info[1].'</p></a>';
-					if (strlen($homeworks_info[0]) >= 0) {
-						echo '<div style = "background-color:#d2c9c6;border:solid #837d7c;padding-left:4px;padding-right:4px;padding-bottom:15px;padding-top:12px;margin-top:-10px;margin-bottom:-6px;color:#837d7c;font-size:15px;"><p>'.$homework_info[0]."</p>";
+					echo '<a href="#" style = "text-decoration:none;"><p style = "margin-top:-12px;padding:3px;text-align:center;background-color:#837d7c;color:#d2c9c6;font-weight:bold;">'.$MyHomeworkInfoArray["MainInfo"]["Title"].'</p></a>';
+					if (strlen($MyHomeworkInfoArray["MainInfo"]["IMGURL"]) >= 0) {
+						echo '<div style = "background-color:#d2c9c6;border:solid #837d7c;border-bottom:none;margin-top:-10px;margin-bottom:-6px;color:#837d7c;font-size:15px;">';
+						echo '<a href = "'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" rel="lightbox"><img src = "'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" style = "border:solid #9f9593;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom:10px;" width = "100%"></a>';
+						echo '</div>';
+					}
+					if (strlen($MyHomeworkInfoArray["MainInfo"]["Data"]) >= 0) {
+						echo '<div style = "background-color:#d2c9c6;border:solid #837d7c;border-top:none;padding-left:4px;padding-right:4px;padding-bottom:15px;padding-top:12px;margin-top:-10px;margin-bottom:-6px;color:#837d7c;font-size:15px;"><p>'.$MyHomeworkInfoArray["MainInfo"]["Data"]."</p>";
 						
 						echo '</div>';
 					}
 					//echo '<li><a href="#">'.$homework_info[2].'</a></li>';
+					
 					echo '</div>';
 					echo '<div style = "margin-bottom:10px;">';
 					
-					$MyPercentage = ($homework_info[2]*25);
+					$MyPercentage = ($MyHomeworkInfoArray["MainInfo"]["Rank"]*25);
 					
 					echo '<div id="progressbar">';
 					echo '<div style = "width: '.$MyPercentage.'%;color:#837d7c;font-weight:bold;">';

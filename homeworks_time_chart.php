@@ -6,7 +6,8 @@
 	include "graphs/make_chart.php";
 	include "graphs/create_date_range.php";
 	include "graphs/collect_data.php";
-	include "graphs/my_week_dropdown_butons.php";
+	include "graphs/my_week_dropdown_buttons.php";
+	include "graphs/convert_month_to_word.php";
 ?>
 
 
@@ -58,9 +59,20 @@ echo '<div><div class="dropdown" style = "float:left;padding-right:10px;">
 		echo '<li><a href="check_width_and_send_to.php?user='.$username.'&page=homeworks_time_chart&weeknum='.$_GET["weeknum"].'&numofweeks='.$counter.'">Покажи '.$counter.$MyWord.'</a></li>';
 	}
 	
-	echo '</div><div style = "margin-bottom:30px;text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 4.5px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">Графики на натовареност (показани '.$_GET["numofweeks"].' седмици)</div></div>';
-?>
-<?php
+	echo '</div><div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 4.5px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">Графики на натовареност (показани '.$_GET["numofweeks"].' седмици)</div></div>';
+	echo '
+	<div class="btn-group btn-group-justified" role="group" style = "width:100%;margin-bottom:30px;">
+	<div class="btn-group" role="group">
+	<button type="button" class="btn btn-default" style = "background: #86cf4b;border-color: #837d7c;border-width:3px;">Домашни</button>
+	</div>
+	<div class="btn-group" role="group">
+	<button type="button" class="btn btn-default" style = "background: #4ba8cf;border-color: #837d7c;border-width:3px;">Изпити</button>
+	</div>
+	<div class="btn-group" role="group">
+	<button type="button" class="btn btn-default" style = "background: #dd8043;border-color: #837d7c;border-width:3px;">Други</button>
+	</div>
+	</div>
+	';
 	
 	
 	$SQL = "SELECT DISTINCT COUNT(user.Name) FROM user WHERE user.Name = '".$username."'";
@@ -94,24 +106,42 @@ if (($there_is_a_such_user[0] > 0) && ($there_are_some_homeworks[0] > 0)) {
 	//echo 'START COLLECTING DATA...';
 	$week_number = $_GET["weeknum"];
 	$year = date("Y");
-	
+	$PrevMonth = 0;
 	for ($counter = 1; $counter <= $numberOfWeeks; $counter++){
-	
 		$done_array1 = CollectData(1, $username, $week_number, $year);
 		$done_array0 = CollectData(0, $username, $week_number, $year);
 		$done_array2 = CollectData(2, $username, $week_number, $year);
 		$MyFinalArray = array($done_array1,$done_array0, $done_array2);
 		$MyChart = MakeMyChart($MyFinalArray, "Напрегнатост", "area", "c".$counter);
-		
+		$MyDate = date_create($done_array1[6][0]);
+		$MyLastDayOfThisWeekMonth = date_format($MyDate, "m");
+		$MyYearToShow = date_format($MyDate, "Y");
+		if ($MyLastDayOfThisWeekMonth != $PrevMonth){
+			echo '<div class="page-header">';
+			echo '<h1 style = "color:#837d7c;">'.ConvertMonthToWord($MyLastDayOfThisWeekMonth)." ".$MyYearToShow.'</h1>';
+			echo '</div>';
+		}
+		$PrevMonth = $MyLastDayOfThisWeekMonth;
 		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username);
 		echo '<div style="width:100%;height:'.($_GET["height"]-200).'px; min-width:100px;">';
 			echo $MyChart; 
 		echo '</div>';
 		
 		$week_number++;
-		if ($week_number == 53){
+		
+		$ddate = $year."-12-31";
+		$date = new DateTime($ddate);
+		$last_week_of_year = $date->format("W");
+		
+		//echo $week_number." ".$year." ".date('Y-m-d', strtotime($year."W".$week_number.'1'))." ".date('Y-m-d', strtotime($year."W".$week_number.'7'));
+		
+		if ($week_number > $last_week_of_year){
+			//echo " ".$week_number." > ".$last_week_of_year;
 			$week_number = 1;
 			$year++;
+			//echo '<div class="page-header">';
+			//echo '<h1 style = "color:#837d7c;">'.$week_number." ".$year.'</h1>';
+			//echo '</div>';
 		}
 	}
 	

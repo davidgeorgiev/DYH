@@ -160,6 +160,7 @@
 	}
 
 	function returnHomeworkInfoByID($homeworkId) {
+		//echo "ENTER";
 		$PosterUserNameSQL = "SELECT user.Name FROM user, uh WHERE uh.HWID = ".$homeworkId;
 		$PosterUserNameResult = mysql_query($PosterUserNameSQL);
 		$MyPosterUserName = mysql_fetch_array($PosterUserNameResult);
@@ -176,7 +177,7 @@
 		$NumOfCommentsResult = mysql_query($NumOfCommentsSQL);
 		$MyNumOfComments = mysql_fetch_array($NumOfCommentsResult);
 		
-		$COMMENTSQL = "SELECT user.Name, comments.Date, comments.Data FROM user, comments, usercommenthomework WHERE usercommenthomework.HWID = ".$homeworkId." AND user.UID = usercommenthomework.USERID AND usercommenthomework.COMMENTID = comments.UID";
+		$COMMENTSQL = "SELECT user.Name, comments.Date, comments.Data FROM user, comments, usercommenthomework WHERE usercommenthomework.HWID = ".$homeworkId." AND user.UID = usercommenthomework.USERID AND usercommenthomework.COMMENTID = comments.UID ORDER BY comments.Date DESC";
 		$commentresult = mysql_query($COMMENTSQL);
 		//$MyComments = mysql_fetch_array($commentresult);
 		
@@ -184,7 +185,7 @@
 		$NumOfSolversResult = mysql_query($COUNTSOLVERSSQL);
 		$MyNumOfSolvers = mysql_fetch_array($NumOfSolversResult);
 		
-		$SOLVINGSSQL = "SELECT user.Name, solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating, solvedhomeworks.Date, solvedhomeworks.SomePersonalText, user.UID FROM solvedhomeworks, user WHERE solvedhomeworks.HWID = ".$homeworkId." AND user.UID = solvedhomeworks.USERID";
+		$SOLVINGSSQL = "SELECT user.Name, solvedhomeworks.TimeForSolve, solvedhomeworks.Assessment, solvedhomeworks.PleasureInPercents, solvedhomeworks.LengthInPages, solvedhomeworks.LearnedInPercents, solvedhomeworks.IfCheating, solvedhomeworks.Date, solvedhomeworks.SomePersonalText, user.UID FROM solvedhomeworks, user WHERE solvedhomeworks.HWID = ".$homeworkId." AND user.UID = solvedhomeworks.USERID ORDER BY solvedhomeworks.Date DESC";
 		//echo $SOLVINGSSQL;
 		$SolvingsResult = mysql_query($SOLVINGSSQL);
 		//$MySolvings = mysql_fetch_array($SolvingsResult);

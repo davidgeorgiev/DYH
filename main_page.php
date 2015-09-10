@@ -12,6 +12,7 @@
 
 <?php
 	include "start_check.php";
+	include "some_external_phps/CheckIfUserIsSolver.php";
 	$pars_time_period_to_check_with_page = "";
 	if (isset($_GET["time_period"])){
 		if (strlen($_GET["time_period"]) > 0){
@@ -172,12 +173,10 @@
 			$SQL = "SELECT (user.UID) FROM user WHERE user.Name = '".$username."'";
 				$result4 = mysql_query($SQL);
 				$user_id = mysql_fetch_array($result4);
-				$SQL = "SELECT DISTINCT COUNT(solvedhomeworks.UID) FROM solvedhomeworks,user WHERE solvedhomeworks.USERID = '".Get_Logged_users_id()."' AND solvedhomeworks.HWID = ".$row2[3];
-				$result4 = mysql_query($SQL);
-				$number_of_solved_hws = mysql_fetch_array($result4);
+				
 				echo '<div class="dropdown" style = "width:130px;padding-right:10px;margin-top:10px;">';
 				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
-				if ($number_of_solved_hws[0] > 0){
+				if (CheckIfUserIsSolver(Get_Logged_users_id(), $row2[3]) == 1){
 					echo '<span style = "color:green;" class = "glyphicon glyphicon-ok"> Решено</span></a>';
 				} else {
 					echo '<span style = "color:red;" class = "glyphicon glyphicon-remove"> Нерешено</span>';
@@ -193,7 +192,7 @@
 					$Label1 = "Взех този изпит";
 					$Label2 = "взели този изпит";
 				}
-				if ($number_of_solved_hws[0] <= 0){
+				if (CheckIfUserIsSolver(Get_Logged_users_id(), $row2[3]) == 0){
 					//echo $number_of_solved_hws[0];
 					$SQL = "SELECT user.Name FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
 					//echo $SQL;

@@ -1,4 +1,6 @@
-﻿<?php
+﻿
+
+<?php
 	session_start();
 	echo '<html>';
 	include "head.php";
@@ -8,6 +10,7 @@
 	include "graphs/collect_data.php";
 	include "graphs/my_week_dropdown_buttons.php";
 	include "graphs/convert_month_to_word.php";
+	include (dirname("../")."/css/progressbar.php");
 ?>
 
 

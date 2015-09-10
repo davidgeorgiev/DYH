@@ -1,9 +1,15 @@
 <?php
 	function CollectData($type_for_search, $username, $week_number, $year){
+		//$strDateFrom = date('Y-m-d', strtotime($year."W".$week_number.'-1'));
+		//$strDateTo = date('Y-m-d', strtotime($year."W".$week_number.'-7'));
 		
-		$strDateFrom = date('Y-m-d', strtotime($year."W".$week_number.'1'));
-		$strDateTo = date('Y-m-d', strtotime($year."W".$week_number.'7'));
+		$week_start = new DateTime();
+		$week_start->setISODate($year,$week_number);
+		$strDateFrom = $week_start->format('Y-m-d');
+		$strDateTo = date('Y-m-d', strtotime($strDateFrom. ' + 6 days'));
 		
+		//echo $strDateFrom;
+		//echo $strDateTo;
 		// $strDateFrom = date("Y-m-d",strtotime('monday this week'));
 		// $strDateTo = date("Y-m-d",strtotime("sunday this week"));
 		

@@ -3,8 +3,8 @@
 	echo '<html>';
 	include "head.php";
 	include "config.php";
-	include ("/css/progressbar.php");
-	include ("/some_external_phps/CheckIfUserIsSolver.php");
+	include "css/progressbar.php";
+	include "some_external_phps/CheckIfUserIsSolver.php";
 	include "graphs/lib/inc/chartphp_dist.php";
 ?>
 	<script src = "graphs/lib/js/jquery.min.js"></script>

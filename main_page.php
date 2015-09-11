@@ -116,7 +116,8 @@
 	$MyToday = gmdate("Y-m-d", time() + 3600*($timezone+date("I")));
 	$strDateFrom = date('Y-m-d', strtotime($MyToday. ' - 1 day'));
 	$strDateTo = date('Y-m-d', strtotime($MyToday. ' + 2 days'));
-	
+	include "some_external_phps/LegendButtonsForChart.php";
+	PrintChartHeader(0, 0, 0, "Вашите скорошни задачи");
 	PrintAChart(1, $username, $strDateFrom, $strDateTo, "0", $EditMode);
 	echo '</div>';
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';

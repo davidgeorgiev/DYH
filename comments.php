@@ -42,14 +42,26 @@
 		$DoneArray["LengthInPages"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "LengthInPages");
 		$DoneArray["LearnedInPercents"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "LearnedInPercents");
 		$DoneArray["IfCheating"] = AverageOfIndexInPercents($MyHomeworkInfoArray, "IfCheating");
+		foreach ($DoneArray as $key => $value){
+			if ($DoneArray[$key] > 100){
+				$DoneArray[$key] = 100;
+			}
+			if ($DoneArray[$key] < 0){
+				$DoneArray[$key] = 0;
+			}
+		}
+		unset($value);
+		//print_r($DoneArray);
 		return $DoneArray;
 	}
 	function PrintPercentagebar($MyHomeworkInfoArray, $myCurrentArray, $count, $index, $text) {
 		echo '<div id="progressbar" style = "margin-left:-20px;border-radius:0px;padding:5px;width:100%;">';
-		if ($myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]][$index] <= 100){
-			$MyWidthPercentage = $myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]][$index];
-		} else {
+		if ($myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]][$index] > 100){
 			$MyWidthPercentage = 100;
+		} else if ($myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]][$index] < 0){
+			$MyWidthPercentage = 0;
+		} else {
+			$MyWidthPercentage = $myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]][$index];
 		}
 		echo '<div style = "width: '.$MyWidthPercentage.'%;color:#514d4c;font-weight:bold;white-space: nowrap;">';
 		echo '<p style = "text-align:center;">'.$text.'</p>';

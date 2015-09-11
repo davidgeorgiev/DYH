@@ -4,9 +4,13 @@
 ?>
 <script type="text/javascript">
 
-width = window.innerWidth;
-height = window.innerHeight;
-
+if (screen.width < screen.height){
+	width = screen.width;
+	height = screen.height;
+} else {
+	width = window.innerWidth;
+	height = window.innerHeight;
+}
 function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);

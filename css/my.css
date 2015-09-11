@@ -104,9 +104,118 @@ width:100px;
 
 #progressbar > div {
 	background-color: #d2c9c6;
-	width: 40%; /* Adjust with JavaScript */
+	width: 40%;
 	height: 20px;
 	border-radius: 3px;
 	text-align:center;font-size:16px;
 	font-weight: bold;
+}
+@font-face {
+  font-family: MyDays;
+  src: local("Helvetica Neue Bold"),
+       local("HelveticaNeue-Bold"),
+       url(Days.ttf);
+  //font-weight: bold;
+}
+@font-face {
+  font-family: Hattori;
+  src: local("Helvetica Neue Bold"),
+       local("HelveticaNeue-Bold"),
+       url("Hattori Hanzo.otf");
+  //font-weight: bold;
+}
+
+#urlTitleForm{
+	background-color:#d2c9c6;
+	padding:10px;
+	font-size:40px;
+	color:#837d7c;
+	border-radius:10px;
+	font-family: Hattori;
+	font-weight:bold;
+}
+#urlForm{
+	width:100%;
+	text-align:center;
+	margin:auto;
+	background-color:#837d7c;
+	border-radius:20px;
+	padding-bottom:20px;
+}
+#MyInputBox{
+	width:90%;
+	margin:auto;
+	margin-top:24px;
+	margin-bottom:24px;
+	background:#d2c9c6;
+	color:#837d7c;
+	font-size:30px;
+	height:45px;
+	border-top-left-radius:20px;
+	border-bottom-right-radius:20px;
+}
+#MyButtonToAddURL{
+	background:#d2c9c6;
+	color:#837d7c;
+	font-weight:bold;
+	width:20%;
+	height:50px;
+	border-radius:20px;
+	font-size:25px;
+	font-family: Hattori;
+	font-weight:bold;
+	min-width:140px;
+}
+#MyButtonToAddURL:hover {
+	background:#837d7c;
+	color:#d2c9c6;
+	font-family: Hattori;
+	font-weight:bold;
+	
+}
+#MyInputBox:hover{
+	background:#e3d6d1;
+	
+}
+#URLdata{
+	height:100px;
+}
+.zoom_img_urls img{
+	margin:50px;
+	height:100px;
+	width:100px;
+	-moz-transition:-moz-transform 0.5s ease-in; 
+	-webkit-transition:-webkit-transform 0.5s ease-in; 
+	-o-transition:-o-transform 0.5s ease-in;
+
+}
+.zoom_img_urls img:hover{
+	-moz-transform:scale(1.3); 
+	-webkit-transform:scale(1.3);
+	-o-transform:scale(1.3);
+	-moz-box-shadow: 0px 20px 10px -10px #888;
+}
+#UrlTitle {
+	padding:10px;
+	font-size:50px;
+	color:#d2c9c6;
+	border-radius:10px;
+	font-family: Hattori;
+	font-weight:bold;
+	margin-top:40px;
+	text-align:center;
+	margin-left:50%;
+}
+#descURL {
+	color:#d2c9c6;
+	font-family: Hattori;
+	font-size:30px;
+	margin-top:-20px;
+	margin-left:50%;
+}
+#URLBOX{
+	margin-left:20px;margin-right:20px;
+}
+#URLBOX:hover{
+	background-color:#9c9695;
 }

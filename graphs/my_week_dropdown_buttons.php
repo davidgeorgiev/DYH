@@ -4,9 +4,9 @@
 	include (dirname("../")."/some_external_phps/return_hw_info_by_id.php");
 	include (dirname("../")."/some_external_phps/CheckIfUserIsSolver.php");
 	//print_r($done_array1);
-	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username){
-		echo '<style>.btn-group {width:'.(93/(sizeof($done_array1))).'%;}.btn btn-default dropdown-toggle{width: 100%;}</style>';
-		echo '<div style = "margin-left: 5%;">';
+	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username, $width, $leftmargin){
+		echo '<style>.btn-group {width:'.(($width-$leftmargin)/(sizeof($done_array1))).'%;}.btn btn-default dropdown-toggle{width: 100%;}</style>';
+		echo '<div style = "margin-left: '.$leftmargin.'%;width:'.($width-$leftmargin).'%;">';
 		foreach ($done_array1 as $value){
 			if ($value[0] == gmdate("Y-m-d", time() + 3600*($timezone+date("I")))){
 				$buttonClass = "btn btn-success dropdown-toggle";

@@ -20,11 +20,20 @@
 		
 		$dates_array = createDateRangeArray($strDateFrom,$strDateTo);
 		
+		
+		
 		$daily_rank_sum_arr = array();
 		foreach ($dates_array as &$value) {
 			//echo $value;
-			
-			$SQL = "SELECT DISTINCT SUM(homeworks.Rank) FROM homeworks,user,uh WHERE homeworks.Type = ".$type_for_search." AND user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$value."'";
+			if (Get_Logged_users_id()){
+				if ($type_for_search != -1){
+					$SQL = "SELECT DISTINCT SUM(homeworks.Rank) FROM homeworks,user,uh,solvedhomeworks WHERE homeworks.Type = ".$type_for_search." AND user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$value."' AND homeworks.UID NOT IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE solvedhomeworks.USERID = ".Get_Logged_users_id().")";
+				} else {
+					$SQL = "SELECT DISTINCT SUM(homeworks.Rank) FROM homeworks,user,uh,solvedhomeworks WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$value."' AND homeworks.UID IN (SELECT solvedhomeworks.HWID FROM solvedhomeworks WHERE solvedhomeworks.USERID = ".Get_Logged_users_id().")";
+				}
+			} else {
+				$SQL = "SELECT DISTINCT SUM(homeworks.Rank) FROM homeworks,user,uh WHERE homeworks.Type = ".$type_for_search." AND user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND homeworks.Date = '".$value."'";
+			}
 			//echo $SQL;
 			$result = mysql_query($SQL);
 			$daily_rank_sum = mysql_fetch_array($result);

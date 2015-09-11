@@ -26,9 +26,9 @@
 	}
 	function Get_Logged_users_id() {
 		$SQL = "SELECT user.UID FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
-		$logged_user_name_is = mysql_query($SQL);
-		$logged_user_name_is = mysql_fetch_array($logged_user_name_is);
-		return $logged_user_name_is[0];
+		$logged_user_id_is = mysql_query($SQL);
+		$logged_user_id_is = mysql_fetch_array($logged_user_id_is);
+		return $logged_user_id_is[0];
 	}
 	$timezone  = +2;
 ?>

@@ -62,7 +62,7 @@ echo '<div><div class="dropdown" style = "float:left;padding-right:10px;">
 		echo '<li><a href="check_width_and_send_to.php?user='.$username.'&page=homeworks_time_chart&weeknum='.$_GET["weeknum"].'&numofweeks='.$counter.'">Покажи '.$counter.$MyWord.'</a></li>';
 	}
 	
-	echo '</div><div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 4.5px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">Графики на натовареност (показани '.$_GET["numofweeks"].' седмици)</div></div>';
+	echo '</div><div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 4.5px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">Графики на задачите (показани '.$_GET["numofweeks"].' седмици)</div></div>';
 	echo '
 	<div class="btn-group btn-group-justified" role="group" style = "width:100%;margin-bottom:30px;">
 	<div class="btn-group" role="group">

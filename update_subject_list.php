@@ -92,7 +92,7 @@ if ($row[0] <= 0) {
 		$number_of_tds = 4;
 	} else if (($_GET["width"] <= 1250) && ($_GET["width"] > 1070)) {
 		$number_of_tds = 3;
-	} else if ((($_GET["width"] <= 1070) && ($_GET["width"] > 870)) || (($_GET["width"] <= 768) && ($_GET["width"] > 657))) {
+	} else if ((($_GET["width"] <= 1070) && ($_GET["width"] > 870)) || (($_GET["height"] > $_GET["width"]) && ($_GET["width"] > 657))) {
 		$number_of_tds = 2;
 	} else {
 		$number_of_tds = 1;

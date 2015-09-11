@@ -126,36 +126,32 @@ if (($there_is_a_such_user[0] > 0) && ($there_are_some_homeworks[0] > 0)) {
 		}
 		$PrevMonth = $MyLastDayOfThisWeekMonth;
 		
-		if ($_GET["width"] > 768){
-			$MyHeight = ($_GET["width"]/3);
-			$MyWidth = 100;
-			$MyLeftMargin = 0;
-		} else if ($_GET["width"] < 385){
+		if (($_GET["width"] < 385) && ($_GET["height"] > $_GET["width"])){
 			$MyWidth = 160;
-			$MyHeight = ($_GET["width"]/1.3);
 			$MyLeftMargin = -30;
-		} else if (($_GET["width"] >= 385) && ($_GET["width"] < 530)){
+		} else if (($_GET["width"] >= 385) && (($_GET["width"] < 530) && ($_GET["height"] > $_GET["width"]))){
 			$MyWidth = 140;
-			$MyHeight = ($_GET["width"]/1.5);
 			$MyLeftMargin = -18;
 		}
-		else if (($_GET["width"] >= 530) && ($_GET["width"] < 768)){
+		else if (($_GET["width"] >= 530) && ($_GET["height"] > $_GET["width"])){
 			$MyWidth = 132;
-			$MyHeight = ($_GET["width"]/1.5);
 			$MyLeftMargin = -13;
+		} else {
+			$MyWidth = 100;
+			$MyLeftMargin = 0;
 		}
 		
-		if ($_GET["width"] < 768){
+		if ($_GET["height"] > $_GET["width"]){
 			$MyButtonWidth = 100;
 			$MyButtonLeftMargin = 0;
 		} else {
 			$MyButtonWidth = $MyWidth;
 			$MyButtonLeftMargin = 8;
 		}
-		
+		$MyHeight = 75;
 		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username,$MyButtonWidth,$MyButtonLeftMargin);
 		
-		echo '<div style="margin-left:'.$MyLeftMargin.'%;width:'.$MyWidth.'%;height:'.$MyHeight.'px; min-width:100px;">';
+		echo '<div style="margin-left:'.$MyLeftMargin.'%;width:'.$MyWidth.'%;height:'.$MyHeight.'%; min-width:100px;">';
 			echo $MyChart; 
 		echo '</div>';
 		

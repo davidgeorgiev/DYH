@@ -74,6 +74,9 @@ echo '<div><div class="dropdown" style = "float:left;padding-right:10px;">
 	<div class="btn-group" role="group">
 	<button type="button" class="btn btn-default" style = "background: #dd8043;border-color: #837d7c;border-width:3px;">Други</button>
 	</div>
+	<div class="btn-group" role="group">
+	<button type="button" class="btn btn-default" style = "color:white;background: #673e7a;border-color: #837d7c;border-width:3px;">Решени от вас</button>
+	</div>
 	</div>
 	';
 	
@@ -114,7 +117,9 @@ if (($there_is_a_such_user[0] > 0) && ($there_are_some_homeworks[0] > 0)) {
 		$done_array1 = CollectData(1, $username, $week_number, $year);
 		$done_array0 = CollectData(0, $username, $week_number, $year);
 		$done_array2 = CollectData(2, $username, $week_number, $year);
-		$MyFinalArray = array($done_array1,$done_array0, $done_array2);
+		$done_array_1 = CollectData(-100, $username, $week_number, $year);//Empty data to skip cyan color in chart
+		$done_array3 = CollectData(-1, $username, $week_number, $year);
+		$MyFinalArray = array($done_array1,$done_array0, $done_array2, $done_array_1, $done_array3);
 		$MyChart = MakeMyChart($MyFinalArray, "Напрегнатост", "area", "c".$counter);
 		$MyDate = date_create($done_array1[6][0]);
 		$MyLastDayOfThisWeekMonth = date_format($MyDate, "m");

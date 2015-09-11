@@ -11,6 +11,11 @@
 <body>
 
 <?php
+	include "graphs/convert_weekday_from_php.php";
+	include "graphs/make_chart.php";
+	include "graphs/collect_data.php";
+	include "graphs/my_week_dropdown_buttons.php";
+	include "graphs/convert_month_to_word.php";
 	include "start_check.php";
 	include "some_external_phps/CheckIfUserIsSolver.php";
 	$pars_time_period_to_check_with_page = "";
@@ -48,11 +53,67 @@
 		$there_is_some_info = 0;
 	}
 	echo '<div class="container">';
-	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
 	
+	
+	function PrintAChart($IdOfChart, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode){
+		
+		$done_array1 = CollectData(1, $username, $strDateFrom, $strDateTo);
+		$done_array0 = CollectData(0, $username, $strDateFrom, $strDateTo);
+		$done_array2 = CollectData(2, $username, $strDateFrom, $strDateTo);
+		$done_array_1 = CollectData(-100, $username, $strDateFrom, $strDateTo);//Empty data to skip cyan color in chart
+		$done_array3 = CollectData(-1, $username, $strDateFrom, $strDateTo);
+		
+		
+		$MyFinalArray = array($done_array1,$done_array0, $done_array2, $done_array_1, $done_array3);
+		$MyChart = MakeMyChart($MyFinalArray, "Напрегнатост", "area", "c".$IdOfChart);
+		
+		$MyDate = date_create($done_array1[6][0]);
+		$MyLastDayOfThisWeekMonth = date_format($MyDate, "m");
+		$MyYearToShow = date_format($MyDate, "Y");
+		if ($MyLastDayOfThisWeekMonth != $PrevMonth){
+			echo '<div class="page-header">';
+			echo '<h1 style = "color:#837d7c;">'.ConvertMonthToWord($MyLastDayOfThisWeekMonth)." ".$MyYearToShow.'</h1>';
+			echo '</div>';
+		}
+		
+		if (($_GET["width"] < 385) && ($_GET["height"] > $_GET["width"])){
+			$MyWidth = 160;
+			$MyLeftMargin = -30;
+		} else if (($_GET["width"] >= 385) && (($_GET["width"] < 530) && ($_GET["height"] > $_GET["width"]))){
+			$MyWidth = 140;
+			$MyLeftMargin = -18;
+		}
+		else if (($_GET["width"] >= 530) && ($_GET["height"] > $_GET["width"])){
+			$MyWidth = 132;
+			$MyLeftMargin = -13;
+		} else {
+			$MyWidth = 100;
+			$MyLeftMargin = 0;
+		}
+		
+		if ($_GET["height"] > $_GET["width"]){
+			$MyButtonWidth = 100;
+			$MyButtonLeftMargin = 0;
+		} else {
+			$MyButtonWidth = $MyWidth+5;
+			$MyButtonLeftMargin = 15;
+		}
+		$MyHeight = 75;
+		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username,$MyButtonWidth,$MyButtonLeftMargin, 1);
+		
+		echo '<div style="margin-left:'.$MyLeftMargin.'%;width:'.$MyWidth.'%;height:'.$MyHeight.'%; min-width:100px;">';
+			echo $MyChart; 
+		echo '</div>';
+		
+		return $MyLastDayOfThisWeekMonth;
+	}
+	
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
 	include "some_external_phps/show_today_and_tomorrow_div.php";
 	echo '</div>';
-	
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
+	PrintAChart(1, "david", "2015-09-10", "2015-09-13", "0", $EditMode);
+	echo '</div>';
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 	if (!$there_is_some_info) {
 		echo '<div class="alert alert-success">';

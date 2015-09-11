@@ -39,7 +39,8 @@
 				while ($homework_info = mysql_fetch_array($result4)){
 					$MyHomeworkInfoArray = returnHomeworkInfoByID($homework_info[0]);
 					$myHeadingBackgroundColor = "white";
-					$myHeadingContent = "Неопределено събитие";
+					$TextColor = "black";
+					$myHeadingContent = "NULL";
 					if ($MyHomeworkInfoArray["MainInfo"]["Type"] == 0) {
 						$myHeadingBackgroundColor = "#86cf4b";
 						$myHeadingContent = "Домашно";
@@ -50,8 +51,20 @@
 						$headingPadding = 24;
 					} else if ($MyHomeworkInfoArray["MainInfo"]["Type"] == 2) {
 						$myHeadingBackgroundColor = "#dd8043";
-						$myHeadingContent = "Друго";
+						$myHeadingContent = "Напомняне";
 						$headingPadding = 24;
+					}
+					
+					if (Get_Logged_users_id()){
+						$SQL = "SELECT COUNT(solvedhomeworks.UID) FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$homework_info[0]." AND solvedhomeworks.USERID = ".Get_Logged_users_id();
+						//echo $SQL;
+						$IfISolvedResult = mysql_query($SQL);
+						$MyIfISolved = mysql_fetch_array($IfISolvedResult);
+						if ($MyIfISolved[0] > 0){
+							$myHeadingBackgroundColor = "#673e7a";
+							//echo "USERID = ".Get_Logged_users_id();
+							$TextColor = "white";
+						}
 					}
 					
 					if ($EditMode == 1){
@@ -62,7 +75,7 @@
 						$Pencil = "";
 					}
 					
-					echo '<p style = "background-color:'.$myHeadingBackgroundColor.';text-left:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$Trash.$Pencil.'<a href="comments.php?hwid='.$homework_info[0].'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-comment"></span> '.$MyHomeworkInfoArray["MainInfo"]["NumOfComments"];
+					echo '<p style = "color:'.$TextColor.';background-color:'.$myHeadingBackgroundColor.';text-left:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$Trash.$Pencil.'<a href="comments.php?hwid='.$homework_info[0].'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-comment"></span> '.$MyHomeworkInfoArray["MainInfo"]["NumOfComments"];
 					
 					if ($MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"] > 0){						
 						echo'<a href="homework_solvers.php?hwid='.$homework_info[0].'&user='.$username;

@@ -21,7 +21,7 @@
 			echo $convertered_weekday;
 			echo '<span class="caret"></span>';
 			echo '</button>';
-			if ($_GET["width"] <= 768){
+			if ($_GET["height"] > $_GET["width"]){
 				$MyDropdownMenuWidth = 200;
 			} else {
 				$MyDropdownMenuWidth = 300;

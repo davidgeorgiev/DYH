@@ -61,7 +61,7 @@ if ($row[0] <= 0) {
     <div class="form-group">
       <label for="date">Дата</label>
 	  <?php
-		if ($_GET["width"] <= 768){
+		if ($_GET["height"] > $_GET["width"]){
 			echo '<input type="date" class="form-control" id="pickdate" name="date" size="20" />';
 		} else {
 			echo '<input type="text" id="datetimepicker4" class="form-control" class="some_class" name="date" size="20" placeholder="30/06/2015">';

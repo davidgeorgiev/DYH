@@ -1,12 +1,8 @@
 <?php
-	function CollectData($type_for_search, $username, $week_number, $year){
+	include "create_date_range.php";
+	function CollectData($type_for_search, $username, $strDateFrom, $strDateTo){
 		//$strDateFrom = date('Y-m-d', strtotime($year."W".$week_number.'-1'));
 		//$strDateTo = date('Y-m-d', strtotime($year."W".$week_number.'-7'));
-		
-		$week_start = new DateTime();
-		$week_start->setISODate($year,$week_number);
-		$strDateFrom = $week_start->format('Y-m-d');
-		$strDateTo = date('Y-m-d', strtotime($strDateFrom. ' + 6 days'));
 		
 		//echo $strDateFrom;
 		//echo $strDateTo;

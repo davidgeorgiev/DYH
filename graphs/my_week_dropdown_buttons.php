@@ -1,10 +1,8 @@
 ﻿
 
 <?php
-	include (dirname("../")."/some_external_phps/return_hw_info_by_id.php");
-	include (dirname("../")."/some_external_phps/CheckIfUserIsSolver.php");
 	//print_r($done_array1);
-	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username, $width, $leftmargin){
+	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username, $width, $leftmargin, $WeekDayFullOrNot){
 		echo '<style>.btn-group {width:'.(($width-$leftmargin)/(sizeof($done_array1))).'%;}.btn btn-default dropdown-toggle{width: 100%;}</style>';
 		echo '<div style = "margin-left: '.$leftmargin.'%;width:'.($width-$leftmargin).'%;">';
 		foreach ($done_array1 as $value){
@@ -16,9 +14,7 @@
 			echo '<div class="btn-group"><button type="button" class="'.$buttonClass.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
 			$timestamp = strtotime($value[0]);
 			$weekday = date( "w", $timestamp);
-			include "convert_weekday_from_php.php";
-			
-			echo $convertered_weekday;
+			echo ConvertWeekdayFromPhp($weekday, $WeekDayFullOrNot);
 			echo '<span class="caret"></span>';
 			echo '</button>';
 			if ($_GET["height"] > $_GET["width"]){
@@ -75,7 +71,7 @@
 						$Pencil = "";
 					}
 					
-					echo '<p style = "color:'.$TextColor.';background-color:'.$myHeadingBackgroundColor.';text-left:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$Trash.$Pencil.'<a href="comments.php?hwid='.$homework_info[0].'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-comment"></span> '.$MyHomeworkInfoArray["MainInfo"]["NumOfComments"];
+					echo '<p style = "padding-bottom:15px;padding-top:3px;color:'.$TextColor.';background-color:'.$myHeadingBackgroundColor.';text-left:center;font-size:16px;border-radius:3px;border:solid #837d7c;">'.$Trash.$Pencil.'<a href="comments.php?hwid='.$homework_info[0].'" style = "text-decoration:none;color:white;font-size:13px;"><span class="glyphicon glyphicon-comment"></span> '.$MyHomeworkInfoArray["MainInfo"]["NumOfComments"];
 					
 					if ($MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"] > 0){						
 						echo'<a href="homework_solvers.php?hwid='.$homework_info[0].'&user='.$username;
@@ -95,7 +91,7 @@
 					
 					echo '<span style = "padding-left:'.$headingPadding.'%;">'.$myHeadingContent.'<span></p>';
 					echo '<div style = "padding:0px;">';
-					echo '<a href="#" style = "text-decoration:none;"><p style = "margin-top:-12px;padding:3px;text-align:center;background-color:#837d7c;color:#d2c9c6;font-weight:bold;">'.$MyHomeworkInfoArray["MainInfo"]["Title"].'</p></a>';
+					echo '<a href="#" style = "text-decoration:none;"><p style = "margin-top:-12px;padding:3px;padding-bottom:15px;padding-top:5px;text-align:center;background-color:#837d7c;color:#d2c9c6;font-weight:bold;">'.$MyHomeworkInfoArray["MainInfo"]["Title"].'</p></a>';
 					if (strlen($MyHomeworkInfoArray["MainInfo"]["IMGURL"]) > 0) {
 						echo '<div style = "background-color:#d2c9c6;border:solid #837d7c;border-bottom:none;margin-top:-10px;margin-bottom:-6px;color:#837d7c;font-size:15px;">';
 						echo '<a href = "'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" rel="lightbox"><img src = "'.$MyHomeworkInfoArray["MainInfo"]["IMGURL"].'" style = "border:solid #9f9593;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom:10px;" width = "100%"></a>';

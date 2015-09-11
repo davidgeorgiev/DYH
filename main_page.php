@@ -112,7 +112,12 @@
 	include "some_external_phps/show_today_and_tomorrow_div.php";
 	echo '</div>';
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
-	PrintAChart(1, "david", "2015-09-10", "2015-09-13", "0", $EditMode);
+	
+	$MyToday = gmdate("Y-m-d", time() + 3600*($timezone+date("I")));
+	$strDateFrom = date('Y-m-d', strtotime($MyToday. ' - 1 day'));
+	$strDateTo = date('Y-m-d', strtotime($MyToday. ' + 2 days'));
+	
+	PrintAChart(1, $username, $strDateFrom, $strDateTo, "0", $EditMode);
 	echo '</div>';
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 	if (!$there_is_some_info) {

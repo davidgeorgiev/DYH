@@ -51,8 +51,7 @@
 	include "graphs/collect_data.php";
 	include "graphs/my_week_dropdown_buttons.php";
 	include "graphs/convert_month_to_word.php";
-	function PrintAChart($IdOfChart, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode){
-		
+	function PrintAChart($IdOfChart, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode, $timezone){
 		
 		$done_array1 = CollectData(1, $username, $strDateFrom, $strDateTo);
 		$done_array0 = CollectData(0, $username, $strDateFrom, $strDateTo);
@@ -96,7 +95,7 @@
 			$MyButtonLeftMargin = 8;
 		}
 		$MyHeight = 75;
-		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username,$MyButtonWidth,$MyButtonLeftMargin, 0);
+		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username,$MyButtonWidth,$MyButtonLeftMargin, 0, $timezone);
 		
 		echo '<div style="margin-left:'.$MyLeftMargin.'%;width:'.$MyWidth.'%;height:'.$MyHeight.'%; min-width:100px;">';
 			echo $MyChart; 
@@ -105,7 +104,7 @@
 		return $MyLastDayOfThisWeekMonth;
 	}
 	
-	function PrintMyCharts($numberOfWeeks, $week_number, $year, $username, $EditMode){
+	function PrintMyCharts($numberOfWeeks, $week_number, $year, $username, $EditMode, $timezone){
 		$PrevMonth = 0;
 		for ($counter = 1; $counter <= $numberOfWeeks; $counter++){
 			
@@ -113,7 +112,7 @@
 			$strDateFrom = $StartAndFinelDates[0];
 			$strDateTo = $StartAndFinelDates[1];
 			
-			$PrevMonth = PrintAChart($counter, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode);
+			$PrevMonth = PrintAChart($counter, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode, $timezone);
 			
 			$week_number++;
 			$ddate = $year."-12-31";
@@ -175,7 +174,7 @@ if (($there_is_a_such_user[0] > 0) && ($there_are_some_homeworks[0] > 0)) {
 	$year = date("Y");
 	
 	
-	PrintMyCharts($numberOfWeeks, $week_number, $year, $username, $EditMode);
+	PrintMyCharts($numberOfWeeks, $week_number, $year, $username, $EditMode, $timezone);
 }
 ?>
 </div>

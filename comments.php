@@ -195,12 +195,11 @@
 				include "comment_form.php";
 			}
 			
-			
-			
 			echo '<div style = "overflow-y: scroll; height:320px;padding:12px;margin-bottom:15px;">';
 			foreach($MyHomeworkInfoArray["Comments"] as $value){
+				$UserInfo = ReturnALLUserInfoByIdOrByName($value["Name"]);
 				echo '<div style = "background-color:#746f6e;border:solid white;border-width:1px;padding: 9px;margin-bottom:20px;">';
-				echo '	<p style = " font-weight: bold;color:white;">'.$value["Name"].'<span style = "color:#d2c9c6;font-size:10px;"> (Публикувано на '.$value["Date"].')</span></p>';
+				echo '	<p style = " font-weight: bold;color:white;">'.$UserInfo["FirstName"]." ".$UserInfo["LastName"].'<span style = "color:#d2c9c6;font-size:10px;"> (Публикувано на '.$value["Date"].')</span></p>';
 				echo '	<p style = "background-color:#746f6e;color:#d2c9c6;border-radius:5px; padding: 9px;">'.$value["Data"].'</p>';
 				echo '</div>';
 			}
@@ -234,11 +233,17 @@
 			
 			for ($count = 0; $count < sizeof($MyHomeworkInfoArray["Solvings"]); $count++){
 				$myCurrentArray = $MyHomeworkInfoArray["Solvings"];
+				
+				$UserInfo = ReturnALLUserInfoByIdOrByName($myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"]);
+				
 				//echo "<h3>user.UID ".$MyHomeworkInfoArray["SolversIDs"][$count]."</h3";
 				//echo "<p>".$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["UID"]."</p>";
 				echo '<div style = "padding-left:20px;padding-bottom:0px;padding-top:5px;background-color:#d2c9c6;">';
-				echo '<h2 style = "color:#514d4c;">'.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"].'<small id = "smalltag"> '.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Date"]."</small></h2>";
-				
+				echo '<a href = "home.php?user='.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"].'">';
+					echo '<div class="zoom_img_urls" class = "thumb1" style = "float:left;margin-top:14px;margin-left:5px;border:solid #d2c9c6;border-radius:50%;width:100px;height:100px;background: url('.$UserInfo["IMGURL"].') 50% 50% no-repeat;background-size: 100% 100%;z-index:100;">';
+					echo '</div>';
+				echo '</a>';
+				echo '<h2 style = "color:#514d4c;">'.$UserInfo["FirstName"]." ".$UserInfo["LastName"].'<small id = "smalltag"> '.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Date"]."</small></h2>";
 				//echo '<div class="col-sm-4" style = "background-color:white;">';
 				
 				echo '<div style = "width:100%;background-color:#837d7c;padding:20px;font-size:18px;margin-left:-20px;color:white;">';

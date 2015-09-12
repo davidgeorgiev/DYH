@@ -180,7 +180,7 @@ width:100px;
 #URLdata{
 	height:100px;
 }
-.zoom_img_urls img{
+.zoom_img_urls{
 	margin:50px;
 	height:100px;
 	width:100px;
@@ -189,7 +189,7 @@ width:100px;
 	-o-transition:-o-transform 0.5s ease-in;
 
 }
-.zoom_img_urls img:hover{
+.zoom_img_urls:hover{
 	-moz-transform:scale(1.3); 
 	-webkit-transform:scale(1.3);
 	-o-transform:scale(1.3);
@@ -221,5 +221,5 @@ width:100px;
 	margin-left:20px;margin-right:20px;
 }
 #URLBOX:hover{
-	background-color:#9c9695;
+	background-color:#726b69;
 }

@@ -50,7 +50,8 @@
 					<li><a href="add_info.php">Добави допълнителна информация</a></li>
 					<li role="separator" class="divider"></li>
 					<li><a href="add_wp.php">Нова програма</a></li>
-					<li><a href="add_sf.php">Начало и край</a></li>';
+					<li><a href="add_sf.php">Начало и край</a></li>
+					<li><a href="edit_profile.php">Промяна на профила</a></li>';
 				}
 				echo '<li><a href="url_list.php?user='.$username.'">Списък с важни сайтове</a></li>
 				<li><a href="check_width_and_send_to.php?user='.$username.'&page=update_subject_list'.'">Списък с предмети</a></li>
@@ -93,7 +94,7 @@ echo 	'<li class="dropdown">
 </ul></li>';
 
 ?>
-<li><a href="#">Страницата на <?php echo $username?></a></li>
+<li><a href="#">Страницата на <?php $UserInfo = ReturnALLUserInfoByIdOrByName($username); echo $UserInfo["FirstName"]; ?></a></li>
 <li><a href="index.php"><strong><span class = "glyphicon glyphicon-log-out"></span> Изход</strong></a></li>
 </ul>
 </div><!-- /.navbar-collapse -->

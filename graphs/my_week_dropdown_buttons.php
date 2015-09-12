@@ -2,7 +2,7 @@
 
 <?php
 	//print_r($done_array1);
-	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username, $width, $leftmargin, $WeekDayFullOrNot){
+	function PrintMyWeekDropdownButtons($done_array1, $EditMode, $username, $width, $leftmargin, $WeekDayFullOrNot, $timezone){
 		echo '<style>.btn-group {width:'.(($width-$leftmargin)/(sizeof($done_array1))).'%;}.btn btn-default dropdown-toggle{width: 100%;}</style>';
 		echo '<div style = "margin-left: '.$leftmargin.'%;width:'.($width-$leftmargin).'%;">';
 		foreach ($done_array1 as $value){

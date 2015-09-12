@@ -41,12 +41,11 @@
 					} else {
 						$Beginning = "http://";
 					}
-					echo '<a href = "'.$Beginning.$url.'" target="blank"><div class="row" id = "URLBOX">';
+					echo '<a href = "'.$Beginning.$url.'" target="blank"><div class="row" id = "URLBOX" style = "margin-bottom:20px;">';
 					echo '<div class="col-sm-3" style = "margin-top:20px;">';
-					echo '<div class="zoom_img_urls" style = "z-index:100;position:relative;">';
-							echo '<img style= "width:140px;height:140px;margin-top:27px;margin-left:40px;border:solid #d2c9c6;border-radius:100px;" src="'.$imgurl.'" alt="Bookmark image" width="100%" height="100%">';
-							echo '</div>';
+						echo '<div class="zoom_img_urls" class = "thumb1" style = "margin-top:27px;margin-left:40px;border:solid #d2c9c6;border-radius:50%;width:150px;height:150px;background: url('.$imgurl.') 50% 50% no-repeat;background-size: 150px;z-index:100;">';
 						echo '</div>';
+					echo '</div>';
 						echo '<div class="col-sm-8">';
 						echo '<p id = "UrlTitle">'.$title.'</p>';
 							

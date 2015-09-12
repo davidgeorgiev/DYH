@@ -35,17 +35,32 @@
 	for ($count = 0; $count < sizeof($MyHomeworkInfoArray["Solvings"]); $count++){
 		$currentUserID = $MyHomeworkInfoArray["SolversIDs"][$count];
 		$myCurrentArray = $MyHomeworkInfoArray["Solvings"];
-		echo '<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="vertical-timeline/img/cd-icon-picture.svg" alt="Picture">
-			</div> <!-- cd-timeline-img -->
-
-			<div class="cd-timeline-content">';
+		
 		//print_r($solvers_names);
 		if ($MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"] <= 0){
 			echo 'Никой не е решил още това домашно :(';
 		} else {
-			echo "<h2>".$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"]."</h2>";
+			$UserInfo = ReturnALLUserInfoByIdOrByName($myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"]);
+			
+			
+			echo '<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-picture">';
+				echo '<a href = "home.php?user='.$myCurrentArray[$MyHomeworkInfoArray["SolversIDs"][$count]]["Name"].'">';
+					echo '<div class="zoom_img_urls" class = "thumb1" style = "float:left;margin-top:-20px;margin-left:-12px;border:solid #d2c9c6;border-radius:50%;width:90px;height:90px;background: url('.$UserInfo["IMGURL"].') 50% 50% no-repeat;background-size: 100% 100%;z-index:100;">';
+					echo '</div>';
+				echo '</a>';
+			echo '</div> <!-- cd-timeline-img -->';
+			echo '<style>#MyHWBOX {background-color:#837d7c; border:solid white;border-width:2px;} #MyHWBOX:hover{background-color:#968e8d;}</style>';
+			echo '<div class="cd-timeline-content" id = "MyHWBOX">';
+			
+			
+			echo '<h2 style = "background-color:#d2c9c6;
+											padding:10px;
+											font-size:30px;
+											color:#837d7c;
+											border-radius:10px;
+											font-family: Hattori;
+											font-weight:bold;">'.$UserInfo["FirstName"]." ".$UserInfo["LastName"]."</h2>";
 			//echo $solvers_names[1];
 			$sentence = $MyHomeworkInfoArray["SolveSentences"][$currentUserID];
 			$percents = $MyHomeworkInfoArray["SolvingsPercents"][$currentUserID];

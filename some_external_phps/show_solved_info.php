@@ -4,10 +4,10 @@ $title = "";
 $style_of_prograssbar = "";
 echo '<div>';
 echo '<div class="dropdown" style = "width:40%;padding-right:10px;margin-top:10px;">';
-echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
+echo '<button class="btn btn-default dropdown-toggle" style = "min-width:100%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:-22px;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
 echo 'Графики';
 echo '</button>';
-echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style = "width:280%;">';
+echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style = "width:280%;" id = "MyHWBOX">';
 foreach ($percents as $value) {
 	
 	switch ($index){
@@ -52,9 +52,9 @@ foreach ($percents as $value) {
 }
 echo '</ul>';
 echo '</div>';
-echo '<p style = "font-size:16px;">'.$sentence.'</p>';
-echo '<p style = "font-size:16px;">'.$SomePersonalText.'</p>';
-echo '<span class="cd-date" style = "font-size:16px;">'.$date.'</span>';
+echo '<p style = "color:#514d4b;font-family: Arial;font-size:20px;margin-top:20px;">'.$sentence.'</p>';
+echo '<p style = "color:#514d4b;font-family: Arial;font-size:25px;margin-top:20px;">'.$SomePersonalText.'</p>';
+echo '<span class="cd-date" style="color:#6f6967;font-family: MyDays;font-size:22px;font-weight:bold;">'.$date.'</span>';
 echo "</div>";
 unset($value);
 ?>

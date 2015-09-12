@@ -27,7 +27,8 @@
 		
 		$SQL = "SELECT favsites.Name, favsites.ImgUrl, favsites.Url, favsites.USERID, favsites.Data, favsites.UID FROM favsites WHERE favsites.USERID = ".$MyUserID[0];
 		$MyResult = mysql_query($SQL);
-		echo '<h1 id = "urlTitleForm">Важните сайтове на '.$username.'</h1>';
+		$UserInfo = ReturnALLUserInfoByIdOrByName($username);
+		echo '<h1 id = "urlTitleForm">Важните сайтове на '.$UserInfo["FirstName"]." ".$UserInfo["LastName"].'</h1>';
 		while($MyBookMarkInfo = mysql_fetch_array($MyResult)){
 			if ($EditMode == 1){
 				$Trash = '<a href="delete_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:white;font-size:15px;padding:4px;margin-left:-80%;"><span class="glyphicon glyphicon-trash"></span> </a>';
@@ -46,12 +47,11 @@
 				} else {
 					$Beginning = "http://";
 				}
-				echo '<a href = "'.$Beginning.$url.'" target="blank"><div class="row" id = "URLBOX">';
-				echo '<div class="col-sm-3" style = "margin-top:20px;">'.$Trash.$Pencil;
-				echo '<div class="zoom_img_urls" style = "z-index:100;position:relative;">';
-						echo '<img style= "width:140px;height:140px;margin-top:27px;margin-left:40px;border:solid #d2c9c6;border-radius:100px;" src="'.$imgurl.'" alt="Bookmark image" width="100%" height="100%">';
-						echo '</div>';
+				echo '<a href = "'.$Beginning.$url.'" target="blank"><div class="row" id = "URLBOX" style = "margin-bottom:20px;">';
+				echo '<div class="col-sm-3" style = "margin-top:20px;">';
+					echo '<div class="zoom_img_urls" class = "thumb1" style = "margin-top:27px;margin-left:40px;border:solid #d2c9c6;border-radius:50%;width:150px;height:150px;background: url('.$imgurl.') 50% 50% no-repeat;background-size: 150px;z-index:100;">';
 					echo '</div>';
+				echo '</div>';
 					echo '<div class="col-sm-8">';
 					echo '<p id = "UrlTitle">'.$title.'</p>';
 						

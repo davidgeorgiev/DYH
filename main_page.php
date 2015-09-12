@@ -18,6 +18,8 @@
 	include "graphs/convert_month_to_word.php";
 	include "start_check.php";
 	include "some_external_phps/CheckIfUserIsSolver.php";
+	include "some_external_phps/PrintAccountInfo.php";
+	
 	$pars_time_period_to_check_with_page = "";
 	if (isset($_GET["time_period"])){
 		if (strlen($_GET["time_period"]) > 0){
@@ -54,8 +56,7 @@
 	}
 	echo '<div class="container">';
 	
-	
-	function PrintAChart($IdOfChart, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode){
+	function PrintAChart($IdOfChart, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode, $timezone){
 		
 		$done_array1 = CollectData(1, $username, $strDateFrom, $strDateTo);
 		$done_array0 = CollectData(0, $username, $strDateFrom, $strDateTo);
@@ -99,7 +100,7 @@
 			$MyButtonLeftMargin = 15;
 		}
 		$MyHeight = 75;
-		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username,$MyButtonWidth,$MyButtonLeftMargin, 1);
+		PrintMyWeekDropdownButtons($MyFinalArray[0],$EditMode,$username,$MyButtonWidth,$MyButtonLeftMargin, 1, $timezone);
 		
 		echo '<div style="margin-left:'.$MyLeftMargin.'%;width:'.$MyWidth.'%;height:'.$MyHeight.'%; min-width:100px;">';
 			echo $MyChart; 
@@ -109,6 +110,19 @@
 	}
 	
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
+	$result = mysql_query("SELECT user.UID FROM user WHERE user.Name = '".$username."'");
+	$currentuserid = mysql_fetch_array($result);
+	if ($currentuserid[0] != Get_Logged_users_id()){
+		if (CheckIfFriends($currentuserid[0], Get_Logged_users_id()) == 0){
+			if ((CheckIfRequestSent(Get_Logged_users_id(), $currentuserid[0])) == 0){
+				echo '<a href = "send_friend_request_to.php?user='.$username.'"><button class="btn btn-default" style = "min-width:100%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:0px;" type="button"><span class = "glyphicon glyphicon-user"></span><span class = "glyphicon glyphicon-user"></span> Сприятеляване</button></a>';
+			} else {
+				echo '<a href = "#"><button class="btn btn-default" style = "min-width:100%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:0px;" type="button"><span class = "glyphicon glyphicon-user"></span><span class = "glyphicon glyphicon-user"></span> Поканата е изпратена</button></a>';
+			}
+		}
+	}
+	PrintAccountInfoByUSERNAME($username, 1);
+	
 	include "some_external_phps/show_today_and_tomorrow_div.php";
 	echo '</div>';
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
@@ -118,7 +132,7 @@
 	$strDateTo = date('Y-m-d', strtotime($MyToday. ' + 2 days'));
 	include "some_external_phps/LegendButtonsForChart.php";
 	PrintChartHeader(0, 0, 0, "Вашите скорошни задачи");
-	PrintAChart(1, $username, $strDateFrom, $strDateTo, "0", $EditMode);
+	PrintAChart(1, $username, $strDateFrom, $strDateTo, "0", $EditMode, $timezone);
 	echo '</div>';
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 	if (!$there_is_some_info) {
@@ -213,7 +227,8 @@
 							echo '</div>';
 						}
 					echo '</div> <!-- cd-timeline-img -->';
-					echo '<div class="cd-timeline-content">';
+					echo '<style>#MyHWBOX {background-color:#837d7c; border:solid white;border-width:2px;} #MyHWBOX:hover{background-color:#968e8d;}</style>';
+					echo '<div class="cd-timeline-content" id = "MyHWBOX">';
 					
 				if ($row2[6] == 0){
 					$type_of_event = "Домашно по ";
@@ -221,10 +236,22 @@
 					$type_of_event = "Изпит по ";
 				}
 			if ($EditMode == 0) {
-				echo '	<h2>'.$type_of_event.$row2[0].'</h2>';
+				echo '	<h2 style = "background-color:#d2c9c6;
+											padding:10px;
+											font-size:30px;
+											color:#837d7c;
+											border-radius:10px;
+											font-family: Hattori;
+											font-weight:bold;">'.$type_of_event.$row2[0].'</h2>';
 			} else {
 				echo '<div class="dropdown" style = "float:left;padding-right:10px;margin-top:-6px;">';
-				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
+				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;background:#d2c9c6;
+																																																color:#837d7c;
+																																																font-weight:bold;
+																																																border-radius:20px;
+																																																font-size:25px;
+																																																font-family: Hattori;
+																																																font-weight:bold;">';
 				echo '<span class="glyphicon glyphicon-wrench"></span>';
 				//echo '<span class="caret"></span>';
 				echo '</button>';
@@ -233,7 +260,13 @@
 				echo '<li><a href="edit_hw.php?hwid='.$row2[3].'&class='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Редактирай</a></li>';
 				echo '</ul>';
 				echo '</div>';
-				echo '<h2>';
+				echo '<h2 style = "background-color:#d2c9c6;
+											padding:10px;
+											font-size:30px;
+											color:#837d7c;
+											border-radius:10px;
+											font-family: Hattori;
+											font-weight:bold;">';
 				echo $type_of_event.$row2[0];
 				echo '</h2>';
 			}
@@ -242,7 +275,14 @@
 				$user_id = mysql_fetch_array($result4);
 				
 				echo '<div class="dropdown" style = "width:130px;padding-right:10px;margin-top:10px;">';
-				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;">';
+				echo '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:100%;color:#837d7c;
+																																													background:#d2c9c6;
+																																													font-weight:bold;
+																																													border-radius:7px;
+																																													font-size:16px;
+																																													font-family: Hattori;
+																																													font-weight:bold;
+																																													margin-top:-22px;">';
 				if (CheckIfUserIsSolver(Get_Logged_users_id(), $row2[3]) == 1){
 					echo '<span style = "color:green;" class = "glyphicon glyphicon-ok"> Решено</span></a>';
 				} else {
@@ -279,7 +319,10 @@
 			// if (strlen($row2[4]) > 0) {
 				//echo ' <p style = "border-width:thin; border-style: solid;background-color:'.$type_color.';border-color: #BEBEBE;border-radius:5px; padding: 9px;"></p>';
 			// }
-				echo '	<p style = "font-family:Book Antiqua;font-size:18px;">'.$row2[1].'</p>';
+				echo '	<p style = "color:#514d4b;
+											font-family: Arial;
+											font-size:20px;
+											margin-top:20px;">'.$row2[1].'</p>';
 			
 			if ($EditMode == 1) {
 				// echo '<div style = "margin-bottom: 13px;"><div>';
@@ -295,7 +338,16 @@
 			$result4 = mysql_query($SQL);
 			$row4 = mysql_fetch_array($result4);
 			echo '<p>';
-			echo '<a href="comments.php?hwid='.$row2[3].'" style = "text-decoration: none;">';
+			echo '<style>#CommentsButton{
+							text-decoration: none;
+							font-size:18px;color:#d2c9c6;
+							font-family: Arial;
+							font-size:20px;
+							margin-top:3px;
+						}#CommentsButton:hover{
+							color:#4f4b4a;
+						}</style>';
+			echo '<a href="comments.php?hwid='.$row2[3].'" id = "CommentsButton" style = "">';
 			echo '<span class="glyphicon glyphicon-comment"></span>';
 			echo ' Коментари '.$row4[0].'</a>';
 			echo '</p>';
@@ -304,7 +356,7 @@
 				// </form>';
 			
 			//echo '</div>';
-			echo '<span class="cd-date"><h1 style="color:black;">'.$weekday.' <small id = "smalltag" style = "color:black;font-size:15px;">'.$weekday2.$row[0].'</small></h1></span>';
+			echo '<span class="cd-date"><h1 style="color:#6f6967;font-family: MyDays;font-size:22px;font-weight:bold;">'.$weekday.' <small id = "smalltag" style = "font-family:Arial;color:black;font-size:15px;">'.$weekday2.$row[0].'</small></h1></span>';
 			echo '</div> <!-- cd-timeline-content -->';
 			echo '</div> <!-- cd-timeline-block -->';
 		}

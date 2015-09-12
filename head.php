@@ -1,4 +1,6 @@
 ﻿<?php
+	include "some_external_phps/ReturnAllUserInfoByIdOrByName.php";
+	include "some_external_phps/CheckIfFriends.php";
 	echo '<head><meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">';
 	if (isset($_SESSION['name'])) {

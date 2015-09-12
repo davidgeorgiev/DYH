@@ -3,6 +3,7 @@
 	echo '<html>';
 	include "head.php";
 	include "config.php";
+	include "some_external_phps/PrintAccountInfo.php";
 	
 ?>
 <body>
@@ -37,7 +38,7 @@ include "main_menu.php";
 echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 
 $searched_string = $_GET['searching_for'];
-$SQL = "SELECT DISTINCT COUNT(user.Name) FROM user WHERE user.Name LIKE '%".$searched_string."%' ORDER BY user.Name DESC";
+$SQL = "SELECT DISTINCT COUNT(user.Name) FROM user WHERE ((user.Name LIKE '%".$searched_string."%') || (user.FirstName LIKE '%".$searched_string."%') || (user.LastName LIKE '%".$searched_string."%') || (user.Text LIKE '%".$searched_string."%')) ORDER BY user.Name DESC";
 $result3 = mysql_query($SQL);
 $row3 = mysql_fetch_array($result3);
 
@@ -48,17 +49,14 @@ echo '</div>';
 if ($row3[0] <= 0) {
 	echo 'Няма съвпадения';
 } else {
-	$SQL = "SELECT DISTINCT user.Name FROM user WHERE user.Name LIKE '%".$searched_string."%' ORDER BY user.Name ASC";
+	$SQL = "SELECT DISTINCT user.Name FROM user WHERE ((user.Name LIKE '%".$searched_string."%') || (user.FirstName LIKE '%".$searched_string."%') || (user.LastName LIKE '%".$searched_string."%') || (user.Text LIKE '%".$searched_string."%')) ORDER BY user.Name ASC";
+	//echo $SQL;
 	$result = mysql_query($SQL);
 	while ($row = mysql_fetch_array($result)){
 		
 		
 		
-		echo '<div class="alert alert-warning alert-dismissible" role="alert">';
-			echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-			echo '<div class="panel-body"><a href = "home.php?user='.$row[0].'"><strong>';
-			echo $row[0];
-			echo '</strong></div></div>';
+		PrintAccountInfoByUSERNAME($row[0], 1);
 			//echo '<div class="panel-footer">'.$row[2].'</div>';
 			
 

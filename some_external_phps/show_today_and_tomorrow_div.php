@@ -1,6 +1,7 @@
 ﻿<?php
 	
 	$today_date = gmdate("Y-m-d", time() + 3600*($timezone+date("I")));
+	//echo $today_date;
 	//$tomorrow = date('Y-m-d', strtotime("tomorrow"));
 	
 	include "return_hw_info_by_id.php";
@@ -50,9 +51,24 @@
 	echo '<div class="row" style = "margin-left: 9%;margin-bottom: 10%;>';
 		echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
 			echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
+			
+			if ($today == 0){
+				$today = 7;
+			}
+			//echo "Принтирай програмата на ".$_GET["user"]." за ".$eoweek." ".$today;
+			
 			PrintCurriculum($_GET["user"], $eoweek, $today, "- днес");
 			echo "</div>";
 			echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
+			
+			if ($today == 7){
+				if ($eoweek == "OddWeekID"){
+					$eoweek = "EvenWeekID";
+				} else if ($eoweek == "EvenWeekID"){
+					$eoweek = "OddWeekID";
+				}
+			}
+			//echo "Принтирай програмата на ".$_GET["user"]." за ".$eoweek." ".$tomorrow;
 			PrintCurriculum($_GET["user"], $eoweek, $tomorrow, "- утре");
 			echo "</div>";
 		echo "</div>";

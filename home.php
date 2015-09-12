@@ -23,7 +23,15 @@
 	}
 	if (ifLogged() > 0){
 	$button_to_render = '<div><div class="dropdown" style = "float:left;padding-right:10px;">
-				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:46px;">
+				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:46px;
+																																									width:100%;background:#d2c9c6;
+																																									color:#837d7c;
+																																									font-weight:bold;
+																																									border-radius:5px;
+																																									font-size:25px;
+																																									font-family: Hattori;
+																																									font-weight:bold;
+																																							">
 				<span class="glyphicon glyphicon-wrench"></span>
 				</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -35,34 +43,21 @@
 				</ul>
 				</div>';
 				$myButtonLabel = "";
+				$UserInfo = ReturnALLUserInfoByIdOrByName($_GET["user"]);
 				switch ($TimePeriod){
-					case "with_past_unsolved": $myButtonLabel = "Всички предстоящи задачи на ".$_GET["user"]." включително пропуснатите от вас";
+					case "with_past_unsolved": $myButtonLabel = "Всички предстоящи задачи на ".$UserInfo["FirstName"]." включително пропуснатите от вас";
 					break;
-					case "false": $myButtonLabel = "Всички предстоящи задачи на ".$_GET["user"]." без пропуснатите от вас";
+					case "false": $myButtonLabel = "Всички предстоящи задачи на ".$UserInfo["FirstName"]." без пропуснатите от вас";
 					break;
-					case "only_unsolved": $myButtonLabel = "Всички задачи на ".$_GET["user"].", които сте пропуснали";
+					case "only_unsolved": $myButtonLabel = "Всички задачи на ".$UserInfo["FirstName"].", които сте пропуснали";
 					break;
-					case "only_solved": $myButtonLabel = "Всички задачи на ".$_GET["user"].", които сте решили";
-					break;
-					
-				}
-		
-		
-				$myButtonLabel = "";
-				switch ($TimePeriod){
-					case "with_past_unsolved": $myButtonLabel = "Всички предстоящи задачи на ".$_GET["user"]." включително пропуснатите от вас";
-					break;
-					case "false": $myButtonLabel = "Всички предстоящи задачи на ".$_GET["user"]." без пропуснатите от вас";
-					break;
-					case "only_unsolved": $myButtonLabel = "Всички задачи на ".$_GET["user"].", които сте пропуснали";
-					break;
-					case "only_solved": $myButtonLabel = "Всички задачи на ".$_GET["user"].", които сте решили";
+					case "only_solved": $myButtonLabel = "Всички задачи на ".$UserInfo["FirstName"].", които сте решили";
 					break;
 					
 				}
 				
 				
-				$button_to_render = $button_to_render.'<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$myButtonLabel.'</div></div>';
+				$button_to_render = $button_to_render.'<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color:#d2c9c6;background-color:#837d7c;font-size:35;font-family:MyDays	;">'.$myButtonLabel.'</div></div>';
 	} else {
 		$button_to_render = "";
 	}

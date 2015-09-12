@@ -113,33 +113,62 @@ function test_input($data) {
 }
 
 ?>
-
-<div class="" id="loginModal" >
+<style>
+#MyButtonToAddURL{
+	font-size:15px;font-family:Arial;border:solid #d2c9c6;border-width:thin;border-radius:7px;width:auto;
+}
+#MyButtonToAddURL:hover{
+	font-family:Arial;
+}
+#MyInputBox{
+	font-size:20px;
+	height:35px;
+	margin:auto;
+}
+#MyInputBox:hover;{
+	background:#d2c9c6;
+}
+#RegInput{
+	margin-top:20px;
+	margin-left:-15px;
+}
+#BoxHeadingButton{
+	background:#b2a5a1;
+	color:#837d7c;
+	font-weight:bold;
+	border-radius:0px;
+	font-family: Hattori;
+	font-weight:bold;
+	width:100%;
+	
+	font-size:20px;
+	height:50px;
+	margin:auto;
+}
+</style>
+<div class="" id="loginModal">
 	  <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">?</button>
-		<h3 style = "color:rgba(243, 243, 243, 0.8);">Have an Account?</h3>
+		<!--<h3 style = "color:rgba(243, 243, 243, 0.8);">DYH</h3>-->
 	  </div>
-	  <div class="modal-body">
-		<div class="well">
+	  <div class="modal-body"  style = "background-color:#d2c9c6;">
+		<div class="well" style = "background-color:#837d7c;">
 		  <ul class="nav nav-tabs">
-			<li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-			<li><a href="#create" data-toggle="tab">Create Account</a></li>
+			<li class="active"><a href="#login" id = "BoxHeadingButton" data-toggle="tab">Вход</a></li>
+			<li><a href="#create" data-toggle="tab" id = "BoxHeadingButton">Създай профил</a></li>
 		  </ul>
 		  <div id="myTabContent" class="tab-content">
 			<div class="tab-pane active in" id="login">
 			<form method="post" class="form-horizontal" <?php echo 'action='; echo "check_user.php";?>> 
 				<fieldset>
 				     
-				  <div class="control-group" style = "margin-left: 1%;margin-right: 1%;">
+				  <div class="control-group" style = "margin-top:20px;">
 					<!-- Username -->
 					<div class="form-group" >
-					<label for="text" style = "margin-right: 10px;" >Име: </label>
-					<input type="text" name="name" class="form-control"  value="<?php echo $name;?>">
+					<input type="text" name="name" id = "MyInputBox" class="form-control" placeholder = "Потребителско име" value="<?php echo $name;?>">
 					<span class="error"> <?php echo $nameErr;?></span>
 					</div>
 					<div class="form-group">
-					<label for="password">Парола</label>
-					<input type="password" class="form-control" name="psw" value="<?php echo $psw;?>">
+					<input type="password" id = "MyInputBox" class="form-control" name="psw" placeholder = "Парола" value="<?php echo $psw;?>">
 					<span class="error"> <?php echo $passErr;?></span>
 					</div>
 				   
@@ -151,7 +180,7 @@ function test_input($data) {
 				  <div class="control-group">
 					<!-- Button -->
 					<div class="controls" style = "margin-top:-40px;">
-					  <input class="btn btn-default" type="submit" name="submit" value="Влез"> 
+					  <input class="btn btn-default" id = "MyButtonToAddURL" type="submit" name="submit" value="Влез"> 
 					</div>
 				  </div>
 				</fieldset>
@@ -159,45 +188,96 @@ function test_input($data) {
 			</div>
 			<div class="tab-pane fade" id="create">
 				<form id="tab" role="form" <?php echo 'action='; echo "acc_added.php";?> method="post">
+					<div id = "RegInput">
 					<div class="form-group" >
-					<label for="text" style = "margin-right: 10px;" >Име: </label>
-					<input type="text" name="name" class="form-control"  value="<?php echo $name;?>">
+					<input type="text" name="FirstName" id = "MyInputBox" class="form-control" placeholder = "Първо име" value="<?php echo $name;?>">
+					</div>
+					<div class="form-group" >
+					<input type="text" name="LastName" id = "MyInputBox" class="form-control" placeholder = "Фамилия" value="<?php echo $name;?>">
+					</div>
+					<div class="form-group" >
+					<input type="text" name="Text" id = "MyInputBox" class="form-control" placeholder = "Опишете себе си с две-три думи" value="<?php echo $name;?>">
+					</div>
+					<div class="form-group" >
+					<input type="text" name="IMGURL" id = "MyInputBox" class="form-control" placeholder = "URL към снимка" value="<?php echo $name;?>">
+					</div>
+					<div class="form-group" >
+						<label for="text" id = "descURL" style = "font-family:Arial;margin:auto;margin-left:20px;font-size:25px;color:#d2c9c6;">Рожден ден</label>
+						<select class="form-control" id = "MyInputBox" style = "margin-left:19px;float:left;width:40%;margin-right:13px;" name="Month">
+							<?php 
+								include "graphs/convert_month_to_word.php";
+								echo '<option value="0">Месец</option>';
+								for ($counter = 1; $counter <= 12; $counter++){
+									if ($counter < 10){
+										$Zero = "0";
+									} else {
+										$Zero = "";
+									}
+									echo '<option value="'.$Zero.$counter.'">'.ConvertMonthToWord($counter).'</option>';
+								}
+							?>
+						</select>
+						<select class="form-control" id = "MyInputBox" style = "width:40%;" name="Day">
+							<option value="0">Ден</option>
+							<?php 
+								for ($counter = 1; $counter <= 31; $counter++){
+									if ($counter < 10){
+										$Zero = "0";
+									} else {
+										$Zero = "";
+									}
+									echo '<option value="'.$Zero.$counter.'">'.$counter.'</option>';
+								}
+							?>
+						</select>
+						<select class="form-control" id = "MyInputBox" style = "margin-top:18px;" name="Year">
+							<option value="0">Година</option>
+							<?php 
+								for ($counter = (date("Y")-5); $counter > 1989; $counter--){
+									echo '<option value="'.$counter.'">'.$counter.'</option>';
+								}
+							?>
+						</select>
+						<select class="form-control" id = "MyInputBox" style = "margin-top:18px;" name="Sex">
+							<option value="1">Момче</option>
+							<option value="2">Момиче</option>
+						</select>
+					</div>
+					<div class="form-group" >
+					<input type="text" name="name" id = "MyInputBox" class="form-control" placeholder = "Потребителско име" value="<?php echo $name;?>">
 					</div>
 					<div class="form-group">
-					<label for="password">Парола</label>
-					<input type="password" class="form-control" name="psw" value="<?php echo $psw;?>">
+					<input type="password" id = "MyInputBox" class="form-control" name="psw" placeholder = "Парола" value="<?php echo $psw;?>">
 					</div>
-					<button class="btn btn-primary" type="submit" >Създай профил</button>
+					</div>
+					<button class="btn btn-primary" id = "MyButtonToAddURL" type="submit" >Създай профил</button>
 				</form>
 			</div>
 		</div>
 	  </div>
-	  <a href="history.php?user=david" id = "index_image" style = "position:fixed;right:130;top:105;" target=_blank><img class=shakeimage onmouseout="stoprattle(this)" onmouseover="init(this);rattleimage()" src="css/features.jpg" border=0 width="500px"></a>
-	  <div class="panel panel-primary"><div class="panel-heading">Информация</div>
-  <div class="panel-body">
+	  <a href="home.php?user=david" id = "index_image" style = "position:fixed;right:130;top:105;" target=_blank><img class=shakeimage onmouseout="stoprattle(this)" onmouseover="init(this);rattleimage()" src="css/features.jpg" border=0 width="500px"></a>
   
 	<?php
-	
+		echo '<style>#descURL{color:#837d7c;font-size:20px;font-weight:bold;margin:auto;margin-left:10px;font-family:Arial;}</style>';
 	
 		$SQL = "SELECT COUNT(user.Name) FROM user";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
-		echo '<p>Регистрирани потребители: ';
+		echo '<p id = "descURL" >Регистрирани потребители: ';
 		echo $row[0].'</p>';
 		
 		$SQL = "SELECT COUNT(homeworks.UID) FROM homeworks";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
-		echo '<p>Домашни: ';
+		echo '<p id = "descURL">Домашни: ';
 		echo $row[0].'</p>';
 		
 		$SQL = "SELECT COUNT(otherinfo.UID) FROM otherinfo";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
-		echo '<p>Други: ';
+		echo '<p id = "descURL">Допълнително: ';
 		echo $row[0].'</p>';
 	?>
-  </div></div>
 	</div>
 </div>
 <?php

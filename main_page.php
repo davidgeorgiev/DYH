@@ -110,8 +110,8 @@
 	}
 	
 	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
-	$result = mysql_query("SELECT user.UID FROM user WHERE user.Name = '".$username."'");
-	$currentuserid = mysql_fetch_array($result);
+	$MyUserUIDresult = mysql_query("SELECT user.UID FROM user WHERE user.Name = '".$username."'");
+	$currentuserid = mysql_fetch_array($MyUserUIDresult);
 	if ($currentuserid[0] != Get_Logged_users_id()){
 		if (CheckIfFriends($currentuserid[0], Get_Logged_users_id()) == 0){
 			if ((CheckIfRequestSent(Get_Logged_users_id(), $currentuserid[0])) == 0){

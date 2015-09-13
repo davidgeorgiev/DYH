@@ -58,7 +58,7 @@
 		$there_is_some_info = 0;
 	}
 	echo '<div class="container">';
-	
+
 	function PrintAChart($IdOfChart, $username, $strDateFrom, $strDateTo, $PrevMonth, $EditMode, $timezone){
 		
 		$done_array1 = CollectData(1, $username, $strDateFrom, $strDateTo);
@@ -112,7 +112,7 @@
 		return $MyLastDayOfThisWeekMonth;
 	}
 	
-	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;">';
+	echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:2%;height:850px;">';
 	$MyUserUIDresult = mysql_query("SELECT user.UID FROM user WHERE user.Name = '".$username."'");
 	$currentuserid = mysql_fetch_array($MyUserUIDresult);
 	if ($currentuserid[0] != Get_Logged_users_id()){
@@ -125,6 +125,7 @@
 			}
 		}
 	}
+	
 	PrintAccountInfoByUSERNAME($username, 1);
 	
 	include "some_external_phps/show_today_and_tomorrow_div.php";

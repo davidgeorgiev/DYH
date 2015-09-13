@@ -7,15 +7,9 @@ include "head.php";
 include "config.php";
 include  "some_external_phps/PrintAccountInfo.php";
 
-function validateDate($date, $format = 'Y-m-d')
-{
-    $d = DateTime::createFromFormat($format, $date);
-    return $d && $d->format($format) == $date;
-}
-
 function CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGURL, $Text){
 	$Error = "";
-	$SQL = "SELECT Count(user.Name) FROM user WHERE user.Name = '".$name."'";
+	$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Name = '".$name."'";
 	$result = mysql_query($SQL);
 	$row = mysql_fetch_array($result);
 	if ($row[0] > 0){
@@ -33,25 +27,8 @@ function CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGU
 	if(!exif_imagetype($IMGURL)){
 		$Error .= 'Невалиден адрес на изображение! ';
 	}
-	$Split_date = explode("-", $Birthday);
-	$ErrDate = 0;
-	foreach($Split_date as $value){
-		if ($value == "0"){
-			$ErrDate = 1;
-		}
-	}
-	unset($value);
-	if ($ErrDate == 1){
-		$Error .= 'Неправилно въведена дата на раждане! ';
-	}
 	if (strlen($Text) <= 0){
 		$Error .= 'Липсва описание! ';
-	}
-	ob_start();
-	var_dump(validateDate($Birthday));
-	$result = ob_get_clean();
-	if ($result == false){
-		$Error .= 'Не съществува такава дата! ';
 	}
 	return $Error;
 }
@@ -71,15 +48,19 @@ function CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGU
 			$Text = $_POST["Text"];
 			$Sex = $_POST["Sex"];
 			
-			$Error = CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGURL, $Text);
-			
+			//$Error = CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGURL, $Text);
+			$Error = "";
 			//$_SESSION['name'] = $username;
 	$EmptyLine = 1;
 	if ($db_found) {
 			if (strlen($Error) <= 0){
 				$SQL = "INSERT INTO user (Name, Password, FirstName, LastName, IMGURL, Birthday, Sex, Text) VALUES ('".$name."', '".$psw."', '".$FirstName."', '".$LastName."', '".$IMGURL."', '".$Birthday."', ".$Sex.", '".$Text."')";
+				
 				$result = mysql_query($SQL);
 				$USERuid = mysql_insert_id();
+				
+				$SQL = "INSERT INTO friends (FirstPersonID, SecondPersonID, FirstConfirm, SecondConfirm) VALUES (".$USERuid.", ".$USERuid.", 1, 1)";
+				$result = mysql_query($SQL);
 				
 				$SQL = "UPDATE user SET user.Password = '".$psw.$USERuid."' WHERE user.UID = ".$USERuid;
 				$MyUpdate = mysql_query($SQL);

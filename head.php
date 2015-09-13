@@ -1,4 +1,5 @@
 ﻿<?php
+	include "config.php";
 	include "some_external_phps/ReturnAllUserInfoByIdOrByName.php";
 	include "some_external_phps/CheckIfFriends.php";
 	echo '<head><meta charset="utf-8">
@@ -33,4 +34,26 @@
 		return $logged_user_id_is[0];
 	}
 	$timezone  = +2;
+<<<<<<< HEAD
+	// $query = $_SERVER['PHP_SELF'];
+	// $path = pathinfo( $query );
+	// $MyCurrentPhpPage = $path['basename'];
+	// if (($MyCurrentPhpPage != "index.php") && ($MyCurrentPhpPage != "acc_added.php")){
+		// if (Get_Logged_users_id() == 0){
+			// header('Location: index.php') and exit;
+		// }
+	// }
+	// if (isset($_GET["user"])) {
+		// $SQL = "SELECT user.UID FROM user WHERE user.Name = '".$_GET["user"]."'";
+		// $MyUserUIDResult = mysql_query($SQL);
+		// $MyUserUID = mysql_fetch_array($MyUserUIDResult);
+		// echo $_GET["user"]." ".Get_Logged_users_name();
+		// if ($_GET["user"] != Get_Logged_users_name()){
+			// if (CheckIfFriends($MyUserUID[0], Get_Logged_users_id()) == 0){
+				// header('Location: you_are_not_friends.php?secured_user='.$_GET["user"]) and exit;
+			// }
+		// }
+	// }
+=======
+>>>>>>> parent of 27d7e7d... Making a security system - redirecting when not friends or not logged
 ?>

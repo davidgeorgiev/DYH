@@ -3,7 +3,7 @@
 	echo '<html>';
 	include "head.php";
 	include "config.php";
-	
+	CheckFriendShipByNameAndKickOut($_GET["user"], Get_Logged_users_id());
 ?>
 <body>
 <?php

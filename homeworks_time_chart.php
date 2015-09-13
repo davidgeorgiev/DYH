@@ -6,6 +6,8 @@
 	include "head.php";
 	include "config.php";
 	include (dirname("../")."/css/progressbar.php");
+	
+	CheckFriendShipByNameAndKickOut($_GET["user"], Get_Logged_users_id());
 ?>
 
 <body>

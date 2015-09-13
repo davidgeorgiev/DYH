@@ -3,6 +3,8 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
+	
+	CheckFriendShipByNameAndKickOut($_GET["user"], Get_Logged_users_id());
 ?>
 <?php
 	include "start_check.php";

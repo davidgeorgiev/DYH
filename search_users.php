@@ -53,9 +53,21 @@ if ($row3[0] <= 0) {
 	//echo $SQL;
 	$result = mysql_query($SQL);
 	while ($row = mysql_fetch_array($result)){
-		
-		
-		
+		echo '<div style = "margin-top:30px;">';
+		$MyCurrentUserInfo = ReturnALLUserInfoByIdOrByName($row[0]);
+		$MyUserIDResult = mysql_query("SELECT user.UID FROM user WHERE user.Name = '".$row[0]."'");
+		$currentuserid = mysql_fetch_array($MyUserIDResult);
+		if ($currentuserid[0] != Get_Logged_users_id()){
+			if (CheckIfFriends($currentuserid[0], Get_Logged_users_id()) == 0){
+				if ((CheckIfRequestSent(Get_Logged_users_id(), $currentuserid[0])) == 0){
+					echo '<a href = "send_friend_request_to.php?user='.$row[0].'"><button class="btn btn-default" style = "min-width:100%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:0px;" type="button"><span class = "glyphicon glyphicon-user"></span><span class = "glyphicon glyphicon-user"></span> Изпрати покана на '.$MyCurrentUserInfo["FirstName"]." ".$MyCurrentUserInfo["LastName"].'</button></a>';
+				} else {
+					echo '<a href = "#"><button class="btn btn-default" style = "min-width:100%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:0px;" type="button"><span class = "glyphicon glyphicon-user"></span><span class = "glyphicon glyphicon-user"></span> Поканата е изпратена</button></a>';
+				}
+			} else {
+				echo '<a href = "#"><button class="btn btn-default" style = "min-width:100%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:0px;" type="button"><span class = "glyphicon glyphicon-user"></span><span class = "glyphicon glyphicon-user"></span> Приятели</button></a>';
+			}
+		}
 		PrintAccountInfoByUSERNAME($row[0], 1);
 			//echo '<div class="panel-footer">'.$row[2].'</div>';
 			

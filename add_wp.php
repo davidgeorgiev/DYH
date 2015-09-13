@@ -81,10 +81,10 @@ include "main_menu.php";
 						break;
 						case 6: $convertered_weekday = 'Събота';
 						break;
-						case 7: $convertered_weekday = 'Неделя';
+						case 0: $convertered_weekday = 'Неделя';$weekday = 7;
 						break;
 					}
-					echo '<option value="'.$weekday.'">Днес </option>';
+					echo '<option value="'.$weekday.'">Днес - '.$convertered_weekday.'</option>';
 					
 				?>
 					<option value="1">Понеделник</option>

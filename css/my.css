@@ -223,3 +223,11 @@ width:100px;
 #URLBOX:hover{
 	background-color:#726b69;
 }
+#MyDataURL{
+	color:white;
+	text-decoration:none;
+}
+#MyDataURL:hover{
+	color:#5e5958;
+	//text-decoration:underline;
+}

@@ -6,6 +6,7 @@
 <?php
 	include "config.php";
 	include "head.php";
+	include "some_external_phps/FixURLLinks.php";
 	/*if ($db_found) {
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('2015-06-30 00:00:00', 'Hello', 'How are you?','2')";
 		$result = mysql_query($SQL);
@@ -116,7 +117,14 @@ if ($row3[0] <= 0) {
 	  ?>
 	<div class="form-group">
       <label for="text">Описание</label>
-      <?php echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник">'.$row[2].'</textarea>'; ?>
+	  
+	  <?php
+	  
+		$DoneText = ReturnNormalText($row[2]);
+	  
+	  ?>
+	  
+      <?php echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник">'.$DoneText.'</textarea>'; ?>
     </div>
 	<div class="form-group">
       <label for="text">URL към изображение</label>

@@ -35,7 +35,7 @@
 				case 7: $WeekDayBG = "Неделя";
 				break;
 			}
-				echo '<table class="table" style = "float:left;margin-top:15px;font-size:16px;font-family:Arial;font-weight:bold;color:white;background-color: #6f6565;">';
+				echo '<table>';
 					echo '<thead>';
 						echo '<tr>';
 						echo '	<th colspan="4">'.$WeekDayBG.$CustomText.'</th>';
@@ -53,15 +53,15 @@
 								$MySymbol = "";
 							}
 							
-							echo '<td>'.$i.'</td>
-								<td style = "font-size:16px;">'.$MyCurriculum[$WeekDay][$i]["Time"].'</td>';
+							echo '<td data-label="'.$WeekDayBG.'">'.$i.'</td>
+								<td>'.$MyCurriculum[$WeekDay][$i]["Time"].'</td>';
 								if ($IsLonger == 1){
 									$onhover = 'title="'.$MyCurriculum[$WeekDay][$i]["Subject"].'"';
 								} else {
 									$onhover = "";
 								}
-								echo '<td '.$onhover.' style = "font-size:13px;">'.mb_substr($MyCurriculum[$WeekDay][$i]["Subject"],0,20,'UTF-8').$MySymbol.'</td>';
-								echo '<td style = "font-size:16px;">'.$MyCurriculum[$WeekDay][$i]["Info"].'</td>';
+								echo '<td '.$onhover.'>'.mb_substr($MyCurriculum[$WeekDay][$i]["Subject"],0,20,'UTF-8').$MySymbol.'</td>';
+								echo '<td>'.$MyCurriculum[$WeekDay][$i]["Info"].'</td>';
 							echo '</tr>';
 						}
 					echo '<tbody>';

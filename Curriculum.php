@@ -14,7 +14,6 @@
 	$_SESSION['page'] = "other";
 ?>
 <body>
-<div class="container">
 <?php include "main_menu.php";include "some_external_phps/checkIfHaveToShowOtherWeek.php";include "some_external_phps/ReturnUserIDByUserName.php";?>
 
 <?php
@@ -23,9 +22,8 @@
 		$date = new DateTime($ddate);
 		$week = $date->format("W");
 	?>
-	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 		<div class="page-header">
-		<h1>Учебната програма <small id = "smalltag">
+		<h1>Учебната програма <small id = "smalltag" style = "color:#d2c9c6;">
 		<?php
 			if($week&1) {
 				$eoweek = "OddWeekID";
@@ -44,20 +42,15 @@
 		?>
 		</small></h1>
 		</div>
-		<div class="row" style = "margin-left: 9%;margin-bottom: 10%;>
 			<?php
 				include "some_external_phps/print_curriculum.php";
-				echo '<div class="col-sm-10" style = "margin:10px;background-color: white;border-radius:7px;">';
+				
 				for ($day = 1; $day <= 7; $day++) {
-					echo '<div class="col-sm-10" style = "margin:10px;background-color: white;border-radius:7px;">';
+					echo '<div id = "Curriculum">';
 					PrintCurriculum($_GET["user"], $eoweek, $day, "");
-					echo "</div>";
+					echo '</div>';
 				}
-				echo "</div>";
 			?>
-		</div>
 	
-	</div>
-</div>
 </body>
 </html>

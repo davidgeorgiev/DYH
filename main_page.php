@@ -20,6 +20,9 @@
 	include "some_external_phps/CheckIfUserIsSolver.php";
 	include "some_external_phps/PrintAccountInfo.php";
 	
+	
+	CheckFriendShipByNameAndKickOut($_GET["user"], Get_Logged_users_id());
+	
 	$pars_time_period_to_check_with_page = "";
 	if (isset($_GET["time_period"])){
 		if (strlen($_GET["time_period"]) > 0){
@@ -114,6 +117,7 @@
 	$currentuserid = mysql_fetch_array($MyUserUIDresult);
 	if ($currentuserid[0] != Get_Logged_users_id()){
 		if (CheckIfFriends($currentuserid[0], Get_Logged_users_id()) == 0){
+			header('Location: you_are_not_friends.php?secured_user='.$_GET["user"]) and exit;
 			if ((CheckIfRequestSent(Get_Logged_users_id(), $currentuserid[0])) == 0){
 				echo '<a href = "send_friend_request_to.php?user='.$username.'"><button class="btn btn-default" style = "min-width:100%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:0px;" type="button"><span class = "glyphicon glyphicon-user"></span><span class = "glyphicon glyphicon-user"></span> Сприятеляване</button></a>';
 			} else {

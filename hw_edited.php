@@ -5,6 +5,7 @@
 <?php 
 include "head.php";
 include "config.php";
+include "some_external_phps/FixURLLinks.php";
 
 $password = $_SESSION['psw'];
 $username = $_SESSION['name'];
@@ -30,6 +31,7 @@ include "main_menu.php"; ?>
 		$rank = $_POST["rank"];
 		$type = $_POST["type"];
 		
+		$data = FixURLsData($data);
 		
 		if (isset($_POST["imgurl"])) {
 			$imgurl = $_POST["imgurl"];

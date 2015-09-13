@@ -6,6 +6,7 @@
 <?php 
 include "head.php";
 include "config.php";
+include "some_external_phps/FixURLLinks.php";
 
 $password = $_SESSION['psw'];
 $username = $_SESSION['name'];
@@ -27,6 +28,9 @@ include "main_menu.php"; ?>
 	if ($db_found && $EditMode == 1) {
 		$title = $_POST["title"];
 		$data = $_POST["data"];
+		
+		$data = FixURLsData($data);
+		
 		$infoid = $_SESSION['infoid'];
 		
 		$SQL = "UPDATE otherinfo SET Title = '".$title."', Data = '".$data."' WHERE otherinfo.UID = ".$infoid;

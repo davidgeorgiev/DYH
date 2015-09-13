@@ -2,6 +2,7 @@
 	include "config.php";
 	include "some_external_phps/ReturnAllUserInfoByIdOrByName.php";
 	include "some_external_phps/CheckIfFriends.php";
+	include "some_external_phps/check_and_kick_out.php";
 	echo '<head><meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">';
 	if (isset($_SESSION['name'])) {
@@ -34,7 +35,7 @@
 		return $logged_user_id_is[0];
 	}
 	$timezone  = +2;
-<<<<<<< HEAD
+
 	// $query = $_SERVER['PHP_SELF'];
 	// $path = pathinfo( $query );
 	// $MyCurrentPhpPage = $path['basename'];
@@ -54,6 +55,4 @@
 			// }
 		// }
 	// }
-=======
->>>>>>> parent of 27d7e7d... Making a security system - redirecting when not friends or not logged
 ?>

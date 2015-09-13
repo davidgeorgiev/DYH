@@ -8,7 +8,7 @@
 			$EndOfQuery = "user.UID = ".$userid;
 		}
 		
-		$SQL = "SELECT user.Name, user.FirstName, User.LastName, user.Password, user.IMGURL, user.Birthday, user.Text, user.Sex FROM user WHERE ".$EndOfQuery ;
+		$SQL = "SELECT user.Name, user.FirstName, user.LastName, user.Password, user.IMGURL, user.Birthday, user.Text, user.Sex FROM user WHERE ".$EndOfQuery ;
 		$MyUserInfoResult = mysql_query($SQL);
 		$MyUserInfo = mysql_fetch_array($MyUserInfoResult);
 		

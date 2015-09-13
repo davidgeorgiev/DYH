@@ -48,18 +48,14 @@
 	echo '</div>';
 	echo '<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$Label.'</div>';
 	include "some_external_phps/print_curriculum.php";
-	echo '<div class="row" style = "margin-left: 9%;margin-bottom: 10%;>';
-		echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
-			echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
 			
 			if ($today == 0){
 				$today = 7;
 			}
 			//echo "Принтирай програмата на ".$_GET["user"]." за ".$eoweek." ".$today;
-			
+			echo '<div id = "CurriculumMain">';
 			PrintCurriculum($_GET["user"], $eoweek, $today, "- днес");
-			echo "</div>";
-			echo '<div class="col-sm-5" style = "margin:10px;background-color: white;border-radius:7px;">';
+			echo '</div>';
 			
 			if ($today == 7){
 				if ($eoweek == "OddWeekID"){
@@ -69,10 +65,10 @@
 				}
 			}
 			//echo "Принтирай програмата на ".$_GET["user"]." за ".$eoweek." ".$tomorrow;
+			echo '<div id = "CurriculumMain">';
 			PrintCurriculum($_GET["user"], $eoweek, $tomorrow, "- утре");
 			echo "</div>";
-		echo "</div>";
-	echo "</div>";
+			echo "</div>";
 	
 	$SQL = "SELECT homeworks.UID FROM homeworks WHERE homeworks.Date = '".$today_date."'";
 	//echo $SQL;

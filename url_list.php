@@ -51,7 +51,7 @@
 				}
 				echo '<a href = "'.$Beginning.$url.'" target="blank"><div class="row" id = "URLBOX" style = "margin-bottom:20px;">';
 				echo '<div class="col-sm-3" style = "margin-top:20px;">';
-					echo $Trash.$Pencil.'<div class="zoom_img_urls" class = "thumb1" style = "margin-top:27px;margin-left:40px;border:solid #d2c9c6;border-radius:50%;width:150px;height:150px;background: url('.$imgurl.') 50% 50% no-repeat;background-size: 150px;z-index:100;">';
+					echo $Trash.$Pencil.'<div class="zoom_img_urls" class = "thumb1" style = "border:solid #d2c9c6;border-radius:50%;background: url('.$imgurl.') 50% 50% no-repeat;background-size: 150px;z-index:100;">';
 					echo '</div>';
 				echo '</div>';
 					echo '<div class="col-sm-8">';

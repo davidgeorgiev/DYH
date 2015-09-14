@@ -9,7 +9,12 @@
 	//$the_end_of_query = 'ORDER BY homeworks.Date DESC';
 	$datetime = new DateTime('tomorrow');
 	$datetime = $datetime->format('Y-m-d H:i:s');
-	$TimePeriod = $_GET["time_period"];
+	if (isset($_GET["time_period"])){
+		$TimePeriod = $_GET["time_period"];
+	} else {
+		$TimePeriod = "false";
+	}
+	
 	if ($TimePeriod == "today_and_tomorrow"){
 		$the_end_of_query = "AND homeworks.Date >= '".gmdate("Y-m-d", time() + 3600*($timezone+date("I")))." 00:00:00' AND homeworks.Date <= '".$datetime."' ORDER BY homeworks.Date ASC";
 	} else if ($TimePeriod == "only_unsolved") {
@@ -57,7 +62,7 @@
 				}
 				
 				
-				$button_to_render = $button_to_render.'<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color:#d2c9c6;background-color:#837d7c;font-size:35;font-family:MyDays	;">'.$myButtonLabel.'</div></div>';
+				$button_to_render = $button_to_render.'<div id = "MainPageHomeTitle" style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color:#d2c9c6;background-color:#837d7c;">'.$myButtonLabel.'</div></div>';
 	} else {
 		$button_to_render = "";
 	}

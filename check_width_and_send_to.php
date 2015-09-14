@@ -22,7 +22,7 @@ function getQueryVariable(variable)
        return(false);
 }
 	if (width > 0 && height >0) {
-		window.location.href = getQueryVariable("page")+".php?user="+getQueryVariable("user")+"&width=" + width + "&height=" + height + "&hwid=" + getQueryVariable("hwid") + "&weeknum=" + getQueryVariable("weeknum") + "&numofweeks=" + getQueryVariable("numofweeks") + "&time_period=" + getQueryVariable("time_period");
+		window.location.href = getQueryVariable("page")+".php?user="+getQueryVariable("user")+"&width=" + width + "&height=" + height + "&hwid=" + getQueryVariable("hwid") + "&weeknum=" + getQueryVariable("weeknum") + "&numofweeks=" + getQueryVariable("numofweeks") + "&time_period=" + getQueryVariable("time_period") + "&searching_for=" + getQueryVariable("searching_for");
 	} else;
 		exit();
 </script>

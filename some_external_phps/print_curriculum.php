@@ -64,7 +64,7 @@
 								echo '<td>'.$MyCurriculum[$WeekDay][$i]["Info"].'</td>';
 							echo '</tr>';
 						}
-					echo '<tbody>';
+					echo '</tbody>';
 						
 				echo '</table>';
 	}

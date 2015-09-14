@@ -24,7 +24,9 @@
 		if (isset($_GET["page"])){
 			if ($_GET["page"] == "homeworks_time_chart"){
 				$MyURL = 'homeworks_time_chart.php?user='.$username.'&weeknum='.date("W").'&numofweeks=4';
-			} 
+			}  else {
+				$MyURL = 'home.php?user='.$username;
+			}
 		} else {
 			$MyURL = 'home.php?user='.$username;
 		}

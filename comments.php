@@ -17,9 +17,9 @@
 		$p = new chartphp();
 
 		$p->data = array(array(array('Време',$MyPercentSolvingsArray["TimeForSolve"]), array('Оценка',$MyPercentSolvingsArray["Assessment"]), array('Мнение',$MyPercentSolvingsArray["PleasureInPercents"]), array('Дължина',$MyPercentSolvingsArray["LengthInPages"]), array('Научено',$MyPercentSolvingsArray["LearnedInPercents"]), array('Честност',$MyPercentSolvingsArray["IfCheating"])));
-		$p->chart_type = "donut";
+		$p->chart_type = "area";
 
-		
+		//print_r(array(array(array('Време',$MyPercentSolvingsArray["TimeForSolve"]), array('Оценка',$MyPercentSolvingsArray["Assessment"]), array('Мнение',$MyPercentSolvingsArray["PleasureInPercents"]), array('Дължина',$MyPercentSolvingsArray["LengthInPages"]), array('Научено',$MyPercentSolvingsArray["LearnedInPercents"]), array('Честност',$MyPercentSolvingsArray["IfCheating"]))));
 		// Common Options
 		$p->title = "Средна стойност на всички решили";
 

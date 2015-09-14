@@ -3,6 +3,7 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
+	include "some_external_phps/return_hw_info_by_id.php";
 ?>
 <?php
 	include "start_check.php";
@@ -10,17 +11,58 @@
 		// header('Location: check_width_and_send_to.php?user='.$username.'&page='.$current_page_is) and exit;
 	// }
 	$_SESSION['page'] = "other";
+	
+	function IHaveThisSubjectInSubjectList($userid,$hwid){
+		$MyCurrentHomeworkIfno = returnHomeworkInfoByID($_GET["hwid"]);
+		
+		$SQL = "SELECT usersubjectlist.SUBJECTLISTID FROM usersubjectlist WHERE usersubjectlist.USERID = ".$userid;
+		$MySubjectListResult = mysql_query($SQL);
+		$MySubjectListIDS = mysql_fetch_array($MySubjectListResult);
+		
+		$IhaveIt = 0;
+		$MySubjectIDsArray = explode(",",$MySubjectListIDS[0]);
+		for($counter = 0; $counter < (sizeof($MySubjectIDsArray)-1); $counter++){
+			$SQL = "SELECT subjects.Name, subjects.UID FROM subjects WHERE subjects.UID = ".$MySubjectIDsArray[$counter];
+			//echo '<p>'.$SQL.'</p>';
+			$MySubjectNameResult = mysql_query($SQL);
+			$MySubjectName = mysql_fetch_array($MySubjectNameResult);
+			if ($MySubjectName[0] == $MyCurrentHomeworkIfno["MainInfo"]["Title"]){
+				$IhaveIt = 1;
+				$SubjectID = $MySubjectName[1];
+			}
+			//echo $MySubjectName[0]." = ".$MyCurrentHomeworkIfno["MainInfo"]["Title"];
+		}
+		if ($IhaveIt == 0){
+			$SubjectID = 0;
+		}
+		//echo '<p style = "margin-top:10%;">'.$SubjectID.'</p>';
+		return $SubjectID;
+	}
+	
+	
+	if (!IHaveThisSubjectInSubjectList(Get_Logged_users_id(),$_GET["hwid"])){
+		$MyCurrentHomeworkIfno = returnHomeworkInfoByID($_GET["hwid"]);
+		
+		$_SESSION['Subject'] = $MyCurrentHomeworkIfno["MainInfo"]["Title"];
+		header('Location: add_to_my_list_subject_with_name.php?hwid='.$_GET["hwid"]) and exit;
+	} else {
+		$SubjectID = IHaveThisSubjectInSubjectList(Get_Logged_users_id(),$_GET["hwid"]);
+	}
 ?>
 <body>
 <div class="container">
-<?php include "main_menu.php"; $_SESSION["hwid"] = $_GET["hwid"]?>
+<?php include "main_menu.php"; $_SESSION["hwid"] = $_GET["hwid"]
+
+
+?>
 
 <div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 
 
 <form role="form" <?php echo 'action='; echo "solve_homework_final.php?user=".$_GET["user"]."&hwid=".$_GET["hwid"]?> method="post">
-
-
+<select class="form-control" name="SubjectID" style = "margin-top:0;">
+<option value = "<?php echo $SubjectID?>" ><?php echo $SubjectID?></option>
+</select>
 <div class="form-group">
   <label for="date">Преди да завършите това действие моля попълнете тази форма, за да могат другите да видят мнението ви за това домашно! :)</label>
 </div>
@@ -56,7 +98,7 @@
 		<option value="600">Много повече от два месеца</option>
 	</select>
 </div>
-<div class="form-group">
+<!--<div class="form-group">
   <label for="text">Каква оценка получихте</label>
 	<select class="form-control" name="assessment">
 		<option value="1">Никаква</option>
@@ -66,7 +108,7 @@
 		<option value="5">Много добър 5</option>
 		<option value="6">Отличен 6</option>
 	</select>
-</div>
+</div>-->
 <div class="form-group">
   <label for="text">Мнение за домашното</label>
 	<select class="form-control" name="pleasure">

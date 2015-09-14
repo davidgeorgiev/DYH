@@ -71,8 +71,11 @@ if ($row[0] <= 0){
 }
 
 
-
-header('Location: check_width_and_send_to.php?user='.$username.'&page=update_subject_list') and exit;
+if (isset($_GET["hwid"])){
+	header('Location: solve_homework.php?user='.$username.'&hwid='.$_GET["hwid"]) and exit;
+} else {
+	header('Location: check_width_and_send_to.php?user='.$username.'&page=update_subject_list') and exit;
+}
 ?>
 
 

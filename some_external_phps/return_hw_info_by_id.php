@@ -130,6 +130,8 @@
 			
 		}
 		switch ($ArraySolvings["Assessment"]) {
+			case 0: $FifthPartOfSentence = "Чакам си оценката още. ";
+			break;
 			case 1: $FifthPartOfSentence = "Нямаше оценка. ";
 			break;
 			case 2: $FifthPartOfSentence = "Писаха ми двойка, но другият път ще си я поправя на всяка цена :). ";

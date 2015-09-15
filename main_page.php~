@@ -216,7 +216,6 @@
 					.MyDeleteEditLink:hover{
 						color:#696160;
 						text-decoration: none;
-						font-weight:bold;
 					}
 				}
 				</style>';

@@ -40,12 +40,6 @@
 		}
 		$ArrayOfSums = array($SumOfTimeForSolve,$SumOfAssessment,$SumOfPleasureInPercents,$SumOfLengthInPages,
 		$SumOfLearnedInPercents,$SumOfIfCheating);
-		if ($counter == 0){
-			$counter = 1;
-		}
-		if ($AssessmentCounter == 0){
-			$AssessmentCounter = 1;
-		}
 		$ArrayOfAverage = array($SumOfTimeForSolve/$counter,$SumOfAssessment/$AssessmentCounter,$SumOfPleasureInPercents/$counter,$SumOfLengthInPages/$counter,
 		$SumOfLearnedInPercents/$counter,$SumOfIfCheating/$counter);
 		

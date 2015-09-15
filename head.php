@@ -42,14 +42,7 @@
 	}
 	$timezone  = +2;
 
-	// $query = $_SERVER['PHP_SELF'];
-	// $path = pathinfo( $query );
-	// $MyCurrentPhpPage = $path['basename'];
-	// if (($MyCurrentPhpPage != "index.php") && ($MyCurrentPhpPage != "acc_added.php")){
-		// if (Get_Logged_users_id() == 0){
-			// header('Location: index.php') and exit;
-		// }
-	// }
+	
 	// if (isset($_GET["user"])) {
 		// $SQL = "SELECT user.UID FROM user WHERE user.Name = '".$_GET["user"]."'";
 		// $MyUserUIDResult = mysql_query($SQL);

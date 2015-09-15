@@ -54,7 +54,7 @@
 		//print_r($DoneArray);
 		return $DoneArray;
 	}
-	include "some_external_phps/PrintPercentageBar.php";
+	
 ?>
 <body>
 

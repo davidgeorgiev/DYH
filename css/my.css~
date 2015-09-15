@@ -355,33 +355,4 @@ letter-spacing: 1px;
 		width:50%;
 	}
 }
-#MySubjectStatisticsBox{
-	border:solid #837d7c;
-	margin-bottom:10px;
-}
-#MySubjectStatisticsBox h2{
-	background-color:#f6f1f0;
-	color:#5e5a59;
-	margin:0px;
-	padding:5px;
-}
-#MySubjectStatisticsBox h3{
-	background-color:#f6f1f0;
-	color:#5e5a59;
-	margin:0px;
-	font-size:17px;
-	border-bottom:solid #837d7c;
-	border-bottom-width:thin;
-	
-}
-#MySubjectStatisticsBox p{
-	margin-top:10px;
-}
-#MySubjectStatisticsBox .SubjectStatistics{
-	background-color:#f6f1f0;
-	color:#837d7c;
-	margin-top:0px;
-	padding-left:10px;
-	padding-bottom:10px;
-	
-}
+

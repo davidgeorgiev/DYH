@@ -81,7 +81,7 @@ if ($row[0] <= 0) {
 	
 	$CurrentUserID = GetUserIDbyName($username);
 	for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
-		ShowSubjectStatistics($CurrentUserID, $subject_ids_arr[$i]);
+		ShowSubjectStatics($CurrentUserID, $subject_ids_arr[$i]);
 	}
 	
 	echo '<div class="list-group">';

@@ -69,8 +69,16 @@
 		
 		echo '<div id = "MySubjectStatisticsBox">';
 		echo '<h2>'.$MySubjectName[0];
-			echo '<p style = "font-weight:bold;font-size:15px;">'.$MyUserAverageSubjectStatistics["RankOfSubjectWithWords"].'</p></h2>
-		<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo'.$subjectID.'" style = "width:100%;">Подробна статистика</button>
+			echo '<p style = "font-weight:bold;font-size:15px;">'.$MyUserAverageSubjectStatistics["RankOfSubjectWithWords"].'</p></h2>';
+			
+			if ($MyUserAverageSubjectStatistics["Average"][1] < 2){
+				$MyUserAverageSubjectStatistics["Average"][1] = "няма";
+			}
+			$MyTitle = 'Средна оценка досега - '.$MyUserAverageSubjectStatistics["Average"][1];
+			echo '<p style = "background:#f6f1f0;padding:5px;margin:0px;">'.$MyTitle.'</p>';
+			//PrintPercentagebarSimple(((($MyUserAverageSubjectStatistics["Average"][1]-2)*100)/4), $MyTitle, number_format($MyUserAverageSubjectStatistics["Average"][1], 2));
+			
+		echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo'.$subjectID.'" style = "width:100%;">Подробна статистика</button>
 		<div id="demo'.$subjectID.'" class="collapse">';
 			echo '<div class = "SubjectStatistics">';
 			echo '<p style = "margin-top:-5px;padding-top:20px;">Решени задачи - '.$MyUserAverageSubjectStatistics["NumOfSolvings"].', от които оценени са 
@@ -83,12 +91,7 @@
 			echo '<h3>Статистика на '.$MyUserInfo[2]." ".$MyUserInfo[3].'</h3>';
 			PrintPercentagebarSimple(($MyUserAverageSubjectStatistics["RankOfSubject"]*10), "Любимост", number_format(($MyUserAverageSubjectStatistics["RankOfSubject"]*10),0).'%');
 			
-			if ($MyUserAverageSubjectStatistics["Average"][1] < 2){
-				$MyUserAverageSubjectStatistics["Average"][1] = "няма";
-			}
-			$MyTitle = 'Средна оценка досега - '.$MyUserAverageSubjectStatistics["Average"][1];
 			
-			PrintPercentagebarSimple(((($MyUserAverageSubjectStatistics["Average"][1]-2)*100)/4), $MyTitle, number_format($MyUserAverageSubjectStatistics["Average"][1], 2));
 			
 			if ($MyUserAverageSubjectStatistics["Sums"][0] == 1){
 				$MyTimeVal = 'час';

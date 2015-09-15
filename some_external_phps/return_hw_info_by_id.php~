@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	function ConvertDataFromSolvedHomewokrsToSentence($ArraySolvings){
 		$dateTimeArray = explode(" ", $ArraySolvings["Date"]);
 		$mydatesolved = $dateTimeArray[0];
@@ -160,6 +160,7 @@
 		}
 		return $FirstPartOfSentence.$SecondPartOfSentence.$ThirdPartOfSentence.$FourthPartOfSentence.$FifthPartOfSentence.$SixthPartOfSentence;
 	}
+
 	function returnHomeworkInfoByID($homeworkId) {
 		//echo "ENTER";
 		$PosterUserNameSQL = "SELECT user.Name FROM user, uh WHERE uh.HWID = ".$homeworkId;
@@ -260,4 +261,5 @@
 		}
 		return $ArrayToReturn;
 	}
+
 ?>

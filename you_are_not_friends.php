@@ -3,6 +3,14 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
+	$query = $_SERVER['PHP_SELF'];
+	$path = pathinfo( $query );
+	$MyCurrentPhpPage = $path['basename'];
+	if (($MyCurrentPhpPage != "index.php") && ($MyCurrentPhpPage != "acc_added.php")){
+		if (Get_Logged_users_id() == 0){
+			header('Location: index.php') and exit;
+		}
+	}
 ?>
 <?php
 	include "start_check.php";

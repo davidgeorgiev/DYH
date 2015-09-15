@@ -3,7 +3,7 @@ function PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Sex, $Error 
 	
 	if (strlen($Error) <= 0){
 		$h3 = "Вашият акаунт беше създаден успешно!";
-		$href = 'home.php?user='.$name;
+		$href = 'index.php';
 		$Target = '';
 	} else {
 		$h3 = "Операцията е неуспешна поради следните причини!";
@@ -19,6 +19,8 @@ function PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Sex, $Error 
 		echo '<div class="panel panel-default" style = "margin-top:3%;">';
 		echo '<h3 class="panel-title" id = "urlTitleForm">'.$h3.'</h3>';
 		
+	} else {
+		$href = 'home.php?user='.$name;
 	}
 	if ($Sex == 1){
 		$bgc = '#83949c';

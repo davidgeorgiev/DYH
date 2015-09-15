@@ -255,7 +255,7 @@ function test_input($data) {
 			</div>
 		</div>
 	  </div>
-	  <a href="home.php?user=david" id = "index_image" style = "position:fixed;right:130;top:105;" target=_blank><img class=shakeimage onmouseout="stoprattle(this)" onmouseover="init(this);rattleimage()" src="css/features.jpg" border=0 width="500px"></a>
+	  <a href="#" id = "index_image" style = "position:fixed;right:130;top:105;"><img class=shakeimage onmouseout="stoprattle(this)" onmouseover="init(this);rattleimage()" src="css/features.jpg" border=0 width="500px"></a>
   
 	<?php
 		echo '<style>#descURL{color:#837d7c;font-size:20px;font-weight:bold;margin:auto;margin-left:10px;font-family:Arial;}</style>';

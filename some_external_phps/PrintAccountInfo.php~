@@ -51,16 +51,4 @@ function PrintAccountInfoByUSERNAME($username, $OnMainPage){
 	
 	PrintResult($MyUserInfo[0], $MyUserInfo[4], $MyUserInfo[1], $MyUserInfo[2], $MyUserInfo[6], $MyUserInfo[7], "", $OnMainPage);
 }
-function GetAccountInfoByUSERNAMEorID($username = "",$userid = 0){
-	if (strlen($username) > 0){
-		$SQL = "SELECT user.Name, user.FirstName, user.LastName, user.Password, user.IMGURL, user.Birthday, user.Text, user.Sex FROM user WHERE user.Name = '".$username."'";
-	} else if ($userid > 0){
-		$SQL = "SELECT user.Name, user.FirstName, user.LastName, user.Password, user.IMGURL, user.Birthday, user.Text, user.Sex FROM user WHERE user.UID = '".$userid."'";
-	}
-	
-	$MyUserInfoResult = mysql_query($SQL);
-	$MyUserInfo = mysql_fetch_array($MyUserInfoResult);
-	
-	return array($MyUserInfo[0], $MyUserInfo[4], $MyUserInfo[1], $MyUserInfo[2], $MyUserInfo[6], $MyUserInfo[7]);
-}
 ?>

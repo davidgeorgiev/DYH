@@ -90,7 +90,13 @@ if ($row3[0] <= 0) {
 				if ($row[4] == 0) {
 					echo '<option value="0">Домашно</option>';
 					echo '<option value="1">Изпит</option>';
-				} else {
+					echo '<option value="2">Друго</option>';
+				} else if ($row[4] == 1){
+					echo '<option value="1">Изпит</option>';
+					echo '<option value="0">Домашно</option>';
+					echo '<option value="2">Друго</option>';
+				} else if ($row[4] == 2){
+					echo '<option value="2">Друго</option>';
 					echo '<option value="1">Изпит</option>';
 					echo '<option value="0">Домашно</option>';
 				}

@@ -11,6 +11,7 @@
         <!-- Sidebar -->
 		<?php
 			include "some_external_phps/CountUnappreciatedHomeworks.php";
+			include "some_external_phps/CountSuggestedHomeworks.php";
 			$SQL = "SELECT DISTINCT user.Name FROM user WHERE user.Password = '".$password."'";
 			$result8 = mysql_query($SQL);
 			$row8 = mysql_fetch_array($result8);
@@ -44,6 +45,16 @@
                         <span class = "glyphicon glyphicon-duplicate"></span> Решени за оценка - <?php  
 						
 							echo CountUnappreciatedHomeworks(Get_Logged_users_id());
+						
+						
+						?>
+                    </a>
+                </li>
+				<li class="sidebar-brand">
+					<a href="hws_waiting_confirmation.php" style = "color:#7a7574;font-family:Arial;font-size:15px;margin-left:-10px;">
+                        <span class = "glyphicon glyphicon-duplicate"></span> Неодобрени домашни - <?php  
+						
+							echo CountSuggestedHomeworks(Get_Logged_users_id());
 						
 						
 						?>

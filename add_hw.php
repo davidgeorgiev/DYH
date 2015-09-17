@@ -23,7 +23,7 @@
 	$password = $_SESSION['psw'];
 	$username = $_SESSION['name'];
 	if ($_SESSION['page'] != 'check_width'){
-		header('Location: check_width_and_send_to.php?user='.$username.'&page=add_hw') and exit;
+		header('Location: check_width_and_send_to.php?user='.$username.'&page=add_hw'.'&suggest_to='.$_GET["suggest_to"]) and exit;
 	}
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
@@ -54,8 +54,19 @@ if ($row[0] <= 0) {
 }
 ?>
 	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
-  <h2>Добави ново домашно</h2>
-  <form role="form" <?php echo 'action='; echo "hw_added.php"?> method="post">
+	<?php 
+	
+	if ($_GET["suggest_to"] == "false"){
+		echo '<form role="form" action = hw_added.php method="post">';
+		echo '<h2>Добави ново домашно</h2>';
+	} else {
+		echo '<form role="form" action = hw_added.php?suggest_to=true method="post">';
+		$MyUserInfoArray = ReturnALLUserInfoByIdOrByName($username);
+		echo '<h2>Препоръчай домашно на '.$MyUserInfoArray[1].' '.$MyUserInfoArray[2].'</h2>';
+	}
+	
+	
+	?>
   
   
     <div class="form-group">
@@ -111,7 +122,7 @@ if ($row[0] <= 0) {
 		</select>
     </div>
 	<?php 
-		if (($EditMode == 1) && ($theresnosubjects == 0)) {
+		if ((($EditMode == 1) && ($theresnosubjects == 0)) || ($_GET["suggest_to"] == "true")) {
 			echo '<button type="submit" class="btn btn-default">Запази</button>';
 		} else {
 			if ($EditMode == 0) {

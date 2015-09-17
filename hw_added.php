@@ -13,6 +13,11 @@ include "CheckEditMode.php";
 $_SESSION['psw'] = $password;
 $_SESSION['name'] = $username;
 
+if ($_GET["suggest_to"] == "true"){
+	$UH_table = "uh_suggested";
+} else {
+	$UH_table = "uh";
+}
 ?>
 <body>
 
@@ -21,7 +26,7 @@ $_SESSION['name'] = $username;
 $_SESSION['page'] = "other";
 include "main_menu.php"; ?>
 	<?php
-	if ($db_found && $EditMode == 1) {
+	if ($db_found && (($EditMode == 1) || ($_GET["suggest_to"] == "true"))) {
 		$date = mysql_real_escape_string($_POST['date']);
 		$new_date = date('Y-m-d',strtotime($date));
 		//echo $new_date;
@@ -42,7 +47,7 @@ include "main_menu.php"; ?>
 		}
 		$row = mysql_fetch_array($result);
 		//print_r ($row);
-		$SQL = "INSERT INTO uh (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
+		$SQL = "INSERT INTO ".$UH_table." (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
 		$result = mysql_query($SQL);
 		
 		if (isset($_POST["imgurl"])) {

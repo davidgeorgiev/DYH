@@ -46,7 +46,7 @@
 		echo 	'<li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class = "glyphicon glyphicon-align-justify"></span> Опции </a><ul class="dropdown-menu">';
 				if ($EditMode == 1){
-					echo '<li><a href="add_hw.php">Добави ново домашно</a></li>
+					echo '<li><a href="add_hw.php?suggest_to=false">Добави ново домашно</a></li>
 					<li><a href="add_info.php">Добави допълнителна информация</a></li>
 					<li role="separator" class="divider"></li>
 					<li><a href="add_wp.php">Нова програма</a></li>
@@ -54,8 +54,11 @@
 					<li><a href="edit_profile.php">Промяна на профила</a></li>';
 				}
 				echo '<li><a href="url_list.php?user='.$username.'">Списък с важни сайтове</a></li>
-				<li><a href="check_width_and_send_to.php?user='.$username.'&page=update_subject_list'.'">Списък с предмети</a></li>
-				<li role="separator" class="divider"></li>
+				<li><a href="check_width_and_send_to.php?user='.$username.'&page=update_subject_list'.'">Списък с предмети</a></li>';
+				if ($_SESSION["name"] != Get_Logged_users_name()) {
+					echo '<li><a href="add_hw.php?suggest_to=true">Препоръчай домашно</a></li>';
+				}
+				echo '<li role="separator" class="divider"></li>
 				</ul></li>';
 ?>
 <li class="dropdown">

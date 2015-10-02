@@ -14,13 +14,12 @@
 	$_SESSION['page'] = "other";
 ?>
 <body>
-
 <div class="container">
 <?php include "main_menu.php";?>
 
 <div id = "my_page" style = "border-radius:20px;background: rgba(243, 243, 243, 0.4);">
 
-	<div id = "urlForm">
+	<div id = "urlForm" style = "border-radius:3px;border:solid #878281;border-width:thin;background-color:#f4f0ef;">
 	
 	<?php
 		$SQL = "SELECT user.UID FROM user WHERE user.Name = '".$username."'";
@@ -30,11 +29,11 @@
 		$SQL = "SELECT favsites.Name, favsites.ImgUrl, favsites.Url, favsites.USERID, favsites.Data, favsites.UID FROM favsites WHERE favsites.USERID = ".$MyUserID[0];
 		$MyResult = mysql_query($SQL);
 		$UserInfo = ReturnALLUserInfoByIdOrByName($username);
-		echo '<h1 id = "urlTitleForm">Важните сайтове на '.$UserInfo["FirstName"]." ".$UserInfo["LastName"].'</h1>';
+		echo '<h1 id = "MainPageHomeTitle" style = "margin-top:4px;">Важните сайтове на '.$UserInfo["FirstName"]." ".$UserInfo["LastName"].'</h1>';
 		while($MyBookMarkInfo = mysql_fetch_array($MyResult)){
 			if ($EditMode == 1){
-				$Trash = '<a href="delete_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:white;font-size:15px;padding:4px;margin-left:-80%;"><span class="glyphicon glyphicon-trash"></span> </a>';
-				$Pencil = '<a href="edit_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'" style = "text-decoration:none;color:white;font-size:15px;"><span class="glyphicon glyphicon-pencil"></span> </a>'; 
+				$Trash = '<a href="delete_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:#726b69;font-size:15px;padding:4px;margin-left:-80%;"><span class="glyphicon glyphicon-trash"></span> </a>';
+				$Pencil = '<a href="edit_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'" style = "text-decoration:none;color:#726b69;font-size:15px;"><span class="glyphicon glyphicon-pencil"></span> </a>'; 
 			} else {
 				$Trash = "";
 				$Pencil = "";
@@ -43,21 +42,21 @@
 			$title = $MyBookMarkInfo[0];
 			$data = $MyBookMarkInfo[4];
 			$url = $MyBookMarkInfo[2];
-			echo '<div>';
+			echo '<div style = "border:solid #726b69;border-width:thin;border-radius:3px;margin-bottom:-1px;background-color:white;width:100.2%;margin-left:-1px;">';
 				if (strpos($url,'http') !== false) {
 					$Beginning = "";
 				} else {
 					$Beginning = "http://";
 				}
-				echo '<div class="row" id = "URLBOX" style = "margin-bottom:20px;">';
+				echo '<div class="row" id = "URLBOX" style = "margin-bottom:20px;margin-top:20px;">';
 				echo '<div class="col-sm-3" style = "margin-top:20px;">';
-					echo $Trash.$Pencil.'<div class="zoom_img_urls" class = "thumb1" style = "border:solid #d2c9c6;border-radius:50%;background: url('.$imgurl.') 50% 50% no-repeat;background-size: 150px;z-index:100;">';
+					echo $Trash.$Pencil.'<div class="zoom_img_urls" class = "thumb1" style = "margin-left:30px;margin-top:5px;width:60px;height:60px;border:solid #726b69;border-radius:50%;background: url('.$imgurl.') 50% 50% no-repeat;background-size: 60px;z-index:100;">';
 					echo '</div>';
 				echo '</div>';
 					echo '<a href = "'.$Beginning.$url.'" target="blank"><div class="col-sm-8">';
-					echo '<p id = "UrlTitle">'.$title.'</p>';
+					echo '<p id = "UrlTitle" style = "color:#726b69;font-size:25px;">'.$title.'</p>';
 						
-						echo '<p id = "descURL">'.$data.'</p>';
+						echo '<p id = "descURL" style = "color:#726b69;font-size:20;">'.$data.'</p>';
 					echo '</div>';
 					echo '</a>';
 					
@@ -67,7 +66,7 @@
 		}
 		
 		if ($EditMode == 1){
-			echo '<h1 id = "urlTitleForm">Добави сайт</h1>
+			echo '<h1 id = "MainPageHomeTitle">Добави сайт</h1>
 			<form role="form" action="url_added.php" method="post">
 			<div class="form-group">
 			<input type="text" class="form-control" id = "MyInputBox"  name="title" placeholder="Заглавие">

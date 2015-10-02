@@ -123,6 +123,27 @@ width:100px;
        url("Hattori Hanzo.otf");
   //font-weight: bold;
 }
+@font-face {
+  font-family: Exo-Thin;
+  src: local("Exo-Thin Neue Bold"),
+       local("Exo-ThinNeue-Bold"),
+       url("Exo2.0-Thin.otf");
+  //font-weight: bold;
+}
+@font-face {
+  font-family: Exo-Regular;
+  src: local("Exo2.0-Regular Neue Bold"),
+       local("Exo2.0-RegularNeue-Bold"),
+       url("Exo2.0-Regular.otf");
+  //font-weight: bold;
+}
+@font-face {
+  font-family: Exo-SemiBold;
+  src: local("Exo2.0-SemiBold Neue Bold"),
+       local("Exo2.0-SemiBoldNeue-Bold"),
+       url("Exo2.0-SemiBold.otf");
+  //font-weight: bold;
+}
 
 #urlTitleForm{
 	background-color:#d2c9c6;
@@ -130,14 +151,14 @@ width:100px;
 	font-size:40px;
 	color:#837d7c;
 	border-radius:10px;
-	font-family: Hattori;
+	font-family: Exo-Regular;
 	font-weight:bold;
 }
 #urlForm{
 	width:100%;
 	text-align:center;
 	margin:auto;
-	background-color:#837d7c;
+	background-color:white;
 	border-radius:20px;
 	padding-bottom:20px;
 }
@@ -146,34 +167,48 @@ width:100px;
 	margin:auto;
 	margin-top:24px;
 	margin-bottom:24px;
-	background:#d2c9c6;
+	//background:#d2c9c6;
+	//color:#837d7c;
+	background:white;
+	//border-top-left-radius:20px;
+	//border-bottom-right-radius:20px;
+	border-radius:0px;
+	//border:solid #837d7c;
+	border-width:thin;
+	
+	//font-weight:bold;
 	color:#837d7c;
-	font-size:30px;
-	height:45px;
-	border-top-left-radius:20px;
-	border-bottom-right-radius:20px;
+	font-family: Exo-Regular;
+	font-size:20px;
+	height:35px;
 }
 #MyButtonToAddURL{
-	background:#d2c9c6;
+	padding:0px;
+	padding-left:15px;
+	padding-right:15px;
+	background:white;
 	color:#837d7c;
 	font-weight:bold;
-	width:20%;
-	height:50px;
-	border-radius:20px;
-	font-size:25px;
-	font-family: Hattori;
+	width:auto;
+	height:35px;
+	//border-radius:20px;
+	font-size:20px;
+	font-family: Exo-Thin;
 	font-weight:bold;
 	min-width:140px;
 }
 #MyButtonToAddURL:hover {
-	background:#837d7c;
-	color:#d2c9c6;
-	font-family: Hattori;
+	background:#e5e5e5;
+	//color:white;
+	font-family: Exo-Thin;
 	font-weight:bold;
-	
+	border:solid #d2c9c6;
+	border-width:thin;
+	border-radius:2px;
 }
 #MyInputBox:hover{
-	background:#e3d6d1;
+	//background:#e3d6d1;
+	background:#ecebeb;
 	
 }
 #URLdata{
@@ -203,8 +238,8 @@ width:100px;
 	font-size:50px;
 	color:#d2c9c6;
 	border-radius:10px;
-	font-family: Hattori;
-	font-weight:bold;
+	font-family: Exo-Regular;
+	//font-weight:bold;
 	margin-top:40px;
 	text-align:center;
 	margin-left:50%;
@@ -213,7 +248,7 @@ width:100px;
 }
 #descURL {
 	color:#d2c9c6;
-	font-family: Hattori;
+	font-family: Exo-Thin;
 	font-size:30px;
 	margin-top:-20px;
 	margin-left:50%;
@@ -221,8 +256,8 @@ width:100px;
 	margin-left:20%;
 }
 #MainPageHomeTitle{
-	font-size:35;
-	font-family:Arial;
+	font-size:25;
+	font-family:Exo-Regular;
 }
 @media screen and (max-width: 768px) {
 #MainPageHomeTitle{
@@ -250,7 +285,7 @@ width:100px;
 	margin-left:20px;margin-right:20px;
 }
 #URLBOX:hover{
-	background-color:#726b69;
+	background-color:#d4d6d8;
 }
 #MyDataURL{
 	color:white;
@@ -357,28 +392,30 @@ letter-spacing: 1px;
 }
 #MySubjectStatisticsBox{
 	border:solid #837d7c;
+	border-width:thin;
 	margin-bottom:10px;
+	background-color:white;
 }
 #MySubjectStatisticsBox h2{
-	background-color:#f6f1f0;
 	color:#5e5a59;
 	margin:0px;
 	padding:5px;
+	font-family:Exo-Regular;
 }
 #MySubjectStatisticsBox h3{
-	background-color:#f6f1f0;
 	color:#5e5a59;
 	margin:0px;
-	font-size:17px;
+	font-size:20px;
 	border-bottom:solid #837d7c;
 	border-bottom-width:thin;
+	font-family:Exo-Regular;
 	
 }
 #MySubjectStatisticsBox p{
 	margin-top:10px;
+	
 }
 #MySubjectStatisticsBox .SubjectStatistics{
-	background-color:#f6f1f0;
 	color:#837d7c;
 	margin-top:0px;
 	padding-left:10px;

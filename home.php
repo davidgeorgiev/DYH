@@ -62,7 +62,7 @@
 				}
 				
 				
-				$button_to_render = $button_to_render.'<div id = "MainPageHomeTitle" style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color:#d2c9c6;background-color:#837d7c;">'.$myButtonLabel.'</div></div>';
+				$button_to_render = $button_to_render.'<div id = "MainPageHomeTitle" style = "text-align:left;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color:#7e7a7a;background-color:white;">'.$myButtonLabel.'</div></div>';
 	} else {
 		$button_to_render = "";
 	}

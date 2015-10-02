@@ -23,21 +23,21 @@ function PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Sex, $Error 
 		$href = 'home.php?user='.$name;
 	}
 	if ($Sex == 1){
-		$bgc = '#83949c';
+		$bgc = '#e5e9ec';
 	} else {
-		$bgc = '#9c8683';
+		$bgc = '#ece5e7';
 	}
-	echo '<div class="panel-body" style = "background-color:'.$bgc.';">';
+	echo '<div class="panel-body" style = "background-color:'.$bgc.';border:solid #726b69;border-width:thin;border-radius:3px;">';
 
-	echo '<a href = "'.$href.'" '.$Target.'><div class="row" id = "URLBOX" style = "margin-bottom:20px;">';
+	echo '<a href = "'.$href.'" '.$Target.'><div class="row" id = "URLBOX" style = "margin-bottom:20px;margin-top:20px;">';
 	echo '<div class="col-sm-3" style = "margin-top:20px;">';
-		echo '<div class="zoom_img_urls" class = "thumb1" style = "border:solid #d2c9c6;border-radius:50%;background: url('.$IMGURL.') 50% 50% no-repeat;background-size: 100% 100%;z-index:100;">';
+		echo '<div class="zoom_img_urls" class = "thumb1" style = "border:solid #726b69;border-radius:50%;background: url('.$IMGURL.') 50% 50% no-repeat;background-size: 100% 100%;z-index:100;">';
 		echo '</div>';
 	echo '</div>';
 		echo '<div class="col-sm-8">';
-		echo '<p id = "UrlTitle">'.$FirstName." ".$LastName.'<small style = "font-size:30px;text-align:center;"> ('.$name.')</small></p>';
+		echo '<p id = "UrlTitle" style = "color:#726b69;">'.$FirstName." ".$LastName.'<small style = "font-size:30px;text-align:center;"> ('.$name.')</small></p>';
 			
-		echo '<p id = "descURL" style = "margin-left:20%;text-align:center;margin-top:0px;">'.$Text.'</p>';
+		echo '<p id = "descURL" style = "margin-left:20%;text-align:center;margin-top:0px;color:#726b69;">'.$Text.'</p>';
 	echo '</div>';
 	echo '</div>';
 	echo '</a>';

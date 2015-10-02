@@ -81,11 +81,11 @@ function CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGU
 				$_SESSION['psw'] = $psw.$USERuid;
 				$_SESSION['name'] = $name;
 			}
-			echo '<div id = "urlTitleForm" style = "margin-bottom:-40px;color:red;">Внимание! Oт съображение за сигурност паролата ви е ';
-			for ($counter = 1; $counter <= strlen($psw); $counter++) {
-			echo '●';
-			}
-			echo $USERuid.'</div>';
+			// echo '<div id = "urlTitleForm" style = "margin-bottom:-40px;color:red;">Внимание! Oт съображение за сигурност паролата ви е ';
+			// for ($counter = 1; $counter <= strlen($psw); $counter++) {
+			// echo '●';
+			// }
+			// echo $USERuid.'</div>';
 			PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Error);
 	}
 	?>

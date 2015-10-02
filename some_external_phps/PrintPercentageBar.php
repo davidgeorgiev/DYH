@@ -23,7 +23,7 @@ function PrintPercentagebarSimple($Value, $Title, $InPercentageBar) {
 	} else {
 		$MyWidthPercentage = $Value;
 	}
-	echo '<p style = "color:#5e5a59;font-size:20px;">'.$Title.'</p>';
+	echo '<p style = "color:#5e5a59;font-size:18px;font-family:Exo-Regular;">'.$Title.'</p>';
 	echo '<div style = "margin:-5px;width: '.$MyWidthPercentage.'%;color:#5e5a59;font-weight:bold;white-space: nowrap;">';
 	echo '<p style = "text-align:center;">'.$InPercentageBar.'</p>';
 	echo '</div>';

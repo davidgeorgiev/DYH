@@ -75,7 +75,7 @@
 				$MyUserAverageSubjectStatistics["Average"][1] = "няма";
 			}
 			$MyTitle = 'Средна оценка досега - '.$MyUserAverageSubjectStatistics["Average"][1];
-			echo '<p style = "background:#f6f1f0;padding:5px;margin:0px;">'.$MyTitle.'</p>';
+			echo '<p style = "padding:5px;margin:0px;">'.$MyTitle.'</p>';
 			//PrintPercentagebarSimple(((($MyUserAverageSubjectStatistics["Average"][1]-2)*100)/4), $MyTitle, number_format($MyUserAverageSubjectStatistics["Average"][1], 2));
 			
 		echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo'.$subjectID.'" style = "width:100%;">Подробна статистика</button>

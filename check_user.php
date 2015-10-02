@@ -1,8 +1,15 @@
 <?php
 	session_start();
 	include "config.php";
-	$password = $_POST["psw"];
+	
 	$username = $_POST["name"];
+	
+	$SQL = "SELECT user.UID FROM user WHERE user.Name = '".$username."'";
+	$MyUserUIDResult = mysql_query($SQL);
+	$MyUserUID = mysql_fetch_array($MyUserUIDResult);
+	
+	$password = $_POST["psw"].$MyUserUID[0];
+	
 	
 	
 

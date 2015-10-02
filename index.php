@@ -115,29 +115,30 @@ function test_input($data) {
 ?>
 <style>
 #MyButtonToAddURL{
-	font-size:15px;font-family:Arial;border:solid #d2c9c6;border-width:thin;border-radius:7px;width:auto;
-}
-#MyButtonToAddURL:hover{
-	font-family:Arial;
+	border:solid #d2c9c6;border-width:thin;border-radius:2px;width:auto;
 }
 #MyInputBox{
+	//font-weight:bold;
+	color:#837d7c;
+	font-family: Exo-Regular;
 	font-size:20px;
 	height:35px;
 	margin:auto;
+	background:white;
+	
 }
 #MyInputBox:hover;{
-	background:#d2c9c6;
+	background:#ecebeb;
 }
 #RegInput{
 	margin-top:20px;
 	margin-left:-15px;
 }
 #BoxHeadingButton{
-	background:#b2a5a1;
+	background:none;
 	color:#837d7c;
-	font-weight:bold;
 	border-radius:0px;
-	font-family: Hattori;
+	font-family: Exo-Thin;
 	font-weight:bold;
 	width:100%;
 	
@@ -145,16 +146,27 @@ function test_input($data) {
 	height:50px;
 	margin:auto;
 }
+.modal-body{
+	background-color:none;
+	width:125%;
+}
+.well{
+	background-color:white;
+}
+.info-below{
+	margin-top:30px;
+	margin-left:-20px;
+}
 </style>
 <div class="" id="loginModal">
 	  <div class="modal-header">
 		<!--<h3 style = "color:rgba(243, 243, 243, 0.8);">DYH</h3>-->
 	  </div>
-	  <div class="modal-body"  style = "background-color:#d2c9c6;">
-		<div class="well" style = "background-color:#837d7c;">
+	  <div class="modal-body">
+		<div class="well">
 		  <ul class="nav nav-tabs">
-			<li class="active"><a href="#login" id = "BoxHeadingButton" data-toggle="tab">Вход</a></li>
-			<li><a href="#create" data-toggle="tab" id = "BoxHeadingButton">Създай профил</a></li>
+			<li class="active"><a href="#login" id = "BoxHeadingButton" data-toggle="tab">Login</a></li>
+			<li><a href="#create" data-toggle="tab" id = "BoxHeadingButton">Create account</a></li>
 		  </ul>
 		  <div id="myTabContent" class="tab-content">
 			<div class="tab-pane active in" id="login">
@@ -164,11 +176,12 @@ function test_input($data) {
 				  <div class="control-group" style = "margin-top:20px;">
 					<!-- Username -->
 					<div class="form-group" >
-					<input type="text" name="name" id = "MyInputBox" class="form-control" placeholder = "Потребителско име" value="<?php echo $name;?>">
+					<input type="text" name="name" id = "MyInputBox" class="form-control" placeholder = "Username" value="<?php echo $name;?>">
 					<span class="error"> <?php echo $nameErr;?></span>
 					</div>
 					<div class="form-group">
-					<input type="password" id = "MyInputBox" class="form-control" name="psw" placeholder = "Парола" value="<?php echo $psw;?>">
+					<input type="password" id = "MyInputBox" class="form-control" name="psw" placeholder = "Password" value="<?php echo $psw;?>">
+					<label for="text" id = "descURL" style = "font-family:Exo-Thin;font-size:20px;margin-left:20px;margin-bottom:15px;margin-top:0px;">Пишете паролата си без цифрите за сигурност накрая!!!</label>
 					<span class="error"> <?php echo $passErr;?></span>
 					</div>
 				   
@@ -180,7 +193,7 @@ function test_input($data) {
 				  <div class="control-group">
 					<!-- Button -->
 					<div class="controls" style = "margin-top:-40px;">
-					  <input class="btn btn-default" id = "MyButtonToAddURL" type="submit" name="submit" value="Влез"> 
+					  <input class="btn btn-default" id = "MyButtonToAddURL" type="submit" name="submit" value="Login"> 
 					</div>
 				  </div>
 				</fieldset>
@@ -202,8 +215,20 @@ function test_input($data) {
 					<input type="text" name="IMGURL" id = "MyInputBox" class="form-control" placeholder = "URL към снимка" value="<?php echo $name;?>">
 					</div>
 					<div class="form-group" >
-						<label for="text" id = "descURL" style = "font-family:Arial;margin:auto;margin-left:20px;font-size:25px;color:#d2c9c6;">Рожден ден</label>
-						<select class="form-control" id = "MyInputBox" style = "margin-left:19px;float:left;width:40%;margin-right:13px;" name="Month">
+						<select class="form-control" id = "MyInputBox" style = "margin-top:18px;" name="Sex">
+							<option value="1">Момче</option>
+							<option value="2">Момиче</option>
+						</select>
+					</div>
+					<div class="form-group" >
+					<input type="text" name="name" id = "MyInputBox" class="form-control" placeholder = "Потребителско име" value="<?php echo $name;?>">
+					</div>
+					<div class="form-group">
+					<input type="password" id = "MyInputBox" class="form-control" name="psw" placeholder = "Парола" value="<?php echo $psw;?>">
+					</div>
+					<div class="form-group" >
+						<label for="text" id = "descURL" style = "font-family:Exo-Thin;font-size:20px;margin-left:20px;margin-bottom:15px;margin-top:0px;">Рожден ден</label>
+						<select class="form-control" id = "MyInputBox" style = "margin-left:22px;float:left;width:40%;margin-right:21px;" name="Month">
 							<?php 
 								include "graphs/convert_month_to_word.php";
 								echo '<option value="0">Месец</option>';
@@ -238,17 +263,8 @@ function test_input($data) {
 								}
 							?>
 						</select>
-						<select class="form-control" id = "MyInputBox" style = "margin-top:18px;" name="Sex">
-							<option value="1">Момче</option>
-							<option value="2">Момиче</option>
-						</select>
 					</div>
-					<div class="form-group" >
-					<input type="text" name="name" id = "MyInputBox" class="form-control" placeholder = "Потребителско име" value="<?php echo $name;?>">
-					</div>
-					<div class="form-group">
-					<input type="password" id = "MyInputBox" class="form-control" name="psw" placeholder = "Парола" value="<?php echo $psw;?>">
-					</div>
+					
 					</div>
 					<button class="btn btn-primary" id = "MyButtonToAddURL" type="submit" >Създай профил</button>
 				</form>
@@ -258,8 +274,8 @@ function test_input($data) {
 	  <a href="#" id = "index_image" style = "position:fixed;right:130;top:105;"><img class=shakeimage onmouseout="stoprattle(this)" onmouseover="init(this);rattleimage()" src="css/features.jpg" border=0 width="500px"></a>
   
 	<?php
-		echo '<style>#descURL{color:#837d7c;font-size:20px;font-weight:bold;margin:auto;margin-left:10px;font-family:Arial;}</style>';
-	
+		echo '<style>#descURL{font-family:Exo-Regular;font-size:20px;margin-left:20px;margin-bottom:15px;color:#8b8988;}</style>';
+		echo '<div class = "info-below">';
 		$SQL = "SELECT COUNT(user.Name) FROM user";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
@@ -277,6 +293,7 @@ function test_input($data) {
 		$row = mysql_fetch_array($result);
 		echo '<p id = "descURL">Допълнително: ';
 		echo $row[0].'</p>';
+		echo '</div>';
 	?>
 	</div>
 </div>

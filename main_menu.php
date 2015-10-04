@@ -98,7 +98,7 @@ echo 	'<li class="dropdown">
 
 ?>
 <li><a href="#">Страницата на <?php $UserInfo = ReturnALLUserInfoByIdOrByName($username); echo $UserInfo["FirstName"]; ?></a></li>
-<li><a href="index.php"><strong><span class = "glyphicon glyphicon-log-out"></span> Изход</strong></a></li>
+<li><a href="Logout.php"><strong><span class = "glyphicon glyphicon-log-out"></span> Изход</strong></a></li>
 </ul>
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->

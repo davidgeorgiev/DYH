@@ -8,6 +8,7 @@
 	include "some_external_phps/CheckMyAssessmentForHWWithID.php";
 	include "some_external_phps/PrintHWInfoInTableByID.php";
 	include "some_external_phps/PrintHomeworksTimeline.php";
+	include "some_external_phps/PrintHWInfoInList.php";
 	CheckFriendShipByNameAndKickOut($_GET["user"], Get_Logged_users_id());
 ?>
 <head>
@@ -72,7 +73,7 @@ if ($row3[0] <= 0) {
 	$counter = 0;
 	while ($row = mysql_fetch_array($result)){
 		$counter++;
-		
+		//PrintHWInfoInListByID($row[0], $timezone, $EditMode, $username, Get_Logged_users_id(), 1);
 		if ($_GET["height"] > $_GET["width"]){
 			PrintHWInfoInTableByID($row[0], $timezone, $EditMode, $username, Get_Logged_users_id());
 		} else {

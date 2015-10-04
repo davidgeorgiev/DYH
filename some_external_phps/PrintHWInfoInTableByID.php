@@ -1,6 +1,6 @@
 ﻿<?php
 	//include "ConvertWeekDay.php";
-	function PrintHWInfoInTableByID($hwid, $timezone, $EditMode, $username, $loggeduserid){
+	function PrintHWInfoInTableByID($hwid, $timezone, $EditMode, $username, $loggeduserid, $ifNextDate = 0){
 		$MyCurrentHomeworkIfno = returnHomeworkInfoByID($hwid);
 		//print_r($MyCurrentHomeworkIfno);
 		if ($MyCurrentHomeworkIfno["MainInfo"]["Date"] == gmdate("Y-m-d", time() + 3600*($timezone+date("I")))) {

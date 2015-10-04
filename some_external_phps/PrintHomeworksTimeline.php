@@ -1,7 +1,7 @@
 <?php
 	include "ConvertWeekDay.php";
 	//include "CheckIfUserIsSolver.php";
-	function PrintHomeworksTimeline($hwid, $timezone, $EditMode, $username, $loggeduserid){
+	function PrintHomeworksTimeline($hwid, $timezone, $EditMode, $username, $loggeduserid, $ifNextDate = 0){
 		//echo "ENTERRRR";
 		$MyHomeworkInfo = returnHomeworkInfoByID($hwid);
 		//print_r($MyHomeworkInfo);

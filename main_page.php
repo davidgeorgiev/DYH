@@ -153,8 +153,12 @@
 	<?php
 	include "some_external_phps/PrintHWInfoInTableByID.php";
 	include "some_external_phps/PrintHomeworksTimeline.php";
-	while ($row = mysql_fetch_array($result)){
+	include "some_external_phps/PrintHWInfoInList.php";
 	
+	$ifNextDate = 0;
+	while ($row = mysql_fetch_array($result)){
+		
+		$ifNextDate = 1;
 		//echo '<div class="page-header" style = "font-size:17px;">';
 		
 		//echo '<h1>'.$weekday.' <small id = "smalltag" style = "font-size:15px;">'.$weekday2.$row[0].'</small></h1>';
@@ -171,13 +175,15 @@
 		while ($row2 = mysql_fetch_array($result2)){
 			//$MyHomeworkInfo = returnHomeworkInfoByID($row2[0]);
 			//print_r($MyHomeworkInfo);
-			if ($_GET["height"] > $_GET["width"]){
-				PrintHWInfoInTableByID($row2[0], $timezone, $EditMode, $username, Get_Logged_users_id());
-			} else {
-				PrintHomeworksTimeline($row2[0], $timezone, $EditMode, $username, Get_Logged_users_id());
-			}
-		
+			PrintHWInfoInListByID($row2[0], $timezone, $EditMode, $username, Get_Logged_users_id(), $ifNextDate);
+			// if ($_GET["height"] > $_GET["width"]){
+				// PrintHWInfoInTableByID($row2[0], $timezone, $EditMode, $username, Get_Logged_users_id(), $ifNextDate);
+			// } else {
+				// PrintHomeworksTimeline($row2[0], $timezone, $EditMode, $username, Get_Logged_users_id());
+			// }
+			$ifNextDate = 0;
 		}
+		$ifNextDate = 0;
 	}
 	//echo '</section> <!-- cd-timeline -->';
 	

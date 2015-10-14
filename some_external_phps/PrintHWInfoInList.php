@@ -51,6 +51,9 @@
 		} else {
 			echo '<p style = "text-align:left;"><a style = "color:green;font-weight:bold;" href = "#"><span class="glyphicon glyphicon-ok"></span> Решено</a></li>';
 		}
+		echo '<p><a href="comments.php?hwid='.$hwid.'" id = "CommentsButton" style = "">';
+		echo '<span class="glyphicon glyphicon-comment"></span>';
+		echo ' Коментари '.$MyCurrentHomeworkIfno["MainInfo"]["NumOfComments"].'</a></p>';
 		
 						
 							if (strlen($MyCurrentHomeworkIfno["MainInfo"]["IMGURL"]) <= 0){
@@ -67,7 +70,7 @@
 							</a>';
 							}
 						
-								echo $MyCurrentHomeworkIfno["MainInfo"]["Data"];
+								echo "<p>".$MyCurrentHomeworkIfno["MainInfo"]["Data"]."</p>";
 								
 							if ($EditMode == 1){
 								echo '<p style = "text-align:left;"><a style = "color:#d2c9c6;font-weight:bold;" href="delete_hw_confirm.php?hwid='.$hwid.'&class='.$username.'"><span class="glyphicon glyphicon-trash"></span> Изтрий </a></p>';

@@ -176,6 +176,7 @@
 			//$MyHomeworkInfo = returnHomeworkInfoByID($row2[0]);
 			//print_r($MyHomeworkInfo);
 			PrintHWInfoInListByID($row2[0], $timezone, $EditMode, $username, Get_Logged_users_id(), $ifNextDate);
+			
 			// if ($_GET["height"] > $_GET["width"]){
 				// PrintHWInfoInTableByID($row2[0], $timezone, $EditMode, $username, Get_Logged_users_id(), $ifNextDate);
 			// } else {
@@ -185,6 +186,9 @@
 		}
 		$ifNextDate = 0;
 	}
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
 	//echo '</section> <!-- cd-timeline -->';
 	
 	if ($result = mysql_query("SELECT DISTINCT COUNT(otherinfo.Title) FROM otherinfo,user,uoi WHERE user.Name = '".$username."' AND uoi.UserID = user.UID AND uoi.OtherInfoID = otherinfo.UID  ORDER BY otherinfo.UID DESC")){

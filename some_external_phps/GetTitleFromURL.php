@@ -1,12 +1,18 @@
 <?php
-
-function get_title($url){
-  $str = file_get_contents($url);
-  if(strlen($str)>0){
-    $str = trim(preg_replace('/\s+/', ' ', $str)); // supports line breaks inside <title>
-    preg_match("/\<title\>(.*)\<\/title\>/i",$str,$title); // ignore case
-    return $title[1];
-  }
+  
+function get_title($page_url){
+	$read_page=file_get_contents($page_url);
+	preg_match("/<title.*?>[\n\r\s]*(.*)[\n\r\s]*<\/title>/", $read_page, $page_title);
+	if (isset($page_title[1])){
+		if ($page_title[1] == ''){
+			  return $page_url;
+		}
+		$page_title = $page_title[1];
+		return trim($page_title);
+	}
+	else{
+		return $page_url;
+	}
 }
 
 ?>

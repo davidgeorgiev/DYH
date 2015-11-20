@@ -1,4 +1,5 @@
 <?php
+	include "some_external_phps/FixURLLinks.php";
 	function ConvertDataFromSolvedHomewokrsToSentence($ArraySolvings){
 		$dateTimeArray = explode(" ", $ArraySolvings["Date"]);
 		$mydatesolved = $dateTimeArray[0];
@@ -169,6 +170,7 @@
 		$HWSQL = "SELECT homeworks.Title, homeworks.Data, homeworks.Type, homeworks.Date, homeworks.Rank, WEEKDAY(homeworks.Date) FROM homeworks WHERE homeworks.UID = ".$homeworkId;
 		$hwresult = mysql_query($HWSQL);
 		$myhwdata = mysql_fetch_array($hwresult);
+		$myhwdata["Data"] = FixURLsData($myhwdata["Data"]);
 		
 		$URLSQL = "SELECT imgurl.URL FROM imgurl, hwimg WHERE hwimg.HWID = ".$homeworkId." AND hwimg.IMGURLID = imgurl.UID";
 		$imgurlresult = mysql_query($URLSQL);

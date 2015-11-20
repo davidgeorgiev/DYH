@@ -29,8 +29,6 @@ include "main_menu.php"; ?>
 		$title = $_POST["title"];
 		$data = $_POST["data"];
 		
-		$data = FixURLsData($data);
-		
 		$SQL = "INSERT INTO otherinfo (Title, Data) VALUES ('".$title."', '".$data."')";
 		$result = mysql_query($SQL);
 		

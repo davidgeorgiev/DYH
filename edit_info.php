@@ -55,7 +55,7 @@ include "main_menu.php"; ?>
       <label for="text">Описание</label>
       <?php 
 	  
-		$DoneText = ReturnNormalText($row[1]);
+		$DoneText = $row[1];
 		echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="">'.$DoneText.'</textarea>'; 
 	  
 	  

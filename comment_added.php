@@ -6,7 +6,6 @@
 <?php 
 include "head.php";
 include "config.php";
-include "some_external_phps/FixURLLinks.php";
 
 $password = $_SESSION['psw'];
 $username = $_SESSION['name'];
@@ -24,8 +23,6 @@ $username = $_SESSION['class'];
 
 	if ($db_found) {
 		$comment = $_POST["comment"];
-		
-		$comment = FixURLsData($comment);
 		
 		$SQL = "SELECT user.UID FROM user WHERE user.Password = '".$password."'";
 		$result = mysql_query($SQL);

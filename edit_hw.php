@@ -126,7 +126,7 @@ if ($row3[0] <= 0) {
 	  
 	  <?php
 	  
-		$DoneText = ReturnNormalText($row[2]);
+		$DoneText = $row[2];
 	  
 	  ?>
 	  

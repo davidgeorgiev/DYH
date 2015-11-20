@@ -187,7 +187,7 @@
 				$UserInfo = ReturnALLUserInfoByIdOrByName($value["Name"]);
 				echo '<div style = "background-color:#746f6e;border:solid white;border-width:1px;padding: 9px;margin-bottom:20px;">';
 				echo '	<p style = " font-weight: bold;color:white;">'.$UserInfo["FirstName"]." ".$UserInfo["LastName"].'<span style = "color:#d2c9c6;font-size:10px;"> (Публикувано на '.$value["Date"].')</span></p>';
-				echo '	<p style = "background-color:#746f6e;color:#d2c9c6;border-radius:5px; padding: 9px;">'.$value["Data"].'</p>';
+				echo '	<p style = "background-color:#746f6e;color:#d2c9c6;border-radius:5px; padding: 9px;">'.FixURLsData($value["Data"]).'</p>';
 				echo '</div>';
 			}
 			unset($value);

@@ -212,12 +212,7 @@
 		} else {
 			echo 'FAIL';
 		}
-		while ($row = mysql_fetch_array($result)){
-			//echo '<div class="col-sm-8" style = "margin:10px;background-color: white;border-radius:7px;">';
-			echo '<h3 style = "font-size:30px;padding:20px;background:#d2c9c6;color:#837d7c;font-family:arial;">'.$row[0].'</h3>';
-			echo '<p style = "background:#837d7c;color:#d2c9c6;font-size:20px;font-family:Arial;padding:20px;">'.$row[1].'</p>';
-			if ($EditMode == 1) {
-				echo '<style>.MyDeleteEditLink{
+		echo '<style>.MyDeleteEditLink{
 						color:#837d7c;
 						font-size:25px;
 						font-family:arial;
@@ -230,6 +225,12 @@
 					}
 				}
 				</style>';
+		while ($row = mysql_fetch_array($result)){
+			//echo '<div class="col-sm-8" style = "margin:10px;background-color: white;border-radius:7px;">';
+			echo '<h3 style = "font-size:30px;padding:20px;background:#d2c9c6;color:#837d7c;font-family:arial;">'.$row[0].'</h3>';
+			echo '<p style = "background:#837d7c;color:#d2c9c6;font-size:20px;font-family:Arial;padding:20px;">'.FixURLsData($row[1]).'</p>';
+			if ($EditMode == 1) {
+				
 				echo '<div style = "padding:20px;background:#d2c9c6;">';
 				echo '<a class = "MyDeleteEditLink" href = "delete_info.php?infoid='.$row[2].'&class='.$username.'"';
 				echo '<p>Изтрий</p></a>';

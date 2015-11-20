@@ -35,8 +35,6 @@ include "main_menu.php"; ?>
 		$rank = $_POST["rank"];
 		$type = $_POST["type"];
 		
-		$data = FixURLsData($data);
-		
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank, Type) VALUES ('".$new_date."', '".$title."', '".$data."', '".$rank."', ".$type.")";
 		$result = mysql_query($SQL);
 		

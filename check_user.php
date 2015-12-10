@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include "config.php";
+	include "some_external_phps/write_log.php";
 	
 	$username = $_POST["name"];
 	
@@ -20,6 +21,7 @@
 	if ($row[0] > 0) {
 		$_SESSION['psw'] = $password;
 		$_SESSION['name'] = $username;
+		AddOrUpdateLog($username);
 		header('Location: home.php?user='.$username) and exit;
 	} else {
 		header('Location: notreg.php') and exit;

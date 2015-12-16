@@ -45,6 +45,9 @@ function CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGU
 			$LastName = $_POST["LastName"];
 			$Birthday = $_POST["Year"]."-".$_POST["Month"]."-".$_POST["Day"];
 			$IMGURL = $_POST["IMGURL"];
+			if ($IMGURL == NULL){
+				$IMGURL = "http:\/\/acd.iupui.edu\/Portals\/ACD\/Files\/Images\/profile-pic.png";
+			}
 			$Text = $_POST["Text"];
 			$Sex = $_POST["Sex"];
 			

@@ -258,7 +258,7 @@ function test_input($data) {
 						<select class="form-control" id = "MyInputBox" style = "margin-top:18px;" name="Year">
 							<option value="0">Година</option>
 							<?php 
-								for ($counter = (date("Y")-5); $counter > 1989; $counter--){
+								for ($counter = (date("Y")-6); $counter > (date("Y")-20); $counter--){
 									echo '<option value="'.$counter.'">'.$counter.'</option>';
 								}
 							?>
@@ -279,7 +279,7 @@ function test_input($data) {
 		$SQL = "SELECT COUNT(user.Name) FROM user";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
-		echo '<p id = "descURL" >Регистрирани потребители: ';
+		echo '<p id = "descURL" >Ученици: ';
 		echo $row[0].'</p>';
 		
 		$SQL = "SELECT COUNT(homeworks.UID) FROM homeworks";
@@ -288,10 +288,16 @@ function test_input($data) {
 		echo '<p id = "descURL">Домашни: ';
 		echo $row[0].'</p>';
 		
-		$SQL = "SELECT COUNT(otherinfo.UID) FROM otherinfo";
+		// $SQL = "SELECT COUNT(otherinfo.UID) FROM otherinfo";
+		// $result = mysql_query($SQL);
+		// $row = mysql_fetch_array($result);
+		// echo '<p id = "descURL">Допълнително: ';
+		// echo $row[0].'</p>';
+		
+		$SQL = "SELECT SUM(NUM) FROM logs";
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
-		echo '<p id = "descURL">Допълнително: ';
+		echo '<p id = "descURL">Влизания: ';
 		echo $row[0].'</p>';
 		echo '</div>';
 	?>

@@ -43,13 +43,13 @@
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;
-	
+
 	if ($_SESSION['page'] != 'check_width'){
 		header('Location: check_width_and_send_to.php?user='.$username.'&page=search_homeworks&searching_for='.$_GET["searching_for"]) and exit;
 	}
-	
+
 	$_SESSION['page'] = "other";
-	
+
 ?>
 
 <div class="container">
@@ -58,7 +58,7 @@ include "main_menu.php";
 echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">';
 
 $searched_string = $_GET['searching_for'];
-$SQL = "SELECT DISTINCT COUNT(homeworks.Date) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND ((homeworks.Data LIKE '%".$searched_string."%') OR (homeworks.Title LIKE '%".$searched_string."%')) ORDER BY homeworks.Date DESC";
+$SQL = "SELECT DISTINCT COUNT(homeworks.UID) FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND ((homeworks.Data LIKE '%".$searched_string."%') OR (homeworks.Title LIKE '%".$searched_string."%')) ORDER BY homeworks.Date DESC";
 $result3 = mysql_query($SQL);
 $row3 = mysql_fetch_array($result3);
 
@@ -68,7 +68,7 @@ echo '</div>';
 if ($row3[0] <= 0) {
 	echo 'Няма съвпадения';
 } else {
-	$SQL = "SELECT DISTINCT homeworks.UID FROM homeworks WHERE ((homeworks.Data LIKE '%".$searched_string."%') OR (homeworks.Title LIKE '%".$searched_string."%')) ORDER BY homeworks.Date DESC";
+	$SQL = "SELECT DISTINCT homeworks.UID FROM homeworks,user,uh WHERE user.Name = '".$username."' AND uh.HWID = homeworks.UID AND uh.USERID = user.UID AND ((homeworks.Data LIKE '%".$searched_string."%') OR (homeworks.Title LIKE '%".$searched_string."%')) ORDER BY homeworks.Date DESC";
 	$result = mysql_query($SQL);
 	$counter = 0;
 	while ($row = mysql_fetch_array($result)){
@@ -80,7 +80,7 @@ if ($row3[0] <= 0) {
 			PrintHomeworksTimeline($row[0], $timezone, $EditMode, $username, Get_Logged_users_id());
 		}
 
-	
+
 		//echo $row[0];
 		//echo $row[1];
 		//echo $row[2];
@@ -88,7 +88,7 @@ if ($row3[0] <= 0) {
 	}
 }
 ?>
-	
+
 </div>
 
 </body>

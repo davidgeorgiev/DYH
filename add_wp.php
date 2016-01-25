@@ -8,7 +8,7 @@
 	/*if ($db_found) {
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('2015-06-30 00:00:00', 'Hello', 'How are you?','2')";
 		$result = mysql_query($SQL);
-		
+
 		mysql_close($dbLink);
 
 		print "Records added to the database";
@@ -19,7 +19,7 @@
 		print "Database NOT Found ";
 		mysql_close($dbLink);
 	}*/
-	
+
 	$password = $_SESSION['psw'];
 	$username = $_SESSION['name'];
 	include "CheckEditMode.php";
@@ -31,7 +31,7 @@
 <div class="container">
 <?php
 $_SESSION['page'] = "other";
-include "main_menu.php"; 
+include "main_menu.php";
 
 
 ?>
@@ -41,7 +41,7 @@ include "main_menu.php";
     <div class="form-group">
 		<div class="row">
 			<div class="col-sm-6">
-				<label for="text">Седмица</label>
+				<label class = "InfoTitleLabel" for="text">Седмица</label>
 				<?php
 					$ddate = date("Y-m-d");
 					$date = new DateTime($ddate);
@@ -62,10 +62,10 @@ include "main_menu.php";
 				?>
 			</div>
 			<div class="col-sm-6">
-				<label for="text">Ден</label>
+				<label class = "InfoTitleLabel" for="text">Ден</label>
 				<select class="form-control" name="day">
 				<?php
-					
+
 					$timestamp = strtotime(gmdate("Y-m-d", time() + 3600*($timezone+date("I"))));
 					$weekday = date( "w", $timestamp);
 					switch($weekday){
@@ -85,7 +85,7 @@ include "main_menu.php";
 						break;
 					}
 					echo '<option value="'.$weekday.'">Днес - '.$convertered_weekday.'</option>';
-					
+
 				?>
 					<option value="1">Понеделник</option>
 					<option value="2">Вторник</option>
@@ -96,7 +96,7 @@ include "main_menu.php";
 					<option value="7">Неделя</option>
 				</select>
 			</div>
-			
+
 		</div>
     </div>
 	<div class="row">
@@ -106,7 +106,7 @@ include "main_menu.php";
 	for ($k=1;$k<=9;$k++){
 		echo '<div class="col-sm-4">';
 		echo '<div class="form-group">';
-			echo '<label for="text">';
+			echo '<label class = "InfoTitleLabel" for="text">';
 			echo ConvertClassNumberToWords($k)." час";
 			echo '</label>';
 			$name = "hours[]";
@@ -116,15 +116,15 @@ include "main_menu.php";
 			include "some_external_phps/time_picker.php";
 			//echo '<input type="time" class="form-control" name="time'.$k.'" placeholder="13:00">';
 			$name = "subjects[]";
-			
+
 			$thereisnosubjects = MakeSubjectMenu($username, $name);
 			echo '<input type="text" class="form-control" name="info[]" placeholder="Информация">';
 		echo '</div>';
 		echo '</div>';
 	}
-	
-	
-	
+
+
+
 		if (($EditMode == 1) && ($thereisnosubjects == 0)) {
 			echo '<button type="submit" class="btn btn-default" style = "margin-left: 15px;">Запиши</button>';
 		}

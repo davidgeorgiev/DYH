@@ -1,6 +1,6 @@
 ﻿<?php
 	session_start();
-	
+
 ?>
 <html lang="en">
 <?php
@@ -9,7 +9,7 @@
 	/*if ($db_found) {
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('2015-06-30 00:00:00', 'Hello', 'How are you?','2')";
 		$result = mysql_query($SQL);
-		
+
 		mysql_close($dbLink);
 
 		print "Records added to the database";
@@ -35,7 +35,7 @@
 <div class="container">
 <?php
 $_SESSION['page'] = "other";
-include "main_menu.php"; 
+include "main_menu.php";
 
 $SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
 $result = mysql_query($SQL);
@@ -54,8 +54,8 @@ if ($row[0] <= 0) {
 }
 ?>
 	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
-	<?php 
-	
+	<?php
+
 	if ($_GET["suggest_to"] == "false"){
 		echo '<form role="form" action = hw_added.php method="post">';
 		echo '<h2>Добави ново домашно</h2>';
@@ -64,13 +64,13 @@ if ($row[0] <= 0) {
 		$MyUserInfoArray = ReturnALLUserInfoByIdOrByName($username);
 		echo '<h2>Препоръчай домашно на '.$MyUserInfoArray[1].' '.$MyUserInfoArray[2].'</h2>';
 	}
-	
-	
+
+
 	?>
-  
-  
+
+
     <div class="form-group">
-      <label for="date">Дата</label>
+      <label class = "InfoTitleLabel" for="date">Дата</label>
 	  <?php
 		if ($_GET["height"] > $_GET["width"]){
 			echo '<input type="date" class="form-control" id="pickdate" name="date" size="20" />';
@@ -80,7 +80,7 @@ if ($row[0] <= 0) {
 	  ?>
     </div>
 	<div class="form-group">
-      <label for="text">Тип</label>
+      <label class = "InfoTitleLabel" for="text">Тип</label>
 		<select class="form-control" name="type">
 			<option value="0">Домашно</option>
 			<option value="1">Изпит</option>
@@ -90,9 +90,9 @@ if ($row[0] <= 0) {
 	  <?php
 		echo '<div class="form-group">';
 		if ($theresnosubjects == 1) {
-			echo '<label for="text">Нямате предмети създайте от опциите горе в менюто!</label>';
+			echo '<label class = "InfoTitleLabel" for="text">Нямате предмети създайте от опциите горе в менюто!</label>';
 		} else {
-			echo '<label for="text">Изберете от вашия списък с предмети!</label>';
+			echo '<label class = "InfoTitleLabel" for="text">Изберете от вашия списък с предмети!</label>';
 			echo '<select class="form-control" name="title">';
 			for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
 				$SQL = "SELECT subjects.Name, subjects.Rank FROM subjects WHERE subjects.UID = ".$subject_ids_arr[$i];
@@ -105,15 +105,15 @@ if ($row[0] <= 0) {
 		echo '</div>';
 	  ?>
 	<div class="form-group">
-      <label for="text">Описание</label>
+      <label class = "InfoTitleLabel" for="text">Описание</label>
       <textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник"></textarea>
     </div>
 	<div class="form-group">
-      <label for="text">URL към изображение</label>
+      <label class = "InfoTitleLabel" for="text">URL към изображение</label>
       <input type="text" class="form-control" name="imgurl" placeholder="http://somesite/img.png">
     </div>
 	<div class="form-group">
-      <label for="text">Важност (от 1 до 4)</label>
+      <label class = "InfoTitleLabel" for="text">Важност (от 1 до 4)</label>
 		<select class="form-control" name="rank">
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -121,7 +121,7 @@ if ($row[0] <= 0) {
 			<option value="4">4</option>
 		</select>
     </div>
-	<?php 
+	<?php
 		if ((($EditMode == 1) && ($theresnosubjects == 0)) || ($_GET["suggest_to"] == "true")) {
 			echo '<button type="submit" class="btn btn-default">Запази</button>';
 		} else {

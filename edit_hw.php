@@ -1,6 +1,6 @@
 ﻿<?php
 	session_start();
-	
+
 ?>
 <html>
 <?php
@@ -10,7 +10,7 @@
 	/*if ($db_found) {
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('2015-06-30 00:00:00', 'Hello', 'How are you?','2')";
 		$result = mysql_query($SQL);
-		
+
 		mysql_close($dbLink);
 
 		print "Records added to the database";
@@ -29,7 +29,7 @@
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;
-	
+
 	$SQL = "SELECT imgurl.UID FROM imgurl, hwimg WHERE hwimg.IMGURLID = imgurl.UID AND hwimg.HWID = ".$_GET["hwid"];
 	$result = mysql_query($SQL);
 	$row = mysql_fetch_array($result);
@@ -43,7 +43,7 @@
 <div class="container">
 <?php
 $_SESSION['page'] = "other";
-include "main_menu.php"; 
+include "main_menu.php";
 
 $SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
 $result = mysql_query($SQL);
@@ -73,7 +73,7 @@ if ($row3[0] <= 0) {
   <h2>Редактирай домашно</h2>
   <form role="form" <?php echo 'action='; echo "hw_edited.php"?> method="post">
     <div class="form-group">
-      <label for="date">Дата</label>
+      <label class = "InfoTitleLabel" for="date">Дата</label>
       <?php //echo '<input type="date" class="form-control" name="date" value = "'.$row[0].'" placeholder="2015-06-30">'; ?>
 	   <?php
 		if ($_GET["height"] > $_GET["width"]){
@@ -84,7 +84,7 @@ if ($row3[0] <= 0) {
 	  ?>
     </div>
 	<div class="form-group">
-      <label for="text">Тип</label>
+      <label class = "InfoTitleLabel" for="text">Тип</label>
 		<select class="form-control" name="type">
 			<?php
 				if ($row[4] == 0) {
@@ -106,9 +106,9 @@ if ($row3[0] <= 0) {
     <?php
 		echo '<div class="form-group">';
 		if ($theresnosubjects == 1) {
-			echo '<label for="text">Нямате предмети създайте от опциите горе в менюто!</label>';
+			echo '<label class = "InfoTitleLabel" for="text">Нямате предмети създайте от опциите горе в менюто!</label>';
 		} else {
-			echo '<label for="text">Изберете от вашия списък с предмети!</label>';
+			echo '<label class = "InfoTitleLabel" for="text">Изберете от вашия списък с предмети!</label>';
 			echo '<select class="form-control" name="title">';
 			echo '<option value="'.$row[1].'">'.$row[1].'</option>';
 			for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
@@ -122,35 +122,35 @@ if ($row3[0] <= 0) {
 		echo '</div>';
 	  ?>
 	<div class="form-group">
-      <label for="text">Описание</label>
-	  
+      <label class = "InfoTitleLabel" for="text">Описание</label>
+
 	  <?php
-	  
+
 		$DoneText = $row[2];
-	  
+
 	  ?>
-	  
+
       <?php echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник">'.$DoneText.'</textarea>'; ?>
     </div>
 	<div class="form-group">
-      <label for="text">URL към изображение</label>
+      <label class = "InfoTitleLabel" for="text">URL към изображение</label>
       <?php echo '<input type="text" class="form-control" name="imgurl" value = "'.$row2[0].'" placeholder="http://somesite/img.png">'; ?>
     </div>
 	<div class="form-group">
-      <label for="text">Важност (от 1 до 4)</label>
+      <label class = "InfoTitleLabel" for="text">Важност (от 1 до 4)</label>
 		<select class="form-control" name="rank">
-			<?php echo '<option value="'.$row[3].'">'.$row[3].'</option>'; 
-			
+			<?php echo '<option value="'.$row[3].'">'.$row[3].'</option>';
+
 			for ($i = 1; $i <= 4; $i++) {
 				if ($i != $row[3]) {
 					echo '<option value="'.$i.'">'.$i.'</option>';
 				}
 			}
-			
+
 			?>
 		</select>
     </div>
-	<?php 
+	<?php
 		if ($EditMode == 1) {
 			echo '<button type="submit" class="btn btn-default">Submit</button>';
 		}

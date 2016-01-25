@@ -3,7 +3,7 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
-	
+
 	CheckFriendShipByNameAndKickOut($_GET["user"], Get_Logged_users_id());
 ?>
 <?php
@@ -20,12 +20,12 @@
 <div id = "my_page" style = "border-radius:20px;background: rgba(243, 243, 243, 0.4);">
 
 	<div id = "urlForm" style = "border-radius:3px;border:solid #878281;border-width:thin;background-color:#f4f0ef;">
-	
+
 	<?php
 		$SQL = "SELECT user.UID FROM user WHERE user.Name = '".$username."'";
 		$MyUserIDResult = mysql_query($SQL);
 		$MyUserID = mysql_fetch_array($MyUserIDResult);
-		
+
 		$SQL = "SELECT favsites.Name, favsites.ImgUrl, favsites.Url, favsites.USERID, favsites.Data, favsites.UID FROM favsites WHERE favsites.USERID = ".$MyUserID[0];
 		$MyResult = mysql_query($SQL);
 		$UserInfo = ReturnALLUserInfoByIdOrByName($username);
@@ -33,7 +33,7 @@
 		while($MyBookMarkInfo = mysql_fetch_array($MyResult)){
 			if ($EditMode == 1){
 				$Trash = '<a href="delete_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'&page=homeworks_time_chart" style = "text-decoration:none;color:#726b69;font-size:15px;padding:4px;margin-left:-80%;"><span class="glyphicon glyphicon-trash"></span> </a>';
-				$Pencil = '<a href="edit_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'" style = "text-decoration:none;color:#726b69;font-size:15px;"><span class="glyphicon glyphicon-pencil"></span> </a>'; 
+				$Pencil = '<a href="edit_bookmark.php?bookmarkid='.$MyBookMarkInfo[5].'&class='.$username.'" style = "text-decoration:none;color:#726b69;font-size:15px;"><span class="glyphicon glyphicon-pencil"></span> </a>';
 			} else {
 				$Trash = "";
 				$Pencil = "";
@@ -42,7 +42,7 @@
 			$title = $MyBookMarkInfo[0];
 			$data = $MyBookMarkInfo[4];
 			$url = $MyBookMarkInfo[2];
-			echo '<div style = "border:solid #726b69;border-width:thin;border-radius:3px;margin-bottom:-1px;background-color:white;width:100.2%;margin-left:-1px;">';
+			echo '<div id = "StandartBox">';
 				if (strpos($url,'http') !== false) {
 					$Beginning = "";
 				} else {
@@ -55,16 +55,16 @@
 				echo '</div>';
 					echo '<a href = "'.$Beginning.$url.'" target="blank"><div class="col-sm-8">';
 					echo '<p id = "UrlTitle" style = "color:#726b69;font-size:25px;">'.$title.'</p>';
-						
+
 						echo '<p id = "descURL" style = "color:#726b69;font-size:20;">'.$data.'</p>';
 					echo '</div>';
 					echo '</a>';
-					
+
 					echo '</div>';
 				echo '</div>';
 			//echo '</div>';
 		}
-		
+
 		if ($EditMode == 1){
 			echo '<h1 id = "MainPageHomeTitle">Добави сайт</h1>
 			<form role="form" action="url_added.php" method="post">
@@ -77,7 +77,7 @@
 			<button class="btn btn-default" id = "MyButtonToAddURL" type="submit" >Добави</button>
 			</form>';
 		}
-		
+
 	?>
 	</div>
 	</div>

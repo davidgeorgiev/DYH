@@ -40,9 +40,30 @@
 		$user_id_is = mysql_fetch_array($user_id_is);
 		return $user_id_is[0];
 	}
+	function GetUserNamebyID($userid){
+		$SQL = "SELECT user.Name FROM user WHERE user.UID = '".$userid."'";
+		$user_name_is = mysql_query($SQL);
+		$user_name_is = mysql_fetch_array($user_name_is);
+		return $user_name_is[0];
+	}
+	function GetFullUserNamebyID($userid,$namenum){
+		if ($namenum == 1){
+			$select = 'FirstName';
+		}else if($namenum == 2){
+			$select = 'LastName';
+		}
+		if (($namenum == 1)||($namenum == 2)){
+			$SQL = "SELECT user.".$select.", user.LastName FROM user WHERE user.UID = '".$userid."'";
+			$user_name_is = mysql_query($SQL);
+			$user_name_is = mysql_fetch_array($user_name_is);
+			return $user_name_is[0];
+		}else{
+			return 1;
+		}
+	}
 	$timezone  = +2;
 
-	
+
 	// if (isset($_GET["user"])) {
 		// $SQL = "SELECT user.UID FROM user WHERE user.Name = '".$_GET["user"]."'";
 		// $MyUserUIDResult = mysql_query($SQL);

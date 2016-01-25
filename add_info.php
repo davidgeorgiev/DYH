@@ -1,6 +1,6 @@
 ﻿<?php
 	session_start();
-	
+
 ?>
 <html>
 <?php
@@ -9,7 +9,7 @@
 	/*if ($db_found) {
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('2015-06-30 00:00:00', 'Hello', 'How are you?','2')";
 		$result = mysql_query($SQL);
-		
+
 		mysql_close($dbLink);
 
 		print "Records added to the database";
@@ -36,11 +36,11 @@ include "main_menu.php"; ?>
   <h2>Добави допълнителна информация</h2>
   <form role="form" <?php echo 'action='; echo "info_added.php";?> method="post">
     <div class="form-group">
-      <label for="text">Заглавие</label>
+      <label class = "InfoTitleLabel" for="text">Заглавие</label>
       <input type="text" class="form-control" name="title" placeholder="">
     </div>
 	<div class="form-group">
-      <label for="text">Описание</label>
+      <label class = "InfoTitleLabel" for="text">Описание</label>
       <textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder=""></textarea>
     </div>
 	<?php

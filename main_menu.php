@@ -17,24 +17,24 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <ul class="nav navbar-nav">
 <?php
-	
+
 	if (isset($_SESSION['page'])) {
 		$SQL = "SELECT COUNT(user.Name) FROM user WHERE user.Password = '".$password."'";
 		$result = mysql_query($SQL);
 		$number_of_users = mysql_fetch_array($result);
-		
+
 		if ($number_of_users[0] <= 0) {
 			echo '<li><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
 		}
 		if ($page == "home") {
-			echo '<li><a href="history.php?user='.$username.'"><span class = "glyphicon glyphicon-time"></span> Отиди на историята<span class="sr-only">(current)</span></a></li>';
+			echo '<li><a href="history.php?user='.$username.'"><span class = "glyphicon glyphicon-time"></span> История<span class="sr-only">(current)</span></a></li>';
 		} else if (($page == "history") || ($page == "other")){
-			echo '<li><a href="home.php?user='.$username.'"><span class = "glyphicon glyphicon-home"></span> Върни ме на началото<span class="sr-only">(current)</span></a></li>';
+			echo '<li><a href="home.php?user='.$username.'"><span class = "glyphicon glyphicon-home"></span> Начало<span class="sr-only">(current)</span></a></li>';
 		}
 	} else {
 			echo '<li><a href="index.php">Регистрирай се безплатно <span class="sr-only">(current)</span></a></li>';
 	}
-	
+
 
 ?>
 
@@ -42,7 +42,7 @@
 
 <?php
 	//include "CheckEditMode.php";
-	
+
 		echo 	'<li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class = "glyphicon glyphicon-align-justify"></span> Опции </a><ul class="dropdown-menu">';
 				if ($EditMode == 1){
@@ -58,8 +58,9 @@
 				if ($_SESSION["name"] != Get_Logged_users_name()) {
 					echo '<li><a href="add_hw.php?suggest_to=true">Препоръчай домашно</a></li>';
 				}
-				echo '<li role="separator" class="divider"></li>
-				</ul></li>';
+				echo '<li role="separator" class="divider"></li>';
+				echo '<li><a href="searchforhelp.php?user='.$username.'">Нуждая се от помощ<span class="sr-only">(current)</span></a></li>';
+				echo '</ul></li>';
 ?>
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class = "glyphicon glyphicon-search"></span> Търсене</a><ul class="dropdown-menu">

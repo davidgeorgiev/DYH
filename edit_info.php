@@ -1,6 +1,6 @@
 ﻿<?php
 	session_start();
-	
+
 ?>
 <html>
 <?php
@@ -10,7 +10,7 @@
 	/*if ($db_found) {
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('2015-06-30 00:00:00', 'Hello', 'How are you?','2')";
 		$result = mysql_query($SQL);
-		
+
 		mysql_close($dbLink);
 
 		print "Records added to the database";
@@ -23,7 +23,7 @@
 	}*/
 	$password = $_SESSION['psw'];
 	$username = $_SESSION['name'];
-	$_SESSION['infoid'] = $_GET["infoid"]; 
+	$_SESSION['infoid'] = $_GET["infoid"];
 	include "CheckEditMode.php";
 	$_SESSION['psw'] = $password;
 	$_SESSION['name'] = $username;
@@ -42,23 +42,23 @@ $_SESSION['page'] = "other";
 include "main_menu.php"; ?>
 	<div class="jumbotron">
 		<h1>Домашни</h1>
-		<p><?php echo $username?></p> 
+		<p><?php echo $username?></p>
 	</div>
 	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
   <h2>Редактирай</h2>
   <form role="form" <?php echo 'action='; echo "info_edited.php";?> method="post">
     <div class="form-group">
-      <label for="text">Заглавие</label>
+      <label class = "InfoTitleLabel" for="text">Заглавие</label>
       <?php echo '<input type="text" class="form-control" value = "'.$row[0].'" name="title" placeholder="">'; ?>
     </div>
 	<div class="form-group">
-      <label for="text">Описание</label>
-      <?php 
-	  
+      <label class = "InfoTitleLabel" for="text">Описание</label>
+      <?php
+
 		$DoneText = $row[1];
-		echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="">'.$DoneText.'</textarea>'; 
-	  
-	  
+		echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="">'.$DoneText.'</textarea>';
+
+
 	  ?>
     </div>
 	<?php

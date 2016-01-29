@@ -59,7 +59,8 @@
 					echo '<li><a href="add_hw.php?suggest_to=true">Препоръчай домашно</a></li>';
 				}
 				echo '<li role="separator" class="divider"></li>';
-				echo '<li><a href="searchforhelp.php?user='.$username.'">Нуждая се от помощ<span class="sr-only">(current)</span></a></li>';
+				echo '<li><a href="searchforhelp.php?user='.$username.'">Потърси помощ<span class="sr-only">(current)</span></a></li>';
+				echo '<li><a href="helpsomebody.php?only_me=0">Помогни на някого<span class="sr-only">(current)</span></a></li>';
 				echo '</ul></li>';
 ?>
 <li class="dropdown">

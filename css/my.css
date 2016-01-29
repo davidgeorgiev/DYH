@@ -424,7 +424,7 @@ letter-spacing: 1px;
 }
 
 #StandartBox {
-	border:solid #726b69;border-width:thin;border-radius:3px;margin-bottom:-1px;background-color:white;width:100.2%;margin-left:-1px;
+	margin-bottom: 50px;border:solid #726b69;border-width:thin;border-radius:3px;background-color:white;width:100.2%;margin-left:-1px;
 }
 #StandartInsideText {
 	padding:10px;

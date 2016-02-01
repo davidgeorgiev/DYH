@@ -13,6 +13,5 @@ $button_to_render2 = '<div><div class="dropdown" style = "float:left;padding-rig
 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 	<li><a href="ExchangeWeeks.php?user='.$_GET["user"].'"><span class="glyphicon glyphicon-random"></span> Размени четна с нечетна</a></li>
 	<li><a href="DeactivateOrActivateOtherWeek.php?user='.$_GET["user"].'">'.$PartOfLabel.' извънредната</a></li>
-	</ul>
-	</div>';
+	</ul></div></div>';
 ?>

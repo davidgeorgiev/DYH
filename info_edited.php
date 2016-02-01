@@ -1,9 +1,9 @@
 ﻿<?php
 	session_start();
-	
+
 ?>
 <html>
-<?php 
+<?php
 include "head.php";
 include "config.php";
 include "some_external_phps/FixURLLinks.php";
@@ -20,23 +20,18 @@ $_SESSION['name'] = $username;
 <?php
 $_SESSION['page'] = "other";
 include "main_menu.php"; ?>
-	<div class="jumbotron">
-		<h1>Домашни</h1>
-		<p><?php echo $username?></p> 
-	</div>
 	<?php
 	if ($db_found && $EditMode == 1) {
 		$title = $_POST["title"];
 		$data = $_POST["data"];
-		
-		$data = FixURLsData($data);
-		
+
+
 		$infoid = $_SESSION['infoid'];
-		
+
 		$SQL = "UPDATE otherinfo SET Title = '".$title."', Data = '".$data."' WHERE otherinfo.UID = ".$infoid;
 		$result = mysql_query($SQL);
-		
-		
+
+
 		mysql_close($dbLink);
 
 		echo '<div class="alert alert-success" role="alert"><a href="" class="alert-link"></a>Редакцията приключи успешно</div>';
@@ -44,7 +39,7 @@ include "main_menu.php"; ?>
 	}
 	else {
 
-		echo '<div class="alert alert-danger" role="alert"><a href="" class="alert-link"></a>Домашното не можа да се добави</div>';
+		echo '<div class="alert alert-danger" role="alert"><a href="" class="alert-link"></a>Не можа да се добави</div>';
 		mysql_close($dbLink);
 	}
 	?>
@@ -53,9 +48,10 @@ include "main_menu.php"; ?>
     <h3 class="panel-title">Информация за домашното</h3>
   </div>
   <div class="panel-body">
-    <?php 
-		echo '<p>Заглавие: '.$title.'</p>'; 
-		echo '<p>Описание: '.$data.'</p>'; 
+    <?php
+		$data = FixURLsData($data);
+		echo '<p>Заглавие: '.$title.'</p>';
+		echo '<p>Описание: '.$data.'</p>';
 	?>
   </div>
 </div>

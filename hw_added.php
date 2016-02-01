@@ -2,7 +2,7 @@
 	session_start();
 ?>
 <html>
-<?php 
+<?php
 include "head.php";
 include "config.php";
 include "some_external_phps/FixURLLinks.php";
@@ -34,10 +34,10 @@ include "main_menu.php"; ?>
 		$data = $_POST["data"];
 		$rank = $_POST["rank"];
 		$type = $_POST["type"];
-		
+
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank, Type) VALUES ('".$new_date."', '".$title."', '".$data."', '".$rank."', ".$type.")";
 		$result = mysql_query($SQL);
-		
+
 		if ($result = mysql_query("SELECT DISTINCT homeworks.UID, user.UID FROM homeworks,user WHERE user.Name = '".$username."' AND homeworks.Date = '".$new_date."' AND homeworks.Title = '".$title."' AND homeworks.Data = '".$data."' AND homeworks.Rank = '".$rank."'")){
 			//echo 'Success';
 		} else {
@@ -47,14 +47,14 @@ include "main_menu.php"; ?>
 		//print_r ($row);
 		$SQL = "INSERT INTO ".$UH_table." (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
 		$result = mysql_query($SQL);
-		
+
 		if (isset($_POST["imgurl"])) {
 			$imgurl = $_POST["imgurl"];
 			$SQL = "INSERT INTO imgurl (URL) VALUES ('".$imgurl."')";
 			$result = mysql_query($SQL);
 			$uid = mysql_insert_id();
-			
-			
+
+
 			$SQL = "INSERT INTO hwimg (HWID, IMGURLID) VALUES ('".$row[0]."', '".$uid."')";
 			$result = mysql_query($SQL);
 		}
@@ -82,10 +82,11 @@ include "main_menu.php"; ?>
 		} else {
 			$type = "Изпит";
 		}
+		$data = FixURLsData($data);
 		echo '<p>Тип: '.$type.'</p>';
-		echo '<p>Предмет: '.$title.'</p>'; 
-		echo '<p>Описание: '.$data.'</p>'; 
-		echo '<p>Трудност: '.$rank.'</p>';
+		echo '<p>Предмет: '.$title.'</p>';
+		echo '<p>Описание: '.$data.'</p>';
+		echo '<p>Важност: '.$rank.'</p>';
 		if (strlen($imgurl) > 0) {
 			echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
 		}

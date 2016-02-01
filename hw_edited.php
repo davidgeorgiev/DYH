@@ -2,7 +2,7 @@
 	session_start();
 ?>
 <html>
-<?php 
+<?php
 include "head.php";
 include "config.php";
 include "some_external_phps/FixURLLinks.php";
@@ -30,9 +30,9 @@ include "main_menu.php"; ?>
 		$data = $_POST["data"];
 		$rank = $_POST["rank"];
 		$type = $_POST["type"];
-		
+
 		$data = FixURLsData($data);
-		
+
 		if (isset($_POST["imgurl"])) {
 			$imgurl = $_POST["imgurl"];
 		}
@@ -40,7 +40,7 @@ include "main_menu.php"; ?>
 		$result = mysql_query($SQL);
 		$SQL = "UPDATE imgurl SET URL = '".$imgurl."' WHERE imgurl.UID = ".$imgurlid;
 		$result = mysql_query($SQL);
-		
+
 		mysql_close($dbLink);
 
 		echo '<div class="alert alert-success" role="alert"><a href="" class="alert-link"></a>Домашното е редактирано успешно.</div>';
@@ -58,8 +58,8 @@ include "main_menu.php"; ?>
   </div>
   <div class="panel-body">
     <?php
-		//echo '<p>IMGURLID: '.$imgurlid.'</p>'; 
-		//echo '<p>HWID: '.$hwid.'</p>'; 
+		//echo '<p>IMGURLID: '.$imgurlid.'</p>';
+		//echo '<p>HWID: '.$hwid.'</p>';
 		echo '<p>Дата: '.$new_date.'</p>';
 		if ($type == 0){
 			$type = "Домашно";
@@ -67,9 +67,9 @@ include "main_menu.php"; ?>
 			$type = "Изпит";
 		}
 		echo '<p>Тип: '.$type.'</p>';
-		echo '<p>Предмет: '.$title.'</p>'; 
-		echo '<p>Описание: '.$data.'</p>'; 
-		echo '<p>Трудност: '.$rank.'</p>';
+		echo '<p>Предмет: '.$title.'</p>';
+		echo '<p>Описание: '.$data.'</p>';
+		echo '<p>Важност: '.$rank.'</p>';
 		if (strlen($imgurl) > 0) {
 			echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
 		}

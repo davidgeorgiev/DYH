@@ -1,9 +1,13 @@
 ﻿<?php
-	
+
+	function PrintMyHeading($Label,$MarginTop){
+		echo '<div style = "width:100%;margin-top:'.$MarginTop.'px;text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$Label.'</div>';
+	}
+
 	$today_date = gmdate("Y-m-d", time() + 3600*($timezone+date("I")));
 	//echo $today_date;
 	//$tomorrow = date('Y-m-d', strtotime("tomorrow"));
-	
+
 	include "return_hw_info_by_id.php";
 	include "SettingButtonTT.php";
 	include (dirname("../")."/css/progressbar.php");
@@ -13,13 +17,13 @@
 	//echo '<div class = "todayandtomorrow" style = ""margin:100px;">';
 	$date = new DateTime($today_date);
 	$week = $date->format("W");
-	
+
 	function getWeekday($date) {
 		return date('w', strtotime($date));
 	}
 	$today = getWeekday($today_date);
 	$tomorrow = getWeekday($today_date)+1;
-	
+
 	if($week&1) {
 		$eoweek = "OddWeekID";
 		$Label = "<h1>Седмицата е нечетна</h1>";
@@ -31,32 +35,32 @@
 		$eoweek = "OtherWeekID";
 		$Label = "<h1>Седмицата е извънредна</h1>";
 	}
-	
 	//$eoweek = "OtherWeekID";
 	if ($EditMode == 1) {
 		echo $button_to_render2;
 	}
-	
-	
-	
-	
+
+
+
+
 	$PercentWidth = ReturnPercentsOfShoolYear($username, $timezone);
 	echo '<div id="progressbar" style = "margin-left:60px;">';
 	echo '<div style = "width: '.$PercentWidth.'%;color:#514d4c;font-weight:bold;white-space: nowrap;">';
 	echo 'Учебна година '.$PercentWidth.'%';
 	echo '</div>';
 	echo '</div>';
-	echo '<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 10px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$Label.'</div>';
+	PrintMyHeading($Label,0);
 	include "some_external_phps/print_curriculum.php";
-			
+
 			if ($today == 0){
 				$today = 7;
 			}
 			//echo "Принтирай програмата на ".$_GET["user"]." за ".$eoweek." ".$today;
-			echo '<div id = "CurriculumMain">';
+			echo '<div class = "row">';
+			echo '<div class="col-sm-6">';
 			PrintCurriculum($_GET["user"], $eoweek, $today, "- днес");
 			echo '</div>';
-			
+
 			if ($today == 7){
 				if ($eoweek == "OddWeekID"){
 					$eoweek = "EvenWeekID";
@@ -65,11 +69,12 @@
 				}
 			}
 			//echo "Принтирай програмата на ".$_GET["user"]." за ".$eoweek." ".$tomorrow;
-			echo '<div id = "CurriculumMain">';
+			echo '<div class="col-sm-6">';
 			PrintCurriculum($_GET["user"], $eoweek, $tomorrow, "- утре");
 			echo "</div>";
 			echo "</div>";
-	
+			echo "</div>";
+
 	$SQL = "SELECT homeworks.UID FROM homeworks WHERE homeworks.Date = '".$today_date."'";
 	//echo $SQL;
 	$MyHomeworksIdsResult = mysql_query($SQL);
@@ -78,13 +83,13 @@
 		$MyHomeworkInfoArray = returnHomeworkInfoByID($MyHomeworksIds[0]);
 		//PrintMyHomeworkData($MyHomeworkInfoArray);
 	}
-	
-	
-	
-	
-	
-?>	
-<?php	
+
+
+
+
+
+?>
+<?php
 	function PrintMyHomeworkData($MyHomeworkInfoArray) {
 		echo '<div style = "font-size:20px;color:black;">';
 		echo "<p>//START PRINTING MAININFO</p>";
@@ -98,7 +103,7 @@
 		echo "<p>Адрес към снимка ".$MyHomeworkInfoArray["MainInfo"]["IMGURL"]."</p>";
 		echo "<p>Брой на коментарите ".$MyHomeworkInfoArray["MainInfo"]["NumOfComments"]."</p>";
 		echo "<p>Брой на решенията ".$MyHomeworkInfoArray["MainInfo"]["NumOfSolvers"]."</p>";
-		
+
 		echo "<p>//START PRINTING COMMENTS</p>";
 		foreach($MyHomeworkInfoArray["Comments"] as $value){
 			echo "<p>Публикувано от ".$value["Name"]."</p>";
@@ -106,7 +111,7 @@
 			echo "<p>Съдържание ".$value["Data"]."</p>";
 		}
 		unset($value);
-		
+
 		echo "<p>//START PRINTING SOLVINGS</p>";
 		for ($count = 0; $count < sizeof($MyHomeworkInfoArray["Solvings"]); $count++){
 			$myCurrentArray = $MyHomeworkInfoArray["Solvings"];

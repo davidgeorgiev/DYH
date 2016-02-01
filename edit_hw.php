@@ -127,7 +127,8 @@ if ($row3[0] <= 0) {
 	  <?php
 
 		$DoneText = $row[2];
-
+		$breaks = array("<br />","<br>","<br/>");
+		$DoneText = str_ireplace($breaks, "\r\n", $DoneText);
 	  ?>
 
       <?php echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник">'.$DoneText.'</textarea>'; ?>

@@ -3,7 +3,7 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
-	include "some_external_phps/FixURLLinks.php";
+	include "some_external_phps/return_hw_info_by_id.php";
 ?>
 <?php
 	include "start_check.php";
@@ -28,13 +28,13 @@
 	if ($num_of_found_users_with_this_psw > 0){
 		$loged = 1;
 	}
-	
-	
+
+
 	$SQL = "SELECT user.UID FROM user WHERE user.Name = '".Get_Logged_users_name()."'";
 	//echo $SQL;
 	$result = mysql_query($SQL);
 	$solvers_id = mysql_fetch_array($result);
-	
+
 	if ($loged == 1){
 		//echo "logged";
 		$time_for_solving = $_POST["time_for_solving"];
@@ -45,15 +45,14 @@
 		$cheat = $_POST["cheat"];
 		$SubjectID = $_POST["SubjectID"];
 		$SomePersonalText = $_POST["SomePersonalText"];
-		
+
 		$SomePersonalText = FixURLsData($SomePersonalText);
-		
-		 //(GMT -5:00) EST (U.S. & Canada) 
+
+		 //(GMT -5:00) EST (U.S. & Canada)
 		$current_date_time = gmdate("Y-m-j H:i:s", time() + 3600*($timezone+date("I")));
 		$SQL = "INSERT INTO solvedhomeworks (USERID, HWID, TimeForSolve, Assessment, PleasureInPercents, LengthInPages, LearnedInPercents, IfCheating, Date, SomePersonalText, SubjectID) VALUES (".$num_of_found_users_with_this_psw[1].", ".$_SESSION["hwid"].", ".$time_for_solving.", ".$assessment.", ".$pleasure.", ".$length.", ".$learned.", ".$cheat.", '".$current_date_time."', '".$SomePersonalText."', ".$SubjectID.")";
 		//echo $SQL;
 		$result = mysql_query($SQL);
-		include "some_external_phps/return_hw_info_by_id.php";
 		$MyHomeworkInfoArray = returnHomeworkInfoByID($_SESSION["hwid"]);
 		$sentence = $MyHomeworkInfoArray["SolveSentences"][$solvers_id[0]];
 		$percents = $MyHomeworkInfoArray["SolvingsPercents"][$solvers_id[0]];

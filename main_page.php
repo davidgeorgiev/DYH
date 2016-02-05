@@ -160,11 +160,8 @@
 	PrintChartHeader(0, 0, 0, "Вашите скорошни задачи");
 	PrintAChart(1, $username, $strDateFrom, $strDateTo, "0", $EditMode, $timezone);
 	echo '</div>';
-	if ($there_is_some_hw) {
-		echo '<div id = "my_page" style = "background: rgba(163, 159, 158, 0.8);">';
-		echo $button_to_render;
-		//echo '</div></div></div></div>';
-	}
+	echo '<div id = "my_page" style = "background: rgba(163, 159, 158, 0.8);">';
+	echo $button_to_render;
 	?>
 	<!--<section id="cd-timeline" class="cd-container">-->
 	<?php
@@ -216,9 +213,7 @@
 		echo 'FAIL';
 	}
 	$row = mysql_fetch_array($result);
-	if ($there_is_some_hw){
-		echo '</div>';
-	}
+	echo '</div>';
 	if ($there_is_some_info){
 		echo '<div id = "my_page" style = "background: rgba(163, 159, 158, 0.8);">';
 		PrintMyHeading("ДОПЪЛНИТЕЛНО",0);

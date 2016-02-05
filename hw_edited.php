@@ -5,12 +5,16 @@
 <?php
 include "head.php";
 include "config.php";
-include "some_external_phps/FixURLLinks.php";
+include "some_external_phps/return_hw_info_by_id.php";
+
 
 $password = $_SESSION['psw'];
 $username = $_SESSION['name'];
 $imgurlid = $_SESSION['imgurlid'];
 $hwid = $_SESSION['hwid'];
+
+$MyCurrentHomeworkInfo = returnHomeworkInfoByID($hwid);
+
 include "CheckEditMode.php";
 $_SESSION['psw'] = $password;
 $_SESSION['name'] = $username;
@@ -32,14 +36,18 @@ include "main_menu.php"; ?>
 		$type = $_POST["type"];
 
 		$data = FixURLsData($data);
-
-		if (isset($_POST["imgurl"])) {
-			$imgurl = $_POST["imgurl"];
-		}
+		include "some_external_phps/upload.php";
 		$SQL = "UPDATE homeworks SET Date = '".$new_date."', Title = '".$title."', Data = '".$data."', Rank = ".$rank.", Type = ".$type." WHERE homeworks.UID = ".$hwid;
 		$result = mysql_query($SQL);
-		$SQL = "UPDATE imgurl SET URL = '".$imgurl."' WHERE imgurl.UID = ".$imgurlid;
-		$result = mysql_query($SQL);
+		if ($ImageUploaded == 1) {
+			if ((strpos($MyCurrentHomeworkInfo["MainInfo"]["IMGURL"], 'dyh_uploads') !== false)&&($ImageUploaded==1)) {
+				unlink($MyCurrentHomeworkInfo["MainInfo"]["IMGURL"]);
+				$ImageUploaded = 0;
+			}
+			$imgurl = $target_file;
+			$SQL = "UPDATE imgurl SET URL = '".$imgurl."' WHERE imgurl.UID = ".$imgurlid;
+			$result = mysql_query($SQL);
+		}
 
 		mysql_close($dbLink);
 
@@ -70,8 +78,10 @@ include "main_menu.php"; ?>
 		echo '<p>Предмет: '.$title.'</p>';
 		echo '<p>Описание: '.$data.'</p>';
 		echo '<p>Важност: '.$rank.'</p>';
-		if (strlen($imgurl) > 0) {
-			echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
+		if(isset($imgurl)){
+			if (strlen($imgurl) > 0) {
+				echo ' <img src="'.$imgurl.'" alt="HomeWork image" width="100px">';
+			}
 		}
 	?>
   </div>

@@ -1,5 +1,6 @@
 ﻿<?php
 	include "config.php";
+	#error_reporting(E_ERROR | E_PARSE);
 	include "some_external_phps/ReturnAllUserInfoByIdOrByName.php";
 	include "some_external_phps/CheckIfFriends.php";
 	include "some_external_phps/check_and_kick_out.php";
@@ -16,6 +17,16 @@
   <script src="jquery.min.js"></script>
   <script src="themes/5/smooth-scroll.js"></script><script src="lightbox/js/jquery-1.11.0.min.js"></script><script src="lightbox/js/lightbox.min.js"></script><link href="lightbox/css/lightbox.css" rel="stylesheet" />
   <script src="js/bootstrap.min.js"></script></head>';
+	echo '<link href="bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
+     This must be loaded before fileinput.min.js -->
+<script src="bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
+<script src="bootstrap-fileinput/js/fileinput.min.js"></script>
+<!-- bootstrap.js below is only needed if you wish to the feature of viewing details
+     of text file preview via modal dialog -->
+<!-- optionally if you need translation for your language then include
+    locale file as mentioned below -->
+<script src="bootstrap-fileinput/js/fileinput_locale_bg.js"></script>';
 	function ifLogged() {
 		$SQL = "SELECT COUNT(user.UID) FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
 		$if_logged_result = mysql_query($SQL);

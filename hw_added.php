@@ -48,8 +48,9 @@ include "main_menu.php"; ?>
 		$SQL = "INSERT INTO ".$UH_table." (HWID, USERID) VALUES ('".$row[0]."', '".$row[1]."')";
 		$result = mysql_query($SQL);
 
-		if (isset($_POST["imgurl"])) {
-			$imgurl = $_POST["imgurl"];
+		include "some_external_phps/upload.php";
+		if (isset($target_file)) {
+			$imgurl = $target_file;
 			$SQL = "INSERT INTO imgurl (URL) VALUES ('".$imgurl."')";
 			$result = mysql_query($SQL);
 			$uid = mysql_insert_id();

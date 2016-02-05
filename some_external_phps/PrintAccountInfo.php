@@ -1,6 +1,6 @@
 ﻿<?php
-function PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Sex, $Error = "", $OnMainPage = 0){
-	
+function PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Sex, $Error, $OnMainPage = 0){
+
 	if (strlen($Error) <= 0){
 		$h3 = "Вашият акаунт беше създаден успешно!";
 		$href = 'index.php';
@@ -18,7 +18,7 @@ function PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Sex, $Error 
 	if ($OnMainPage == 0){
 		echo '<div class="panel panel-default" style = "margin-top:3%;">';
 		echo '<h3 class="panel-title" id = "urlTitleForm">'.$h3.'</h3>';
-		
+
 	} else {
 		$href = 'home.php?user='.$name;
 	}
@@ -36,7 +36,7 @@ function PrintResult($name, $IMGURL, $FirstName, $LastName, $Text, $Sex, $Error 
 	echo '</div>';
 		echo '<div class="col-sm-8">';
 		echo '<p id = "UrlTitle" style = "color:#726b69;">'.$FirstName." ".$LastName.'<small style = "font-size:30px;text-align:center;"> ('.$name.')</small></p>';
-			
+
 		echo '<p id = "descURL" style = "margin-left:20%;text-align:center;margin-top:0px;color:#726b69;">'.$Text.'</p>';
 	echo '</div>';
 	echo '</div>';
@@ -50,7 +50,7 @@ function PrintAccountInfoByUSERNAME($username, $OnMainPage){
 	$SQL = "SELECT user.Name, user.FirstName, user.LastName, user.Password, user.IMGURL, user.Birthday, user.Text, user.Sex FROM user WHERE user.Name = '".$username."'";
 	$MyUserInfoResult = mysql_query($SQL);
 	$MyUserInfo = mysql_fetch_array($MyUserInfoResult);
-	
+
 	PrintResult($MyUserInfo[0], $MyUserInfo[4], $MyUserInfo[1], $MyUserInfo[2], $MyUserInfo[6], $MyUserInfo[7], "", $OnMainPage);
 }
 function GetAccountInfoByUSERNAMEorID($username = "",$userid = 0){
@@ -59,10 +59,10 @@ function GetAccountInfoByUSERNAMEorID($username = "",$userid = 0){
 	} else if ($userid > 0){
 		$SQL = "SELECT user.Name, user.FirstName, user.LastName, user.Password, user.IMGURL, user.Birthday, user.Text, user.Sex FROM user WHERE user.UID = '".$userid."'";
 	}
-	
+
 	$MyUserInfoResult = mysql_query($SQL);
 	$MyUserInfo = mysql_fetch_array($MyUserInfoResult);
-	
+
 	return array($MyUserInfo[0], $MyUserInfo[4], $MyUserInfo[1], $MyUserInfo[2], $MyUserInfo[6], $MyUserInfo[7]);
 }
 ?>

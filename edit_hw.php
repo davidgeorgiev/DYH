@@ -71,7 +71,7 @@ if ($row3[0] <= 0) {
 ?>
 	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
   <h2>Редактирай домашно</h2>
-  <form role="form" <?php echo 'action='; echo "hw_edited.php"?> method="post">
+  <form role="form" <?php echo 'action='; echo "hw_edited.php"?> method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label class = "InfoTitleLabel" for="date">Дата</label>
       <?php //echo '<input type="date" class="form-control" name="date" value = "'.$row[0].'" placeholder="2015-06-30">'; ?>
@@ -133,10 +133,19 @@ if ($row3[0] <= 0) {
 
       <?php echo '<textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник">'.$DoneText.'</textarea>'; ?>
     </div>
+	<?php	echo '<a href = "'.$row2[0].'" rel="lightbox" >
+
+			<div class="frame-square" style = "display: inline-block;vertical-align: top; padding: 10px;width: 200px; height: 200px;margin-right: .5em;margin-bottom: .3em;">
+				<div class="crop" style = " height: 100%;overflow: hidden;position: relative;">
+					<img style = " display: block;width: 100%; height: 100%;margin: auto;position: absolute;top: -100%;right: -100%;bottom: -100%;left: -100%;border:solid #d2c9c6;"src="'.$row2[0].'">
+				</div>
+			</div>
+
+		</a>'; ?>
 	<div class="form-group">
-      <label class = "InfoTitleLabel" for="text">URL към изображение</label>
-      <?php echo '<input type="text" class="form-control" name="imgurl" value = "'.$row2[0].'" placeholder="http://somesite/img.png">'; ?>
-    </div>
+		<label class = "InfoTitleLabel"  for="text">Заменете снимката</label>
+		<input id="input-1" type="file" class="file" name="fileToUpload">
+	</div>
 	<div class="form-group">
       <label class = "InfoTitleLabel" for="text">Важност (от 1 до 4)</label>
 		<select class="form-control" name="rank">

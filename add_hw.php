@@ -57,10 +57,10 @@ if ($row[0] <= 0) {
 	<?php
 
 	if ($_GET["suggest_to"] == "false"){
-		echo '<form role="form" action = hw_added.php method="post">';
+		echo '<form role="form" action = hw_added.php method="post" enctype="multipart/form-data">';
 		echo '<h2>Добави ново домашно</h2>';
 	} else {
-		echo '<form role="form" action = hw_added.php?suggest_to=true method="post">';
+		echo '<form role="form" action = hw_added.php?suggest_to=true method="post" enctype="multipart/form-data">';
 		$MyUserInfoArray = ReturnALLUserInfoByIdOrByName($username);
 		echo '<h2>Препоръчай домашно на '.$MyUserInfoArray[1].' '.$MyUserInfoArray[2].'</h2>';
 	}
@@ -108,10 +108,10 @@ if ($row[0] <= 0) {
       <label class = "InfoTitleLabel" for="text">Описание</label>
       <textarea type="text" cols="50" rows="7" class="form-control" name="data" placeholder="Решете целия учебник"></textarea>
     </div>
-	<div class="form-group">
-      <label class = "InfoTitleLabel" for="text">URL към изображение</label>
-      <input type="text" class="form-control" name="imgurl" placeholder="http://somesite/img.png">
-    </div>
+		<div class="form-group">
+			<label class = "InfoTitleLabel"  for="text">Качете снимка</label>
+		<input id="input-1" type="file" class="file" name="fileToUpload">
+		</div>
 	<div class="form-group">
       <label class = "InfoTitleLabel" for="text">Важност (от 1 до 4)</label>
 		<select class="form-control" name="rank">

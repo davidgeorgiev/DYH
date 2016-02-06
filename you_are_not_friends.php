@@ -28,7 +28,6 @@
 <div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 
 	<h1 id = "urlTitleForm">Не можете да видите това съдържание понеже не сте приятели с <?php $SecuredUserInfo = ReturnALLUserInfoByIdOrByName($_GET["secured_user"]); echo $SecuredUserInfo["FirstName"]." ".$SecuredUserInfo["LastName"];?></h1>
-
 </div>
 
 </body>

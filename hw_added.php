@@ -49,7 +49,7 @@ include "main_menu.php"; ?>
 		$result = mysql_query($SQL);
 
 		include "some_external_phps/upload.php";
-		if (isset($target_file)) {
+		if ($ImageUploaded == 1) {
 			$imgurl = $target_file;
 			$SQL = "INSERT INTO imgurl (URL) VALUES ('".$imgurl."')";
 			$result = mysql_query($SQL);

@@ -1,4 +1,5 @@
 ﻿<?php
+include "PrintLegendButtonsPlease.php";
 function PrintChartHeader($username, $weeknum, $EnableMenu, $CustomHeading){
 	echo '<div>';
 	if ($EnableMenu == 1){
@@ -7,7 +8,7 @@ function PrintChartHeader($username, $weeknum, $EnableMenu, $CustomHeading){
 			<span class="glyphicon glyphicon-wrench"></span>
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
-			
+
 		for ($counter = 1; $counter <= 15; $counter++) {
 			if ($counter == 1){
 				$MyWord = " седмица";
@@ -25,22 +26,8 @@ function PrintChartHeader($username, $weeknum, $EnableMenu, $CustomHeading){
 			$MyHeading = "Графика";
 		}
 	}
-	echo '<div style = "text-align:center;border:1px solid #c8ccc1;border-radius: 5px;padding: 4.5px;color: #243746;background-color: white;font-size:24;font-family:Arial	;font-weight: bold;">'.$MyHeading.'</div></div>';
-	echo '
-	<div class="btn-group btn-group-justified" role="group" style = "width:100%;margin-bottom:30px;">
-	<div class="btn-group" role="group">
-	<button type="button" class="btn btn-default" style = "background: #86cf4b;border-color: #837d7c;border-width:3px;">Домашни</button>
-	</div>
-	<div class="btn-group" role="group">
-	<button type="button" class="btn btn-default" style = "background: #4ba8cf;border-color: #837d7c;border-width:3px;">Изпити</button>
-	</div>
-	<div class="btn-group" role="group">
-	<button type="button" class="btn btn-default" style = "background: #dd8043;border-color: #837d7c;border-width:3px;">Други</button>
-	</div>
-	<div class="btn-group" role="group">
-	<button type="button" class="btn btn-default" style = "color:white;background: #673e7a;border-color: #837d7c;border-width:3px;">Решени от вас</button>
-	</div>
-	</div>
-	';
+	echo "</div>";
+	$TitlesArray = array(0 => array("Color" => "black","BGColor" => "#86cf4b","TEXT" => "Домашни"),array("Color" => "black","BGColor" => "#4ba8cf","TEXT" => "Изпити"),array("Color" => "black","BGColor" => "#dd8043","TEXT" => "Други"),array("Color" => "white","BGColor" => "#673e7a","TEXT" => "Решени от вас"));
+	PrintLegendButtonsPlease($TitlesArray,$MyHeading);
 }
 ?>

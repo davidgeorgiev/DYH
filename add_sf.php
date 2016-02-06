@@ -18,15 +18,19 @@
 
 	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 
-		<div style = "background-color:#d2c9c6;margin-left:auto;margin-right:auto;margin-top:30px;margin-bottom:20px;width:100%;height:60%;border:solid #6d6765;border-width:thin;">
+		<div id = "StandartBox">
 <?php
-		echo '<h3 style = "margin-top:0px;border:solid #6d6765;text-align:center;background-color: #837d7c;border-width:thin;border-top-left-radius: 0px;border-top-right-radius: 0px; padding: 10px;color:#d2c9c6;font-size:35px;"><span style = "padding-left:13px;">Добавяне на начало и край на учебната година</span></h3>';
-		echo '<form role="form" action=StartAndFinalAdded.php method="post">';
-		echo '<div class="form-group" style="width:80%;margin:auto;"><input style = "background-color:#ddd5d3;border:solid #6d6765;border-width:thin;margin-top:8%;height:50px;font-size:20px;" placeholder = "Начало" type="date" class="form-control" id="pickdate" name="date1" size="20" /><input style = "background-color:#ddd5d3;border:solid #6d6765;border-width:thin;margin-top:5%;height:50px;font-size:20px;" placeholder = "Край" type="date" class="form-control" id="pickdate1" name="date2" size="20" />';
+		echo '<h3 id = "StandartTitle"><span style = "padding-left:20px;">Добавяне на граници</span></h3>';
+		echo '<form role="form" action=StartAndFinalAdded.php method="post" style = "padding-top:15px;">';
+		echo '<label class = ".InfoTitleLabel" style = "margin-left:10%;">Начало и край на първи срок</label>';
+		echo '<div class="form-group" style="width:80%;margin:auto;"><input id = "StandartInputBox" placeholder = "Начало" type="date" class="form-control" id="pickdate2" name="date3" size="20" /><input id = "StandartInputBox" placeholder = "Край" type="date" class="form-control" id="pickdate3" name="date4" size="20" /></div>';
+		echo '<label class = ".InfoTitleLabel" style = "margin-left:10%;">Начало и край на втори срок</label>';
+		echo '<div class="form-group" style="width:80%;margin:auto;"><input id = "StandartInputBox" placeholder = "Начало" type="date" class="form-control" id="pickdate4" name="date5" size="20" /><input id = "StandartInputBox" placeholder = "Край" type="date" class="form-control" id="pickdate5" name="date6" size="20" /></div>';
+
 
 		if ($EditMode == 1){
 			echo '<div style = "margin-left:30%;">';
-			echo '<button type="submit" style = "margin-top:5.5%;width:50%;background:#837d7c;color:#d2c9c6;height:50px;font-family:MyDays;font-size:25px;" class="btn btn-default">Запази</button>';
+			echo '<button type="submit" style = "width:50%;height:40px;background:#d2cdcc;" class="btn btn-default">Запази</button>';
 			echo '</div>';
 		}
 

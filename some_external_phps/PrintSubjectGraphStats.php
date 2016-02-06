@@ -174,7 +174,7 @@
   function PrintSubjectGraphStats($subjectID,$StartDate,$FinalDate,$UserID){
     $LegendColorsArray = array(0 => array("Color" => "white","BGColor" => "#008ee4"),array("Color" => "white","BGColor" => "#6baa01"),array("Color" => "white","BGColor" => "#e44a00"),array("Color" => "white","BGColor" => "#32bbd7"),array("Color" => "white","BGColor" => "#583e78"),array("Color" => "white","BGColor" => "#91d100"));
     $divForGraph = '<div style="margin-bottom:100px;margin-left:35px;width:100%;height:60%;min-width:100px;">'; //Принтиране на графиката за оценки
-    $button_to_render = '<div><div class="dropdown" style = "float:right;padding-right:0px;">
+    $button_to_render = '<div><div class="dropdown" style = "float:right;padding-right:0px;margin-top:20px;">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:45px;font-size:20px;">
       <span class="glyphicon glyphicon-wrench"></span>
       </button>
@@ -185,7 +185,7 @@
       <li><a href="SubjectStatsAndGraphs.php?SubjectID='.$subjectID.'&ShowOption=average&user='.GetUserNamebyID($UserID).'&period='.$_GET["period"].'"><span class="glyphicon glyphicon-stats"></span> Средно аритметично по '.GetSubjectNameByID($subjectID).'</a></li>
       </ul></div></div>';
 
-    $button_to_render2 = '<div><div class="dropdown" style = "float:right;padding-right:0px;">
+    $button_to_render2 = '<div><div class="dropdown" style = "float:right;padding-right:0px;margin-top:20px;">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "width:60px;height:45px;font-size:20px;">
       <span class="glyphicon glyphicon-indent-left"></span>
       </button>
@@ -194,7 +194,7 @@
       <li><a href="SubjectStatsAndGraphs.php?SubjectID='.$subjectID.'&ShowOption='.$_GET["ShowOption"].'&user='.GetUserNamebyID($UserID).'&period=firstsemester"><span class="glyphicon glyphicon-import"></span> За първи срок</a></li>
       <li><a href="SubjectStatsAndGraphs.php?SubjectID='.$subjectID.'&ShowOption='.$_GET["ShowOption"].'&user='.GetUserNamebyID($UserID).'&period=secondsemester"><span class="glyphicon glyphicon-export"></span> За втори срок</a></li>
       </ul></div></div>';
-    $button_to_render3 = '<a href="check_width_and_send_to.php?user='.GetUserNamebyID($UserID).'&page=update_subject_list'.'"><button style = "width:20%;height:45px;float:left;" class="btn btn-default"><span class = "glyphicon glyphicon-triangle-left"></span> Назад</button></a>';
+    $button_to_render3 = '<a href="check_width_and_send_to.php?user='.GetUserNamebyID($UserID).'&page=update_subject_list'.'"><button style = "width:20%;height:45px;float:left;margin-top:20px;" class="btn btn-default"><span class = "glyphicon glyphicon-triangle-left"></span> Назад</button></a>';
       $MyGraphPartOfLabel = "";
       if($_GET["period"]=="year"){
         $MyGraphPartOfLabel = "годината";
@@ -207,62 +207,79 @@
       echo $button_to_render3;
       echo $button_to_render;
       echo $button_to_render2;
-      if ($_GET["ShowOption"]=="assessments"){
-        $TitlesArray = array(0 => array("Color" => "white","BGColor" => "#008ee4","TEXT" => "Оценки"));
-        PrintLegendButtonsPlease($TitlesArray,"Графика на оценките по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-        echo $divForGraph;
-        $myArr = array(array(array("first",5),array("second",6),array("third",3)));
-        //MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
-        echo MakeSubjectAreaChart(array(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID)[0]),$subjectID,"c0");
-        echo '</div>';
 
-        $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Количество решавания"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Брой на оценките"));
-        PrintLegendButtonsPlease($TitlesArray,"Решавания и оценки по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-        echo $divForGraph;
-        $myArr = array(array(array("first",5),array("second",6),array("third",3)));
-        //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-        echo MakeSubjectAreaChart(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID)[8],$subjectID,"c8");
-  	    echo '</div>';
-      }else if($_GET["ShowOption"]=="percents"){
-        $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Време"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Оценка"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Ентусиазъм"),array("Color" => $LegendColorsArray[3]["Color"],"BGColor" => $LegendColorsArray[3]["BGColor"],"TEXT" => "Дължина"),array("Color" => $LegendColorsArray[4]["Color"],"BGColor" => $LegendColorsArray[4]["BGColor"],"TEXT" => "Научено"),array("Color" => $LegendColorsArray[5]["Color"],"BGColor" => $LegendColorsArray[5]["BGColor"],"TEXT" => "Преписване"));
-        PrintLegendButtonsPlease($TitlesArray,"Процентна графика по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-        echo $divForGraph;
-        $myArr = array(array(array("first",5),array("second",6),array("third",3)));
-        //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-        echo MakeSubjectAreaChart(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID)[3],$subjectID,"c3");
-      	echo '</div>';
-      }else if($_GET["ShowOption"]=="sums"){
-        $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Време"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Оценка"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Преписване"));
-        PrintLegendButtonsPlease($TitlesArray,"Графика на сумите по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-        echo $divForGraph;
-        $myArr = array(array(array("first",5),array("second",6),array("third",3)));
-        //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-        echo MakeSubjectAreaChart(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID)[4],$subjectID,"c4");
-  		  echo '</div>';
+      $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+      $MyUserAverageSubjectStatisticsMonthsArray[0] = array_filter($MyUserAverageSubjectStatisticsMonthsArray[0]);
 
-        $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Ентусиазъм"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Дължина"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Научено"));
-        PrintLegendButtonsPlease($TitlesArray,"Графика на сумите по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-        echo $divForGraph;
-        $myArr = array(array(array("first",5),array("second",6),array("third",3)));
-        //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-        echo MakeSubjectAreaChart(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID)[6],$subjectID,"c6");
-  		  echo '</div>';
-      }else if($_GET["ShowOption"]=="average"){
-        $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Време"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Оценка"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Преписване"));
-        PrintLegendButtonsPlease($TitlesArray,"Средно аритметично по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-        echo $divForGraph;
-        $myArr = array(array(array("first",5),array("second",6),array("third",3)));
-        //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-        echo MakeSubjectAreaChart(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID)[5],$subjectID,"c5");
-  	    echo '</div>';
+      if (empty($MyUserAverageSubjectStatisticsMonthsArray[0])) {
+        $TitlesArray = array(0 => array("Color" => "black","BGCOLOR" => "white","TEXT" => "Решете поне една задача и елате пак!"));
+        PrintLegendButtonsPlease($TitlesArray,"За съжаление все още не разполагаме с достатъчно информация, за да ви покажем графиките по ".GetSubjectNameByID($subjectID));
+      }else{
+        if ($_GET["ShowOption"]=="assessments"){
+          $TitlesArray = array(0 => array("Color" => "white","BGColor" => "#008ee4","TEXT" => "Оценки"));
+          PrintLegendButtonsPlease($TitlesArray,"Графика на оценките по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+          echo $divForGraph;
+          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+          //MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          //print_r($MyUserAverageSubjectStatisticsMonthsArray[1]);
+          echo MakeSubjectAreaChart(array($MyUserAverageSubjectStatisticsMonthsArray[0]),$subjectID,"c0");
+          echo '</div>';
 
-        $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Ентусиазъм"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Дължина"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Научено"));
-        PrintLegendButtonsPlease($TitlesArray,"Средно аритметично по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-        echo $divForGraph;
-        $myArr = array(array(array("first",5),array("second",6),array("third",3)));
-        //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-        echo MakeSubjectAreaChart(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID)[7],$subjectID,"c7");
-  	    echo '</div>';
+          $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Количество решавания"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Брой на оценките"));
+          PrintLegendButtonsPlease($TitlesArray,"Решавания и оценки по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+          echo $divForGraph;
+          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+          //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
+          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[8],$subjectID,"c8");
+    	    echo '</div>';
+        }else if($_GET["ShowOption"]=="percents"){
+          $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Време"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Оценка"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Ентусиазъм"),array("Color" => $LegendColorsArray[3]["Color"],"BGColor" => $LegendColorsArray[3]["BGColor"],"TEXT" => "Дължина"),array("Color" => $LegendColorsArray[4]["Color"],"BGColor" => $LegendColorsArray[4]["BGColor"],"TEXT" => "Научено"),array("Color" => $LegendColorsArray[5]["Color"],"BGColor" => $LegendColorsArray[5]["BGColor"],"TEXT" => "Преписване"));
+          PrintLegendButtonsPlease($TitlesArray,"Процентна графика по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+          echo $divForGraph;
+          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+          //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
+          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[3],$subjectID,"c3");
+        	echo '</div>';
+        }else if($_GET["ShowOption"]=="sums"){
+          $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Време"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Оценка"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Преписване"));
+          PrintLegendButtonsPlease($TitlesArray,"Графика на сумите по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+          echo $divForGraph;
+          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+          //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
+          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[4],$subjectID,"c4");
+    		  echo '</div>';
+
+          $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Ентусиазъм"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Дължина"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Научено"));
+          PrintLegendButtonsPlease($TitlesArray,"Графика на сумите по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+          echo $divForGraph;
+          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+          //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
+          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[6],$subjectID,"c6");
+    		  echo '</div>';
+        }else if($_GET["ShowOption"]=="average"){
+          $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Време"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Оценка"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Преписване"));
+          PrintLegendButtonsPlease($TitlesArray,"Средно аритметично по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+          echo $divForGraph;
+          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+          //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
+          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[5],$subjectID,"c5");
+    	    echo '</div>';
+
+          $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Ентусиазъм"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Дължина"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Научено"));
+          PrintLegendButtonsPlease($TitlesArray,"Средно аритметично по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+          echo $divForGraph;
+          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+          //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
+          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+          echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[7],$subjectID,"c7");
+    	    echo '</div>';
+        }
       }
   }
 

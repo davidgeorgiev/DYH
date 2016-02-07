@@ -219,7 +219,7 @@
           $MyUserAverageSubjectStatisticsMonthsArray[0] = array_filter($MyUserAverageSubjectStatisticsMonthsArray[0]);
           if (empty($MyUserAverageSubjectStatisticsMonthsArray[0])) {
             $MyPrintSolvingsOrBoth = array($MyUserAverageSubjectStatisticsMonthsArray[8][0]);
-            print_r($MyPrintSolvingsOrBoth);
+            //print_r($MyPrintSolvingsOrBoth);
           }else{
             $MyPrintSolvingsOrBoth = $MyUserAverageSubjectStatisticsMonthsArray[8];
           }

@@ -12,6 +12,19 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="./home.php"><span class = "glyphicon glyphicon-education"></span> DYH</a>
+			<style>
+				@media only screen and (min-width: 767px) {
+					#menu-toggle{position: fixed;top: -1000px;}
+				}
+
+			</style>
+			<a class="navbar-brand" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Side panel <span class="glyphicon glyphicon-transfer" style="color:gray"></span></a>
+			<script>
+				$("#menu-toggle").click(function(e) {
+						e.preventDefault();
+						$("#wrapper").toggleClass("toggled");
+				});
+				</script>
 	</div>
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

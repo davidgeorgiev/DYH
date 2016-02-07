@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="simple-sidebar-1.0.4/css/simple-sidebar.css">
   <script src="jquery.min.js"></script>
   <script src="themes/5/smooth-scroll.js"></script><script src="lightbox/js/jquery-1.11.0.min.js"></script><script src="lightbox/js/lightbox.min.js"></script><link href="lightbox/css/lightbox.css" rel="stylesheet" />
-  <script src="js/bootstrap.min.js"></script></head>';
+  <script src="js/bootstrap.min.js"></script>';
 	echo '<link href="bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
      This must be loaded before fileinput.min.js -->
@@ -26,7 +26,8 @@
      of text file preview via modal dialog -->
 <!-- optionally if you need translation for your language then include
     locale file as mentioned below -->
-<script src="bootstrap-fileinput/js/fileinput_locale_bg.js"></script>';
+<script src="bootstrap-fileinput/js/fileinput_locale_bg.js"></script></head>';
+
 	function ifLogged() {
 		$SQL = "SELECT COUNT(user.UID) FROM user WHERE user.Password = '".$_SESSION["psw"]."'";
 		$if_logged_result = mysql_query($SQL);

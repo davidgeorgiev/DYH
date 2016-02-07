@@ -23,10 +23,10 @@
     while ($monthCounter < $ArraySize){
       if ($MyUserAverageSubjectStatisticsMonths[$monthCounter][1]["NumOfSolvings"]>0){
         $StatsArray["NumOfSolvings"][$SolvingsCounter][0] = $MyUserAverageSubjectStatisticsMonths[$monthCounter][0];
-        $StatsArray["NumOfSolvings"][$SolvingsCounter][1] = $MyUserAverageSubjectStatisticsMonths[$monthCounter][1]["NumOfSolvings"]; //брой решавания за месец
-
+        $StatsArray["NumOfSolvings"][$SolvingsCounter][1] = $MyUserAverageSubjectStatisticsMonths[$monthCounter][1]["BackedUpNumOfSolvings"]; //брой решавания за месец
+        //print_r($StatsArray["NumOfSolvings"][$SolvingsCounter]);
         $StatsArray["NumOfAssessments"][$SolvingsCounter][0] = $MyUserAverageSubjectStatisticsMonths[$monthCounter][0];
-        $StatsArray["NumOfAssessments"][$SolvingsCounter][1] = $MyUserAverageSubjectStatisticsMonths[$monthCounter][1]["NumOfAssessments"]; //бройка на оценките за месец
+        $StatsArray["NumOfAssessments"][$SolvingsCounter][1] = $MyUserAverageSubjectStatisticsMonths[$monthCounter][1]["BackedUpNumOfAssessments"]; //бройка на оценките за месец
 
 
 
@@ -209,30 +209,39 @@
       echo $button_to_render2;
 
       $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
-      $MyUserAverageSubjectStatisticsMonthsArray[0] = array_filter($MyUserAverageSubjectStatisticsMonthsArray[0]);
+      $MyUserAverageSubjectStatisticsMonthsArray[8] = array_filter($MyUserAverageSubjectStatisticsMonthsArray[8]);
 
-      if (empty($MyUserAverageSubjectStatisticsMonthsArray[0])) {
+      if (empty($MyUserAverageSubjectStatisticsMonthsArray[8])) {
         $TitlesArray = array(0 => array("Color" => "black","BGCOLOR" => "white","TEXT" => "Решете поне една задача и елате пак!"));
         PrintLegendButtonsPlease($TitlesArray,"За съжаление все още не разполагаме с достатъчно информация, за да ви покажем графиките по ".GetSubjectNameByID($subjectID));
       }else{
         if ($_GET["ShowOption"]=="assessments"){
-          $TitlesArray = array(0 => array("Color" => "white","BGColor" => "#008ee4","TEXT" => "Оценки"));
-          PrintLegendButtonsPlease($TitlesArray,"Графика на оценките по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
-          echo $divForGraph;
-          #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
-          //MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
-          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
-          //print_r($MyUserAverageSubjectStatisticsMonthsArray[1]);
-          echo MakeSubjectAreaChart(array($MyUserAverageSubjectStatisticsMonthsArray[0]),$subjectID,"c0");
-          echo '</div>';
+          $MyUserAverageSubjectStatisticsMonthsArray[0] = array_filter($MyUserAverageSubjectStatisticsMonthsArray[0]);
+          if (empty($MyUserAverageSubjectStatisticsMonthsArray[0])) {
+            $MyPrintSolvingsOrBoth = array($MyUserAverageSubjectStatisticsMonthsArray[8][0]);
+            print_r($MyPrintSolvingsOrBoth);
+          }else{
+            $MyPrintSolvingsOrBoth = $MyUserAverageSubjectStatisticsMonthsArray[8];
+          }
+          if(!empty($MyUserAverageSubjectStatisticsMonthsArray[0])) {
+            $TitlesArray = array(0 => array("Color" => "white","BGColor" => "#008ee4","TEXT" => "Оценки"));
+            PrintLegendButtonsPlease($TitlesArray,"Графика на оценките по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
+            echo $divForGraph;
+            #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
+            //MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+            //print_r($MyUserAverageSubjectStatisticsMonthsArray[1]);
+
+              echo MakeSubjectAreaChart(array($MyUserAverageSubjectStatisticsMonthsArray[0]),$subjectID,"c0");
+            echo '</div>';
+          }
 
           $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Количество решавания"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Брой на оценките"));
           PrintLegendButtonsPlease($TitlesArray,"Решавания и оценки по ".GetSubjectNameByID($subjectID)." за ".$MyGraphPartOfLabel);
           echo $divForGraph;
           #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
           //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
-          echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[8],$subjectID,"c8");
+
+          echo MakeSubjectAreaChart($MyPrintSolvingsOrBoth,$subjectID,"c8");
     	    echo '</div>';
         }else if($_GET["ShowOption"]=="percents"){
           $TitlesArray = array(0 => array("Color" => $LegendColorsArray[0]["Color"],"BGColor" => $LegendColorsArray[0]["BGColor"],"TEXT" => "Време"),array("Color" => $LegendColorsArray[1]["Color"],"BGColor" => $LegendColorsArray[1]["BGColor"],"TEXT" => "Оценка"),array("Color" => $LegendColorsArray[2]["Color"],"BGColor" => $LegendColorsArray[2]["BGColor"],"TEXT" => "Ентусиазъм"),array("Color" => $LegendColorsArray[3]["Color"],"BGColor" => $LegendColorsArray[3]["BGColor"],"TEXT" => "Дължина"),array("Color" => $LegendColorsArray[4]["Color"],"BGColor" => $LegendColorsArray[4]["BGColor"],"TEXT" => "Научено"),array("Color" => $LegendColorsArray[5]["Color"],"BGColor" => $LegendColorsArray[5]["BGColor"],"TEXT" => "Преписване"));
@@ -240,7 +249,7 @@
           echo $divForGraph;
           #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
           //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+
           echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[3],$subjectID,"c3");
         	echo '</div>';
         }else if($_GET["ShowOption"]=="sums"){
@@ -249,7 +258,7 @@
           echo $divForGraph;
           #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
           //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+
           echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[4],$subjectID,"c4");
     		  echo '</div>';
 
@@ -258,7 +267,7 @@
           echo $divForGraph;
           #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
           //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+
           echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[6],$subjectID,"c6");
     		  echo '</div>';
         }else if($_GET["ShowOption"]=="average"){
@@ -267,7 +276,7 @@
           echo $divForGraph;
           #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
           //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+
           echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[5],$subjectID,"c5");
     	    echo '</div>';
 
@@ -276,7 +285,7 @@
           echo $divForGraph;
           #$myArr = array(array(array("first",5),array("second",6),array("third",3)));
           //print_r(MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$UserID,$subjectID)[0]);
-          $MyUserAverageSubjectStatisticsMonthsArray = MakeMyUserAverageSubjectStatisticsMonthsArray($StartDate,$FinalDate,$subjectID,$UserID);
+
           echo MakeSubjectAreaChart($MyUserAverageSubjectStatisticsMonthsArray[7],$subjectID,"c7");
     	    echo '</div>';
         }

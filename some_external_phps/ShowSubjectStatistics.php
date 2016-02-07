@@ -25,12 +25,16 @@
 		$SumOfLengthInPages = 0;
 		$SumOfLearnedInPercents = 0;
 		$SumOfIfCheating = 0;
+		$BackedUpNumOfSolvings = 0;
+		$BackedUpNumOfAssessments = 0;
 		while($MySubjectsStatistics = mysql_fetch_array($MySubjectsStatisticsResult)){
 			$counter++;
+			$BackedUpNumOfSolvings++;
 			$SumOfTimeForSolve += $MySubjectsStatistics[0];
 
 			if ($MySubjectsStatistics[1] > 1){
 				$AssessmentCounter++;
+				$BackedUpNumOfAssessments++;
 				$SumOfAssessment += $MySubjectsStatistics[1];
 			}
 			$SumOfPleasureInPercents += $MySubjectsStatistics[2];
@@ -50,6 +54,8 @@
 		$SumOfLearnedInPercents/$counter,$SumOfIfCheating/$counter);
 
 		$ArrayForReturn = array();
+		$ArrayForReturn["BackedUpNumOfSolvings"] = $BackedUpNumOfSolvings;
+		$ArrayForReturn["BackedUpNumOfAssessments"] = $BackedUpNumOfAssessments;
 		$ArrayForReturn["NumOfSolvings"] = $counter;
 		$ArrayForReturn["NumOfAssessments"] = $AssessmentCounter;
 		$ArrayForReturn["Sums"] = $ArrayOfSums;
@@ -81,9 +87,9 @@
 		echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo'.$subjectID.'" style = "width:100%;">Подробна статистика</button>
 		<div id="demo'.$subjectID.'" class="collapse">';
 			echo '<div class = "SubjectStatistics">';
-			echo '<p style = "margin-top:-5px;padding-top:20px;">Решени задачи - '.$MyUserAverageSubjectStatistics["NumOfSolvings"].', от които оценени са
+			echo '<p style = "margin-top:-5px;padding-top:20px;">Решени задачи - '.$MyUserAverageSubjectStatistics["BackedUpNumOfSolvings"].', от които оценени са
 
-			'.$MyUserAverageSubjectStatistics["NumOfAssessments"].'
+			'.$MyUserAverageSubjectStatistics["BackedUpNumOfAssessments"].'
 
 			</p>';
 			echo '<p>БАЛ - '.$MyUserAverageSubjectStatistics["Sums"][1].'</p>';

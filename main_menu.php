@@ -18,7 +18,7 @@
 				}
 
 			</style>
-			<a class="navbar-brand" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Side panel <span class="glyphicon glyphicon-transfer" style="color:gray"></span></a>
+			<a class="navbar-brand" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Панел <span class="glyphicon glyphicon-transfer" style="color:gray"></span></a>
 			<script>
 				$("#menu-toggle").click(function(e) {
 						e.preventDefault();

@@ -45,8 +45,19 @@ include "main_menu.php"; ?>
 				$ImageUploaded = 0;
 			}
 			$imgurl = $target_file;
+			$SQL = "SELECT COUNT(UID) FROM hwimg WHERE HWID = ".$hwid;
+			$result = mysql_query($SQL);
+			$ThereIsUploadedImage = mysql_fetch_array($result);
+			if ($ThereIsUploadedImage[0] > 0){
 			$SQL = "UPDATE imgurl SET URL = '".$imgurl."' WHERE imgurl.UID = ".$imgurlid;
 			$result = mysql_query($SQL);
+			}else{
+			$SQL = "INSERT INTO imgurl (URL) VALUES ('".$imgurl."')";
+			$result = mysql_query($SQL);
+			$uid = mysql_insert_id();
+			$SQL = "INSERT INTO hwimg (HWID, IMGURLID) VALUES ('".$hwid."', '".$uid."')";
+			$result = mysql_query($SQL);
+			}
 		}
 
 		mysql_close($dbLink);

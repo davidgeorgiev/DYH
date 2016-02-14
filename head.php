@@ -1,6 +1,6 @@
 ﻿<?php
 	include "config.php";
-	error_reporting(E_ERROR | E_PARSE);
+	//error_reporting(E_ERROR | E_PARSE);
 	include "some_external_phps/ReturnAllUserInfoByIdOrByName.php";
 	include "some_external_phps/CheckIfFriends.php";
 	include "some_external_phps/check_and_kick_out.php";

@@ -14,22 +14,22 @@ function CheckPostArguments($name, $psw, $FirstName, $LastName, $Birthday, $IMGU
 	$result = mysql_query($SQL);
 	$row = mysql_fetch_array($result);
 	if ($row[0] > 0){
-		$Error .= 'Вече съществува акаунт с такова име! ';
+		$Error .= 'Вече съществува акаунт с такова име! <br>';
 	}
 	if (strlen($psw) < 6){
-		$Error .= 'Паролата може да е минимум 6 символа! ';
+		$Error .= 'Паролата може да е минимум 6 символа! <br>';
 	}
 	if (strlen($name) <= 0){
-		$Error .= 'Не сте въвели потребителско име! ';
+		$Error .= 'Не сте въвели потребителско име! <br>';
 	}
 	if ((strlen($FirstName) <= 0) || (strlen($LastName) <= 0)){
-		$Error .= 'Не сте въвели името си или фамилията си или и двете! ';
+		$Error .= 'Не сте въвели името си или фамилията си или и двете! <br>';
 	}
 	if(!exif_imagetype($IMGURL)){
-		$Error .= 'Неподходящо изображение! ';
+		$Error .= 'Неподходящо изображение! <br>';
 	}
 	if (strlen($Text) <= 0){
-		$Error .= 'Липсва описание! ';
+		$Error .= 'Липсва описание! <br>';
 	}
 	return $Error;
 }

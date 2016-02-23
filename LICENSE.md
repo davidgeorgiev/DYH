@@ -1,3 +1,7 @@
+#DYH (do your homework)
+repository: https://github.com/davidgeorgiev/dyh
+official website: http://dyh2015.coxslot.com/
+
 #BOOTSTRAP
 The MIT License (MIT)
 

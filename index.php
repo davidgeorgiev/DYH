@@ -233,46 +233,8 @@ function test_input($data) {
 					<div class="form-group"><label class = "MyLabel" class="control-label">* Парола (минимум 6 символа)</label>
 					<input type="password" id = "MyInputBox" class="form-control" name="psw" placeholder = "Парола (минимум 6 символа)" value="<?php echo $psw;?>">
 					</div>
-					<div class="form-group" >
-						<label for="text" id = "descURL" style = "font-family:Exo-Thin;font-size:20px;margin-left:20px;margin-bottom:15px;margin-top:0px;">Рожден ден</label>
-						<select class="form-control" id = "MyInputBox" style = "margin-left:22px;float:left;width:40%;margin-right:21px;" name="Month">
-							<?php
-								include "graphs/convert_month_to_word.php";
-								echo '<option value="0">Месец</option>';
-								for ($counter = 1; $counter <= 12; $counter++){
-									if ($counter < 10){
-										$Zero = "0";
-									} else {
-										$Zero = "";
-									}
-									echo '<option value="'.$Zero.$counter.'">'.ConvertMonthToWord($counter).'</option>';
-								}
-							?>
-						</select>
-						<select class="form-control" id = "MyInputBox" style = "width:40%;" name="Day">
-							<option value="0">Ден</option>
-							<?php
-								for ($counter = 1; $counter <= 31; $counter++){
-									if ($counter < 10){
-										$Zero = "0";
-									} else {
-										$Zero = "";
-									}
-									echo '<option value="'.$Zero.$counter.'">'.$counter.'</option>';
-								}
-							?>
-						</select>
-						<select class="form-control" id = "MyInputBox" style = "margin-top:18px;" name="Year">
-							<option value="0">Година</option>
-							<?php
-								for ($counter = (date("Y")-6); $counter > (date("Y")-20); $counter--){
-									echo '<option value="'.$counter.'">'.$counter.'</option>';
-								}
-							?>
-						</select>
-					</div>
-
-					</div>
+					<?php include "some_external_phps/MakeSimpleDatePicker.php";include "graphs/convert_month_to_word.php";MakeSimpleDatePicker("Рожден ден",1);?>
+				</div>
 					<button class="btn btn-primary" id = "MyButtonToAddURL" type="submit" >Създай профил</button>
 				</form>
 			</div>

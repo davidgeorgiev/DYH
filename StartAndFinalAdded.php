@@ -18,14 +18,10 @@
 
 	<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);">
 <?php
-		$date = mysql_real_escape_string($_POST['date3']);
-		$date3 = date('Y-m-d',strtotime($date));
-		$date = mysql_real_escape_string($_POST['date4']);
-		$date4 = date('Y-m-d',strtotime($date));
-		$date = mysql_real_escape_string($_POST['date5']);
-		$date5 = date('Y-m-d',strtotime($date));
-		$date = mysql_real_escape_string($_POST['date6']);
-		$date6 = date('Y-m-d',strtotime($date));
+		$date3 = $_POST["Year1"]."-".$_POST["Month1"]."-".$_POST["Day1"];
+		$date4 = $_POST["Year2"]."-".$_POST["Month2"]."-".$_POST["Day2"];
+		$date5 = $_POST["Year3"]."-".$_POST["Month3"]."-".$_POST["Day3"];
+		$date6 = $_POST["Year4"]."-".$_POST["Month4"]."-".$_POST["Day4"];
 	if(($date3!="1970-01-01")&&($date4!="1970-01-01")&&($date5!="1970-01-01")&&($date6!="1970-01-01")){
 		$SQL = "SELECT COUNT(schoolyear.USERID) FROM schoolyear, user WHERE schoolyear.USERID = ".Get_Logged_users_id();
 		$MyResult = mysql_query($SQL);
@@ -36,11 +32,11 @@
 		if ($ThereIsAlreadySchoolyear[0] > 0) {
 			$SQL = "UPDATE schoolyear SET Start = '".$date3."', Final = '".$date6."',StartS1 = '".$date3."',FinalS1 = '".$date4."',StartS2 = '".$date5."',FinalS2 = '".$date6."' WHERE schoolyear.USERID = ".Get_Logged_users_id();
 		} else {
-			$SQL = "INSERT INTO schoolyear (USERID, Start, Final, StartS1, FinalS1, StartS2, FinalS2) VALUES (".Get_Logged_users_id().", '".$date1."', '".$date2."', '".$date3."', '".$date4."', '".$date5."', '".$date6."')";
+			$SQL = "INSERT INTO schoolyear (USERID, Start, Final, StartS1, FinalS1, StartS2, FinalS2) VALUES (".Get_Logged_users_id().", '".$date3."', '".$date6."', '".$date3."', '".$date4."', '".$date5."', '".$date6."')";
 		}
 		$MyInsertionResult = mysql_query($SQL);
 
-		echo "<p>Успешно актуализиране на диапазона</p>";
+		echo "<p>Успешно актуализиране на диапазона!<a href='home.php'> Върнете се в началото!</a></p>";
 	} else {
 		echo "<p id = 'StandartTitle'>НЕ СТЕ ПОПЪЛНИЛИ ВСИЧКИ ПОЛЕТА <a href = 'add_sf.php'>ВЪРНЕТЕ СЕ</a> И ОПИТАЙТЕ ОТНОВО!</p>";
 	}

@@ -5,6 +5,7 @@
 <?php
 	include "config.php";
 	include "head.php";
+	include "some_external_phps/checkIfHaveToShowOtherWeek.php";
 	/*if ($db_found) {
 		$SQL = "INSERT INTO homeworks (Date, Title, Data, Rank) VALUES ('2015-06-30 00:00:00', 'Hello', 'How are you?','2')";
 		$result = mysql_query($SQL);
@@ -46,18 +47,26 @@ include "main_menu.php";
 					$ddate = date("Y-m-d");
 					$date = new DateTime($ddate);
 					$week = $date->format("W");
-					if($week&1) {
+					if (CheckIfHaveToShowOtherWeek(GetUserIDbyName($username)) == 1) {
 						echo '<select class="form-control" name="week">
-							<option value="1">Нечетна (текущата седмица)</option>
+							<option value="3">Извънредна (текущата седмица)</option>
 							<option value="2">Четна</option>
-							<option value="3">Извънредна</option>
+							<option value="1">Нечетна</option>
 						</select>';
 					} else {
-						echo '<select class="form-control" name="week">
-							<option value="2">Четна (текущата седмица)</option>
-							<option value="1">Нечетна</option>
-							<option value="3">Извънредна</option>
-						</select>';
+						if($week&1) {
+							echo '<select class="form-control" name="week">
+								<option value="1">Нечетна (текущата седмица)</option>
+								<option value="2">Четна</option>
+								<option value="3">Извънредна</option>
+							</select>';
+						} else {
+							echo '<select class="form-control" name="week">
+								<option value="2">Четна (текущата седмица)</option>
+								<option value="1">Нечетна</option>
+								<option value="3">Извънредна</option>
+							</select>';
+						}
 					}
 				?>
 			</div>

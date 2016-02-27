@@ -74,6 +74,10 @@
 				echo '<li role="separator" class="divider"></li>';
 				echo '<li><a href="searchforhelp.php?user='.$username.'">Потърси помощ<span class="sr-only">(current)</span></a></li>';
 				echo '<li><a href="helpsomebody.php?only_me=0">Помогни на някого<span class="sr-only">(current)</span></a></li>';
+				if ($EditMode == 1){
+					echo '<li role="separator" class="divider"></li>';
+					echo '<li><a href="DeleteProfile.php" style = "color:#6b0d0d;">Изтриване на профила</a></li>';
+				}
 				echo '</ul></li>';
 ?>
 <li class="dropdown">

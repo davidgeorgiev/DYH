@@ -74,7 +74,7 @@
 		}
 	}
 	$timezone  = +2;
-
+	$_SESSION["deleteProfileConfirm"]=0;
 
 	// if (isset($_GET["user"])) {
 		// $SQL = "SELECT user.UID FROM user WHERE user.Name = '".$_GET["user"]."'";

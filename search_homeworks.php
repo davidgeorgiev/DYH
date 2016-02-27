@@ -3,6 +3,7 @@
 	echo '<html>';
 	include "head.php";
 	include "config.php";
+	include "some_external_phps/IfSomeHwIsSolved.php";
 	include "some_external_phps/return_hw_info_by_id.php";
 	include "some_external_phps/CheckIfUserIsSolver.php";
 	include "some_external_phps/CheckMyAssessmentForHWWithID.php";

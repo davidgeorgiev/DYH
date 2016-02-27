@@ -3,12 +3,13 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
+	include "some_external_phps/IfSomeHwIsSolved.php";
 	include "some_external_phps/return_hw_info_by_id.php";
 	include "some_external_phps/CheckIfUserIsSolver.php";
 	include "some_external_phps/CheckMyAssessmentForHWWithID.php";
 	include "some_external_phps/PrintHWInfoInTableByID.php";
 	include "some_external_phps/PrintHomeworksTimeline.php";
-	
+
 ?>
 <head>
 	<meta charset="UTF-8">

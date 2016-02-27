@@ -77,7 +77,9 @@
 								echo '<p style = "text-align:left;"><a style = "color:#d2c9c6;font-weight:bold;" href="delete_hw_confirm.php?hwid='.$hwid.'&class='.$username.'"><span class="glyphicon glyphicon-trash"></span> Изтрий </a></p>';
 								echo '<p style = "text-align:left;"><a style = "color:#d2c9c6;font-weight:bold;" href="edit_hw.php?hwid='.$hwid.'&class='.$username.'"><span class="glyphicon glyphicon-pencil"></span> Редактирай</a></p>';
 							}
-							echo '<p style = "text-align:left;"><a href = "add_assessment_to_hw.php?hwid='.$hwid.'"><span class = "glyphicon glyphicon-stats"></span> Вашата оценка - '.CheckMyAssessmentForHWWithID($hwid, $loggeduserid).'</a></p>';
+							if (IfSomeHwIsSolved($loggeduserid,$hwid) > 0){
+								echo '<p style = "text-align:left;"><a href = "add_assessment_to_hw.php?hwid='.$hwid.'"><span class = "glyphicon glyphicon-stats"></span> Вашата оценка - '.CheckMyAssessmentForHWWithID($hwid, $loggeduserid).'</a></p>';
+							}
 
 
 								$SQL = "SELECT COUNT(solvedhomeworks.UID) FROM solvedhomeworks WHERE solvedhomeworks.HWID = ".$hwid;

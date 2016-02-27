@@ -165,6 +165,7 @@
 	?>
 	<!--<section id="cd-timeline" class="cd-container">-->
 	<?php
+	include "some_external_phps/IfSomeHwIsSolved.php";
 	include "some_external_phps/PrintHWInfoInTableByID.php";
 	include "some_external_phps/PrintHomeworksTimeline.php";
 	include "some_external_phps/PrintHWInfoInList.php";

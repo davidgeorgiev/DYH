@@ -3,12 +3,13 @@
 	echo '<html lang="en" class="no-js">';
 	include "head.php";
 	include "config.php";
+	include "some_external_phps/IfSomeHwIsSolved.php";
 	include "some_external_phps/return_hw_info_by_id.php";
 	include "some_external_phps/CheckIfUserIsSolver.php";
 	include "some_external_phps/CheckMyAssessmentForHWWithID.php";
 	include "some_external_phps/PrintHWInfoInTableByID.php";
 	include "some_external_phps/PrintHomeworksTimeline.php";
-	
+
 ?>
 <head>
 	<meta charset="UTF-8">
@@ -31,7 +32,7 @@
 <div class="container">
 <?php include "main_menu.php";
 	$MySuggestedHomeworks = SuggestedHomeworks(Get_Logged_users_id());
-	
+
 	while($CurrentSuggestedHomeworkID = mysql_fetch_array($MySuggestedHomeworks)){
 		echo '<div id = "my_page" style = "background: rgba(243, 243, 243, 0.4);margin-top:50px;">';
 		if ($_GET["height"] > $_GET["width"]){
@@ -43,7 +44,7 @@
 		echo '<a href = "refuse_hw_suggestion.php?hwid='.$CurrentSuggestedHomeworkID[0].'"><button class="btn btn-default" style = "width:50%;color:#837d7c;background:#d2c9c6;font-weight:bold;border-radius:7px;font-size:16px;font-family: Arial;font-weight:bold;margin-top:0px;" type="button"><span class = "glyphicon glyphicon-remove"></span> Отхвърлям</button></a>';
 		echo '</div>';
 	}
-	
+
 
 ?>
 

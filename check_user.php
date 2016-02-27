@@ -2,7 +2,7 @@
 	session_start();
 	include "config.php";
 	include "some_external_phps/write_log.php";
-	include "some_external_phps/ReturnUserIdByUserName.php";
+	include "some_external_phps/ReturnUserIDByUserName.php";
 
 	$username = $_POST["name"];
 

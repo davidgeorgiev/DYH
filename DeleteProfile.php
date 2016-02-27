@@ -67,10 +67,18 @@
       $_SESSION["deleteProfileConfirm"]+=1;
     }
 		if($_SESSION["DeleteItNow"]==1){
-			mysql_query($SQL);
-      $_SESSION["deleteProfileConfirm"]=0;
+		$SQL2 = "SELECT IMGURL FROM user WHERE user.UID = ".$MyUserUID[0];
+		$MyIMGURLResult = mysql_query($SQL2);
+		$MyIMGURLARR = mysql_fetch_array($MyIMGURLResult);
+		$IMGURL = $MyIMGURLARR[0];
+		if (strpos($IMGURL, 'dyh_uploads') !== false) {
+			echo $IMGURL;
+			unlink($IMGURL);
+		}
+		mysql_query($SQL);
+		$_SESSION["deleteProfileConfirm"]=0;
 			$_SESSION["DeleteItNow"]=0;
-      header('Location: index.php') and exit;
+		  header('Location: index.php') and exit;
 		}
 
     //header('Location: index.php') and exit;

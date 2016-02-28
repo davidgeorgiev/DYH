@@ -58,8 +58,14 @@ include "main_menu.php"; ?>
 	  ?>
     </div>
 	<?php
-		if ($EditMode == 1) {
+		$SQL = "SELECT COUNT(UID) FROM uoi WHERE UserID = ".Get_Logged_users_id()." AND OtherInfoID = ".$_GET["infoid"];
+		//echo $SQL;
+		$ResultCountUIDs = mysql_query($SQL);
+		$MyCountedUIDs = mysql_fetch_array($ResultCountUIDs);
+		if (($EditMode == 1)&&($MyCountedUIDs[0]>0)) {
 			echo '<button type="submit" class="btn btn-default">Submit</button>';
+		}else{
+			echo '<p>Нямате право да запазите това съдържание.</p>';
 		}
 	?>
   </form>

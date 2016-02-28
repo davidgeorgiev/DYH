@@ -122,13 +122,17 @@ if ($row[0] <= 0) {
 		</select>
     </div>
 	<?php
-		if ((($EditMode == 1) && ($theresnosubjects == 0)) || ($_GET["suggest_to"] == "true")) {
+		if ((($EditMode == 1)||($_GET["suggest_to"] == "true"))&&($theresnosubjects == 0)){
 			echo '<button type="submit" class="btn btn-default">Запази</button>';
 		} else {
-			if ($EditMode == 0) {
-				echo '<p>Не сте влезли в акаунта си!</p>';
-			} else {
+			if (($EditMode == 0)&&($_GET["suggest_to"] == "false")) {
+				echo '<p>Не сте влезли в акаунта си или се опитвате да добавите задача на друг профил!</p>';
+			}
+			if (($theresnosubjects == 1)&&($_GET["suggest_to"] == "false")){
 				echo '<p>Първо създайте предмети във вашия списък от опциите горе!</p>';
+			}
+			if (($theresnosubjects == 1)&&($_GET["suggest_to"] == "true")){
+				echo '<p>Ученикът, на когото искате да препоръчате задачата все още няма предмети!</p>';
 			}
 		}
 	?>

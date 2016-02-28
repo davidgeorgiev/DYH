@@ -137,6 +137,12 @@ include "main_menu.php";
 		if (($EditMode == 1) && ($thereisnosubjects == 0)) {
 			echo '<button type="submit" class="btn btn-default" style = "margin-left: 15px;">Запиши</button>';
 		}
+		if ($EditMode == 0){
+			echo '<p>Не сте влезли в акаунта си или се опитвате да добавите задача на друг профил!</p>';
+		}
+		if ($thereisnosubjects == 1){
+			echo '<p>Още нямате предмети в списъка си. Добавете ги от опциите!</p>';
+		}
 	?>
 	</form>
 	</div>

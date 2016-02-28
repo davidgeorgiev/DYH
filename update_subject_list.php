@@ -5,7 +5,7 @@
 	include "config.php";
 	include "some_external_phps/ShowSubjectStatistics.php";
 	include "some_external_phps/PrintAccountInfo.php";
-	
+
 	CheckFriendShipByNameAndKickOut($_GET["user"], Get_Logged_users_id());
 ?>
 <body>
@@ -78,22 +78,26 @@ if ($row[0] <= 0) {
 	$row = mysql_fetch_array($result);
 	//echo "<p>".$row[0]."</p>";
 	$subject_ids_arr = explode(",", $row[0]);
-	
+
 	$CurrentUserID = GetUserIDbyName($username);
 	for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
 		ShowSubjectStatistics($CurrentUserID, $subject_ids_arr[$i]);
 	}
-	
+	if($EditMode == 1){
+		$MyHeader = "Вашите предмети";
+	}else{
+		$MyHeader = "Предметите на ".GetFullUserNamebyID($CurrentUserID,1)." ".GetFullUserNamebyID($CurrentUserID,2);
+	}
 	echo '<div class="list-group">';
 	echo '<a href="#" class="list-group-item unactive" style = "background-color:#837d7c;">';
-	echo '<h4 class="list-group-item-heading" style = "color:white">Вашите предмети</h4>';
+	echo '<h4 class="list-group-item-heading" style = "color:white">'.$MyHeader.'</h4>';
 	echo '<p class="list-group-item-text"></p>';
 	echo '</a>';
 	echo '<div style = "margin:10px;padding:0px;border-radius:7px;">';
 	$subjects_window_height = $_GET["height"]*0.70;
 	echo '<div style = "border-radius:7px;overflow-y: scroll; height:'.$subjects_window_height.';">';
 	echo '<table style = "float:left;font-size:13px;">';
-	
+
 	if ($_GET["width"] > 1250){
 		$number_of_tds = 4;
 	} else if (($_GET["width"] <= 1250) && ($_GET["width"] > 1070)) {
@@ -103,20 +107,20 @@ if ($row[0] <= 0) {
 	} else {
 		$number_of_tds = 1;
 	}
-	
-	
-	
-	
+
+
+
+
 	for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
 		$SQL = "SELECT subjects.Name, subjects.Rank FROM subjects WHERE subjects.UID = ".$subject_ids_arr[$i];
 		$result = mysql_query($SQL);
 		$row = mysql_fetch_array($result);
-		
+
 		//echo $row[0].$row[1];
-		
+
 		$rank_of_subject = $row[1];
 		include "some_external_phps/subject_scale_to_words.php";
-		
+
 		if (!(($i+$number_of_tds) % $number_of_tds)){
 			if ($i > 0){
 				echo '</tbody>';
@@ -139,7 +143,7 @@ if ($row[0] <= 0) {
 	}
 	echo '</tbody>';
 	echo '</table></div></div></div>';
-	
+
 }
 ?>
 
@@ -153,34 +157,16 @@ if ($row[0] <= 0) {
 			// echo '<tbody>';
 		// }
 			// echo '<td>'.$i.'</td>';
-		
+
 	// }
 	// echo '</tbody>';
 	// echo '</table>';
 // ?>
-
-<div style = " margin: auto;width: 98%;border-radius:10px;border:3px solid #d2c9c6;background-color:#837d7c;padding: 10px;">
-<form id="subject_input" role="form" <?php echo 'action='; echo "subjects_added.php?user=".$username?> method="post">
-     <div id="dynamicInput">
-          <br> <br/><div class="form-group" style = "color:white;"><label for="text">Предмет 1</label><input type="text" class="form-control" name="myInputs[]" placeholder="Въведете името на предмета тук"><label for="text">Любимост</label><select class="form-control" name="myRanks[]"><?php for ($i = 1; $i <=10; $i++) {echo '<option value="'.$i.'">';$rank_of_subject = $i;include "subject_scale_to_words.php";echo $rank_of_subject_with_words."</option>";}?></select></div>
-     </div>
-	 <p>Внимание веднъж въведен предмет не може да се изтрива или редактира!</p>
-     <input type="button" class="btn btn-default" value="Още един" onClick="addInput('dynamicInput');">
-	 
-	 
-	 <?php 
-	 if ($EditMode == 1) {
-		echo '<button type="submit" class="btn btn-default">Запази</button>';
-	 } else {
-		echo '<br> </br><div class="alert alert-danger" role="alert">Нямате право да запазите тази форма. Регистрирайте се ';
-		echo '<a href="index.php" class="alert-link">тук</a>';
-		echo '!</div>';
-	 }
-	 ?>
-	 
-	 
-</form>
-</div>
+<?php
+if($EditMode == 1){
+	include "some_external_phps/PrintFormForAddSubject.php";
+}
+?>
 
 <?php
 echo '</div>';

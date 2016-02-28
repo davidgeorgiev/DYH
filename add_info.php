@@ -46,6 +46,8 @@ include "main_menu.php"; ?>
 	<?php
 		if ($EditMode == 1) {
 			echo '<button type="submit" class="btn btn-default">Submit</button>';
+		}else{
+			echo '<p>Не сте влезли в акаунта си или се опитвате да добавите задача на друг профил!</p>';
 		}
 	?>
   </form>

@@ -69,8 +69,13 @@ $SQL = "SELECT COUNT(usersubjectlist.UID) FROM usersubjectlist, user WHERE users
 $result = mysql_query($SQL);
 $row = mysql_fetch_array($result);
 
+$CurrentUserID = GetUserIDbyName($username);
 if ($row[0] <= 0) {
-	echo "<p>Още нямате списък с предмети! Въведете ги долу!</p>";
+	if($EditMode == 1){
+		echo "<p>Още нямате предмети в списъка си! Въведете ги долу!</p>";
+	}else{
+		echo "<p>".GetFullUserNamebyID($CurrentUserID,1)." ".GetFullUserNamebyID($CurrentUserID,2)." още няма предмети в списъка си.</p>";
+	}
 } else {
 	$SQL = "SELECT usersubjectlist.SUBJECTLISTID FROM usersubjectlist, user WHERE usersubjectlist.USERID = user.UID AND user.Name = '".$username."'";
 	//echo $SQL;
@@ -79,7 +84,7 @@ if ($row[0] <= 0) {
 	//echo "<p>".$row[0]."</p>";
 	$subject_ids_arr = explode(",", $row[0]);
 
-	$CurrentUserID = GetUserIDbyName($username);
+
 	for ($i = 0;$i < sizeof($subject_ids_arr) - 1; $i++) {
 		ShowSubjectStatistics($CurrentUserID, $subject_ids_arr[$i]);
 	}
